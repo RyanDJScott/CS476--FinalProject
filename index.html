@@ -9,111 +9,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--=============================Stylesheets=======================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="stylesheets/smallGameBox.css">
 </head>
 <body>
     <!-- The navigation bar -->
     <nav> 
-        <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button"/></a>
-        <button>Search</button>
-        <button>Signup</button>
-        <button>Login</button>
+        <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <a href="login.html" class="navButton">Login</a>
+        <a href="signup.html" class="navButton">Signup</a>
+        <a href ="search.html" class="navButton">Search</a>
     </nav>
 
     <!-- Main header image -->
-    <div>
-        <img src="dependencies/mainHeader.png" alt="Welcome to Queen City's Gambit!"/>
+    <div class="mainPageHeader">
+        <img src="dependencies/headerImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!"/>
     </div> 
 
     <!--Main Area -->
     <!--Main area container-->
-    <div> 
-        <!-- Content container -->
-        <div>
+    <h1> Featured Table Top Game! </h1>
+    <div class="mainAreaContainer">
+        
+    
+        <!-- featured item container-->
+        <div class="featuredItem">
+            
+            <!-- left div for header + information -->
+            <div class="featuredItemLeft">
+                <h2>Game Title!</h2>
+                <p>Submitted by: Ryan Scott</p>
+                <p>Rating: 9/10</p>
+                <p>Number of Players: 3</p>
+                <p>Company: ACME Corp.</p>
+                <p>Game time: 2 hours </p>
+                <p>Age Rating: 3-6 yrs</p>
+                <p>Number of Expansions: None</p>
+                <p>Description:</p>
+                <p>Game title is an interesting game to keep your kids occupied for 2 hours. Game title is an interesting
+                    game to keep your kids occupied for 2 hours.
+                    Game title is an interesting game to keep your kids occupied for 2 hours. Game title is an interesting
+                    game to keep your kids occupied for 2 hours.
+                    Game title is an interesting game to keep your kids occupied for 2 hours. Game title is an interesting
+                    game to keep your kids occupied for 2 hours.</p>
+            </div>
+    
+            <!-- Right div for YouTube video-->
+            <div class="featuredItemRight">
+                <img src="" alt="Featured Game Image" />
+            </div>
+        </div>
 
-            <!-- featured item container-->
-            <div>
-                <h1> Featured Table Top Game! </h1>
+            
+        <div class="gameHeader"><h1>Tabletop Games</h1></div>
+        <!-- Regular Games Container-->
+        <div class="gameContainer">
 
-                <!-- left div for header + information -->
-                <div>
-                    <h2>Game Title!</h2>
-                    <p>Submitted by: Ryan Scott</p>
-                    <p>Rating: 9/10</p>
-                    <p>Number of Players: 3</p>
-                    <p>Company: ACME Corp.</p>
-                    <p>Game time: 2 hours </p>
-                    <p>Age Rating: 3-6 yrs</p>
-                    <p>Number of Expansions: None</p>
-                    <p>Description:</p>
-                    <p>Game title is an interesting game to keep your kids occupied for 2 hours. Game title is an interesting game to keep your kids occupied for 2 hours. 
-                        Game title is an interesting game to keep your kids occupied for 2 hours. Game title is an interesting game to keep your kids occupied for 2 hours. 
-                        Game title is an interesting game to keep your kids occupied for 2 hours. Game title is an interesting game to keep your kids occupied for 2 hours.</p>
-                    <button>View Full Game Information</button>
+            <!-- Row Container -->
+            <div class="rowContainer">
+                <div class="smallGameBox">
+                    <p>Game Title</p>
+                    <p>Rating: 7/10</p>
+                    <p>This is a board game and it is fun!</p>
+                    <button>View Description</button>
                 </div>
-
-                <!-- Right div for YouTube video-->
-                <div>
-                    <img src="" alt="Featured Game Image"/>
+                <div class="smallGameBox"> 
+                    <p>Game Title</p>
+                    <p>Rating: 7/10</p>
+                    <p>This is a board game and it is fun!</p>
+                    <button>View Description</button>
+                </div>
+                <div class="smallGameBox">
+                    <p>Game Title</p>
+                    <p>Rating: 7/10</p>
+                    <p>This is a board game and it is fun!</p>
+                    <button>View Description</button>
                 </div>
             </div>
-
-            <!-- Regular Games Container-->
-            <div>
-
-                <h1>Tabletop Games</h1>
-
-                <!-- Row Container -->
-                <div>
-                    <div>
-                        <p>Game Title</p>
-                        <p>Rating: 7/10</p>
-                        <p>This is a board game and it is fun!</p>
-                        <button>View Description</button>
-                    </div>
-                    <div>
-                        <p>Game Title</p>
-                        <p>Rating: 7/10</p>
-                        <p>This is a board game and it is fun!</p>
-                        <button>View Description</button>
-                    </div>
-                    <div>
-                        <p>Game Title</p>
-                        <p>Rating: 7/10</p>
-                        <p>This is a board game and it is fun!</p>
-                        <button>View Description</button>
-                    </div> 
+    
+            <!-- Row Container 2 -->
+            <div class="rowContainer">
+                <div class="smallGameBox">
+                    <p>Game Title</p>
+                    <p>Rating: 7/10</p>
+                    <p>This is a board game and it is fun!</p>
+                    <button>View Description</button>
                 </div>
-
-                <!-- Row Container 2 -->
-                <div>
-                    <div>
-                        <p>Game Title</p>
-                        <p>Rating: 7/10</p>
-                        <p>This is a board game and it is fun!</p>
-                        <button>View Description</button>
-                    </div>
-                    <div>
-                        <p>Game Title</p>
-                        <p>Rating: 7/10</p>
-                        <p>This is a board game and it is fun!</p>
-                        <button>View Description</button>
-                    </div>
-                    <div>
-                        <p>Game Title</p>
-                        <p>Rating: 7/10</p>
-                        <p>This is a board game and it is fun!</p>
-                        <button>View Description</button>
-                    </div> 
+                <div class="smallGameBox">
+                    <p>Game Title</p>
+                    <p>Rating: 7/10</p>
+                    <p>This is a board game and it is fun!</p>
+                    <button>View Description</button>
                 </div>
-
+                <div class="smallGameBox">
+                    <p>Game Title</p>
+                    <p>Rating: 7/10</p>
+                    <p>This is a board game and it is fun!</p>
+                    <button>View Description</button>
+                </div>
             </div>
+    
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <a href="mailto: geekagog@geekagogo.ca"> Contact the Webmasters </a>
-        <p>&copy 2021</p>
+        <a href="mailto:geekagog@geekagogo.ca"> Contact the Webmasters </a>
+        <p>&copy 2021 GeekAGoGo</p>
     </footer>
 </body>
 </HTML>
