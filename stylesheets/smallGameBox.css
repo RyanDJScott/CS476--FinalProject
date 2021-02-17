@@ -1,3 +1,13 @@
+/* contains rows of (3) games */
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
 /*Small game box for search results and index*/
 .smallGameBox {
     border: 1px solid #AAA0B4;

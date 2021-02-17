@@ -60,16 +60,6 @@
     width: 75%;
 }
 
-/* contains rows of (3) games */
-.rowContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
-}
-
 /* alignment of header */
 .gameHeader {
     margin-top: 20px;
