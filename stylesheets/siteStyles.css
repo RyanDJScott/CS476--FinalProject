@@ -99,17 +99,17 @@ nav {
 
 /* Main Header Styling */
 .mainPageHeader {
-    height: 400px;
-    max-width: 100%;
+    width: 100%;
+    height: auto;
     background-color: #F0E5FC;
     border-bottom: 1px solid black;
 }
 
 .headerImage {
     max-width: 100%;
-    max-height: 400px;
     height: auto;
     width: auto\9;
+    display: block;
 }
 
 /* Footer Styling */
