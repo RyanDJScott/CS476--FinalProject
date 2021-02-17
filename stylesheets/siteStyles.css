@@ -1,0 +1,29 @@
+a:link {
+    color: AAA0B4;
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;
+}
+
+a:visited {
+    color: 53485e;
+}
+
+a:hover,a:focus {
+    text-decoration: underline;
+    color: 53485e;
+}
+
+a:active {
+    color: #330066;
+    text-decoration: none;
+}
+
+footer {
+    background-color: F0E5FC;
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+    color: #53485e;
+}
