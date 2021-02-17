@@ -24,6 +24,11 @@ p {
     padding: 0px 10px 0px 10px;
 }
 
+.errorMessage {
+    color: red;
+    text-transform: uppercase;
+}
+
 /* Link Styling */
 a:link{
     color: #AAA0B4;
@@ -114,4 +119,7 @@ footer {
     height: 50px;
     border-top: 1px solid black;
     vertical-align: middle;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
