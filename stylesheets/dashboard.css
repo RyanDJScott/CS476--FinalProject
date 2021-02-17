@@ -1,0 +1,158 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.userInformation {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    margin: 5px; 
+    background-color: #F0E5FC;
+    border: 1px solid #AAA0B4;
+}
+
+.userInformationLeft {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 33%;
+    min-width: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+.userProfileImage {
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+    background-color: white;
+    border: 1px solid #AAA0B4;
+}
+
+.simpleUserInfo {
+    min-width: 200px;
+    margin: 5px;
+    background-color: white;
+    border: 1px solid #AAA0B4;
+}
+
+.userInformationRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    margin: 5px
+}
+
+.userBiography {
+    margin: 5px;
+    background-color: white;
+    border: 1px solid #AAA0B4;
+}
+
+.favouritesInfo {
+    margin: 5px;
+    background-color: white;
+    border: 1px solid #AAA0B4;
+}
+
+.editProfileButton {
+    padding: 5px;
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* buttonButton is the Edit Profile Button on the site */ 
+.buttonButton {
+    background-color: #ccbbcc;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.buttonButton:hover, .buttonButton:focus {
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
+    background-color: #dac5f1;
+    text-decoration: none;
+}
+
+.submitPending {
+    background-color: #F0E5FC;
+    min-width: 500px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    margin: 5px;
+    border: 1px solid #AAA0B4;
+}
+
+.submitDescription {
+    flex-basis: 33%;
+    height: 100px;
+    min-width: 100px;
+    margin: 5px;
+    border: 1px solid #AAA0B4;
+}
+
+.pendingTableContainer {
+    flex-basis: auto;
+    margin: 5px;
+    background-color: white;
+    border: 1px solid #AAA0B4;
+}
+
+.submitDescriptionButton {
+    background-color: #ccbbcc;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+.submitDescriptionButton:hover, .submitDescriptionButton:focus {
+    border-radius: 25px;
+    transition: all 0.3s ease 0s;
+    background-color: #dac5f1;
+    text-decoration: none;
+}
+
+.adminArea {
+    background-color: #F0E5FC;
+    display: flex;
+    flex-direction: row;
+    flex-direction: row;
+    width: 75%;
+    margin: 5px;
+    border: 1px solid #AAA0B4;
+}
+
+.flagTable {
+    margin: 5px;
+    background-color: white;
+    flex-basis: 50%;
+    width: 100%;
+    border: 1px solid #AAA0B4;
+}
+
+.descriptionReview {
+    margin: 5px;
+    background-color: white;
+    flex-basis: 50%;
+    width: 100%;
+    border: 1px solid #AAA0B4;
+}
+
+td {
+    padding-right: 10px;
+}
