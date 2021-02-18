@@ -23,28 +23,28 @@ class adminUserFactory extends userFactory {
 abstract class user {
     //Base user functionalities here
     //Both users implement these functions
-    abstract function setInfo($info);
-    abstract function getInfo();
-    abstract function setUID($userID);
-    abstract function getUID();
-    abstract function displayDashboard();
-    abstract function displayEditProfile();
-    abstract function editProfile($newInfo);
-    abstract function deleteAccount();
-    abstract function addTGE($TG);
-    abstract function leaveReview($review);
-    abstract function flagReview($revInfo);
+    abstract public function setInfo($info);
+    abstract public function getInfo();
+    abstract public function setUID($userID);
+    abstract public function getUID();
+    abstract public function displayDashboard();
+    abstract public function displayEditProfile();
+    abstract public function editProfile($newInfo);
+    abstract protected function deleteAccount();
+    abstract public function addTGE($TG);
+    abstract public function leaveReview($review);
+    abstract public function flagReview($revInfo);
 
     //Admin functionalities here
     //Admin: implements these functions
     //Comm. Users: Block the user from using these functions
-    abstract function deleteUser($userID);
-    abstract function reviewFlag();
-    abstract function removeFlag($reviewInfo);
-    abstract function deleteReview($reviewInfo);
-    abstract function displayReviewTGE($TGE);
-    abstract function setTGEStatus($TGE);
-    abstract function promoteUser($userID);
+    abstract protected function deleteUser($userID);
+    abstract protected function reviewFlag();
+    abstract protected function removeFlag($reviewInfo);
+    abstract protected function deleteReview($reviewInfo);
+    abstract public function displayReviewTGE($TGE);
+    abstract protected function setTGEStatus($TGE);
+    abstract protected function promoteUser($userID);
 }
 
 class communityUser extends user {
@@ -129,7 +129,7 @@ class communityUser extends user {
     //   <1> True: If the user account was successfully deleted
     //   <2> False: If the user account was not successfully deleted
     // Side Effects: The user information is deleted from the DB
-    private function deleteAccount() {}
+    protected function deleteAccount() {}
 
     // Function Name: addTGE
     // Purpose: To add the tabletop game entry to the DB
@@ -167,7 +167,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    private function deleteUser($userID) {}
+    protected function deleteUser($userID) {}
 
     // Function Name: reviewFlag
     // Purpose: None; used to overwrite abstract method
@@ -181,14 +181,14 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    private function removeFlag($reviewInfo) {}
+    protected function removeFlag($reviewInfo) {}
 
     // Function Name: deleteReview
     // Purpose: None; used to overwrite abstract method
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    private function deleteReview($reviewInfo) {}
+    protected function deleteReview($reviewInfo) {}
 
     // Function Name: displayReviewTGE
     // Purpose: None; used to overwrite abstract method
@@ -202,14 +202,14 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    private function setTGEStatus() {}
+    protected function setTGEStatus($TGE) {}
 
     // Function Name: promoteUser
     // Purpose: None; used to overwrite abstract method
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    private function promoteUser($userID) {}
+    protected function promoteUser($userID) {}
 }
 
 class adminUser extends user {
@@ -294,7 +294,7 @@ class adminUser extends user {
     //   <1> True: If the user account was successfully deleted
     //   <2> False: If the user account was not successfully deleted
     // Side Effects: The user information is deleted from the DB
-    private function deleteAccount() {}
+    protected function deleteAccount() {}
 
     // Function Name: addTGE
     // Purpose: To add the tabletop game entry to the DB
@@ -335,7 +335,7 @@ class adminUser extends user {
     //   <1> True: If the user was successfully deleted
     //   <2> False: If the user was unsuccessfully deleted
     // Side Effects: The user with UID of $userID is deleted from the DB
-    private function deleteUser($userID) {}
+    protected function deleteUser($userID) {}
 
     // Function Name: reviewFlag
     // Purpose: To display the information necessary to review a flagged review
@@ -352,7 +352,7 @@ class adminUser extends user {
     //   <1> True: The flag was successfully removed
     //   <2> False: The flag was unsuccessfully removed
     // Side Effects: The flag is removed from the review
-    private function removeFlag($reviewInfo) {}
+    protected function removeFlag($reviewInfo) {}
 
     // Function Name: deleteReview
     // Purpose: To delete a review from the DB
@@ -362,7 +362,7 @@ class adminUser extends user {
     //   <1> True: The review was successfully deleted
     //   <2> False: The review was unsuccessfully deleted
     // Side Effects: The review is deleted from the site
-    private function deleteReview($reviewInfo) {}
+    protected function deleteReview($reviewInfo) {}
 
     // Function Name: reviewTGE
     // Purpose: To display the contents of a pending TGE with review box and buttons
@@ -380,7 +380,7 @@ class adminUser extends user {
     //   <1> True: If the update was successful
     //   <2> False: If the update was unsuccessful
     // Side Effects: The status variable in the DB for the game is updated
-    private function setTGEStatus ($TGE) {}
+    protected function setTGEStatus ($TGE) {}
 
     // Function Name: promoteUser
     // Purpose: To promote a community user to an administrator
@@ -390,6 +390,6 @@ class adminUser extends user {
     //   <1> True: If the user was successfully updated
     //   <2> False: If the user was unsuccessfully updated
     // <side effects>
-    private function promoteUser($userID) {}
+    protected function promoteUser($userID) {}
 }
 ?>
