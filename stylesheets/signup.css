@@ -1,0 +1,37 @@
+.alignmentContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.signupContainer {
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    max-width: 75%;
+    width: fit-content;
+    border: 1px solid #AAA0B4;
+    background-color: #F5F0F9;
+    overflow: 0;
+}
+
+.rowContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: left;
+}
+
+.itemContainer {
+    display: flex;
+    padding-left: 30px;
+    width: fit-content;
+}
+
+label {
+    width: 100px;
+}

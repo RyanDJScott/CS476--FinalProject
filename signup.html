@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <!--==========================Stylsheets=================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
+    <link rel="stylesheet" href="stylesheets/signup.css">
 </head>
 
 <body>
@@ -19,8 +20,86 @@
 
     <!-- Signup header image -->
     <div class="mainPageHeader">
-        <img src="dependencies/signupImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
+        <img src="dependencies/signupHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
     </div>
+
+    <!-- Signup Form Container -->
+    <form>
+        <div class="alignmentContainer">
+            <div class="signupContainer">
+                <!-- outer container for flexbox design-->
+        
+                <!-- First and last name -->
+                <div class="rowContainer">
+        
+                    <!-- First name -->
+                    <div class="itemContainer">
+                        <label for="signupFName">First Name:</label>
+                        <input type="text" id="signupFName" placeholder="enter your first name here">
+                    </div>
+        
+                    <!-- Last name -->
+                    <div class="itemContainer">
+                        <label for="signupLName">Last Name:</label>
+                        <input tpye="text" id="signupLName" placeholder="enter your last name here">
+                    </div>
+                </div>
+        
+                <!-- First and last name errors -->
+                <div class="rowContainer">
+        
+                </div>
+        
+                <!-- Email and Screenname-->
+                <div class="rowContainer">
+        
+                    <!-- Email -->
+                    <div class="itemContainer">
+                        <label for="signupEmail">Email:</label>
+                        <input type="email" id="signupEmail">
+                    </div>
+        
+                    <!-- Screenname -->
+                    <div class="itemContainer">
+                        <label for="signupScreenname">Screenname:</label>
+                        <input type="text" id="signupScreenname">
+                    </div>
+                </div>
+        
+                <!-- Email and Screenname Errors -->
+                <div class="rowContainer">
+        
+                </div>
+        
+                <!-- Password and Confirm Password -->
+                <div class="rowContainer">
+        
+                    <!-- Password -->
+                    <div class="itemContainer">
+                        <label for="signupPassword">Password:</label>
+                        <input type="password" id="signupPassword">
+                    </div>
+        
+                    <!-- Confirm Password -->
+                    <div class="itemContainer">
+                        <label for="signupPasswordConfirm">Password:</label>
+                        <input type="password" id="signupPasswordConfirm">
+                    </div>
+        
+                </div>
+        
+                <!-- Password and Confirm Password Errors -->
+                <div class="rowContainer">
+
+                </div>
+
+                <!-- Birthday -->
+                <div class="rowContainer">
+                    
+                </div>
+            </div>
+        </div>
+    </form>
 
     <!-- Footer -->
     <footer>
