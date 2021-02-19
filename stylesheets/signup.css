@@ -25,6 +25,7 @@
     flex-direction: row;
     align-items: left;
     padding-left: 30px;
+    margin-top: 10px;
 }
 
 .itemContainer {
@@ -44,4 +45,24 @@ label {
 .bioBoxBig {
     height: 300px;
     min-width: 300px
+}
+
+.submitButton {
+    margin-left: 160px;
+}
+
+input, select {
+    background-color: #f1d7f1;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #AAA0B4;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.submitButton:hover, .submitButton:focus {
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
+    background-color: #dac5f1;
+    text-decoration: none;
 }
