@@ -22,9 +22,15 @@ class userSearch implements searchStrategy {
 }
 
 class gameSearch implements searchStrategy {
-    public function getResults($querry) {}
+    public function getResults($query) {}
 
     public function displayResults($dbReturn) {}
 }
 
+ class searchBoth implements searchStrategy {
+     public function getResults($query) {}
+
+     public function displayResults($dbReturn) {}
+ }
+ 
 ?>
