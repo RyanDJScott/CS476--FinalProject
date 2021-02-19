@@ -14,7 +14,24 @@ class Search {
     //Returns: N/A
     //Side Effects: assigns values to $searchType, $query, and instantiates an object
     //   to $searchStrategy
-    public function __construct ($searchOption, $searchQuery) {}
+    public function __construct ($searchOption, $searchQuery) {
+        //Construct member variables
+        $searchType = $searchOption;
+        $query = $searchQuery;
+
+        //Choose a search strategy
+        switch (strtoupper($searchOption))
+        {
+            case "USER":
+                $this->$searchStrategy = new userSearch();
+                break;
+            case "GAME":
+                $this->$searchStrategy = new gameSearch();
+                break;
+            case "BOTH":
+                $this->$searchStrategy = new searchBoth();
+        }
+    }
 
     //Function Name: publishResults
     //Purpose: To publish the results of the string to the search page
@@ -22,7 +39,9 @@ class Search {
     //   <1> $query: the query string to be submitted to the DB
     //Returns: N/A
     //Side Effects: publishes the results of the query to the search page
-    public function publishResults ($query) {}
+    public function publishResults ($query) {
+        return $this->$searchStrategy->displayResults(getResults($query));
+    }
 }
 
 interface searchStrategy {
