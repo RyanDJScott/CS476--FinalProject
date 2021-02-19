@@ -97,10 +97,13 @@
 }
 
 .pendingTableContainer {
+    display: flex;
     height: auto;
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: 5px;
+    align-content: center;
+    justify-content: center;
     flex-basis: 67%;
     background-color: white;
     border: 1px solid #AAA0B4;
@@ -128,7 +131,6 @@
     background-color: #F0E5FC;
     display: flex;
     flex-direction: row;
-    flex-direction: row;
     width: 75%;
     margin: 5px;
     border: 1px solid #AAA0B4;
@@ -137,6 +139,7 @@
 .flagTable {
     display: flex;
     justify-content: center;
+    align-content: center;
     margin: 5px;
     background-color: white;
     flex-basis: 50%;
@@ -149,6 +152,7 @@
     margin: 5px 5px 5px 0px;
     background-color: white;
     justify-content: center;
+    align-content: center;
     flex-basis: 50%;
     width: auto;
     border: 1px solid #AAA0B4;
@@ -170,10 +174,20 @@
     font-weight: bold;
 }
 
-td {
+td, th {
     padding-right: 10px;
+    border: 1px solid black;
+}
+
+th {
+    border-bottom: 1px solid black;
+    background-color: #F0E5FC;
 }
 
 table {
-    justify-content: center;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    border-collapse: collapse;
+    margin: 5px;
 }
