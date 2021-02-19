@@ -1,3 +1,32 @@
+/* Main Header Styling */
+.dashboardHeader {
+    width: 100%;
+    height: auto;
+    background-color: #F0E5FC;
+    border-bottom: 1px solid black;
+    position: relative;
+}
+
+.dashboardHeaderImage {
+    position: relative;
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
+    display: block;
+}
+
+.headerImageMessage {
+    position: absolute;
+    left: 50%;                       
+    top: 50%;                         
+    transform: translate(-50%, -50%); 
+    color: black;
+    width: auto;
+    font-size: xx-large;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
 .mainContainer {
     display: flex;
     flex-direction: column;
