@@ -1,22 +1,22 @@
 <?php
 
 abstract class userFactory {
-    abstract function makeUser();
+    abstract function makeUser($userID);
 }
 
 class communityUserFactory extends userFactory {
     private $context = "Community User";
 
-    public function makeUser() {
-        return new communityUser;
+    public function makeUser($userID) {
+        return new communityUser($userID);
     }
 }
 
 class adminUserFactory extends userFactory {
     private $context = "Administrator";
 
-    public function makeUser() {
-        return new adminUser;
+    public function makeUser($userID) {
+        return new adminUser($userID);
     }
 }
 

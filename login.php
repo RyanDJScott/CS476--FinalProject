@@ -1,3 +1,8 @@
+<?php
+    //Check to see if they are already logged in; redirect if so
+    if (isset($_SESSION["userObj"]) && isset($_SESSION["UID"]))
+        header("Location: dashboard.php");
+?>
 <!DOCTYPE html>
 <HTML lang="en">
 
@@ -34,10 +39,15 @@
 
         <!-- contains the login form elements and error spaces -->
         <div class="loginFormContainer">
-            <form class="loginForm">
+            <form class="loginForm" method="POST" action="PHP/login.php">
                 <table class="loginTable">
                     <tr>
-                        <td></td><td><span class="errorMessage" id="invalidMessage"></span></td>
+                        <td></td><td><span class="errorMessage" id="invalidMessage">
+                            <?php 
+                                if ($_SERVER["REQUEST_METHOD"] === "GET" && $_GET["login"] === "FAIL")
+                                    echo("Login failed. Please try again!");
+                            ?>
+                        </span></td>
                     </tr>
 
                     <!-- Login Email -->

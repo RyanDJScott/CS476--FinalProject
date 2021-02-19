@@ -40,9 +40,11 @@
 
         //Determine what type of user they are and instantiate that object
         if ($userInfo["userType"] === 0) {}
-            $_SESSION["userObj"] = new communityUserFactory->makeUser($userInfo["UID"]);
+            $commUser = new communityUserFactory;
+            $_SESSION["userObj"] = $commUser->makeUser($userInfo["UID"]);
         } else if ($userInfo["userType"] === 1) {
-            $_SESSION["userObj"] = new adminUserFactory->makeUser($userInfo["UID"]);
+            $adminUser = new adminUserFactory;
+            $_SESSION["userObj"] = $adminUser->makeUser($userInfo["UID"]);
         }
 
         //Send them to their dashboard page
