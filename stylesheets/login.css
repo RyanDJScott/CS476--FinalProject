@@ -8,14 +8,19 @@
     margin-bottom: 20px;
     margin-left: 15%;
     flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
 }
 
 .loginImage {
     display: flex;
     flex-basis: 33%;
-    margin: 20px;
+    max-width: 192px;
+    width: auto;
     background-color: white;
     height: 250px;
+    margin: 20px;
 }
 
 .loginFormContainer {
