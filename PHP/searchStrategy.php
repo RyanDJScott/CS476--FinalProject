@@ -15,5 +15,10 @@ interface searchStrategy {
     public function displayResults($dbReturn);
 }
 
+class userSearch extends searchStrategy {
+    public function getResults($query) {}
+
+    public function displayResults($dbReturn) {}
+}
 
 ?>
