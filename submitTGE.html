@@ -43,59 +43,59 @@
 
                 <!-- Name of TGE Company -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="text" id=""></td>
+                    <td><label for="submitTGECompanyName">Company Name:</label></td>
+                    <td><input type="text" id="submitTGECompanyName"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="submitTGECompanyNameError"></div></td>
                 </tr>
 
                 <!-- Approximate Playtime -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="text" id=""></td>
+                    <td><label for="submitTGEPlaytime">Approximate Playtime:</label></td>
+                    <td><input type="text" id="submitTGEPlaytime"> hours</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="submitTGEPlaytimeError"></div></td>
                 </tr>
 
                 <!-- Age Rating -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="text" id=""></td>
+                    <td><label for="submitTGEAge">Age Rating:</label></td>
+                    <td><input type="text" id="submitTGEAge">+years</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="submitTGEAgeError"></div></td>
                 </tr>
 
                 <!-- Number of Players -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="text" id=""></td>
+                    <td><label for="submitTGEPlayers">Number of Players:</label></td>
+                    <td><input type="text" id="submitTGEPlayers"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="submitTGEPlayersError"></div></td>
                 </tr>
 
                 <!-- Number of Expansions -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="text" id=""></td>
+                    <td><label for="submitTGEExpansions">Number of Expansions</label></td>
+                    <td><input type="text" id="submitTGEExpansions"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="submitTGEExpansionsError"></div></td>
                 </tr>
 
             </table>
 
             <!-- Provides and area to leave the game description -->
             <div class="gameDescription">
-                <p>Describe the game:</p>
+                Describe the game:<br>
                 <textarea rows="4" cols="50"></textarea>
                 <div class="errorMessage" id="descriptionError"></div>
             </div>
@@ -103,11 +103,23 @@
             <!-- image upload container -->
             <div class="uploadContainer">
 
+                <!-- Upload Button -->
+                <div>
+                    <label for="submitTGEUpload">Upload a file:</label>
+                    <input type="file" id="submitTGEUpload">
+                </div>
+
+                <!-- images themselves -->
+                <div class="uploadImagePreview"></div>
+                <div class="uploadImagePreview"></div>
+                <div class="uploadImagePreview"></div>
+                <div class="uploadImagePreview"></div>
+                
             </div>
 
             <!-- Submit button -->
             <div>
-                
+                <input type="submit" class="submitButton">
             </div>
         </div>
 
