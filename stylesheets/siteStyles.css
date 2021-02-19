@@ -112,15 +112,3 @@ nav {
     width: auto\9;
     display: block;
 }
-
-/* Footer Styling */
-footer {
-    background-color: #F0E5FC;
-    text-align: center;
-    height: 50px;
-    border-top: 1px solid black;
-    vertical-align: middle;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
