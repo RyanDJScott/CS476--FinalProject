@@ -28,6 +28,9 @@ abstract class user {
     abstract public function setUID($userID);
     abstract public function getUID();
     abstract public function displayDashboard();
+    abstract public function displayDashboardTitle();
+    abstract protected function showProfileDashboard();
+    abstract protected function showTGEBoxDashboard();
     abstract public function displayEditProfile();
     abstract public function editProfile($newInfo);
     abstract protected function deleteAccount();
@@ -38,6 +41,8 @@ abstract class user {
     //Admin functionalities here
     //Admin: implements these functions
     //Comm. Users: Block the user from using these functions
+    abstract protected function showFlaggedReviewsDashboard();
+    abstract protected function showPendingTGEDashboard();
     abstract protected function deleteUser($userID);
     abstract protected function reviewFlag();
     abstract protected function removeFlag($reviewInfo);
@@ -50,7 +55,6 @@ abstract class user {
 class communityUser extends user {
     //Member variables
     private $userInfo = NULL;
-    private $userDashboard = NULL;
     private $UID = NULL;
 
     // Function Name: Constructor
@@ -103,6 +107,36 @@ class communityUser extends user {
     // Side Effects: Displays the community users dashboard (profile, submit button, pending entries)
     //    to the dashboard page
     public function displayDashboard() {}
+
+    // Function Name: displayDashboardTitle
+    // Purpose: To display the title block on the dashboard header image
+    // Parameters: N/A
+    // Returns: N/A
+    // Side Effects: 
+    //   <1> Displays the user name, # reviews, # entries, last login on the page 
+    //       if DB fetch is successful
+    //   <2> Displays error if DB fetch unsuccessful
+    public function displayDashboardTitle() {}
+
+    // Function Name: showProfileDashboard
+    // Purpose: To fetch DB info and display the profile box on the dashboard
+    // Parameters:
+    //   <1> $userID: The UID of the user who owns the dashboard
+    // Returns: N/A
+    // Side Effects: 
+    //   <1> Displays the profile box of the user if DB fetch was successful
+    //   <2> Displays an error if the DB fetch is unsuccessful
+    protected function showProfileDashboard() {}
+
+    // Function Name: showTGEBoxDashboard
+    // Purpose: To fetch DB info and display the submit TGE button and pending TGE box
+    // Parameters: 
+    //   <1> $userID: The UID of the user who owns the dashboard
+    // Returns: N/A
+    // Side Effects: 
+    //   <1> Displays all of the TGE's that have a pending flag status if DB fetch successful
+    //   <2> Displays error message if DB fetch unsuccessful
+    protected function showTGEBoxDashboard() {}
 
     // Function Name: displayEditProfile
     // Purpose: To display the displayEditProfile page with the DB info inside the fields
@@ -161,6 +195,20 @@ class communityUser extends user {
     //   <2> If update is unsuccessful, shows a confirmation box about flag not being set
     public function flagReview($revInfo) {}
 
+
+    // Function Name: showFlaggedReviewsDashboard()
+    // Purpose: None; used to overwrite abstract method
+    // Parameters: None
+    // Returns: None
+    // Side Effects: None
+    protected function showFlaggedReviewsDashboard() {}
+
+    // Function Name: showPendingTGEDashboard
+    // Purpose: None; used to overwrite abstract method
+    // Parameters: None
+    // Returns: None
+    // Side Effects: none
+    protected function showPendingTGEDashboard() {}
 
     // Function Name: deleteUser
     // Purpose: None; used to overwrite abstract method
@@ -269,6 +317,36 @@ class adminUser extends user {
     //    to the dashboard page
     public function displayDashboard() {}
 
+    // Function Name: displayDashboardTitle
+    // Purpose: To display the title block on the dashboard header image
+    // Parameters: N/A
+    // Returns: N/A
+    // Side Effects: 
+    //   <1> Displays the user name, # reviews, # entries, last login on the page if DB fetch 
+    //      is successful
+    //   <2> Displauys error message if DB fetch unsuccessful
+    public function displayDashboardTitle() {}
+
+    // Function Name: showProfileDashboard
+    // Purpose: To fetch DB info and display the profile box on the dashboard
+    // Parameters:
+    //   <1> $userID: The UID of the user who owns the dashboard
+    // Returns: N/A
+    // Side Effects: 
+    //   <1> Displays the profile box of the user if DB fetch was successful
+    //   <2> Displays an error if the DB fetch is unsuccessful
+    protected function showProfileDashboard() {}
+
+    // Function Name: showTGEBoxDashboard
+    // Purpose: To fetch DB info and display the submit TGE button and pending TGE box
+    // Parameters: 
+    //   <1> $userID: The UID of the user who owns the dashboard
+    // Returns: N/A
+    // Side Effects: 
+    //   <1> Displays the submit button and pending TGE box if DB fetch was successful 
+    //   <2> Displays an error if DB fetch unsuccessful
+    protected function showTGEBoxDashboard() {}
+
     // Function Name: displayEditProfile
     // Purpose: To display the displayEditProfile page with the DB info inside the fields
     // Parameters: N/A
@@ -326,6 +404,26 @@ class adminUser extends user {
     //   <2> If update is unsuccessful, shows a confirmation box about flag not being set
     public function flagReview($revInfo) {}
 
+
+    // Function Name: showFlaggedReviewsDashboard()
+    // Purpose: Fetches and displays all of the flagged reviews needing moderation 
+    //  on the admin dashboard
+    // Parameters: None
+    // Returns: N/A
+    // Side Effects:
+    //   <1> Displays all of the reviews that have been flagged for moderation if DB fetch 
+    //       successful
+    //   <2> Displays error message if DB fetch unsuccessful
+    protected function showFlaggedReviewsDashboard() {}
+
+    // Function Name: showPendingTGEDashboard
+    // Purpose: Fetches and displays all of the pending TGE's needing moderation
+    // Parameters: None
+    // Returns: N/A
+    // Side Effects: 
+    //   <1> Displays all of the TGE's that have a pending flag status if DB fetch successful
+    //   <2> Displays error message if DB fetch unsuccessful
+    protected function showPendingTGEDashboard() {}
 
     // Function Name: deleteUser
     // Purpose: To delete a user from the database/site
