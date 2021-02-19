@@ -1,0 +1,68 @@
+.alignmentContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.signupContainer {
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: left;
+    max-width: 75%;
+    width: fit-content;
+    border: 1px solid #AAA0B4;
+    background-color: #F5F0F9;
+    overflow: 0;
+}
+
+.rowContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: left;
+    padding-left: 30px;
+    margin-top: 10px;
+}
+
+.itemContainer {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+label {
+    width: 160px;
+}
+
+.errorMessage {
+    width: fit-content;
+}
+
+.bioBoxBig {
+    height: 300px;
+    min-width: 300px
+}
+
+.submitButton {
+    margin-left: 160px;
+}
+
+input, select {
+    background-color: #f1d7f1;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #AAA0B4;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.submitButton:hover, .submitButton:focus {
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
+    background-color: #dac5f1;
+    text-decoration: none;
+}
