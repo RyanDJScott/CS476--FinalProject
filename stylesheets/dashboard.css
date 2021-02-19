@@ -135,21 +135,45 @@
 }
 
 .flagTable {
+    display: flex;
+    justify-content: center;
     margin: 5px;
     background-color: white;
-    flex-basis: 33%;
-    width: 100%;
+    flex-basis: 50%;
+    width: auto;
     border: 1px solid #AAA0B4;
 }
 
 .descriptionReview {
+    display: flex;
     margin: 5px 5px 5px 0px;
     background-color: white;
-    flex-basis: 67%;
-    width: 100%;
+    justify-content: center;
+    flex-basis: 50%;
+    width: auto;
     border: 1px solid #AAA0B4;
+}
+
+.adminContainer
+{
+    width: 75%;
+    display: flex;
+    justify-content: left;
+}
+
+.adminHeading {
+    display: flex;
+    color: #6B5F77;
+    text-align: left;
+    text-decoration: underline;
+    font-size: xx-large;
+    font-weight: bold;
 }
 
 td {
     padding-right: 10px;
+}
+
+table {
+    justify-content: center;
 }
