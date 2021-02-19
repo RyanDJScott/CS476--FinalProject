@@ -18,50 +18,43 @@
 .userInformationLeft {
     display: flex;
     flex-direction: column;
-    flex-basis: 33%;
     min-width: 200px;
+    width: auto;
     justify-content: center;
     align-items: center;
+    margin: 5px;
 }
 
 .userProfileImage {
     width: 200px;
     height: 200px;
-    margin: 5px;
     background-color: white;
     border: 1px solid #AAA0B4;
+    margin-bottom: 5px;
 }
 
 .simpleUserInfo {
     min-width: 200px;
-    margin: 5px;
     background-color: white;
     border: 1px solid #AAA0B4;
 }
 
 .userInformationRight {
+    margin-top: 5px;
+    margin-right: 5px;
     display: flex;
     flex-direction: column;
     justify-content: left;
     align-items: left;
-    margin: 5px
 }
 
-.userBiography {
-    margin: 5px;
+.favouritesInfo, .userBiography  {
     background-color: white;
     border: 1px solid #AAA0B4;
-}
-
-.favouritesInfo {
-    margin: 5px;
-    background-color: white;
-    border: 1px solid #AAA0B4;
+    margin-bottom: 5px;;
 }
 
 .editProfileButton {
-    padding: 5px;
-    margin: 5px;
     align-items: center;
     justify-content: center;
 }
@@ -83,6 +76,8 @@
     text-decoration: none;
 }
 
+
+/*Styling for shared dashboard components involving submissions */
 .submitPending {
     background-color: #F0E5FC;
     min-width: 500px;
@@ -90,7 +85,6 @@
     display: flex;
     flex-direction: row;
     width: 75%;
-    margin: 5px;
     border: 1px solid #AAA0B4;
 }
 
@@ -103,8 +97,11 @@
 }
 
 .pendingTableContainer {
-    flex-basis: auto;
-    margin: 5px;
+    height: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    flex-basis: 67%;
     background-color: white;
     border: 1px solid #AAA0B4;
 }
@@ -140,15 +137,15 @@
 .flagTable {
     margin: 5px;
     background-color: white;
-    flex-basis: 50%;
+    flex-basis: 33%;
     width: 100%;
     border: 1px solid #AAA0B4;
 }
 
 .descriptionReview {
-    margin: 5px;
+    margin: 5px 5px 5px 0px;
     background-color: white;
-    flex-basis: 50%;
+    flex-basis: 67%;
     width: 100%;
     border: 1px solid #AAA0B4;
 }
