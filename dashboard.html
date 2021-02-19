@@ -19,10 +19,14 @@
     </nav>
 
     <!-- Dashboard header image -->
-    <div class="mainPageHeader">
-        <img src="dependencies/dashboardImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
+    <div class="dashboardHeader">
+        <img src="dependencies/dashboardImage.png" class="dashboardHeaderImage" alt="Welcome to Queen City's Gambit!" />
+        <div class="headerImageMessage">
+            Username's Dashboard!
+        </div>
     </div>
 
+    <h1>User Information</h1>
     <!-- Main Area Container Which holds all -->
     <div class="mainContainer">
 
@@ -86,10 +90,10 @@
                 <table>
                     <!-- header row -->
                     <tr>
-                        <td>TITLE</td>
-                        <td>DATE SUBMITTED</td>
-                        <td>STATUS</td>
-                        <td>REASON</td>
+                        <th>TITLE</th>
+                        <th>DATE SUBMITTED</th>
+                        <th>STATUS</th>
+                        <th>REASON</th>
                     </tr>
 
                     <!-- information -->
@@ -115,6 +119,11 @@
             </div>
         </div>
 
+        <!-- heading for admin area-->
+        <div class="adminContainer">
+            <div class="adminHeading">Admin Area</div>
+        </div>
+
         <!-- admin functionality -->
         <div class="adminArea">
 
@@ -122,8 +131,8 @@
             <div class="flagTable">
                 <table>
                     <tr>
-                        <td>Review</td>
-                        <td>User</td>
+                        <th>Review</th>
+                        <th>User</th>
                     </tr>
                     <tr>
                         <td>review 1</td>
@@ -140,9 +149,9 @@
             <div class="descriptionReview">
                 <table>
                     <tr>
-                        <td>Title</td>
-                        <td>Date Submitted</td>
-                        <td>Revision Link</td> 
+                        <th>Title</th>
+                        <th>Date Submitted</th>
+                        <th>Revision Link</th> 
                     </tr>
                     <tr>
                         <td>-</td>
@@ -164,11 +173,6 @@
 
         </div> 
     </div>
-    <!-- Footer -->
-    <footer>
-        <a href="mailto:geekagog@geekagogo.ca"> Contact the Webmasters </a>
-        <p>&copy 2021 GeekAGoGo</p>
-    </footer>
 </body>
 
 </html>
