@@ -15,8 +15,8 @@
 <body>
     <!-- The navigation bar -->
     <nav> 
-        <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.html" class="navButton">Login</a>
+        <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <a href="login.php" class="navButton">Login</a>
         <a href="signup.html" class="navButton">Signup</a>
         <a href ="search.html" class="navButton">Search</a>
     </nav>

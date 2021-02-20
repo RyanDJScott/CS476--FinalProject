@@ -1,3 +1,10 @@
+<?php
+    //Include dependencies
+    include 'PHP/userFactory.php';
+
+    //Continue the session
+    session_start();
+?>
 <!DOCTYPE html>
 <HTML lang="en">
 
@@ -12,8 +19,8 @@
 <body>
     <!-- The navigation bar -->
     <nav>
-        <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.html" class="navButton">Login</a>
+        <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <a href="login.php" class="navButton">Login</a>
         <a href="signup.html" class="navButton">Signup</a>
         <a href="search.html" class="navButton">Search</a>
     </nav>
@@ -22,7 +29,7 @@
     <div class="dashboardHeader">
         <img src="dependencies/dashboardImage.png" class="dashboardHeaderImage" alt="Welcome to Queen City's Gambit!" />
         <div class="headerImageMessage">
-            Username's Dashboard!
+            USER INFO GOES HERE
         </div>
     </div>
 
