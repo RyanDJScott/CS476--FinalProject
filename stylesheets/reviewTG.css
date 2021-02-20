@@ -1,0 +1,44 @@
+.alignmentContainer {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border: 1px solid #AAA0B4;
+    background-color: #F5F0F9;
+    width: fit-content;
+}
+
+.reviewTableForm {
+    margin: 5px 0px 0px 5px;
+}
+
+.reviewSection {
+    margin: 5px 5px 0px 5px;
+}
+
+.reviewSubmitButton {
+    padding: 5px 0px 5px 0px;
+    margin: 0px 5px 5px 5px;
+}
+
+input, select, textarea {
+    background-color: #f1d7f1;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #AAA0B4;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.reviewSubmitButton:hover, .reviewSubmitButton:focus {
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
+    background-color: #dac5f1;
+    text-decoration: none;
+}
