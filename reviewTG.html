@@ -29,38 +29,39 @@
             <table>
                 <!-- Rating -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="" id=""></td>
+                    <td><label for="reviewRating">Rating:</label></td>
+                    <td><input type="number" id="reviewRating">&nbsp;/10</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="reviewRatingError"></div></td>
                 </tr>
 
                 <!-- Recommended? -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="" id=""></td>
+                    <td><label for="reviewRecommended">Would you recommend?</label></td>
+                    <td><input type="radio" id="yes" name="reviewRecommendedTrue">Yes &nbsp;
+                    <input type="radio" id="no" name="reviewRecommendedFalse">No</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="reviewRecommendedError"></div></td>
                 </tr>
 
                 <!-- How Many Players-->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="" id=""></td>
+                    <td><label for="reviewPlayers">How many players?</label></td>
+                    <td><input type="number" id="reviewPlayers"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="reviewPlayersError"></div></td>
                 </tr>
 
                 <!-- Average Age of Players -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="" id=""></td>
+                    <td><label for="reviewAge">Average age of players:</label></td>
+                    <td><input type="number" id="reviewAge">&nbsp;years</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -69,38 +70,45 @@
 
                 <!-- Playtime for one round -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="" id=""></td>
+                    <td><label for="reviewPlaytime">Time for one round:</label></td>
+                    <td><input type="number" id="reviewPlaytime">&nbsp;hour(s)</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="reviewPlaytimeError"></div></td>
                 </tr>
 
                 <!-- Number of Times Player -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="" id=""></td>
+                    <td><label for="reviewPlayedQuantity">Number of times played:</label></td>
+                    <td><input type="number" id="reviewPlayedQuantity"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="reviewPlayedQuantity"></div></td>
                 </tr>
 
                 <!-- Percieved difficulty -->
                 <tr>
-                    <td><label for=""></label></td>
-                    <td><input type="" id=""></td>
+                    <td><label for="reviewDifficulty">Percieved Difficulty</label></td>
+                    <td>
+                        <select id="reviewDifficulty">
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><div class="errorMessage" id=""></div></td>
+                    <td><div class="errorMessage" id="reviewDifficultyError"></div></td>
                 </tr>
             </table>
 
             <!-- Review section itself -->
             <div class="reviewSection">
-
+                Please tell us about your experience with this game:<br>
+                <textarea rows="15" cols="75">Leave your review here...</textarea>
+                <div class="errorMessage" id="reviewTextError"></div>
             </div>
 
             <!-- submit button-->
