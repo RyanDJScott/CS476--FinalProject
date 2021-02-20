@@ -1,3 +1,11 @@
+<?php
+    //Check for continued session
+    session_start();
+
+    //Check to see if they are already logged in; redirect if so
+    if (isset($_SESSION["UID"]) && $_SESSION["UID"] > 0)
+        header("Location: dashboard.php");
+?>
 <!DOCTYPE html>
 <HTML lang="en">
 
@@ -13,8 +21,8 @@
 
     <!-- The navigation bar -->
     <nav> 
-        <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.html" class="navButton">Login</a>
+        <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <a href="login.php" class="navButton">Login</a>
         <a href="signup.html" class="navButton">Signup</a>
         <a href ="search.html" class="navButton">Search</a>
     </nav>
@@ -34,15 +42,22 @@
 
         <!-- contains the login form elements and error spaces -->
         <div class="loginFormContainer">
-            <form class="loginForm">
+            <form class="loginForm" method="POST" action="./PHP/loginScript.php">
                 <table class="loginTable">
                     <tr>
-                        <td></td><td><span class="errorMessage" id="invalidMessage"></span></td>
+                        <td></td><td><span class="errorMessage" id="invalidMessage">
+                            <?php 
+                                if ($_SERVER["REQUEST_METHOD"] === "GET") {
+                                    if (isset($_GET["login"]) && $_GET["login"] === "FAIL")
+                                        echo("Login failed. Please try again!");
+                                }
+                            ?>
+                        </span></td>
                     </tr>
 
                     <!-- Login Email -->
                     <tr>
-                        <td><label for="loginEmail">Email: </label></td><td><input type="email" id="loginEmail" class="loginInput"></td>
+                        <td><label for="loginEmail">Email: </label></td><td><input type="email" name="loginEmail" id="loginEmail" class="loginInput"></td>
                     </tr>
                     <tr>
                         <td></td><td><span class="errorMessage" id="invalidLoginEmail"><br></span></td>
@@ -50,7 +65,7 @@
 
                     <!-- Login Password -->
                     <tr>
-                        <td><label for="loginPassword">Password:</label></td><td><input type="password" id="loginPassword" class="loginInput"></td>
+                        <td><label for="loginPassword">Password:</label></td><td><input type="password" name="loginPassword" id="loginPassword" class="loginInput"></td>
                     </tr>
                     <tr>
                         <td></td><td><span class="errorMessage" id="invalidLoginPassword"><br></span></td>

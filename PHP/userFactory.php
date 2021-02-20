@@ -1,22 +1,22 @@
 <?php
 
 abstract class userFactory {
-    abstract function makeUser();
+    abstract function makeUser($userID);
 }
 
 class communityUserFactory extends userFactory {
     private $context = "Community User";
 
-    public function makeUser() {
-        return new communityUser;
+    public function makeUser($userID) {
+        return new communityUser($userID);
     }
 }
 
 class adminUserFactory extends userFactory {
     private $context = "Administrator";
 
-    public function makeUser() {
-        return new adminUser;
+    public function makeUser($userID) {
+        return new adminUser($userID);
     }
 }
 
@@ -66,7 +66,9 @@ class communityUser extends user {
     //   <1> $userInfo array initialized with DB values for userID
     //   <2> $userDashboard is initialized with a dashboard object
     //   <3> $UID is set to the primary key of the user
-    public function __construct($userID) {}
+    public function __construct($userID) {
+        $UID = $userID;
+    }
 
     // Function Name: setInfo
     // Purpose: Setter for the $userInfo array
@@ -263,7 +265,6 @@ class communityUser extends user {
 class adminUser extends user {
     //Member variables
     private $userInfo = NULL;
-    private $userDashboard = NULL;
     private $UID = NULL;
 
     // Function Name: Constructor
@@ -275,7 +276,9 @@ class adminUser extends user {
     //   <1> $userInfo array initialized with DB values for userID
     //   <2> $userDashboard is initialized with a dashboard object
     //   <3> $UID is set to the primary key of the user
-    public function __construct($userID) {}
+    public function __construct($userID) {
+        $UID = $userID;
+    }
 
     // Function Name: setInfo
     // Purpose: Setter for the $userInfo array
