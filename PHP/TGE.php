@@ -69,5 +69,13 @@ class TGE {
     //Returns: N/A
     //Side Effects: Displays the contents of a tabletop game description as a mini-card
     public function displayTGECard() {}
+
+    //Function Name: displayTGEFeatureGameBox
+    //Purpose: To display the contents of a tabletop game description as a feature game box
+    //Parameters: N/A
+    //Returns: N/A
+    //Side Effects: Displays the contents of a tabletop game description as a feature game box
+    public function displayTGEFeatureGameBox() {}
+
 }
 ?>
