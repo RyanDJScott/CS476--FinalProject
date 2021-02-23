@@ -3,8 +3,11 @@
 include 'dbCred.php';
 include 'userFactory.php';
 
+//Create a database object
+$db = new database();
+
 //Connect to the database
-$dbConnect = new mysqli($host, $userName, $userPW, $dbName);
+$dbConnect = $db->dbConnect();
 
 //Check the connection
 if ($dbConnect->connect_error) {
