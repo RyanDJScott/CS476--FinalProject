@@ -1,3 +1,11 @@
+<?php
+    //Include functions for displaying
+    include 'navBar.php';
+
+    //Continue the session
+    session_start();
+?>
+
 <!DOCTYPE html>
 <HTML lang="en">
 <head>
@@ -16,9 +24,14 @@
     <!-- The navigation bar -->
     <nav> 
         <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.php" class="navButton">Login</a>
-        <a href="signup.html" class="navButton">Signup</a>
-        <a href ="search.html" class="navButton">Search</a>
+        <?php
+            //Check if the user is logged in
+            if ((isset($_SESSION["UID"]) && $_SESSION["UID"] > 0) && is_object($_SESSION["userObj"])) {
+                loggedInNavBar();
+            } else {
+                loggedOutNavBar();
+            }
+        ?>
     </nav>
 
     <!-- Main header image -->
