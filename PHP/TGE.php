@@ -5,6 +5,8 @@ class TGE {
     private $entryInfo = NULL;
     private $images = NULL;
     private $gameReviews = NULL;
+    private $statusInfo = NULL;
+    private $overallRating = NULL;
 
     //Member Functions
 
@@ -17,7 +19,95 @@ class TGE {
     //   <1> $entryInfo is initialized as an array with all game information
     //   <2> $images is initialized as an array with all picture URLs in it
     //   <3> $gameReviews is initialized as an array of review objects
-    public function __construct($gameTitle) {}
+    public function __construct($gameTitle) {
+        //Include DB credentials
+        include 'dbCred.php';
+        include 'reviewClass.php';
+
+        //Connect to the database
+        $dbConnect = new mysqli($host, $userName, $userPW, $dbName);
+
+        //----------------fill entryInfo variable--------------------//
+        //Query the database to fill the entryInfo array
+        $gameQuery = "SELECT GameDescriptions.gameTitle, Users.screenName, GameDescriptions.dateSubmitted, GameDescriptions.numPlayers, 
+            GameDescriptions.ageRating, GameDescriptions.playTime, GameDescriptions.description, GameDescriptions.company, GameDescriptions.expansions, 
+            GameDescriptionStatus.status, GameDescriptionStatus.reason
+            FROM GameDescriptions INNER JOIN Users ON (GameDescriptions.UID = Users.UID)
+            INNER JOIN GameDescriptionStatus ON (GameDescriptions.gameTitle = GameDescriptionStatus.gameTitle)
+            WHERE GameDescriptions.gameTitle = " . $dbConnect->real_escape_string($gameTitle) . "";
+
+        //Query the database
+        $queryResult = $dbConnect->query($gameQuery);
+
+        //If the game doesn't exist, set the variable to FALSE
+        if ($queryResult === FALSE) {
+            $entryInfo = FALSE;
+        } else if (mysqli_num_rows($queryResult) > 0) {
+            //Fetch the information from the DB object
+            $resultRows = $queryResult->fetch_assoc();
+
+            //Put this information into the entryInfo variable
+            $entryInfo = array(
+                "gameTitle" => $resultRows["gameTitle"],
+                "screenName" => $resultRows["screenName"],
+                "dateSubmitted" => $resultRows["dateSubmitted"],
+                "numPlayers" => $resultRows["numPlayers"],
+                "ageRating" => $resultRows["ageRating"],
+                "playTime" => $resultRows["playTime"],
+                "description" => $resultRows["description"],
+                "company" => $resultRows["company"],
+                "expanions" => $resultRows["expansions"]
+            );
+
+            //Put this information into the statusInfo variable
+            $statusInfo = array(
+                "status" => $resultRows["status"],
+                "reason" => $resultRows["reason"]
+            );
+        }
+
+        //---------------fill images variable-----------------------//
+        //Query the database to fill the images array
+        $imagesQuery = "SELECT pictureURL FROM DescriptionPics WHERE gameTitle = " . $dbConnect->real_escape_string($gameTitle) . "";
+
+        //Query the database
+        $queryResult = $dbConnect->query($imagesQuery);
+
+        //If the database doesn't yield any results, set this variable to false
+        if ($queryResult === FALSE) {
+            $images = FALSE;
+        } else if (mysqli_num_rows($queryResult) > 0) {
+            //Initialize $images as an array
+            $images = array();
+
+            //While there is a row to fetch from the result object
+            while ($resultRows = $queryResult->fetch_assoc()) {
+                $images[] = $resultRows["pictureURL"];
+            }
+        }
+
+        //---------------fill reviews array-------------------------//
+        //Query the database to fill the reviews array
+        $reviewQuery = "SELECT gameTitle, UID FROM Reviews WHERE gameTitle = " . $dbConnect->real_escape_string($gameTitle) . "";
+
+        //Query the database
+        $queryResult = $dbConnect->query($reviewQuery);
+
+        //If the database doesn't yield any results, set this variable to false
+        if ($queryResult === FALSE || mysqli_num_rows($queryResult) == 0) {
+            $gameReviews = FALSE;
+        } else if (mysqli_num_rows($queryResult) > 0) {
+            //Initialize $gameReviews to an array
+            $gameReviews = array();
+
+            //For each review, create a new review object and place into the array
+            while ($resultRows = $queryResult->fetch_assoc()) {
+                $gameReviews[] = new Review($resultRows["gameTitle"], $resultRows["UID"]);
+            }
+        }
+
+        //------------set overall rating-----------------------------//
+    }
 
     //Function Name: setEntryInfo
     //Purpose: To set $entryInfo with the information given
