@@ -1,6 +1,9 @@
 <?php
+    //Include class definitions for login check
+    include './PHP/userFactory.php';
+
     //Include functions for displaying
-    include 'navBar.php';
+    include './PHP/navBar.php';
 
     //Continue the session
     session_start();
@@ -26,11 +29,11 @@
         <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
         <?php
             //Check if the user is logged in
-            if ((isset($_SESSION["UID"]) && $_SESSION["UID"] > 0) && is_object($_SESSION["userObj"])) {
+            if ((isset($_SESSION["UID"]) && $_SESSION["UID"] > 0) && is_object($_SESSION["userObj"])) 
                 loggedInNavBar();
-            } else {
+             else 
                 loggedOutNavBar();
-            }
+            
         ?>
     </nav>
 
