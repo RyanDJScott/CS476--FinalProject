@@ -5,14 +5,7 @@ include 'userFactory.php';
 
 //Create a database object
 $db = new database();
-
-//Connect to the database
-$dbConnect = $db->dbConnect();
-
-//Check the connection
-if ($dbConnect->connect_error) {
-    die("There was an error connecting to the DB:" . $dbConnect->connect_error);
-} 
+$dbConnect = $db->getDBConnection();
 
 //If the user presses the submit button
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -53,8 +46,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         //User does not exist, send them back with error message
         header("Location: ../login.php?login=FAIL");
     }
-
-    //Close the DB connection
-    $dbConnect->close();
 }
 ?>
