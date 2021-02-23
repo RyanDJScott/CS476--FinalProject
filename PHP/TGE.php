@@ -107,6 +107,20 @@ class TGE {
         }
 
         //------------set overall rating-----------------------------//
+        //Query the database to get the avg rating for this game
+        $ratingQuery = "SELECT AVG(rating) AS overallRating FROM Reviews WHERE gameTitle = " . $dbConnect->real_escape_string($gameTitle) . "";
+
+        //Execute the query
+        $queryResult = $dbConnect->query($ratingQuery);
+
+        //If the database doesn't yield any results, set this variable to false
+        if ($queryResult === FALSE || mysqli_num_rows($queryResult) == 0) {
+            $overallRating = FALSE;
+        } else if (mysqli_num_rows($queryResult) > 0) {
+            $resultRows = $queryResult->fetch_assoc();
+
+            $overallRating = $resultRows["overallRating"];
+        }
     }
 
     //Function Name: setEntryInfo
