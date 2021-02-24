@@ -1,15 +1,11 @@
 <?php
 //Include the database credentials
-include 'dbCred.php';
+include 'database.php';
 include 'userFactory.php';
 
-//Connect to the database
-$dbConnect = new mysqli($host, $userName, $userPW, $dbName);
-
-//Check the connection
-if ($dbConnect->connect_error) {
-    die("There was an error connecting to the DB:" . $dbConnect->connect_error);
-} 
+//Create a database object
+$db = new database();
+$dbConnect = $db->getDBConnection();
 
 //If the user presses the submit button
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -50,8 +46,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         //User does not exist, send them back with error message
         header("Location: ../login.php?login=FAIL");
     }
-
-    //Close the DB connection
-    $dbConnect->close();
 }
 ?>
