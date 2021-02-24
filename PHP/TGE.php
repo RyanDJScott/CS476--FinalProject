@@ -1,5 +1,5 @@
 <?php
-include 'dbCred.php';
+include 'database.php';
 include 'reviewClass.php';
 
 class TGE {
