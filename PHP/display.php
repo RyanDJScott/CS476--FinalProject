@@ -6,6 +6,7 @@ include 'userFactory.php';
 
 //Implement display class
 class display {
-    //Member functions
+    //Utility Member Functions
+
     
 }

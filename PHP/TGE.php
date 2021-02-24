@@ -178,6 +178,16 @@ class TGE {
         return $this->gameTitle;
     }
 
+    //Function Name: getScreenName
+    //Purpose: To get the screenname of the person who wrote this tabletop game entry
+    //Parameters: N/A
+    //Returns: 
+    //   <1> $this->screenName 
+    //Side Effects: N/A
+    public function getScreenName () {
+        return $this->screenName;
+    }
+
     //Function Name: setDateSubmitted
     //Purpose: To set $dateSubmitted with the information given
     //Parameters: 
@@ -626,27 +636,5 @@ class TGE {
     public function getOverallRating () {
         return $this->overallRating;
     }
-
-    //Function Name: displayTGE
-    //Purpose: To display the contents of a tabletop game description on the viewTGE.php page
-    //Parameters: N/A
-    //Returns: N/A
-    //Side Effects: Displays the contents of a tabletop game description on the viewTGE.php page
-    public function displayTGE() {}
-
-    //Function Name: displayTGECard
-    //Purpose: To display the contents of a tabletop game description as a mini-card
-    //Parameters: N/A
-    //Returns: N/A
-    //Side Effects: Displays the contents of a tabletop game description as a mini-card
-    public function displayTGECard() {}
-
-    //Function Name: displayTGEFeatureGameBox
-    //Purpose: To display the contents of a tabletop game description as a feature game box
-    //Parameters: N/A
-    //Returns: N/A
-    //Side Effects: Displays the contents of a tabletop game description as a feature game box
-    public function displayTGEFeatureGameBox() {}
-
 }
 ?>
