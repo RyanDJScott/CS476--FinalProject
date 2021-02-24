@@ -1,6 +1,6 @@
 <?php
 //Include the database credentials
-include 'dbCred.php';
+include 'database.php';
 include 'userFactory.php';
 
 //Create a database object

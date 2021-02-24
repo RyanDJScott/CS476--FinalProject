@@ -184,6 +184,7 @@ class TGE {
     //Returns: 
     //   <1> $this->screenName 
     //Side Effects: N/A
+    //Note: No setter required; it is not a function of the GameDescription table but rather the user who wrote it
     public function getScreenName () {
         return $this->screenName;
     }
