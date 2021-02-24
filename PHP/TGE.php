@@ -54,7 +54,7 @@ class TGE {
             GameDescriptionStatus.status, GameDescriptionStatus.reason
             FROM GameDescriptions INNER JOIN Users ON (GameDescriptions.UID = Users.UID)
             INNER JOIN GameDescriptionStatus ON (GameDescriptions.gameTitle = GameDescriptionStatus.gameTitle)
-            WHERE GameDescriptions.gameTitle = " . $this->dbConnect->real_escape_string($objGameTitle) . "";
+            WHERE GameDescriptions.gameTitle = '" . $this->dbConnect->real_escape_string($objGameTitle) . "'";
 
         //Query the database
         $queryResult = $this->dbConnect->query($gameQuery);
@@ -84,7 +84,7 @@ class TGE {
 
         //---------------fill images variable-----------------------//
         //Query the database to fill the images array
-        $imagesQuery = "SELECT pictureURL FROM DescriptionPics WHERE gameTitle = " . $this->dbConnect->real_escape_string($objGameTitle) . "";
+        $imagesQuery = "SELECT pictureURL FROM DescriptionPics WHERE gameTitle = '" . $this->dbConnect->real_escape_string($objGameTitle) . "'";
 
         //Query the database
         $queryResult = $this->dbConnect->query($imagesQuery);
@@ -102,7 +102,7 @@ class TGE {
 
         //---------------fill reviews array-------------------------//
         //Query the database to fill the reviews array
-        $reviewQuery = "SELECT gameTitle, UID FROM Reviews WHERE gameTitle = " . $this->dbConnect->real_escape_string($objGameTitle) . "";
+        $reviewQuery = "SELECT gameTitle, UID FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($objGameTitle) . "'";
 
         //Query the database
         $queryResult = $this->dbConnect->query($reviewQuery);
@@ -120,7 +120,7 @@ class TGE {
 
         //------------set overall rating-----------------------------//
         //Query the database to get the avg rating for this game
-        $ratingQuery = "SELECT AVG(rating) AS overallRating FROM Reviews WHERE gameTitle = " . $this->dbConnect->real_escape_string($objGameTitle) . "";
+        $ratingQuery = "SELECT AVG(rating) AS overallRating FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($objGameTitle) . "'";
 
         //Execute the query
         $queryResult = $this->dbConnect->query($ratingQuery);
@@ -145,12 +145,12 @@ class TGE {
     //   and updated in the database
     public function setGameTitle($title) {
         //Check to see if title is empty, return FALSE if it is empty
-        if (empty($title)) {
+        if (!isset($title)) {
             return FALSE;
         } else {
             //Perform the update query
-            $setGameTitle = "UPDATE GameDescription SET gameTitle = " . $this->dbConnect->real_escape_string($title) . 
-                "WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+            $setGameTitle = "UPDATE GameDescriptions SET gameTitle = '" . $this->dbConnect->real_escape_string($title) . 
+                "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
             //Execute the query
             $queryResult = $this->dbConnect->query($setGameTitle);
@@ -200,12 +200,12 @@ class TGE {
     //   and updated in the database
     public function setDateSubmitted($date) {
         //Check to see if date is empty, return FALSE if it is empty
-        if (empty($date)) {
+        if (!isset($date)) {
             return FALSE;
         } else {
             //Perform the update query
-            $setDateSubmitted = "UPDATE GameDescription SET dateSubmitted = " . $this->dbConnect->real_escape_string($date) . 
-                "WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+            $setDateSubmitted = "UPDATE GameDescriptions SET dateSubmitted = '" . $this->dbConnect->real_escape_string($date) . 
+                "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
             //Execute the query
             $queryResult = $this->dbConnect->query($setDateSubmitted);
@@ -244,12 +244,12 @@ class TGE {
     //   and updated in the database
     public function setNumPlayers($number) {
         //Check to see if number is empty, return FALSE if it is empty
-        if (empty($number)) {
+        if (!isset($number)) {
             return FALSE;
         } else {
             //Perform the update query
-            $setNumPlayers = "UPDATE GameDescription SET numPlayers = " . $this->dbConnect->real_escape_string($number) . 
-                "WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+            $setNumPlayers = "UPDATE GameDescriptions SET numPlayers = '" . $this->dbConnect->real_escape_string($number) . 
+                "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
             //Execute the query
             $queryResult = $this->dbConnect->query($setNumPlayers);
@@ -288,12 +288,12 @@ class TGE {
     //   and updated in the database
     public function setAgeRating($age) {
         //Check to see if age is empty, return FALSE if it is empty
-        if (empty($age)) {
+        if (!isset($age)) {
             return FALSE;
         } else {
             //Perform the update query
-            $setAgeRating = "UPDATE GameDescription SET ageRating = " . $this->dbConnect->real_escape_string($age) . 
-                "WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+            $setAgeRating = "UPDATE GameDescriptions SET ageRating = '" . $this->dbConnect->real_escape_string($age) . 
+                "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
             //Execute the query
             $queryResult = $this->dbConnect->query($setAgeRating);
@@ -332,12 +332,12 @@ class TGE {
     //   and updated in the database
     public function setPlayTime($time) {
         //Check to see if time is empty, return FALSE if it is empty
-        if (empty($time)) {
+        if (!isset($time)) {
             return FALSE;
         } else {
             //Perform the update query
-            $setPlayTime = "UPDATE GameDescription SET playTime = " . $this->dbConnect->real_escape_string($time) . 
-                "WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+            $setPlayTime = "UPDATE GameDescriptions SET playTime = '" . $this->dbConnect->real_escape_string($time) . 
+                "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
             //Execute the query
             $queryResult = $this->dbConnect->query($setPlayTime);
@@ -345,7 +345,7 @@ class TGE {
             //See if the update worked
             if ($queryResult === TRUE) {
                 //Update the object information
-                $this->ageRating = $time;
+                $this->playTime = $time;
 
                 //Exit the function
                 return TRUE;
@@ -376,12 +376,12 @@ class TGE {
     //   and updated in the database
     public function setDescription ($newDescription) {
         //Check to see if newDescription is empty, return FALSE if it is empty
-        if (empty($newDescription)) {
+        if (!isset($newDescription)) {
             return FALSE;
         } else {
             //Perform the update query
-            $setDescription = "UPDATE GameDescription SET description = " . $this->dbConnect->real_escape_string($newDescription) . 
-                "WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+            $setDescription = "UPDATE GameDescriptions SET description = '" . $this->dbConnect->real_escape_string($newDescription) . 
+                "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
             //Execute the query
             $queryResult = $this->dbConnect->query($setDescription);
@@ -389,7 +389,7 @@ class TGE {
             //See if the update worked
             if ($queryResult === TRUE) {
                 //Update the object information
-                $this->ageRating = $newDescription;
+                $this->description = $newDescription;
 
                 //Exit the function
                 return TRUE;
@@ -420,12 +420,12 @@ class TGE {
     //   and updated in the database
     public function setCompany ($newCompany) {
         //Check to see if newCompany is empty, return FALSE if it is empty
-        if (empty($newCompany)) {
+        if (!isset($newCompany)) {
             return FALSE;
         } else {
             //Perform the update query
-            $setCompany = "UPDATE GameDescription SET ageRating = " . $this->dbConnect->real_escape_string($newCompany) . 
-                "WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+            $setCompany = "UPDATE GameDescriptions SET company = '" . $this->dbConnect->real_escape_string($newCompany) . 
+                "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
             //Execute the query
             $queryResult = $this->dbConnect->query($setCompany);
@@ -433,7 +433,7 @@ class TGE {
             //See if the update worked
             if ($queryResult === TRUE) {
                 //Update the object information
-                $this->ageRating = $newCompany;
+                $this->company = $newCompany;
 
                 //Exit the function
                 return TRUE;
@@ -464,12 +464,12 @@ class TGE {
     //   and updated in the database
     public function setExpansions ($numExpans) {
         //Check to see if numExpans is empty, return FALSE if it is empty
-        if (empty($numExpans)) {
+        if (!isset($numExpans)) {
             return FALSE;
         } else {
             //Perform the update query
-            $setExpansions = "UPDATE GameDescription SET expansions = " . $this->dbConnect->real_escape_string($numExpans) . 
-                "WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+            $setExpansions = "UPDATE GameDescriptions SET expansions = '" . $this->dbConnect->real_escape_string($numExpans) . 
+                "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
             //Execute the query
             $queryResult = $this->dbConnect->query($setExpansions);
@@ -477,7 +477,7 @@ class TGE {
             //See if the update worked
             if ($queryResult === TRUE) {
                 //Update the object information
-                $this->ageRating = $numExpans;
+                $this->expansions = $numExpans;
 
                 //Exit the function
                 return TRUE;
@@ -512,24 +512,28 @@ class TGE {
             return FALSE;
         } else {
             //Perform a delete query for the old image URLs
-            $deleteImages = "DELETE FROM DescriptionPics WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+            $deleteImages = "DELETE FROM DescriptionPics WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
             //Execute query
             $deleteResults = $this->dbConnect->query($deleteImages);
 
             //If the delete worked, insert the new images
             if ($deleteResults === TRUE) {
+                //Create a new images array to store the new image URLs
+                $newImages = array();
+
                 foreach ($imageURLs as $image)
                 {
                     //Perform an insert query to insert new image URLs into the DB
-                    $insertQuery = "INSER INTO DescriptionPics (pictureURL, gameTitle) VALUES (" . $this->dbConnect->real_escape_string($image) . ", "
-                        . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+                    $insertQuery = "INSERT INTO DescriptionPics (pictureURL, gameTitle) VALUES ('" . $this->dbConnect->real_escape_string($image) . "', '"
+                        . $this->dbConnect->real_escape_string($this->gameTitle) . "')";
                     
                     //Execute the query
                     $insertResult = $this->dbConnect->query($insertQuery);
 
                     //If the query succeeded, continue. Otherwise, return FALSE and break
                     if ($insertResult === TRUE) {
+                        $newImages[] = $image;
                         continue;
                     } else {
                         return FALSE;
@@ -537,6 +541,9 @@ class TGE {
                 }
 
                 //If loop finished without returning, it was successful
+                //Overwrite the images array with the new images
+                $this->images = $newImages;
+
                 return TRUE;
             } else {
                 return FALSE;
@@ -567,15 +574,15 @@ class TGE {
     public function setStatusInfo ($status, $reason) {
         //Check to see if status is empty, return FALSE if it is empty
         //Reason may be empty, no need to check
-        if (empty($status)) {
+        if (!isset($status)) {
             return FALSE;
         } else {
             //Perform the update query
-            $statusInfo = "UPDATE GameDescriptionStatus SET status = " . $this->dbConnect->real_escape_string($status) . 
-                " AND reason  = " . $this->dbConnect->real_escape_string($reason) . "WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+            $statusInfoQuery = "UPDATE GameDescriptionStatus SET status = '" . $this->dbConnect->real_escape_string($status) . 
+                "', reason  = '" . $this->dbConnect->real_escape_string($reason) . "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
             //Execute the query
-            $queryResult = $this->dbConnect->query($statusInfo);
+            $queryResult = $this->dbConnect->query($statusInfoQuery);
 
             //See if the update worked
             if ($queryResult === TRUE) {
@@ -610,7 +617,7 @@ class TGE {
     //Side Effects: $overallRating is set to the new information obtained from the database
     public function setOverallRating () {
         //Query the database to get the avg rating for this game
-        $ratingQuery = "SELECT AVG(rating) AS overallRating FROM Reviews WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+        $ratingQuery = "SELECT AVG(rating) AS overallRating FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
 
         //Execute the query
         $queryResult = $this->dbConnect->query($ratingQuery);
