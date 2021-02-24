@@ -59,7 +59,7 @@ class TGE {
         //Query the database
         $queryResult = $this->dbConnect->query($gameQuery);
 
-        //If the game doesn't exist, set the variable to FALSE
+        //If the game exists, set the information for this object
         if (mysqli_num_rows($queryResult) > 0) {
             //Fetch the information from the DB object
             $resultRows = $queryResult->fetch_assoc();
@@ -89,7 +89,7 @@ class TGE {
         //Query the database
         $queryResult = $this->dbConnect->query($imagesQuery);
 
-        //If the database doesn't yield any results, set this variable to false
+        //If the database doesn't yield any results, set this variable to FALSE
         if (mysqli_num_rows($queryResult) > 0) {
             //Initialize $images as an array
             $this->images = array();
@@ -107,7 +107,7 @@ class TGE {
         //Query the database
         $queryResult = $this->dbConnect->query($reviewQuery);
 
-        //If the database doesn't yield any results, set this variable to false
+        //If the database doesn't yield any results, set this variable to FALSE
         if (mysqli_num_rows($queryResult) > 0) {
             //Initialize $gameReviews to an array
             $this->gameReviews = array();
@@ -125,7 +125,7 @@ class TGE {
         //Execute the query
         $queryResult = $this->dbConnect->query($ratingQuery);
 
-        //If the database doesn't yield any results, set this variable to false
+        //If the database doesn't yield any results, set this variable to FALSE
         if (mysqli_num_rows($queryResult) > 0) {
             $resultRows = $queryResult->fetch_assoc();
 
@@ -139,14 +139,14 @@ class TGE {
     //Parameters: 
     //   <1> $title: The new title of the tabletop game
     //Returns: 
-    //   <1> True: The information was updated in the DB
-    //   <2> False: The information was not updated in the DB
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $gameTitle is set to the new information contained in $title
     //   and updated in the database
     public function setGameTitle($title) {
-        //Check to see if title is empty, return false if it is empty
+        //Check to see if title is empty, return FALSE if it is empty
         if (empty($title)) {
-            return false;
+            return FALSE;
         } else {
             //Perform the update query
             $setGameTitle = "UPDATE GameDescription SET gameTitle = " . $this->dbConnect->real_escape_string($title) . 
@@ -161,9 +161,9 @@ class TGE {
                 $this->gameTitle = $title;
 
                 //Exit the function
-                return true;
+                return TRUE;
             } else if ($queryResult === FALSE) {
-                return false;
+                return FALSE;
             }
         }
     }
@@ -183,14 +183,14 @@ class TGE {
     //Parameters: 
     //   <1> $date: The new submission date of the tabletop game
     //Returns: 
-    //   <1> True: The information was updated in the DB
-    //   <2> False: The information was not updated in the DB
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $dateSubmitted is set to the new information contained in $date
     //   and updated in the database
     public function setDateSubmitted($date) {
-        //Check to see if title is empty, return false if it is empty
+        //Check to see if date is empty, return FALSE if it is empty
         if (empty($date)) {
-            return false;
+            return FALSE;
         } else {
             //Perform the update query
             $setDateSubmitted = "UPDATE GameDescription SET dateSubmitted = " . $this->dbConnect->real_escape_string($date) . 
@@ -205,9 +205,9 @@ class TGE {
                 $this->dateSubmitted = $date;
 
                 //Exit the function
-                return true;
+                return TRUE;
             } else if ($queryResult === FALSE) {
-                return false;
+                return FALSE;
             }
         }
     }
@@ -227,14 +227,14 @@ class TGE {
     //Parameters: 
     //   <1> $number: The number of players for this tabletop game entry
     //Returns: 
-    //   <1> True: The information was updated in the DB
-    //   <2> False: The information was not updated in the DB
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $numPlayers is set to the new information contained in $number
     //   and updated in the database
     public function setNumPlayers($number) {
-        //Check to see if title is empty, return false if it is empty
+        //Check to see if number is empty, return FALSE if it is empty
         if (empty($number)) {
-            return false;
+            return FALSE;
         } else {
             //Perform the update query
             $setNumPlayers = "UPDATE GameDescription SET numPlayers = " . $this->dbConnect->real_escape_string($number) . 
@@ -249,9 +249,9 @@ class TGE {
                 $this->numPlayers = $number;
 
                 //Exit the function
-                return true;
+                return TRUE;
             } else if ($queryResult === FALSE) {
-                return false;
+                return FALSE;
             }
         }
     }
@@ -271,14 +271,14 @@ class TGE {
     //Parameters: 
     //   <1> $age: The new age rating of the tabletop game entry
     //Returns: 
-    //   <1> True: The information was updated in the DB
-    //   <2> False: The information was not updated in the DB
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $ageRating is set to the new information contained in $age
     //   and updated in the database
     public function setAgeRating($age) {
-        //Check to see if title is empty, return false if it is empty
+        //Check to see if age is empty, return FALSE if it is empty
         if (empty($age)) {
-            return false;
+            return FALSE;
         } else {
             //Perform the update query
             $setAgeRating = "UPDATE GameDescription SET ageRating = " . $this->dbConnect->real_escape_string($age) . 
@@ -293,9 +293,9 @@ class TGE {
                 $this->ageRating = $age;
 
                 //Exit the function
-                return true;
+                return TRUE;
             } else if ($queryResult === FALSE) {
-                return false;
+                return FALSE;
             }
         }
     }
@@ -315,14 +315,14 @@ class TGE {
     //Parameters: 
     //   <1> $time: The new play time of this tabletop game entry
     //Returns: 
-    //   <1> True: The information was updated in the DB
-    //   <2> False: The information was not updated in the DB
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $playTime is set to the new information contained in $time
     //   and updated in the database
     public function setPlayTime($time) {
-        //Check to see if title is empty, return false if it is empty
+        //Check to see if time is empty, return FALSE if it is empty
         if (empty($time)) {
-            return false;
+            return FALSE;
         } else {
             //Perform the update query
             $setPlayTime = "UPDATE GameDescription SET playTime = " . $this->dbConnect->real_escape_string($time) . 
@@ -337,9 +337,9 @@ class TGE {
                 $this->ageRating = $time;
 
                 //Exit the function
-                return true;
+                return TRUE;
             } else if ($queryResult === FALSE) {
-                return false;
+                return FALSE;
             }
         }
     }
@@ -359,14 +359,14 @@ class TGE {
     //Parameters: 
     //   <1> $newDescription: The new description of this tabletop game entry
     //Returns: 
-    //   <1> True: The information was updated in the DB
-    //   <2> False: The information was not updated in the DB
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $description is set to the new information contained in $newDescription
     //   and updated in the database
     public function setDescription ($newDescription) {
-        //Check to see if title is empty, return false if it is empty
+        //Check to see if newDescription is empty, return FALSE if it is empty
         if (empty($newDescription)) {
-            return false;
+            return FALSE;
         } else {
             //Perform the update query
             $setDescription = "UPDATE GameDescription SET description = " . $this->dbConnect->real_escape_string($newDescription) . 
@@ -381,9 +381,9 @@ class TGE {
                 $this->ageRating = $newDescription;
 
                 //Exit the function
-                return true;
+                return TRUE;
             } else if ($queryResult === FALSE) {
-                return false;
+                return FALSE;
             }
         }
     }
@@ -403,14 +403,14 @@ class TGE {
     //Parameters: 
     //   <1> $newCompany: The new company that produced this tabletop game entry
     //Returns: 
-    //   <1> True: The information was updated in the DB
-    //   <2> False: The information was not updated in the DB
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $company is set to the new information contained in $newCompany
     //   and updated in the database
     public function setCompany ($newCompany) {
-        //Check to see if title is empty, return false if it is empty
+        //Check to see if newCompany is empty, return FALSE if it is empty
         if (empty($newCompany)) {
-            return false;
+            return FALSE;
         } else {
             //Perform the update query
             $setCompany = "UPDATE GameDescription SET ageRating = " . $this->dbConnect->real_escape_string($newCompany) . 
@@ -425,9 +425,9 @@ class TGE {
                 $this->ageRating = $newCompany;
 
                 //Exit the function
-                return true;
+                return TRUE;
             } else if ($queryResult === FALSE) {
-                return false;
+                return FALSE;
             }
         }
     }
@@ -447,14 +447,14 @@ class TGE {
     //Parameters: 
     //   <1> $numExpans: The number of expansions for this tabletop game entry
     //Returns: 
-    //   <1> True: The information was updated in the DB
-    //   <2> False: The information was not updated in the DB
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $expansions is set to the new information contained in $numExpans
     //   and updated in the database
     public function setExpansions ($numExpans) {
-        //Check to see if title is empty, return false if it is empty
+        //Check to see if numExpans is empty, return FALSE if it is empty
         if (empty($numExpans)) {
-            return false;
+            return FALSE;
         } else {
             //Perform the update query
             $setExpansions = "UPDATE GameDescription SET expansions = " . $this->dbConnect->real_escape_string($numExpans) . 
@@ -469,9 +469,9 @@ class TGE {
                 $this->ageRating = $numExpans;
 
                 //Exit the function
-                return true;
+                return TRUE;
             } else if ($queryResult === FALSE) {
-                return false;
+                return FALSE;
             }
         }
     }
@@ -491,11 +491,47 @@ class TGE {
     //Parameters:
     //   <1> $imageURLs: An array containing all of the imageURLs to be set
     //Returns:
-    //   <1> True: The information was updated in the DB
-    //   <2> False: The information was not updated in the DB
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $images is set to the new information contained in $imageURLs
     //   and updated in the database
-    public function setImages($imageURLs) {}
+    public function setImages($imageURLs) {
+        //Determine if the imageURLs array is empty, if so return FALSE
+        if (sizeof($imageURLs) == 0) {
+            return FALSE;
+        } else {
+            //Perform a delete query for the old image URLs
+            $deleteImages = "DELETE FROM DescriptionPics WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+
+            //Execute query
+            $deleteResults = $this->dbConnect->query($deleteImages);
+
+            //If the delete worked, insert the new images
+            if ($deleteResults === TRUE) {
+                foreach ($imageURLs as $image)
+                {
+                    //Perform an insert query to insert new image URLs into the DB
+                    $insertQuery = "INSER INTO DescriptionPics (pictureURL, gameTitle) VALUES (" . $this->dbConnect->real_escape_string($image) . ", "
+                        . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+                    
+                    //Execute the query
+                    $insertResult = $this->dbConnect->query($insertQuery);
+
+                    //If the query succeeded, continue. Otherwise, return FALSE and break
+                    if ($insertResult === TRUE) {
+                        continue;
+                    } else {
+                        return FALSE;
+                    }
+                }
+
+                //If loop finished without returning, it was successful
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getImages
     //Purpose: To get the image URLs for this tabletop game
@@ -513,11 +549,36 @@ class TGE {
     //   <1> $status: the status of the tabletop game entry
     //   <2> $reason: the reason why the entry was accepted/rejected
     //Returns:
-    //   <1> True: The information was updated in the DB
-    //   <2> False: The information was not updated in the DB
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $statusInfo is set to the new information contained in $status and $reason
     //   and updated in the database
-    public function setStatusInfo ($status, $reason) {}
+    public function setStatusInfo ($status, $reason) {
+        //Check to see if status is empty, return FALSE if it is empty
+        //Reason may be empty, no need to check
+        if (empty($status)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $statusInfo = "UPDATE GameDescriptionStatus SET status = " . $this->dbConnect->real_escape_string($status) . 
+                " AND reason  = " . $this->dbConnect->real_escape_string($reason) . "WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+
+            //Execute the query
+            $queryResult = $this->dbConnect->query($statusInfo);
+
+            //See if the update worked
+            if ($queryResult === TRUE) {
+                //Update the object information
+                $this->statusInfo["status"] = $status;
+                $this->statusInfo["reason"] = $reason;
+
+                //Exit the function
+                return TRUE;
+            } else if ($queryResult === FALSE) {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getStatusInfo
     //Purpose: To get the status information for this tabletop game entry
@@ -530,13 +591,31 @@ class TGE {
     }
 
     //Function Name: setOverallRating
-    //Purpose: To recalculate the overall rating of this tabletop game enttry
+    //Purpose: To recalculate the overall rating of this tabletop game entry
     //Parameters: None
     //Returns:
-    //   <1> True: The information was retrieved from the DB
-    //   <2> False: The information was retrieved from the DB
+    //   <1> TRUE: The information was retrieved from the DB
+    //   <2> FALSE: The information was retrieved from the DB
     //Side Effects: $overallRating is set to the new information obtained from the database
-    public function setOverallRating () {}
+    public function setOverallRating () {
+        //Query the database to get the avg rating for this game
+        $ratingQuery = "SELECT AVG(rating) AS overallRating FROM Reviews WHERE gameTitle = " . $this->dbConnect->real_escape_string($this->gameTitle) . "";
+
+        //Execute the query
+        $queryResult = $this->dbConnect->query($ratingQuery);
+
+        //If the database doesn't yield any results, set this variable to FALSE
+        if (mysqli_num_rows($queryResult) > 0) {
+            $resultRows = $queryResult->fetch_assoc();
+
+            //Set the overallRating variable to the calculation done in the DB
+            $this->overallRating = $resultRows["overallRating"];
+
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 
     //Function Name: getOverallRating
     //Purpose: To get the overall rating of this tabletop game entry
