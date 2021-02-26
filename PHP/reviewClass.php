@@ -1,4 +1,6 @@
 <?php
+    include 'database.php';
+
     class Review {
         //Member variables
         //Defining variables; not editable through this class
@@ -15,8 +17,11 @@
         private $avgPlayTime = NULL;
         private $difficulty = NULL;
         private $numPlays = NULL;
-        private $flagStatus = NULL;
+        private $flag = NULL;
 
+        //Database variables
+        private $db = NULL;
+        private $dbConnect = NULL;
 
         //Member functions
 
@@ -29,7 +34,41 @@
         //Side Effects:
         //   <1> $reviewInformation: initialized to an array containing all review info
         //   <2> $flagStatus: initialized to 0 or 1
-        public function __construct($gameTitle, $UID) {}
+        public function __construct($gameTitle, $UID) {
+            //Create new database object
+            $this->db = new database();
+            $this->dbConnect = $this->db->getDBConnection();
+
+            //Query DB for this specific review
+            $reviewQuery = "SELECT submittedBy, submitDate, rating, review, recommend, avgAge, avgPlayTime, difficulty, numPlays, flag
+                FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($gameTitle) . "' 
+                AND UID = '" . $this->dbConnect->real_escape_string($UID) . "'";
+            
+            //Execute query
+            $reviewResults = $this->dbConnect->query($reviewQuery);
+
+            //If the object exists, set the information for this object
+            if (mysqli_num_rows($reviewResults) > 0) {
+                //Fetch the information
+                $resultRows = $reviewResults->fetch_assoc();
+
+                //Set all the member variables to this information
+                $this->submittedBy = $resultRows["submittedBy"];
+                $this->submitDate = $resultRows["submitDate"];
+                $this->rating = $resultRows["rating"];
+                $this->review = $resultRows["review"];
+                $this->recommend = $resultRows["recommend"];
+                $this->avgAge = $resultRows["avgAge"];
+                $this->avgPlayTime = $resultRows["avgPlayTime"];
+                $this->difficulty = $resultRows["difficulty"];
+                $this->numPlays = $resultRows["numPlays"];
+                $this->flag = $resultRows["flag"];
+
+                //Set the game title and UID for this review
+                $this->gameTitle = $gameTitle;
+                $this->UID = $UID;
+            }
+        }
 
         //Function Name: getGameTitle
         //Purpose: To get the value of $gameTitle
@@ -212,18 +251,18 @@
         //Function Name: setFlag
         //Purpose: To set the value of $flagStatus
         //Parameters: 
-        //   <1> $flagVal: The new value of $flagStatus (0 or 1)
+        //   <1> $flagVal: The new value of $flag (0 or 1)
         //Returns:
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
-        //Side Effects: $flagStatus is set to the value of $flagVal
+        //Side Effects: $flag is set to the value of $flagVal
         public function setFlag($flagVal) {}
 
         //Function Name: getFlag
         //Purpose: To get the value of $flagStatus
         //Parameters: N/A
         //Returns: 
-        //   <1> $this->flagStatus
+        //   <1> $this->flag
         //Side Effects: N/A
         public function getFlag() {}      
     }
