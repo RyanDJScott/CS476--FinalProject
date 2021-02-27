@@ -34,15 +34,15 @@
         //Side Effects:
         //   <1> $reviewInformation: initialized to an array containing all review info
         //   <2> $flagStatus: initialized to 0 or 1
-        public function __construct($gameTitle, $UID) {
+        public function __construct($objGameTitle, $reviewerUID) {
             //Create new database object
             $this->db = new database();
             $this->dbConnect = $this->db->getDBConnection();
 
             //Query DB for this specific review
             $reviewQuery = "SELECT submittedBy, submitDate, rating, review, recommend, avgAge, avgPlayTime, difficulty, numPlays, flag
-                FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($gameTitle) . " 
-                ' AND UID = '" . $this->dbConnect->real_escape_string($UID) . "'";
+                FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($objGameTitle) . "'
+                AND UID = '" . $this->dbConnect->real_escape_string($reviewerUID) . "'";
             
             //Execute query
             $reviewResults = $this->dbConnect->query($reviewQuery);
@@ -65,8 +65,10 @@
                 $this->flag = $resultRows["flag"];
 
                 //Set the game title and UID for this review
-                $this->gameTitle = $gameTitle;
-                $this->UID = $UID;
+                $this->gameTitle = $objGameTitle;
+                $this->UID = $reviewerUID;
+            } else {
+                $this->gameTitle = "MAJOR ISSUE!";
             }
         }
 
