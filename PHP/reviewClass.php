@@ -41,8 +41,8 @@
 
             //Query DB for this specific review
             $reviewQuery = "SELECT submittedBy, submitDate, rating, review, recommend, avgAge, avgPlayTime, difficulty, numPlays, flag
-                FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($gameTitle) . "' 
-                AND UID = '" . $this->dbConnect->real_escape_string($UID) . "'";
+                FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($gameTitle) . " 
+                ' AND UID = '" . $this->dbConnect->real_escape_string($UID) . "'";
             
             //Execute query
             $reviewResults = $this->dbConnect->query($reviewQuery);
@@ -109,7 +109,29 @@
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
         //Side Effects: $submitDate is set to the value of $date
-        public function setSubmitDate ($date) {}
+        public function setSubmitDate ($date) {
+            //Check to see if date is set
+            if (!isset($date)) {
+                return FALSE;
+            } else {
+                //Write an update query
+                $submitDateQuery = "UPDATE Reviews SET submitDate = '" . $this->dbConnect->real_escape_string($date) . "
+                    ' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+                
+                //Execute query
+                $queryResults = $this->dbConnect->query($submitDateQuery);
+
+                //See if the update worked
+                if ($queryResults === TRUE) {
+                    //Update the object variable
+                    $this->submitDate = $date;
+
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
 
         //Function Name: getSubmitDate
         //Purpose: To get the value of $submitDate
@@ -129,7 +151,29 @@
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
         //Side Effects: $rating is set to the value of $newRating
-        public function setRating ($newRating) {}
+        public function setRating ($newRating) {
+            //Check to see if date is set
+            if (!isset($newRating)) {
+                return FALSE;
+            } else {
+                //Write an update query
+                $ratingQuery = "UPDATE Reviews SET rating = '" . $this->dbConnect->real_escape_string($newRating) . "
+                    ' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+                
+                //Execute query
+                $queryResults = $this->dbConnect->query($ratingQuery);
+
+                //See if the update worked
+                if ($queryResults === TRUE) {
+                    //Update the object variable
+                    $this->rating = $newRating;
+
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
 
         //Function Name: getRating
         //Purpose: To get the value of $rating
@@ -149,7 +193,29 @@
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
         //Side Effects: $review is set to the value of $newReview
-        public function setReview ($newReview) {}
+        public function setReview ($newReview) {
+            //Check to see if date is set
+            if (!isset($newReview)) {
+                return FALSE;
+            } else {
+                //Write an update query
+                $reviewQuery = "UPDATE Reviews SET review = '" . $this->dbConnect->real_escape_string($newReview) . "
+                    ' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+                
+                //Execute query
+                $queryResults = $this->dbConnect->query($reviewQuery);
+
+                //See if the update worked
+                if ($queryResults === TRUE) {
+                    //Update the object variable
+                    $this->review = $newReview;
+
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
 
         //Function Name: getReview
         //Purpose: To get the value of $review
@@ -169,7 +235,29 @@
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
         //Side Effects: $recommend is set to the value of $newRecommend
-        public function setRecommend ($newRecommend) {}
+        public function setRecommend ($newRecommend) {
+            //Check to see if date is set
+            if (!isset($newRecommend)) {
+                return FALSE;
+            } else {
+                //Write an update query
+                $recommendQuery = "UPDATE Reviews SET recommend = '" . $this->dbConnect->real_escape_string($newRecommend) . "
+                    ' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+                
+                //Execute query
+                $queryResults = $this->dbConnect->query($recommendQuery);
+
+                //See if the update worked
+                if ($queryResults === TRUE) {
+                    //Update the object variable
+                    $this->recommend = $newRecommend;
+
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
 
         //Function Name: getRecommend
         //Purpose: To get the value of $recommend
@@ -189,7 +277,29 @@
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
         //Side Effects: $avgAge is set to the value of $age
-        public function setAvgAge ($age) {}
+        public function setAvgAge ($age) {
+            //Check to see if date is set
+            if (!isset($age)) {
+                return FALSE;
+            } else {
+                //Write an update query
+                $ageQuery = "UPDATE Reviews SET avgAge = '" . $this->dbConnect->real_escape_string($age) . "
+                    ' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+                
+                //Execute query
+                $queryResults = $this->dbConnect->query($ageQuery);
+
+                //See if the update worked
+                if ($queryResults === TRUE) {
+                    //Update the object variable
+                    $this->avgAge = $age;
+
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
 
         //Function Name: getAvgAge
         //Purpose: To get the value of $avgAge
@@ -209,7 +319,29 @@
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
         //Side Effects: $avgPlayTime is set to the value of $playTime
-        public function setAvgPlayTime ($playTime) {}
+        public function setAvgPlayTime ($playTime) {
+            //Check to see if date is set
+            if (!isset($playTime)) {
+                return FALSE;
+            } else {
+                //Write an update query
+                $playTimeQuery = "UPDATE Reviews SET avgPlayTime = '" . $this->dbConnect->real_escape_string($playTime) . "
+                    ' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+                
+                //Execute query
+                $queryResults = $this->dbConnect->query($playTimeQuery);
+
+                //See if the update worked
+                if ($queryResults === TRUE) {
+                    //Update the object variable
+                    $this->avgPlayTime = $playTime;
+
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
 
         //Function Name: getAvgPlayTime
         //Purpose: To get the value of $avgPlayTime
@@ -229,7 +361,29 @@
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
         //Side Effects: $difficulty is set to the value of $newDifficulty
-        public function setDifficulty ($newDifficulty) {}
+        public function setDifficulty ($newDifficulty) {
+            //Check to see if date is set
+            if (!isset($newDifficulty)) {
+                return FALSE;
+            } else {
+                //Write an update query
+                $difficultyQuery = "UPDATE Reviews SET difficulty = '" . $this->dbConnect->real_escape_string($newDifficulty) . "
+                    ' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+                
+                //Execute query
+                $queryResults = $this->dbConnect->query($difficultyQuery);
+
+                //See if the update worked
+                if ($queryResults === TRUE) {
+                    //Update the object variable
+                    $this->difficulty = $newDifficulty;
+
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
 
         //Function Name: getDifficulty
         //Purpose: To get the value of $difficulty
@@ -249,7 +403,29 @@
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
         //Side Effects: $numPlays is set to the value of $numberPlays
-        public function setNumPlays ($numberPlays) {}
+        public function setNumPlays ($numberPlays) {
+            //Check to see if date is set
+            if (!isset($numberPlays)) {
+                return FALSE;
+            } else {
+                //Write an update query
+                $numPlaysQuery = "UPDATE Reviews SET numPlays = '" . $this->dbConnect->real_escape_string($numberPlays) . "
+                    ' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+                
+                //Execute query
+                $queryResults = $this->dbConnect->query($numPlaysQuery);
+
+                //See if the update worked
+                if ($queryResults === TRUE) {
+                    //Update the object variable
+                    $this->numPlays = $numberPlays;
+
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
 
         //Function Name: getNumPlays
         //Purpose: To get the value of $numPlays
@@ -269,7 +445,29 @@
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
         //Side Effects: $flag is set to the value of $flagVal
-        public function setFlag($flagVal) {}
+        public function setFlag($flagVal) {
+            //Check to see if date is set
+            if (!isset($flagVal)) {
+                return FALSE;
+            } else {
+                //Write an update query
+                $flagQuery = "UPDATE Reviews SET flag = '" . $this->dbConnect->real_escape_string($flagVal) . "
+                    ' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+                
+                //Execute query
+                $queryResults = $this->dbConnect->query($flagQuery);
+
+                //See if the update worked
+                if ($queryResults === TRUE) {
+                    //Update the object variable
+                    $this->flag = $flagVal;
+
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
 
         //Function Name: getFlag
         //Purpose: To get the value of $flagStatus
