@@ -76,7 +76,9 @@
         //Returns: 
         //   <1> $this->gameTitle
         //Side Effects: N/A
-        public function getGameTitle () {}
+        public function getGameTitle () {
+            return $this->gameTitle;
+        }
 
         //Function Name: getUID
         //Purpose: To get the value of $UID
@@ -84,25 +86,20 @@
         //Returns: 
         //   <1> $this->UID
         //Side Effects: N/A
-        public function getUID () {}
+        public function getUID () {
+            return $this->UID;
+        }
 
-        //Function Name: setSubmittedDate
-        //Purpose: To set the value of $submittedDate
-        //Parameters: 
-        //   <1> $date: The new value of $submitDate
-        //Returns:
-        //   <1> True: The information was updated in the DB
-        //   <2> False: The information was not updated in the DB
-        //Side Effects: $submittedDate is set to the value of $date
-        public function setSubmittedDate ($date) {}
-
-        //Function Name: getSubmittedDate
-        //Purpose: To get the value of $submittedDate
+        //Note: No setter, should not be manipulated by this class
+        //Function Name: getSubmittedDBy
+        //Purpose: To get the value of $submittedBy
         //Parameters: N/A
         //Returns: 
-        //   <1> $this->submittedDate
+        //   <1> $this->submittedBy
         //Side Effects: N/A
-        public function getSubmittedDate () {}
+        public function getSubmittedBy () {
+            return $this->submittedBy;
+        }
 
         //Function Name: setSubmitDate
         //Purpose: To set the value of $submitDate
@@ -120,7 +117,9 @@
         //Returns: 
         //   <1> $this->submitDate
         //Side Effects: N/A
-        public function getSubmitDate () {}
+        public function getSubmitDate () {
+            return $this->submitDate;
+        }
 
         //Function Name: setRating
         //Purpose: To set the value of $rating
@@ -138,7 +137,9 @@
         //Returns: 
         //   <1> $this->rating
         //Side Effects: N/A
-        public function getRating () {}
+        public function getRating () {
+            return $this->rating;
+        }
         
         //Function Name: setReview
         //Purpose: To set the value of $review
@@ -156,7 +157,9 @@
         //Returns: 
         //   <1> $this->review
         //Side Effects: N/A
-        public function getReview () {}
+        public function getReview () {
+            return $this->review;
+        }
 
         //Function Name: setRecommend
         //Purpose: To set the value of $recommend
@@ -174,7 +177,9 @@
         //Returns: 
         //   <1> $this->recommend
         //Side Effects: N/A
-        public function getRecommend () {}
+        public function getRecommend () {
+            return $this->recommend;
+        }
         
         //Function Name: setAvgAge
         //Purpose: To set the value of $avgAge
@@ -192,7 +197,9 @@
         //Returns: 
         //   <1> $this->avgAge
         //Side Effects: N/A
-        public function getAvgAge () {}
+        public function getAvgAge () {
+            return $this->avgAge;
+        }
         
         //Function Name: setAvgPlayTime
         //Purpose: To set the value of $avgPlayTime
@@ -210,7 +217,9 @@
         //Returns: 
         //   <1> $this->avgPlayTime
         //Side Effects: N/A
-        public function getAvgPlayTime () {}
+        public function getAvgPlayTime () {
+            return $this->avgPlayTime;
+        }
 
         //Function Name: setDifficulty
         //Purpose: To set the value of $difficulty
@@ -228,7 +237,9 @@
         //Returns: 
         //   <1> $this->difficulty
         //Side Effects: N/A
-        public function getDifficulty () {}
+        public function getDifficulty () {
+            return $this->difficulty;
+        }
 
         //Function Name: setNumPlays
         //Purpose: To set the value of $numPlays
@@ -246,7 +257,9 @@
         //Returns: 
         //   <1> $this->numPlays
         //Side Effects: N/A
-        public function getNumPlays () {}
+        public function getNumPlays () {
+            return $this->numPlays;
+        }
 
         //Function Name: setFlag
         //Purpose: To set the value of $flagStatus
@@ -264,6 +277,8 @@
         //Returns: 
         //   <1> $this->flag
         //Side Effects: N/A
-        public function getFlag() {}      
+        public function getFlag() {
+            return $this->flag;
+        }      
     }
 ?>
