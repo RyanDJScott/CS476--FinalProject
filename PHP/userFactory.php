@@ -58,7 +58,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->UID
     //Side Effects: N/A
-    public function getUID() {}
+    public function getUID() {
+        return $this->UID;
+    }
 
     //Note: No setter; only administrators have this right
     //Function Name: getUserType
@@ -67,7 +69,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->userType
     //Side Effects: N/A
-    public function getUserType () {}
+    public function getUserType () {
+        return $this->userType;
+    }
 
     //Function Name: setFirstName
     //Purpose: To set the value of $firstName
@@ -86,7 +90,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->firstName
     //Side Effects: N/A
-    public function getFirstName() {}
+    public function getFirstName() {
+        return $this->firstName;
+    }
 
     //Function Name: setLastName
     //Purpose: To set the value of $lastName
@@ -105,7 +111,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->lastName
     //Side Effects: N/A
-    public function getLastName() {}
+    public function getLastName() {
+        return $this->lastName;
+    }
 
     //Function Name: setBirthday
     //Purpose: To set the value of $birthday
@@ -124,7 +132,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->birthday
     //Side Effects: N/A
-    public function getBirthday() {}
+    public function getBirthday() {
+        return $this->birthday;
+    }
 
     //Function Name: setEmail
     //Purpose: To set the value of $email
@@ -143,7 +153,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->email
     //Side Effects: N/A
-    public function getEmail() {}
+    public function getEmail() {
+        return $this->email;
+    }
 
     //Function Name: setScreenName
     //Purpose: To set the value of $screenName
@@ -162,7 +174,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->screenName
     //Side Effects: N/A
-    public function getScreenName() {}
+    public function getScreenName() {
+        return $this->screenName;
+    }
 
     //Function Name: setAvatarURL
     //Purpose: To set the value of $avatarURL
@@ -181,7 +195,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->avatarURL
     //Side Effects: N/A
-    public function getAvatarURL() {}
+    public function getAvatarURL() {
+        return $this->avatarURL;
+    }
 
     //Function Name: setBiography
     //Purpose: To set the value of $biography
@@ -200,7 +216,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->biography
     //Side Effects: N/A
-    public function getBiography() {}
+    public function getBiography() {
+        return $this->biography;
+    }
 
     //Function Name: setFavGame
     //Purpose: To set the value of $favGame
@@ -219,7 +237,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->favGame
     //Side Effects: N/A
-    public function getFavGame() {}
+    public function getFavGame() {
+        return $this->favGame;
+    }
 
     //Function Name: setGameType
     //Purpose: To set the value of $gameType
@@ -238,7 +258,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->gameType
     //Side Effects: N/A
-    public function getGameType() {}
+    public function getGameType() {
+        return $this->gameType;
+    }
 
     //Function Name: setPlayTime
     //Purpose: To set the value of $playTime
@@ -257,7 +279,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->playTime
     //Side Effects: N/A
-    public function getPlayTime() {}
+    public function getPlayTime() {
+        return $this->playTime;
+    }
 
     //Function Name: setLastLogin
     //Purpose: To set the value of $lastLogin
@@ -276,7 +300,9 @@ abstract class user {
     //Returns: 
     //   <1> $this->lastLogin
     //Side Effects: N/A
-    public function getLastLogin() {}
+    public function getLastLogin() {
+        return $this->lastLogin;
+    }
     
     //Base user functionalities here
     //Both users implement these functions
