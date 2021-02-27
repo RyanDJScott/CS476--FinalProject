@@ -297,42 +297,41 @@ abstract class user {
 
 class communityUser extends user {
     // Function Name: deleteAccount
-    // Purpose: To delete this users account if they choose
+    // Purpose: To delete this objects user account
     // Parameters: N/A
     // Returns:
-    //   <1> True: If the user account was successfully deleted
-    //   <2> False: If the user account was not successfully deleted
-    // Side Effects: The user information is deleted from the DB
+    //   <1> TRUE: If the user account was successfully deleted
+    //   <2> FALSE: If the user account was not successfully deleted
+    // Side Effects: The user information is deleted from the DB, and the user is logged out of the system
     public function deleteAccount() {}
 
     // Function Name: addTGE
     // Purpose: To add the tabletop game entry to the DB
-    // Parameters: 
-    //   <1> $TG: An array that contains all the information for the DB
+    // Parameters: None
     // Returns:
-    //   <1> True: If the insert into the DB is successful
-    //   <2> False: If the insert into the DB is unsuccessful
-    // Side Effects: The tabletop game description is inserted into the DB
+    //   <1> TRUE: If the insert into the DB is successful
+    //   <2> FALSE: If the insert into the DB is unsuccessful
+    // Side Effects: A tabletop game description is inserted into the DB
     public function addTGE() {}
 
     // Function Name: leaveReview
     // Purpose: To add a review to a tabletop game description on the site
-    // Parameters:
-    //   <1> $review: An array that contains all of the information for the DB
+    // Parameters: None
     // Returns:
-    //   <1> True: If the insert into the DB is successful
-    //   <2> False: If the insert into the DB is unsuccessful
+    //   <1> TRUE: If the insert into the DB is successful
+    //   <2> FALSE: If the insert into the DB is unsuccessful
     // Side Effects: The review is inserted into the DB
     public function leaveReview() {}
 
     // Function Name: flagReview
-    // Purpose: To flag an innappropriate review for moderation
+    // Purpose: Flag an innappropriate review for moderation
     // Parameters:
-    //   <1> $revInfo: An array that contains the UID/GameTitle for the review to be found
-    // Returns: N/A
+    //   <1> $review: A review object
+    // Returns:
+    //   <1> TRUE: The flag was successfully set in the DB
+    //   <2> FALSE: The flag was unsuccessfully set in the DB
     // Side Effects:
-    //   <1> If update is successful, shows a confirmation box about the flag being set
-    //   <2> If update is unsuccessful, shows a confirmation box about flag not being set
+    //   <1> The review objects flag is set to 1
     public function flagReview($review) {}
 
 
@@ -374,78 +373,96 @@ class communityUser extends user {
 
 class adminUser extends user {
     // Function Name: deleteAccount
-    // Purpose: To delete this users account if they choose
+    // Purpose: To delete this objects user account
     // Parameters: N/A
     // Returns:
-    //   <1> True: If the user account was successfully deleted
-    //   <2> False: If the user account was not successfully deleted
-    // Side Effects: The user information is deleted from the DB
+    //   <1> TRUE: If the user account was successfully deleted
+    //   <2> FALSE: If the user account was not successfully deleted
+    // Side Effects: The user information is deleted from the DB, and the user is logged out of the system
     public function deleteAccount() {}
 
     // Function Name: addTGE
     // Purpose: To add the tabletop game entry to the DB
-    // Parameters: 
-    //   <1> $TG: An array that contains all the information for the DB
+    // Parameters: None
     // Returns:
-    //   <1> True: If the insert into the DB is successful
-    //   <2> False: If the insert into the DB is unsuccessful
-    // Side Effects: The tabletop game description is inserted into the DB
+    //   <1> TRUE: If the insert into the DB is successful
+    //   <2> FALSE: If the insert into the DB is unsuccessful
+    // Side Effects: A tabletop game description is inserted into the DB
     public function addTGE() {}
 
     // Function Name: leaveReview
     // Purpose: To add a review to a tabletop game description on the site
-    // Parameters:
-    //   <1> $review: An array that contains all of the information for the DB
+    // Parameters: None
     // Returns:
-    //   <1> True: If the insert into the DB is successful
-    //   <2> False: If the insert into the DB is unsuccessful
+    //   <1> TRUE: If the insert into the DB is successful
+    //   <2> FALSE: If the insert into the DB is unsuccessful
     // Side Effects: The review is inserted into the DB
     public function leaveReview() {}
 
     // Function Name: flagReview
-    // Purpose: To flag an innappropriate review for moderation
+    // Purpose: Flag an innappropriate review for moderation
     // Parameters:
-    //   <1> $revInfo: An array that contains the UID/GameTitle for the review to be found
-    // Returns: N/A
+    //   <1> $review: A review object
+    // Returns:
+    //   <1> TRUE: The flag was successfully set in the DB
+    //   <2> FALSE: The flag was unsuccessfully set in the DB
     // Side Effects:
-    //   <1> If update is successful, shows a confirmation box about the flag being set
-    //   <2> If update is unsuccessful, shows a confirmation box about flag not being set
+    //   <1> The review objects flag is set to 1
     public function flagReview($review) {}
 
-
     // Function Name: deleteUser
-    // Purpose: None; used to overwrite abstract method
-    // Parameters: None
-    // Returns: None
-    // Side Effects: None
+    // Purpose: To delete a user from the database
+    // Parameters: 
+    //   <1> $user: a user object that the admin wishes to delete
+    // Returns:
+    //   <1> TRUE: The user was successfully deleted from the DB
+    //   <2> FALSE: The user was unsuccessfully deleted from the DB
+    // Side Effects:
+    //   <1> The user is removed from the DB
     public function deleteUser($user) {}
 
     // Function Name: removeFlag
-    // Purpose: None; used to overwrite abstract method
-    // Parameters: None
-    // Returns: None
-    // Side Effects: None
+    // Purpose: To remove the flag from the given review
+    // Parameters: 
+    //   <1> $review: The review that has it's flag set
+    // Returns: 
+    //   <1> TRUE: The review had the flag set back to 0
+    //   <2> FALSE: The review did not have the flag set back to 0
+    // Side Effects: 
+    //   <1> The review has it's flag set back to 0
     public function removeFlag($review) {}
 
     // Function Name: deleteReview
-    // Purpose: None; used to overwrite abstract method
-    // Parameters: None
-    // Returns: None
-    // Side Effects: None
+    // Purpose: To delete the review from the database
+    // Parameters: 
+    //   <1> $review: The review that needs to be deleted
+    // Returns:
+    //   <1> TRUE: The review was successfully deleted from the database
+    //   <2> FALSE: The review was not successfully deleted from the database
+    // Side Effects:
+    //   <1> The review is deleted from the database
     public function deleteReview($review) {}
 
     // Function Name: setTGEStatus
-    // Purpose: None; used to overwrite abstract method
-    // Parameters: None
-    // Returns: None
-    // Side Effects: None
+    // Purpose: To set the status information of a TGE
+    // Parameters: 
+    //   <1> $TGE: A tabletop game entry object
+    // Returns:
+    //   <1> TRUE: The status information was successfully set in the database
+    //   <2> FALSE: The status information was not successfully set in the database
+    // Side Effects:
+    //   <1> The TGE has it's status information updated
     public function setTGEStatus($TGE) {}
 
     // Function Name: promoteUser
-    // Purpose: None; used to overwrite abstract method
-    // Parameters: None
-    // Returns: None
-    // Side Effects: None
-    public function promoteUser($userID) {}
+    // Purpose: To promote a user to an administrator
+    // Parameters:
+    //   <1> $user: The user who is being promoted
+    // Returns:
+    //   <1> TRUE: The user was successfully promoted to administrator
+    //   <2> FALSE: The user was not successfully promoted to administrator
+    // Side Effects:
+    //   <1> The user is promoted to an administrator
+    public function promoteUser($user) {}
 }
 ?>
