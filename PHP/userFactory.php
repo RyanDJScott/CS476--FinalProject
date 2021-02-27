@@ -20,6 +20,8 @@ abstract class user {
     //Member variables common to all users
     private $UID = NULL;
     private $userType = NULL;
+
+    //User profile variables
     private $firstName = NULL;
     private $lastName = NULL;
     private $birthday = NULL;
@@ -32,26 +34,250 @@ abstract class user {
     private $playTime = NULL;
     private $lastLogin = NULL;
 
+    //DB variables
+    private $db = NULL;
+    private $dbConnect = NULL;
+
     //Common functions to both user types
 
-    public function __construct($UID) {}
-    // Function Name: setUID
-    // Purpose: Setter for the $UID
-    // Parameters: 
-    //   <1> $userID - UID from DB that is primanry key of user row
-    // Returns: N/A
-    // Side Effects: $UID is set to the value of $userID
-    public function setUID($userID) {}
-
-    // Function Name: getUID
-    // Purpose: Getter for the $UID
-    // Parameters: N/A
-    // Returns: 
-    //   <1> $UID
-    // Side Effects: None
+    //Function Name: Constructor
+    //Purpose: To construct a user object
+    //Parameters:
+    //   <1> $objUID: The UID of the user being constructed
+    //Returns: N/A
+    //Side Effects:
+    //   <1> The DB variables are set for the object
+    //   <2> All profile variables are set to their DB variables
+    //   <3> $UID and $userType are set for the user object
+    public function __construct($objUID) {}
+    
+    //Note: No setter; set in the constructor
+    //Function Name: getUID
+    //Purpose: To get the UID of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->UID
+    //Side Effects: N/A
     public function getUID() {}
 
+    //Note: No setter; only administrators have this right
+    //Function Name: getUserType
+    //Purpose: To get the userType of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->userType
+    //Side Effects: N/A
+    public function getUserType () {}
 
+    //Function Name: setFirstName
+    //Purpose: To set the value of $firstName
+    //Parameters:
+    //   <1> $newFirstName: The new value of $firstName
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $firstName is set to the value of $newFirstName
+    public function setFirstName($newFirstName) {}
+
+    //Function Name: getFirstName
+    //Purpose: To get the firstName of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->firstName
+    //Side Effects: N/A
+    public function getFirstName() {}
+
+    //Function Name: setLastName
+    //Purpose: To set the value of $lastName
+    //Parameters:
+    //   <1> $newFirstName: The new value of $lastName
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $lastName is set to the value of $newLastName
+    public function setLastName($newLastName) {}
+
+    //Function Name: getLastName
+    //Purpose: To get the lastName of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->lastName
+    //Side Effects: N/A
+    public function getLastName() {}
+
+    //Function Name: setBirthday
+    //Purpose: To set the value of $birthday
+    //Parameters:
+    //   <1> $newBday: The new value of $birthday
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $birthday is set to the value of $newBday
+    public function setBirthday($newBday) {}
+
+    //Function Name: getBirthday
+    //Purpose: To get the birthday of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->birthday
+    //Side Effects: N/A
+    public function getBirthday() {}
+
+    //Function Name: setEmail
+    //Purpose: To set the value of $email
+    //Parameters:
+    //   <1> $newEmail The new value of $email
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $email is set to the value of $newEmail
+    public function setEmail($newEmail) {}
+
+    //Function Name: getEmail
+    //Purpose: To get the email of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->email
+    //Side Effects: N/A
+    public function getEmail() {}
+
+    //Function Name: setScreenName
+    //Purpose: To set the value of $screenName
+    //Parameters:
+    //   <1> $newSN: The new value of $screenName
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $screenName is set to the value of $newSN
+    public function setScreenName($newSN) {}
+
+    //Function Name: getScreenName
+    //Purpose: To get the screenName of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->screenName
+    //Side Effects: N/A
+    public function getScreenName() {}
+
+    //Function Name: setAvatarURL
+    //Purpose: To set the value of $avatarURL
+    //Parameters:
+    //   <1> $newAvatar: The new value of $avatarURL
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $avatarURL is set to the value of $newAvatar
+    public function setAvatarURL($newAvatar) {}
+
+    //Function Name: getAvatarURL
+    //Purpose: To get the avatarURL of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->avatarURL
+    //Side Effects: N/A
+    public function getAvatarURL() {}
+
+    //Function Name: setBiography
+    //Purpose: To set the value of $biography
+    //Parameters:
+    //   <1> $newBio The new value of $biography
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $biography is set to the value of $newBio
+    public function setBiography($newBio) {}
+
+    //Function Name: getBiography
+    //Purpose: To get the biography of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->biography
+    //Side Effects: N/A
+    public function getBiography() {}
+
+    //Function Name: setFavGame
+    //Purpose: To set the value of $favGame
+    //Parameters:
+    //   <1> $newFavGame: The new value of $favGame
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $favGame is set to the value of $newFavGame
+    public function setFavGame($newFavGame) {}
+
+    //Function Name: getFavGame
+    //Purpose: To get the favGame of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->favGame
+    //Side Effects: N/A
+    public function getFavGame() {}
+
+    //Function Name: setGameType
+    //Purpose: To set the value of $gameType
+    //Parameters:
+    //   <1> $newGameType: The new value of $gameType
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $gameType is set to the value of $newGameType
+    public function setGameType($newGameType) {}
+
+    //Function Name: getGameType
+    //Purpose: To get the gameType of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->gameType
+    //Side Effects: N/A
+    public function getGameType() {}
+
+    //Function Name: setPlayTime
+    //Purpose: To set the value of $playTime
+    //Parameters:
+    //   <1> $newPlayTime: The new value of $playTime
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $playTime is set to the value of $newPlayTime
+    public function setPlayTIme($newPlayTime) {}
+
+    //Function Name: getPlayTime
+    //Purpose: To get the playTime of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->playTime
+    //Side Effects: N/A
+    public function getPlayTime() {}
+
+    //Function Name: setLastLogin
+    //Purpose: To set the value of $lastLogin
+    //Parameters:
+    //   <1> $newLogin: The new value of $lastLogin
+    //Returns: 
+    //   <1> TRUE: The information was updated in the DB
+    //   <2> FALSE: THe information was not updated in the DB
+    //Side Effects:
+    //   <1> $lastLogin is set to the value of $newLogin
+    public function setLastLogin($newLogin) {}
+
+    //Function Name: getLastLogin
+    //Purpose: To get the lastLogin of this object
+    //Parameters: None
+    //Returns: 
+    //   <1> $this->lastLogin
+    //Side Effects: N/A
+    public function getLastLogin() {}
+    
     //Base user functionalities here
     //Both users implement these functions
     abstract public function deleteAccount();
