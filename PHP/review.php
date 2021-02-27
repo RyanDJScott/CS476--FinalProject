@@ -67,9 +67,7 @@
                 //Set the game title and UID for this review
                 $this->gameTitle = $objGameTitle;
                 $this->UID = $reviewerUID;
-            } else {
-                $this->gameTitle = "MAJOR ISSUE!";
-            }
+            } 
         }
 
         //Function Name: getGameTitle

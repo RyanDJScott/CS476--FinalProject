@@ -1,4 +1,5 @@
 <?php
+include './database.php';
 
 abstract class userFactory {
     abstract function makeUser($userID);
@@ -49,7 +50,41 @@ abstract class user {
     //   <1> The DB variables are set for the object
     //   <2> All profile variables are set to their DB variables
     //   <3> $UID and $userType are set for the user object
-    public function __construct($objUID) {}
+    public function __construct($objUID) {
+        //Create a new database object
+        $this->db = new database();
+        $this->dbConnect = $this->db->getDBConnection();
+
+        //Query the DB for this user ID
+        $userQuery = "SELECT userType, firstName, lastName, birthday, email, screenName, avatarURL, biography, favGame, gameType, playTime, lastLogin
+            FROM Users WHERE UID = '" . $this->dbConnect->real_escape_string($objUID) . "'";
+
+        //Execute query
+        $queryResult = $this->dbConnect->query($userQuery);
+
+        //If there is a result, instantiate all variables
+        if (mysqli_num_rows($queryResult) > 0) {
+            //Fetch the information
+            $resultRows = $queryResult->fetch_assoc();
+
+            //Set all information in the member variables
+            $this->userType = $resultRows["userType"];
+            $this->firstName = $resultRows["firstName"];
+            $this->lastName = $resultRows["lastName"];
+            $this->birthday = $resultRows["birthday"];
+            $this->email = $resultRows["email"];
+            $this->screenName = $resultRows["screenName"];
+            $this->avatarURL = $resultRows["avatarURL"];
+            $this->biography = $resultRows["biography"];
+            $this->favGame = $resultRows["favGame"];
+            $this->gameType = $resultRows["gameType"];
+            $this->playTime = $resultRows["playTime"];
+            $this->lastLogin = $resultRows["lastLogin"];
+
+            //Set the UID for this object
+            $this->UID = $objUID;
+        }
+    }
     
     //Note: No setter; set in the constructor
     //Function Name: getUID
