@@ -643,35 +643,45 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function deleteUser($user) {}
+    public function deleteUser($user) {
+        return;
+    }
 
     // Function Name: removeFlag
     // Purpose: None; used to overwrite abstract method
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function removeFlag($review) {}
+    public function removeFlag($review) {
+        return;
+    }
 
     // Function Name: deleteReview
     // Purpose: None; used to overwrite abstract method
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function deleteReview($review) {}
+    public function deleteReview($review) {
+        return;
+    }
 
     // Function Name: setTGEStatus
     // Purpose: None; used to overwrite abstract method
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function setTGEStatus($TGE) {}
+    public function setTGEStatus($TGE) {
+        return;
+    }
 
     // Function Name: promoteUser
     // Purpose: None; used to overwrite abstract method
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function promoteUser($userID) {}
+    public function promoteUser($userID) {
+        return;
+    }
 }
 
 class adminUser extends user {
