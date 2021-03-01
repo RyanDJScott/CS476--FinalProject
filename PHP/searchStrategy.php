@@ -23,13 +23,13 @@ class Search {
         switch (strtoupper($searchOption))
         {
             case "USER":
-                $this->$searchStrategy = new userSearch();
+                $this->searchStrategy = new userSearch();
                 break;
             case "GAME":
-                $this->$searchStrategy = new gameSearch();
+                $this->searchStrategy = new gameSearch();
                 break;
             case "BOTH":
-                $this->$searchStrategy = new searchBoth();
+                $this->searchStrategy = new searchBoth();
         }
     }
 
@@ -40,7 +40,7 @@ class Search {
     //Returns: N/A
     //Side Effects: publishes the results of the query to the search page
     public function publishResults ($query) {
-        return $this->$searchStrategy->displayResults(getResults($query));
+        return $this->searchStrategy->displayResults($this->searchStrategy->getResults($query));
     }
 }
 
