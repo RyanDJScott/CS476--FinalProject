@@ -123,20 +123,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $nameQuery = "UPDATE Users SET firstName = '" . $this->dbConnect->real_escape_string($newFirstName) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $nameQuery = "UPDATE Users SET firstName = '" . $this->dbConnect->real_escape_string($newFirstName) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $nameResult = $this->dbConnect->query($nameQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($nameResult) > 0) {
+            if ($nameResult === TRUE) {
                 //Update the object information
                 $this->firstName = $newFirstName;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($nameResult === FALSE) {
                 return FALSE;
             }
         }
@@ -167,20 +166,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $nameQuery = "UPDATE Users SET lastName = '" . $this->dbConnect->real_escape_string($newLastName) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $nameQuery = "UPDATE Users SET lastName = '" . $this->dbConnect->real_escape_string($newLastName) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $nameResult = $this->dbConnect->query($nameQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($nameResult) > 0) {
+            if ($nameQuery === TRUE) {
                 //Update the object information
                 $this->lastName = $newLastName;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($nameQuery === FALSE) {
                 return FALSE;
             }
         }
@@ -211,20 +209,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $bdayQuery = "UPDATE Users SET birthday = '" . $this->dbConnect->real_escape_string($newBday) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $bdayQuery = "UPDATE Users SET birthday = '" . $this->dbConnect->real_escape_string($newBday) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $bdayResult = $this->dbConnect->query($bdayQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($bdayResult) > 0) {
+            if ($bdayResult === TRUE) {
                 //Update the object information
                 $this->birthday = $newBday;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($bdayResult === FALSE) {
                 return FALSE;
             }
         }
@@ -255,20 +252,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $emailQuery = "UPDATE Users SET email = '" . $this->dbConnect->real_escape_string($newEmail) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $emailQuery = "UPDATE Users SET email = '" . $this->dbConnect->real_escape_string($newEmail) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $emailResult = $this->dbConnect->query($emailQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($emailResult) > 0) {
+            if ($emailResult === TRUE) {
                 //Update the object information
                 $this->email = $newEmail;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($emailResult === FALSE) {
                 return FALSE;
             }
         }
@@ -299,20 +295,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $SNQuery = "UPDATE Users SET screenName = '" . $this->dbConnect->real_escape_string($newSN) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $SNQuery = "UPDATE Users SET screenName = '" . $this->dbConnect->real_escape_string($newSN) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $SNResult = $this->dbConnect->query($SNQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($SNResult) > 0) {
+            if ($SNResult === TRUE) {
                 //Update the object information
                 $this->screenName = $newSN;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($SNResult === FALSE) {
                 return FALSE;
             }
         }
@@ -343,20 +338,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $avatarQuery = "UPDATE Users SET avatarURL = '" . $this->dbConnect->real_escape_string($newAvatar) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $avatarQuery = "UPDATE Users SET avatarURL = '" . $this->dbConnect->real_escape_string($newAvatar) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $avatarResult = $this->dbConnect->query($avatarQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($avatarResult) > 0) {
+            if ($avatarResult === TRUE) {
                 //Update the object information
                 $this->avatarURL = $newAvatar;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($avatarResult === FALSE) {
                 return FALSE;
             }
         }
@@ -387,20 +381,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $bioQuery = "UPDATE Users SET biography = '" . $this->dbConnect->real_escape_string($newBio) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $bioQuery = "UPDATE Users SET biography = '" . $this->dbConnect->real_escape_string($newBio) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $bioResult = $this->dbConnect->query($bioQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($bioResult) > 0) {
+            if ($bioResult === TRUE) {
                 //Update the object information
                 $this->biography = $newBio;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($bioResult === FALSE) {
                 return FALSE;
             }
         }
@@ -431,20 +424,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $FGQuery = "UPDATE Users SET favGame = '" . $this->dbConnect->real_escape_string($newFavGame) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $FGQuery = "UPDATE Users SET favGame = '" . $this->dbConnect->real_escape_string($newFavGame) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $FGResult = $this->dbConnect->query($FGQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($FGResult) > 0) {
+            if ($FGResult === TRUE) {
                 //Update the object information
                 $this->favGame = $newFavGame;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($FGResult === FALSE) {
                 return FALSE;
             }
         }
@@ -475,20 +467,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $GTQuery = "UPDATE Users SET gameType = '" . $this->dbConnect->real_escape_string($newGameType) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $GTQuery = "UPDATE Users SET gameType = '" . $this->dbConnect->real_escape_string($newGameType) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $GTResult = $this->dbConnect->query($GTQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($GTResult) > 0) {
+            if ($GTResult === TRUE) {
                 //Update the object information
                 $this->gameType = $newGameType;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($GTResult === FALSE) {
                 return FALSE;
             }
         }
@@ -519,20 +510,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $PTQuery = "UPDATE Users SET playTime = '" . $this->dbConnect->real_escape_string($newPlayTime) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $PTQuery = "UPDATE Users SET playTime = '" . $this->dbConnect->real_escape_string($newPlayTime) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $PTResult = $this->dbConnect->query($PTQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($PTResult) > 0) {
+            if ($PTResult === TRUE) {
                 //Update the object information
                 $this->playTime = $newPlayTime;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($PTResult === FALSE) {
                 return FALSE;
             }
         }
@@ -563,20 +553,19 @@ abstract class user {
             return FALSE;
         } else {
             //Perform the update query
-            $LLQuery = "UPDATE Users SET lastLogin = '" . $this->dbConnect->real_escape_string($newLogin) . 
-            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+            $LLQuery = "UPDATE Users SET lastLogin = '" . $this->dbConnect->real_escape_string($newLogin) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
 
             //Execute the query
             $LLResult = $this->dbConnect->query($LLQuery);
 
             //See if the update worked
-            if (mysqli_num_rows($LLResult) > 0) {
+            if ($LLResult === TRUE) {
                 //Update the object information
                 $this->lastLogin = $newLogin;
 
                 //Exit the function
                 return TRUE;
-            } else {
+            } else if ($LLResult === FALSE) {
                 return FALSE;
             }
         }
