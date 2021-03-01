@@ -1,5 +1,6 @@
 <?php
 include './database.php';
+include './review.php';
 
 abstract class userFactory {
     abstract function makeUser($userID);
@@ -19,25 +20,25 @@ class adminUserFactory extends userFactory {
 
 abstract class user { 
     //Member variables common to all users
-    private $UID = NULL;
-    private $userType = NULL;
+    protected $UID = NULL;
+    protected $userType = NULL;
 
     //User profile variables
-    private $firstName = NULL;
-    private $lastName = NULL;
-    private $birthday = NULL;
-    private $email = NULL;
-    private $screenName = NULL;
-    private $avatarURL = NULL;
-    private $biography = NULL;
-    private $favGame = NULL;
-    private $gameType = NULL;
-    private $playTime = NULL;
-    private $lastLogin = NULL;
+    protected $firstName = NULL;
+    protected $lastName = NULL;
+    protected $birthday = NULL;
+    protected $email = NULL;
+    protected $screenName = NULL;
+    protected $avatarURL = NULL;
+    protected $biography = NULL;
+    protected $favGame = NULL;
+    protected $gameType = NULL;
+    protected $playTime = NULL;
+    protected $lastLogin = NULL;
 
     //DB variables
-    private $db = NULL;
-    private $dbConnect = NULL;
+    protected $db = NULL;
+    protected $dbConnect = NULL;
 
     //Common functions to both user types
 
@@ -586,16 +587,16 @@ abstract class user {
     abstract public function deleteAccount();
     abstract public function addTGE();
     abstract public function leaveReview();
-    abstract public function flagReview($review);
+    abstract public function flagReview(Review $review);
 
     //Admin functionalities here
     //Admin: implements these functions
     //Comm. Users: Block the user from using these functions
-    abstract public function deleteUser($userID);
-    abstract public function removeFlag($review);
-    abstract public function deleteReview($review);
-    abstract public function setTGEStatus($TGE);
-    abstract public function promoteUser($user);
+    abstract public function deleteUser(int $userID);
+    abstract public function removeFlag(Review $review);
+    abstract public function deleteReview(Review $review);
+    abstract public function setTGEStatus(TGE $TGE);
+    abstract public function promoteUser(int $userID);
 }
 
 class communityUser extends user {
@@ -603,10 +604,22 @@ class communityUser extends user {
     // Purpose: To delete this objects user account
     // Parameters: N/A
     // Returns:
-    //   <1> TRUE: If the user account was successfully deleted
-    //   <2> FALSE: If the user account was not successfully deleted
+    //   <1> FALSE: If the user account was not successfully deleted
     // Side Effects: The user information is deleted from the DB, and the user is logged out of the system
-    public function deleteAccount() {}
+    public function deleteAccount() {
+        //Perform the delete query
+        $deleteQuery = "DELETE FROM Users WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+        //Execute the query
+        $deleteResult = $this->dbConnect->query($deleteQuery);
+
+        //If delete worked, log them out
+        if ($deleteResult === TRUE) {
+            header("Location: http://www.queencitysgambit.geekagogo.com/PHP/logoutScript.php");
+        } else if ($deleteResult === FALSE) {
+            return FALSE;
+        }
+    }
 
     // Function Name: addTGE
     // Purpose: To add the tabletop game entry to the DB
@@ -635,7 +648,20 @@ class communityUser extends user {
     //   <2> FALSE: The flag was unsuccessfully set in the DB
     // Side Effects:
     //   <1> The review objects flag is set to 1
-    public function flagReview($review) {}
+    public function flagReview(Review $review) {
+        //Perform the flag query
+        $flagReviewQuery = "UPDATE Reviews SET flag = 1 WHERE gameTitle = '" . $this->dbConnect->real_escape_string($review->getGameTitle()) . "' AND UID = '" . $this->dbConnect->real_escape_string($review->getUID()) . "'";
+
+        //Execute query
+        $flagResult = $this->dbConnect->query($flagReviewQuery);
+
+        //If the update worked, return true
+        if ($flagResult === TRUE) {
+            return TRUE;
+        } else if ($flagResult === FALSE) {
+            return FALSE;
+        }
+    }
 
 
     // Function Name: deleteUser
@@ -643,7 +669,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function deleteUser($user) {
+    public function deleteUser($userID) {
         return;
     }
 
@@ -652,7 +678,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function removeFlag($review) {
+    public function removeFlag(Review $review) {
         return;
     }
 
@@ -661,7 +687,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function deleteReview($review) {
+    public function deleteReview(Review $review) {
         return;
     }
 
@@ -670,7 +696,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function setTGEStatus($TGE) {
+    public function setTGEStatus(TGE $TGE) {
         return;
     }
 
@@ -679,7 +705,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function promoteUser($userID) {
+    public function promoteUser(int $userID) {
         return;
     }
 }
@@ -689,10 +715,22 @@ class adminUser extends user {
     // Purpose: To delete this objects user account
     // Parameters: N/A
     // Returns:
-    //   <1> TRUE: If the user account was successfully deleted
-    //   <2> FALSE: If the user account was not successfully deleted
+    //   <1> FALSE: If the user account was not successfully deleted
     // Side Effects: The user information is deleted from the DB, and the user is logged out of the system
-    public function deleteAccount() {}
+    public function deleteAccount() {
+        //Perform the delete query
+        $deleteQuery = "DELETE FROM Users WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+        //Execute the query
+        $deleteResult = $this->dbConnect->query($deleteQuery);
+
+        //If delete worked, log them out
+        if ($deleteResult === TRUE) {
+            header("Location: http://www.queencitysgambit.geekagogo.com/PHP/logoutScript.php");
+        } else if ($deleteResult === FALSE) {
+            return FALSE;
+        }
+    }
 
     // Function Name: addTGE
     // Purpose: To add the tabletop game entry to the DB
@@ -721,7 +759,20 @@ class adminUser extends user {
     //   <2> FALSE: The flag was unsuccessfully set in the DB
     // Side Effects:
     //   <1> The review objects flag is set to 1
-    public function flagReview($review) {}
+    public function flagReview(Review $review) {
+        //Perform the flag query
+        $flagReviewQuery = "UPDATE Reviews SET flag = 1 WHERE gameTitle = '" . $this->dbConnect->real_escape_string($review->getGameTitle()) . "' AND UID = '" . $this->dbConnect->real_escape_string($review->getUID()) . "'";
+
+        //Execute query
+        $flagResult = $this->dbConnect->query($flagReviewQuery);
+
+        //If the update worked, return true
+        if ($flagResult === TRUE) {
+            return TRUE;
+        } else if ($flagResult === FALSE) {
+            return FALSE;
+        }
+    }
 
     // Function Name: deleteUser
     // Purpose: To delete a user from the database
@@ -732,7 +783,20 @@ class adminUser extends user {
     //   <2> FALSE: The user was unsuccessfully deleted from the DB
     // Side Effects:
     //   <1> The user is removed from the DB
-    public function deleteUser($user) {}
+    public function deleteUser(int $userID) {
+        //Perform the delete query
+        $deleteQuery = "DELETE FROM Users WHERE UID = '" . $this->dbConnect->real_escape_string($userID) . "'";
+
+        //Execute the query
+        $deleteResult = $this->dbConnect->query($deleteQuery);
+
+        //If delete worked, return true
+        if ($deleteResult === TRUE) {
+            return TRUE;
+        } else if ($deleteResult === FALSE) {
+            return FALSE;
+        }
+    }
 
     // Function Name: removeFlag
     // Purpose: To remove the flag from the given review
@@ -743,7 +807,21 @@ class adminUser extends user {
     //   <2> FALSE: The review did not have the flag set back to 0
     // Side Effects: 
     //   <1> The review has it's flag set back to 0
-    public function removeFlag($review) {}
+    public function removeFlag(Review $review) {
+        //Perform update query
+        $removeFlagQuery = "UPDATE Reviews SET flag = 0 WHERE gameTitle = '" . $this->dbConnect->real_escape_string($review->getGameTitle()) . "' AND UID = '" . $this->dbConnect->real_escape_string($review->getUID()) . "'";
+    
+        //Execute query
+        $removeResult = $this->dbConnect->query($removeFlagQuery);
+
+        //If update was successful, return true
+        if ($removeResult === TRUE) {
+            return TRUE;
+        } else if ($removeResult === FALSE) {
+            return FALSE;
+        }
+    }
+
 
     // Function Name: deleteReview
     // Purpose: To delete the review from the database
@@ -754,7 +832,20 @@ class adminUser extends user {
     //   <2> FALSE: The review was not successfully deleted from the database
     // Side Effects:
     //   <1> The review is deleted from the database
-    public function deleteReview($review) {}
+    public function deleteReview(Review $review) {
+        //Perform delete query
+        $deleteReviewQuery = "DELETE FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($review->getGameTitle()) . "' AND UID = '" . $this->dbConnect->real_escape_string($review->getUID()) . "'";
+    
+        //Execute the query
+        $deleteResult = $this->dbConnect->query($deleteReviewQuery);
+
+        //If the delete was successful, return true
+        if ($deleteResult === TRUE) {
+            return TRUE;
+        } else if ($deleteResult === FALSE) {
+            return FALSE;
+        }
+    }
 
     // Function Name: setTGEStatus
     // Purpose: To set the status information of a TGE
@@ -765,7 +856,7 @@ class adminUser extends user {
     //   <2> FALSE: The status information was not successfully set in the database
     // Side Effects:
     //   <1> The TGE has it's status information updated
-    public function setTGEStatus($TGE) {}
+    public function setTGEStatus(TGE $TGE) {}
 
     // Function Name: promoteUser
     // Purpose: To promote a user to an administrator
@@ -776,6 +867,19 @@ class adminUser extends user {
     //   <2> FALSE: The user was not successfully promoted to administrator
     // Side Effects:
     //   <1> The user is promoted to an administrator
-    public function promoteUser($user) {}
+    public function promoteUser(int $userID) {
+        //Perform the update query
+        $promoteQuery = "UPDATE Users SET userType = 1 WHERE UID = '" . $this->dbConnect->real_escape_string($userID) . "'";
+
+        //Execute the query
+        $promoteResult = $this->dbConnect->query($promoteQuery);
+
+        //If the promotion was successful, return true
+        if ($promoteResult === TRUE) {
+            return TRUE;
+        } else if ($promoteResult === FALSE) {
+            return FALSE;
+        }
+    }
 }
 ?>
