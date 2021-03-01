@@ -1,7 +1,7 @@
 <?php
 //Include the database credentials
-include 'database.php';
-include 'userFactory.php';
+include './database.php';
+include './userFactory.php';
 
 //Create a database object
 $db = new database();

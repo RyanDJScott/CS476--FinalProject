@@ -1,8 +1,8 @@
 <?
 //Include all class dependencies
-include 'TGE.php';
-include 'review.php';
-include 'userFactory.php';
+include './TGE.php';
+include './review.php';
+include './userFactory.php';
 
 //Implement display class
 class display {
@@ -13,6 +13,7 @@ class display {
     //Utility Member Functions
 
 
+    //--------------User Display Functions----------------//
     public function displayDashboard($user) {}
 
     private function displayDashboardTitle($user) {}

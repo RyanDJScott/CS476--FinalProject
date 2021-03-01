@@ -1,6 +1,6 @@
 <?php
-include 'database.php';
-include 'review.php';
+include './database.php';
+include './review.php';
 
 class TGE {
     //Member Variables

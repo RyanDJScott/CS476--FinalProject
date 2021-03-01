@@ -114,10 +114,33 @@ abstract class user {
     //   <1> $newFirstName: The new value of $firstName
     //Returns: 
     //   <1> TRUE: The information was updated in the DB
-    //   <2> FALSE: THe information was not updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects:
     //   <1> $firstName is set to the value of $newFirstName
-    public function setFirstName($newFirstName) {}
+    public function setFirstName($newFirstName) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newFirstName)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $nameQuery = "UPDATE Users SET firstName = '" . $this->dbConnect->real_escape_string($newFirstName) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $nameResult = $this->dbConnect->query($nameQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($nameResult) > 0) {
+                //Update the object information
+                $this->firstName = $newFirstName;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getFirstName
     //Purpose: To get the firstName of this object
@@ -135,10 +158,33 @@ abstract class user {
     //   <1> $newFirstName: The new value of $lastName
     //Returns: 
     //   <1> TRUE: The information was updated in the DB
-    //   <2> FALSE: THe information was not updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects:
     //   <1> $lastName is set to the value of $newLastName
-    public function setLastName($newLastName) {}
+    public function setLastName($newLastName) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newLastName)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $nameQuery = "UPDATE Users SET lastName = '" . $this->dbConnect->real_escape_string($newLastName) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $nameResult = $this->dbConnect->query($nameQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($nameResult) > 0) {
+                //Update the object information
+                $this->lastName = $newLastName;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getLastName
     //Purpose: To get the lastName of this object
@@ -156,10 +202,33 @@ abstract class user {
     //   <1> $newBday: The new value of $birthday
     //Returns: 
     //   <1> TRUE: The information was updated in the DB
-    //   <2> FALSE: THe information was not updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects:
     //   <1> $birthday is set to the value of $newBday
-    public function setBirthday($newBday) {}
+    public function setBirthday($newBday) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newBday)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $bdayQuery = "UPDATE Users SET birthday = '" . $this->dbConnect->real_escape_string($newBday) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $bdayResult = $this->dbConnect->query($bdayQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($bdayResult) > 0) {
+                //Update the object information
+                $this->birthday = $newBday;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getBirthday
     //Purpose: To get the birthday of this object
@@ -177,10 +246,33 @@ abstract class user {
     //   <1> $newEmail The new value of $email
     //Returns: 
     //   <1> TRUE: The information was updated in the DB
-    //   <2> FALSE: THe information was not updated in the DB
+    //   <2> FALSE: The information was not updated in the DB
     //Side Effects:
     //   <1> $email is set to the value of $newEmail
-    public function setEmail($newEmail) {}
+    public function setEmail($newEmail) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newEmail)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $emailQuery = "UPDATE Users SET email = '" . $this->dbConnect->real_escape_string($newEmail) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $emailResult = $this->dbConnect->query($emailQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($emailResult) > 0) {
+                //Update the object information
+                $this->email = $newEmail;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getEmail
     //Purpose: To get the email of this object
@@ -201,7 +293,30 @@ abstract class user {
     //   <2> FALSE: THe information was not updated in the DB
     //Side Effects:
     //   <1> $screenName is set to the value of $newSN
-    public function setScreenName($newSN) {}
+    public function setScreenName($newSN) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newSN)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $SNQuery = "UPDATE Users SET screenName = '" . $this->dbConnect->real_escape_string($newSN) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $SNResult = $this->dbConnect->query($SNQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($SNResult) > 0) {
+                //Update the object information
+                $this->screenName = $newSN;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getScreenName
     //Purpose: To get the screenName of this object
@@ -222,7 +337,30 @@ abstract class user {
     //   <2> FALSE: THe information was not updated in the DB
     //Side Effects:
     //   <1> $avatarURL is set to the value of $newAvatar
-    public function setAvatarURL($newAvatar) {}
+    public function setAvatarURL($newAvatar) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newAvatar)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $avatarQuery = "UPDATE Users SET avatarURL = '" . $this->dbConnect->real_escape_string($newAvatar) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $avatarResult = $this->dbConnect->query($avatarQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($avatarResult) > 0) {
+                //Update the object information
+                $this->avatarURL = $newAvatar;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getAvatarURL
     //Purpose: To get the avatarURL of this object
@@ -243,7 +381,30 @@ abstract class user {
     //   <2> FALSE: THe information was not updated in the DB
     //Side Effects:
     //   <1> $biography is set to the value of $newBio
-    public function setBiography($newBio) {}
+    public function setBiography($newBio) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newBio)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $bioQuery = "UPDATE Users SET biography = '" . $this->dbConnect->real_escape_string($newBio) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $bioResult = $this->dbConnect->query($bioQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($bioResult) > 0) {
+                //Update the object information
+                $this->biography = $newBio;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getBiography
     //Purpose: To get the biography of this object
@@ -264,7 +425,30 @@ abstract class user {
     //   <2> FALSE: THe information was not updated in the DB
     //Side Effects:
     //   <1> $favGame is set to the value of $newFavGame
-    public function setFavGame($newFavGame) {}
+    public function setFavGame($newFavGame) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newFavGame)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $FGQuery = "UPDATE Users SET favGame = '" . $this->dbConnect->real_escape_string($newFavGame) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $FGResult = $this->dbConnect->query($FGQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($FGResult) > 0) {
+                //Update the object information
+                $this->favGame = $newFavGame;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getFavGame
     //Purpose: To get the favGame of this object
@@ -285,7 +469,30 @@ abstract class user {
     //   <2> FALSE: THe information was not updated in the DB
     //Side Effects:
     //   <1> $gameType is set to the value of $newGameType
-    public function setGameType($newGameType) {}
+    public function setGameType($newGameType) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newGameType)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $GTQuery = "UPDATE Users SET gameType = '" . $this->dbConnect->real_escape_string($newGameType) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $GTResult = $this->dbConnect->query($GTQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($GTResult) > 0) {
+                //Update the object information
+                $this->gameType = $newGameType;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getGameType
     //Purpose: To get the gameType of this object
@@ -306,7 +513,30 @@ abstract class user {
     //   <2> FALSE: THe information was not updated in the DB
     //Side Effects:
     //   <1> $playTime is set to the value of $newPlayTime
-    public function setPlayTIme($newPlayTime) {}
+    public function setPlayTIme($newPlayTime) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newPlayTime)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $PTQuery = "UPDATE Users SET playTime = '" . $this->dbConnect->real_escape_string($newPlayTime) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $PTResult = $this->dbConnect->query($PTQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($PTResult) > 0) {
+                //Update the object information
+                $this->playTime = $newPlayTime;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getPlayTime
     //Purpose: To get the playTime of this object
@@ -327,7 +557,30 @@ abstract class user {
     //   <2> FALSE: THe information was not updated in the DB
     //Side Effects:
     //   <1> $lastLogin is set to the value of $newLogin
-    public function setLastLogin($newLogin) {}
+    public function setLastLogin($newLogin) {
+        //Check if the passed variable is empty, return false if so
+        if(!isset($newLogin)) {
+            return FALSE;
+        } else {
+            //Perform the update query
+            $LLQuery = "UPDATE Users SET lastLogin = '" . $this->dbConnect->real_escape_string($newLogin) . 
+            "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
+
+            //Execute the query
+            $LLResult = $this->dbConnect->query($LLQuery);
+
+            //See if the update worked
+            if (mysqli_num_rows($LLResult) > 0) {
+                //Update the object information
+                $this->lastLogin = $newLogin;
+
+                //Exit the function
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     //Function Name: getLastLogin
     //Purpose: To get the lastLogin of this object
