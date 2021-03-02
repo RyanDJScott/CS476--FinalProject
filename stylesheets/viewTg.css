@@ -1,0 +1,31 @@
+/* This holds the information on the game for the upper box
+but will also be used to style the boxes which will come below 
+that will feature the games. Stacks vertically with imageContainer
+class as well.
+*/
+.elementContainer {
+
+}
+
+/* This is the inside containers which hold different information
+in each one (determined in associated file). These neeed to line up
+together in line 
+*/
+.innerContainer {
+
+}
+
+/* Contains the images associated with the game which will
+be displayed between the description and the reviews.
+*/
+.imageContainer {
+
+}
+
+/* images are only contained in the image container, there should
+be four across in a row, centred but should expand to the left 
+and right edges of the image container.
+*/
+img {
+
+}
