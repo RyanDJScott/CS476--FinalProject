@@ -5,6 +5,7 @@
     <meta charset="UTF=8">
     <!--=============================Stylesheets=======================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
+    <link rel="stylesheet" href="stylesheets/viewTg.css">
 </head>
 
 <body>
@@ -32,7 +33,8 @@
                 and other information on one side
             -->
             <div class="innerContainer">
-                Gamename, submitted by screenname<br>
+                <div class="name">Gamename</div>
+                Submitted by screenname<br>
                 Company: ________ <br>
                 Play Time: ________ <br>
                 Age Rating: ________ <br>
@@ -45,7 +47,7 @@
                 the other (right) side
             -->
             <div class="innerContainer">
-                <p>
+                <p><br>
                     This is a game and here is the description.
                     This is a game and here is the description.
                     This is a game and here is the description.
@@ -58,17 +60,45 @@
 
         <!-- Container for images of the tabletop game-->
         <div class="imageContainer">
-        
+            <!-- Images of the boardgame, ideally should appear
+             as four in a row-->
+             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
+             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
+             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
+             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
         </div>
 
         <!-- Container for each review... multiples will be added -->
         <div class="elementContainer">
-            <!-- Images of the boardgame, ideally should appear
-             as four in a row-->
-            <img src="dependencies/placeholder.png" alt="tabletop game image"/>
-            <img src="dependencies/placeholder.png" alt="tabletop game image"/>
-            <img src="dependencies/placeholder.png" alt="tabletop game image"/>
-            <img src="dependencies/placeholder.png" alt="tabletop game image"/>
+            
+            <!-- 
+                left side for rating information
+            -->
+            <div class="innerContainer">
+                <div class="name">Rating 0/10</div>
+                Submitted By: Screenname<br>
+                Recommended? Yes<br>
+                Number of Players: ____<br>
+                Age of Players: ____<br>
+                Time for one Round: ____<br>
+                Percieved Difficulty: easy<br>
+                Number of Times Played: ____<br>
+            </div> 
+
+            <!--
+                right side for review itself and flag button
+            -->
+            <div class="innerContainer">
+                <p><br>
+                    This is a review for a game and this is where the reviews
+                    will go. This is a review for a game and this is where the reviews
+                    will go. This is a review for a game and this is where the reviews
+                    will go. This is a review for a game and this is where the reviews
+                    will go. This is a review for a game and this is where the reviews
+                    will go.
+                </p>
+                <input class="flag" type="button" name="flag" id="flag" value="FLAG REVIEW">
+            </div>
         </div>
     </div>
 

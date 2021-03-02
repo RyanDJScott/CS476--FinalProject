@@ -1,10 +1,32 @@
+.overallContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styles the desired element to resemble more of a header 
+*/ 
+.name {
+    color: #6B5F77;
+    font-size: larger;
+}
+
 /* This holds the information on the game for the upper box
 but will also be used to style the boxes which will come below 
 that will feature the games. Stacks vertically with imageContainer
 class as well.
 */
 .elementContainer {
-
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 75%;
+    margin: 20px;
+    border: 1px solid #AAA0B4;
+    background-color: #F5F0F9;
+    padding: 5px;
 }
 
 /* This is the inside containers which hold different information
@@ -12,20 +34,38 @@ in each one (determined in associated file). These neeed to line up
 together in line 
 */
 .innerContainer {
-
+    display: flex;
+    flex-direction: column;
+    width: 50%;
 }
 
 /* Contains the images associated with the game which will
 be displayed between the description and the reviews.
 */
 .imageContainer {
-
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    border: 1px solid #AAA0B4;
+    background-color: #F5F0F9;
 }
 
 /* images are only contained in the image container, there should
 be four across in a row, centred but should expand to the left 
 and right edges of the image container.
 */
-img {
+.image {
+    width: 350px;
+    border: 1px solid #AAA0B4;
+    margin: 20px;
+}
 
+/* solely used for the flag button 
+*/
+.flag {
+    margin-left: 10px;
+    background-color: #e76161;
+    width: 100px;
 }
