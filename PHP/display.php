@@ -1,15 +1,21 @@
-<?
+<?php
 //Include all class dependencies
 include './TGE.php';
 include './review.php';
 include './userFactory.php';
+include './database.php';
 
 //Implement display class
-class display {
+class Display {
     //Database variables
     private $db = NULL;
     private $dbConnect = NULL;
  
+    public function __construct() {
+        $db = new database();
+        $dbConnect = $this->db->getDBConnection();
+    }
+    
     //Utility Member Functions
     
     //Function Name: limitChars
@@ -45,7 +51,7 @@ class display {
     //   <1> $TGE: a tabletop game entry object
     //Returns: N/A
     //Side Effects: Displays the contents of a tabletop game description as a mini-card
-    public function displayTGECard($TGE) {
+    public function displayTGECard(TGE $TGE) {
         echo '<div class="smallGameBox">
                 <p>' . htmlspecialchars($TGE->getGameTitle()) . '</p>
                 <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '/10</p>
@@ -59,7 +65,9 @@ class display {
     //Parameters: N/A
     //Returns: N/A
     //Side Effects: Displays the contents of a tabletop game description as a feature game box
-    public function displayTGEFeatureGameBox($TGE) {
+    public function displayTGEFeatureGameBox(string $featureGame) {
+        //Create new TGE object from the game
+        $TGE = new TGE($featureGame);
         //Get images array for output
         $images = $TGE->getImages();
 

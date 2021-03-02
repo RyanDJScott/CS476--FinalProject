@@ -1,12 +1,17 @@
 <?php
     //Include class definitions for login check
     include './PHP/userFactory.php';
+    include './PHP/TGE.php';
+    include './PHP/display.php';
 
     //Include functions for displaying
     include './PHP/navBar.php';
 
     //Continue the session
     session_start();
+
+    //Create a display object for the page
+    $display = new Display();
 ?>
 
 <!DOCTYPE html>
@@ -50,30 +55,9 @@
     
         <!-- featured item container-->
         <div class="featuredItem">
-            
-            <!-- left div for header + information -->
-            <div class="featuredItemLeft">
-                <h2>Game Title!</h2>
-                <p>Submitted by: Ryan Scott</p>
-                <p>Rating: 9/10</p>
-                <p>Number of Players: 3</p>
-                <p>Company: ACME Corp.</p>
-                <p>Game time: 2 hours </p>
-                <p>Age Rating: 3-6 yrs</p>
-                <p>Number of Expansions: None</p>
-                <p>Description:</p>
-                <p>Game title is an interesting game to keep your kids occupied for 2 hours. Game title is an interesting
-                    game to keep your kids occupied for 2 hours.
-                    Game title is an interesting game to keep your kids occupied for 2 hours. Game title is an interesting
-                    game to keep your kids occupied for 2 hours.
-                    Game title is an interesting game to keep your kids occupied for 2 hours. Game title is an interesting
-                    game to keep your kids occupied for 2 hours.</p>
-            </div>
-    
-            <!-- Right div for YouTube video-->
-            <div class="featuredItemRight">
-                <img src="" alt="Featured Game Image" />
-            </div>
+            <?php
+                $display->displayTGEFeatureGameBox("Betrayal at House on the Hill");
+            ?>
         </div>
 
             
