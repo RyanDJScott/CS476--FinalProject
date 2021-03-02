@@ -1,0 +1,75 @@
+.container {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: fit-content;
+    background-color: #F0E5FC;
+    border: 1px solid #AAA0B4;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+}
+
+.uploadContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0px 5px 5px 5px;
+}
+
+.uploadImagePreview {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 20%;
+    min-width: 210px;
+}
+
+.uploadImageFile {
+    width: fit-content;
+    margin-left: 5px;
+    max-width: 20%;
+}
+
+/* .gameDescription {
+    margin-left: 5px;
+} */
+
+.submitButton {
+    align-self: center;
+    justify-self: center;
+    margin: 0px 0px 5px 5px;
+}
+
+
+input, textarea{
+    background-color: #f1d7f1;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #AAA0B4;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+table {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+td {
+    padding-right: 10px;
+}
+
+.previewImg {
+    margin: 5px 5px 5px 0px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #AAA0B4;
+}

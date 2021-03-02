@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<HTML lang="en">
+<head>
+    <title> View Tabletop Game - Queen City's Gambit </title>
+    <meta charset="UTF=8">
+    <!--=============================Stylesheets=======================================-->
+    <link rel="stylesheet" href="stylesheets/siteStyles.css">
+    <link rel="stylesheet" href="stylesheets/viewTg.css">
+</head>
+
+<body>
+    <!-- The navigation bar -->
+    <nav> 
+        <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <a href="login.php" class="navButton">Login</a>
+        <a href="signup.html" class="navButton">Signup</a>
+        <a href ="search.html" class="navButton">Search</a>
+    </nav>
+
+    <!-- Main header image -->
+    <div class="mainPageHeader">
+        <img src="dependencies/boardGameHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!"/>
+    </div> 
+
+    <!-- Container for page elements -->
+    <div class="overallContainer">
+    
+        <!-- Container for tabletop game description -->
+        <div class="elementContainer">
+            
+            <!--
+                Display name, user who submitted
+                and other information on one side
+            -->
+            <div class="innerContainer">
+                <div class="name">Gamename</div>
+                Submitted by screenname<br>
+                Company: ________ <br>
+                Play Time: ________ <br>
+                Age Rating: ________ <br>
+                Number of Players: ________ <br>
+                Expenses: ________ <br>
+            </div>
+
+            <!-- 
+                The game description itseld on
+                the other (right) side
+            -->
+            <div class="innerContainer">
+                <p><br>
+                    This is a game and here is the description.
+                    This is a game and here is the description.
+                    This is a game and here is the description.
+                    This is a game and here is the description.
+                    This is a game and here is the description.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Container for images of the tabletop game-->
+        <div class="imageContainer">
+            <!-- Images of the boardgame, ideally should appear
+             as four in a row-->
+             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
+             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
+             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
+             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
+        </div>
+
+        <!-- Container for each review... multiples will be added -->
+        <div class="elementContainer">
+            
+            <!-- 
+                left side for rating information
+            -->
+            <div class="innerContainer">
+                <div class="name">Rating 0/10</div>
+                Submitted By: Screenname<br>
+                Recommended? Yes<br>
+                Number of Players: ____<br>
+                Age of Players: ____<br>
+                Time for one Round: ____<br>
+                Percieved Difficulty: easy<br>
+                Number of Times Played: ____<br>
+            </div> 
+
+            <!--
+                right side for review itself and flag button
+            -->
+            <div class="innerContainer">
+                <p><br>
+                    This is a review for a game and this is where the reviews
+                    will go. This is a review for a game and this is where the reviews
+                    will go. This is a review for a game and this is where the reviews
+                    will go. This is a review for a game and this is where the reviews
+                    will go. This is a review for a game and this is where the reviews
+                    will go.
+                </p>
+                <input class="flag" type="button" name="flag" id="flag" value="FLAG REVIEW">
+            </div>
+        </div>
+    </div>
+
+</body>
+</HTML>

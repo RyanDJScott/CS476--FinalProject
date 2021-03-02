@@ -78,5 +78,8 @@ class display {
             <img src="' . htmlspecialchars($images[0]) . '" alt="Featured Game Image" />
         </div>';
     }
+
+
+
     
 }
