@@ -1,0 +1,87 @@
+/* overarching allignment for page and containers 
+*/
+.pageAllignment {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+/* This class is for alignning the search bar itself with
+the rest of the page 
+*/
+.searchAlignment {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 33%;
+}
+
+/* Styles the search bar 
+*/
+.search {
+    font-size: x-large;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 5px;
+}
+
+/* aligns the search options 
+*/
+.userGame {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+/* aligns the elements of a row to be left biased
+*/
+.rowAlignment {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: left;
+    width: 75%;
+}
+
+/* Styles the desired element to resemble more of a header 
+*/ 
+.rowHeader {
+    color: #6B5F77;
+    font-size: larger;
+}
+
+/* contains the styling for rows to be displayed
+These will contain the search results for their respect section
+*/
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+/* contained as a link in the result output
+*/
+.resultBox {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border: 1px solid black;
+    padding: 2px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    min-width: fit-content;
+}
+
+/* sets the height/width of images
+*/
+.resultImg {
+    width: 150px;
+    height: 100px;
+}

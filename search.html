@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <HTML lang="en">
-    <head>
-        <title>Search - Queen City's Gambit</title>
-        <meta charset="UTF-8">
-        <!--==========================Stylsheets=================================-->
-        <link rel="stylesheet" href="stylesheets/siteStyles.css">
-    </head>
 
-    <body>
-        <!-- The navigation bar -->
+<head>
+    <title>Search - Queen City's Gambit</title>
+    <meta charset="UTF-8">
+    <!--==========================Stylsheets=================================-->
+    <link rel="stylesheet" href="stylesheets/siteStyles.css">
+    <link rel="stylesheet" href="stylesheets/search.css">
+</head>
+
+<body>
+    <!-- The navigation bar -->
     <nav>
         <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
         <a href="login.html" class="navButton">Login</a>
@@ -29,27 +31,95 @@
     -->
 
     <!-- Search bar and result-type selection -->
-    <div class="searchAlignment">
-        <input type="text" id="searchInput" placeholder="Search...">
-        <br><input type="checkbox" id="user" value="USER">
-        <input type="checkbox" id="game" value="GAME">
-    </div>
+    <div class="pageAllignment">
+        <div class="searchAlignment">
+            <form id="search" name="search">
+                <input class="search" type="text" id="searchInput" name="searchInput" placeholder="Search...">
+                <br>
+                <div class="userGame">
+                    <label for="user">USER</label>
+                    <input type="checkbox" id="user" name="user" value="USER">
+                    <label for="game">&nbsp GAME</label>
+                    <input type="checkbox" id="game" name="game" value="GAME">
+                </div>
+            </form>
+        </div>
 
-    <!-- User Returns-->
-    <div class="rowHeader">
-        Users:
-    </div>
-    <div class="userRow">
+        <div class="rowAlignment">
+            <!-- User Returns-->
+            <div class="rowHeader">
+                Users:
+            </div>
+
+            <div class="row">
+                <!-- Search results -->
+                <a href="dummy.html">
+                    <div class="resultBox">
+                        <img class="resultImg" src="dependencies/dummy.png" alt="result image">
+                        <br>Screenname
+                    </div>
+                </a>
+
+                <a href="dummy.html">
+                    <div class="resultBox">
+                        <img class="resultImg" src="dependencies/dummy.png" alt="result image">
+                        <br>Screenname
+                    </div>
+                </a>
+
+                <a href="dummy.html">
+                    <div class="resultBox">
+                        <img class="resultImg" src="dependencies/dummy.png" alt="result image">
+                        <br>Screenname
+                    </div>
+                </a>
+
+                <a href="dummy.html">
+                    <div class="resultBox">
+                        <img class="resultImg" src="dependencies/dummy.png" alt="result image">
+                        <br>Screenname
+                    </div>
+                </a>
+            </div>
+
+            <!-- Game Returns -->
+            <div class="rowHeader">
+                Games:
+            </div>
+
+            <div class="row">
+                <!-- Search results -->
+                <a href="dummy.html">
+                    <div class="resultBox">
+                        <img class="resultImg" src="dependencies/dummy.png" alt="result image">
+                        <br>Game Name
+                    </div>
+                </a>
+
+                <a href="dummy.html">
+                    <div class="resultBox">
+                        <img class="resultImg" src="dependencies/dummy.png" alt="result image">
+                        <br>Game Name
+                    </div>
+                </a>
+
+                <a href="dummy.html">
+                    <div class="resultBox">
+                        <img class="resultImg" src="dependencies/dummy.png" alt="result image">
+                        <br>Game Name
+                    </div>
+                </a>
+
+                <a href="dummy.html">
+                    <div class="resultBox">
+                        <img class="resultImg" src="dependencies/dummy.png" alt="result image">
+                        <br>Game Name
+                    </div>
+                </a>
+            </div>
+        </div>
 
     </div>
+</body>
 
-    <!-- Game Returns -->
-    <div class="rowHeader">
-        Games:
-    </div>
-    <div class="gameRow">
-        
-    </div>
-
-    </body>
 </HTML>
