@@ -1,6 +1,6 @@
 <?php
-include 'database.php';
-include 'review.php';
+include './database.php';
+include './review.php';
 
 class TGE {
     //Member Variables
@@ -42,7 +42,7 @@ class TGE {
     //   <1> $entryInfo is initialized as an array with all game information
     //   <2> $images is initialized as an array with all picture URLs in it
     //   <3> $gameReviews is initialized as an array of review objects
-    public function __construct($objGameTitle) {
+    public function __construct(string $objGameTitle) {
         //Create new database object
         $this->db = new database();
         $this->dbConnect = $this->db->getDBConnection();
@@ -143,7 +143,7 @@ class TGE {
     //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $gameTitle is set to the new information contained in $title
     //   and updated in the database
-    public function setGameTitle($title) {
+    public function setGameTitle(string $title) {
         //Check to see if title is empty, return FALSE if it is empty
         if (!isset($title)) {
             return FALSE;
@@ -198,7 +198,7 @@ class TGE {
     //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $dateSubmitted is set to the new information contained in $date
     //   and updated in the database
-    public function setDateSubmitted($date) {
+    public function setDateSubmitted(object $date) {
         //Check to see if date is empty, return FALSE if it is empty
         if (!isset($date)) {
             return FALSE;
@@ -242,7 +242,7 @@ class TGE {
     //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $numPlayers is set to the new information contained in $number
     //   and updated in the database
-    public function setNumPlayers($number) {
+    public function setNumPlayers(int $number) {
         //Check to see if number is empty, return FALSE if it is empty
         if (!isset($number)) {
             return FALSE;
@@ -286,7 +286,7 @@ class TGE {
     //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $ageRating is set to the new information contained in $age
     //   and updated in the database
-    public function setAgeRating($age) {
+    public function setAgeRating(int $age) {
         //Check to see if age is empty, return FALSE if it is empty
         if (!isset($age)) {
             return FALSE;
@@ -330,7 +330,7 @@ class TGE {
     //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $playTime is set to the new information contained in $time
     //   and updated in the database
-    public function setPlayTime($time) {
+    public function setPlayTime(float $time) {
         //Check to see if time is empty, return FALSE if it is empty
         if (!isset($time)) {
             return FALSE;
@@ -374,7 +374,7 @@ class TGE {
     //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $description is set to the new information contained in $newDescription
     //   and updated in the database
-    public function setDescription ($newDescription) {
+    public function setDescription (string $newDescription) {
         //Check to see if newDescription is empty, return FALSE if it is empty
         if (!isset($newDescription)) {
             return FALSE;
@@ -418,7 +418,7 @@ class TGE {
     //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $company is set to the new information contained in $newCompany
     //   and updated in the database
-    public function setCompany ($newCompany) {
+    public function setCompany (string $newCompany) {
         //Check to see if newCompany is empty, return FALSE if it is empty
         if (!isset($newCompany)) {
             return FALSE;
@@ -462,7 +462,7 @@ class TGE {
     //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $expansions is set to the new information contained in $numExpans
     //   and updated in the database
-    public function setExpansions ($numExpans) {
+    public function setExpansions (int $numExpans) {
         //Check to see if numExpans is empty, return FALSE if it is empty
         if (!isset($numExpans)) {
             return FALSE;
@@ -506,7 +506,7 @@ class TGE {
     //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $images is set to the new information contained in $imageURLs
     //   and updated in the database
-    public function setImages($imageURLs) {
+    public function setImages(array $imageURLs) {
         //Determine if the imageURLs array is empty, if so return FALSE
         if (sizeof($imageURLs) == 0) {
             return FALSE;
@@ -571,7 +571,7 @@ class TGE {
     //   <2> FALSE: The information was not updated in the DB
     //Side Effects: $statusInfo is set to the new information contained in $status and $reason
     //   and updated in the database
-    public function setStatusInfo ($status, $reason) {
+    public function setStatusInfo (int $status, string $reason) {
         //Check to see if status is empty, return FALSE if it is empty
         //Reason may be empty, no need to check
         if (!isset($status)) {

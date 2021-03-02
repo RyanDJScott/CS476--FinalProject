@@ -1,5 +1,5 @@
 <?php
-    include 'database.php';
+    include './database.php';
 
     class Review {
         //Member variables
@@ -34,7 +34,7 @@
         //Side Effects:
         //   <1> $reviewInformation: initialized to an array containing all review info
         //   <2> $flagStatus: initialized to 0 or 1
-        public function __construct($objGameTitle, $reviewerUID) {
+        public function __construct(string $objGameTitle, int $reviewerUID) {
             //Create new database object
             $this->db = new database();
             $this->dbConnect = $this->db->getDBConnection();
@@ -67,9 +67,7 @@
                 //Set the game title and UID for this review
                 $this->gameTitle = $objGameTitle;
                 $this->UID = $reviewerUID;
-            } else {
-                $this->gameTitle = "MAJOR ISSUE!";
-            }
+            } 
         }
 
         //Function Name: getGameTitle
@@ -111,7 +109,7 @@
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
         //Side Effects: $submitDate is set to the value of $date
-        public function setSubmitDate ($date) {
+        public function setSubmitDate (object $date) {
             //Check to see if date is set
             if (!isset($date)) {
                 return FALSE;
@@ -153,7 +151,7 @@
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
         //Side Effects: $rating is set to the value of $newRating
-        public function setRating ($newRating) {
+        public function setRating (float $newRating) {
             //Check to see if date is set
             if (!isset($newRating)) {
                 return FALSE;
@@ -195,7 +193,7 @@
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
         //Side Effects: $review is set to the value of $newReview
-        public function setReview ($newReview) {
+        public function setReview (string $newReview) {
             //Check to see if date is set
             if (!isset($newReview)) {
                 return FALSE;
@@ -237,7 +235,7 @@
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
         //Side Effects: $recommend is set to the value of $newRecommend
-        public function setRecommend ($newRecommend) {
+        public function setRecommend (bool $newRecommend) {
             //Check to see if date is set
             if (!isset($newRecommend)) {
                 return FALSE;
@@ -279,7 +277,7 @@
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
         //Side Effects: $avgAge is set to the value of $age
-        public function setAvgAge ($age) {
+        public function setAvgAge (int $age) {
             //Check to see if date is set
             if (!isset($age)) {
                 return FALSE;
@@ -321,7 +319,7 @@
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
         //Side Effects: $avgPlayTime is set to the value of $playTime
-        public function setAvgPlayTime ($playTime) {
+        public function setAvgPlayTime (float $playTime) {
             //Check to see if date is set
             if (!isset($playTime)) {
                 return FALSE;
@@ -363,7 +361,7 @@
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
         //Side Effects: $difficulty is set to the value of $newDifficulty
-        public function setDifficulty ($newDifficulty) {
+        public function setDifficulty (string $newDifficulty) {
             //Check to see if date is set
             if (!isset($newDifficulty)) {
                 return FALSE;
@@ -405,7 +403,7 @@
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
         //Side Effects: $numPlays is set to the value of $numberPlays
-        public function setNumPlays ($numberPlays) {
+        public function setNumPlays (int $numberPlays) {
             //Check to see if date is set
             if (!isset($numberPlays)) {
                 return FALSE;
@@ -447,7 +445,7 @@
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
         //Side Effects: $flag is set to the value of $flagVal
-        public function setFlag($flagVal) {
+        public function setFlag(int $flagVal) {
             //Check to see if date is set
             if (!isset($flagVal)) {
                 return FALSE;
