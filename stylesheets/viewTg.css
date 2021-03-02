@@ -66,6 +66,8 @@ and right edges of the image container.
 */
 .flag {
     margin-left: 10px;
-    background-color: #e76161;
+    background-color: #e79c9c;
     width: 100px;
+    padding: 2px;
+    font-family: 'Times New Roman', Times, serif;
 }
