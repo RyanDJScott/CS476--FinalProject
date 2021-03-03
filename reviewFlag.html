@@ -3,7 +3,7 @@
 <!-- name and stylesheets-->
 
 <head>
-    <title>Search - Queen City's Gambit</title>
+    <title>Flagged Review - Queen City's Gambit</title>
     <meta charset="UTF-8">
     <!--==========================Stylsheets=================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
@@ -36,7 +36,7 @@
     <div class="pageAllignment">
 
         <!-- First inner element contains the game description -->
-        <div class="textBox">
+        <div class="textBox" name="gameDescription">
             <!-- dummy text -->
             This is a description for a game, a review for this game
             has been flagged. This is the review flag page. 
@@ -49,25 +49,31 @@
         </div>
 
         <!--  Secondary inner element will contain the images -->
-        <div class="imageBox">
+        <div class="imageBox" name="imageBox">
             
             <!-- four dummy images -->
             <div class="image">
-                <img src="dependencies/dummy.png">
+                <img name="image1" src="dependencies/dummy.png">
             </div>
 
             <div class="image">
-                <img src="dependencies/dummy.png">
+                <img name="image2" src="dependencies/dummy.png">
             </div>
 
             <div class="image">
-                <img src="dependencies/dummy.png">                
+                <img name="image3" src="dependencies/dummy.png">                
             </div>
 
             <div class="image">
-                <img src="dependencies/dummy.png">
+                <img name="image4" src="dependencies/dummy.png">
             </div>
-            
+
+        </div>
+        
+        <!-- another field for the flagged review to be displayed -->
+        <div class="textBox" name="flaggedReview">
+            This is a review that has been flagged. The outcome of a 
+            flagged review can be determined via the buttons below!
         </div> 
 
     </div>
