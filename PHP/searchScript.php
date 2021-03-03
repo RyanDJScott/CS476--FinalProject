@@ -11,7 +11,9 @@ include_once(__DIR__.'/searchStrategy.php');
 function getSearchObject() {
     //Sent by the post method, get the parameters
     $query = $_POST["searchInput"];
-    $searchOption = NULL;
+    $searchOption = "";
+
+    
 
     //Figure out what kind of search
     if (isset($_POST["user"]) && $_POST["user"] == "USER") {
@@ -26,5 +28,4 @@ function getSearchObject() {
     //If you have the required information, create the object
     return new Search($searchOption, $query);
 }
-
 ?>
