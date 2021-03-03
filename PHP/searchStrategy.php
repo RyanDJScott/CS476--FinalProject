@@ -95,7 +95,34 @@ class userSearch implements searchStrategy {
     //   <1> $dbReturn: an array that contains all of the information retrieved from the DB
     //Returns: N/A
     //Side Effects: All of the DB information will be displayed on the website
-    public function displayResults(array $dbReturn) {}
+    public function displayResults(array $dbReturn) {
+        //Print out the header
+        echo '<!-- User Returns-->
+            <div class="rowHeader">
+                Users:
+            </div>';
+
+        //If the array wasn't empty, print the results
+        if (sizeof($dbReturn) != 0) {
+            //Print the div container
+            echo '<div class="row">
+                    <!-- Search results -->';
+            
+            //For each entry in the array, print their information
+            foreach ($dbReturn as $user) {
+                echo '<a href="viewProfile.php?UID="' . $user["UID"] . '">
+                        <div class="resultBox">
+                            <img class="resultImg" src="' . $user["avatarURL"] . '" alt="result image"><br>
+                            ' . $user["screenName"] . '
+                        </div>
+                    </a>';
+            }                   
+            echo '</div>';
+        } else {
+            //If there are no results, print a generic message
+            echo '<p>Sorry, there are no matches to your search query.</p>';
+        }
+    }
 }
 
 class gameSearch implements searchStrategy {
@@ -146,7 +173,34 @@ class gameSearch implements searchStrategy {
     //   <1> $dbReturn: an object that contains all of the information retrieved from the DB
     //Returns: N/A
     //Side Effects: All of the DB information will be displayed on the website
-    public function displayResults(array $dbReturn) {}
+    public function displayResults(array $dbReturn) {
+        //Print out the header
+        echo '<!-- Game Returns-->
+            <div class="rowHeader">
+                Tabletop Games:
+            </div>';
+
+        //If the array wasn't empty, print the results
+        if (sizeof($dbReturn) != 0) {
+            //Print the div container
+            echo '<div class="row">
+                    <!-- Search results -->';
+            
+            //For each entry in the array, print their information
+            foreach ($dbReturn as $games) {
+                echo '<a href="viewTGE.php?gameTitle="' . $games["gameTitle"] . '">
+                        <div class="resultBox">
+                            <img class="resultImg" src="' . $games["pictureURL"] . '" alt="result image"><br>
+                            ' . $games["gameTitle"] . '
+                        </div>
+                    </a>';
+            }                   
+            echo '</div>';
+        } else {
+            //If there are no results, print a generic message
+            echo '<p>Sorry, there are no matches to your search query.</p>';
+        }
+    }
 }
 
  class searchBoth implements searchStrategy {
@@ -211,7 +265,65 @@ class gameSearch implements searchStrategy {
     //   <1> $dbReturn: an object that contains all of the information retrieved from the DB
     //Returns: N/A
     //Side Effects: All of the DB information will be displayed on the website
-    public function displayResults(array $dbReturn) {}
- }
+    public function displayResults(array $dbReturn) {
+        //Split the array into separate arrays
+        $userResults = $dbReturn["users"];
+        $gameResults = $dbReturn["games"];
 
+        //Print out the header
+        echo '<!-- User Returns-->
+            <div class="rowHeader">
+                Users:
+            </div>';
+
+        //If the array wasn't empty, print the results
+        if (sizeof($userResults) != 0) {
+            //Print the div container
+            echo '<div class="row">
+                    <!-- Search results -->';
+            
+            //For each entry in the array, print their information
+            foreach ($userResults as $user) {
+                echo '<a href="viewProfile.php?UID="' . $user["UID"] . '">
+                        <div class="resultBox">
+                            <img class="resultImg" src="' . $user["avatarURL"] . '" alt="result image"><br>
+                            ' . $user["screenName"] . '
+                        </div>
+                    </a>';
+            }                   
+            echo '</div>';
+        } else {
+            //If there are no results, print a generic message
+            echo '<p>Sorry, there are no matches to your search query.</p>';
+        }
+
+        //Execute the two display results from each separate user/game classes
+        //Print out the header
+        echo '<!-- Game Returns-->
+            <div class="rowHeader">
+                Tabletop Games:
+            </div>';
+
+        //If the array wasn't empty, print the results
+        if (sizeof($gameResults) != 0) {
+            //Print the div container
+            echo '<div class="row">
+                    <!-- Search results -->';
+            
+            //For each entry in the array, print their information
+            foreach ($gameResults as $games) {
+                echo '<a href="viewTGE.php?gameTitle="' . $games["gameTitle"] . '">
+                        <div class="resultBox">
+                            <img class="resultImg" src="' . $games["pictureURL"] . '" alt="result image"><br>
+                            ' . $games["gameTitle"] . '
+                        </div>
+                    </a>';
+            }                   
+            echo '</div>';
+        } else {
+            //If there are no results, print a generic message
+            echo '<p>Sorry, there are no matches to your search query.</p>';
+        }
+    }
+ }
 ?>
