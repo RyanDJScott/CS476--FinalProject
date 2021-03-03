@@ -13,8 +13,9 @@
 .featuredItem {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
+    justify-items: center;
     max-width: 75%;
     border: 1px solid #AAA0B4;
     background-color: #F5F0F9;
@@ -35,6 +36,13 @@
     flex-basis: 34%;
     align-self: center;
     justify-self: center;
+    padding: 4px 4px 0px 0px;
+}
+
+/* image size constraints */
+.featureImage {
+    max-height: 350px;
+    border: 1px solid #000000;
 }
 
 /* buttons ...not currently used */
