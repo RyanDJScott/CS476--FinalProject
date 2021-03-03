@@ -1,9 +1,9 @@
 <?php
 //Include all class dependencies
-include './TGE.php';
-include './review.php';
-include './userFactory.php';
-include './database.php';
+include_once(__DIR__ . '/TGE.php');
+include_once(__DIR__ . '/review.php');
+include_once(__DIR__ . '/userFactory.php');
+include_once(__DIR__ . '/database.php');
 
 //Implement display class
 class Display {
@@ -12,37 +12,66 @@ class Display {
     private $dbConnect = NULL;
  
     public function __construct() {
-        $db = new database();
-        $dbConnect = $this->db->getDBConnection();
+        $this->db = new database();
+        $this->dbConnect = $this->db->getDBConnection();
     }
     
     //Utility Member Functions
     
     //Function Name: limitChars
     //Purpose: To truncate the text to a specific length and append '...' to the end of the string
-    //Parameters: 
-    //   <1> $text: the text you wish to truncate
-    //   <2> $length: how much of $text you would like to display
-    //Returns:
-    //   <1> $text if the length of the string is <= $length
-    //   <2> $newText, the truncated version of $text with '...' appended to the end
-    //Side Effects: N/A
-    private function limitChars($text, $length) {
-        if(strlen($text) <= $length) {
+    //Parameters: 0
+    //Parameters: none
+    //Returns: N/A
+    //Side Effects: Displays all approved TGE's on the site in mini boxes
+    private function limitChars ($text, $length) {
+        if (strlen($text) <= $length) {
             return $text;
         } else {
-            $newText = substr($text, 0, $length) . '...';
-            return $newText;
+            $newString = substr($text, 0, $length) . "...";
+
+            return $newString;
         }
     }
 
-    //Function Name: displayTGE
-    //Purpose: To display the contents of a tabletop game description on the viewTGE.php page
-    //Parameters: N/A
-    //Returns: N/A
-    //Side Effects: Displays the contents of a tabletop game description on the viewTGE.php page
-    public function displayTGE($TGE) {
+    public function displayAllGames() {
+        //Get all of the games from the DB
+        $allGamesQuery = "SELECT gameTitle FROM GameDescriptionStatus WHERE status = 1 OR status = 2 OR status = 0";
 
+        //Execute the query
+        $allGamesResult = $this->dbConnect->query($allGamesQuery);
+
+        //Create an array to hold all of the objects
+        $newGame = array();
+
+        //For each of the results, create an object
+        if (mysqli_num_rows($allGamesResult) > 0) {
+            while ($resultRows = mysqli_fetch_assoc($allGamesResult)) {
+                $newGame[] = new TGE($resultRows["gameTitle"]);
+            }
+        }
+
+        if (sizeof($newGame) != 0) {
+            while (sizeof($newGame) != 0) {
+                $counter = 0;
+
+                echo '<div class="rowContainer">';
+
+                while ($counter <= 3 && sizeof($newGame) != 0) {
+                    $this->displayTGECard($newGame[0]);
+
+                    array_shift($newGame);
+
+                    $counter++;
+                }
+
+                echo '</div>';
+    
+            }
+        } else {
+            //Echo an error statement
+            echo '<div class="rowContainer"><p>There are no games on the site yet! Sign up and submit!</div>';
+        }
     }
 
     //Function Name: displayTGECard
@@ -51,11 +80,12 @@ class Display {
     //   <1> $TGE: a tabletop game entry object
     //Returns: N/A
     //Side Effects: Displays the contents of a tabletop game description as a mini-card
+
     public function displayTGECard(TGE $TGE) {
         echo '<div class="smallGameBox">
                 <p>' . htmlspecialchars($TGE->getGameTitle()) . '</p>
                 <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '/10</p>
-                <p>' . htmlspecialchars(limitChars($TGE->getDescription())) . '</p>
+                <p>' . htmlspecialchars($this->limitChars($TGE->getDescription(), 200)) . '</p>
                 <a href="viewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton">View Game Description</a>
             </div>';
     }
@@ -68,12 +98,13 @@ class Display {
     public function displayTGEFeatureGameBox(string $featureGame) {
         //Create new TGE object from the game
         $TGE = new TGE($featureGame);
+        
         //Get images array for output
         $images = $TGE->getImages();
 
         echo '<!-- left div for header + information -->
         <div class="featuredItemLeft">
-            <h2>' . htmlspecialchars($TGE->getGameTitle()) . '</h2>
+            <a href="viewTG.php?gameTitle="' . htmlspecialchars($TGE->getGameTitle()) . '" <h2>' . htmlspecialchars($TGE->getGameTitle()) . '</h2></a>
             <p>Submitted by: ' . htmlspecialchars($TGE->getScreenName()) . '</p>
             <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '</p>
             <p>Number of Players: ' . htmlspecialchars($TGE->getNumPlayers()) . '</p>
@@ -85,9 +116,9 @@ class Display {
             <p>' . htmlspecialchars($TGE->getDescription()) . '</p>
         </div>
 
-        <!-- Right div for YouTube video-->
+        <!-- Right div for feature image-->
         <div class="featuredItemRight">
-            <img src="' . htmlspecialchars($images[0]) . '" alt="Featured Game Image" />
+            <img src="' . htmlspecialchars($images[0]) . '" class="featureImage" alt="Featured Game Image" />
         </div>';
     }
 
@@ -116,4 +147,14 @@ class Display {
     //Returns: N/A
     //Side Effects: The contents of this review are displayed on a webpage
     public function displayReview() {}
+
+    //------------TGE Display Functions--------------------//
+    //Function Name: displayTGE
+    //Purpose: To display the contents of a tabletop game description on the viewTGE.php page
+    //Parameters: N/A
+    //Returns: N/A
+    //Side Effects: Displays the contents of a tabletop game description on the viewTGE.php page
+    public function displayTGE($TGE) {
+
+    }
 }

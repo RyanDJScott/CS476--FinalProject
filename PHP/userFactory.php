@@ -1,6 +1,6 @@
 <?php
-include './database.php';
-include './review.php';
+include_once(__DIR__ . '/database.php');
+include_once(__DIR__. '/review.php');
 
 abstract class userFactory {
     abstract function makeUser($userID);
@@ -669,7 +669,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function deleteUser($userID) {
+    public function deleteUser(int $userID) {
         return;
     }
 

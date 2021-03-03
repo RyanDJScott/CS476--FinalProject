@@ -1,8 +1,7 @@
 <?php
     //Include class definitions for login check
-    include './PHP/userFactory.php';
-    include './PHP/TGE.php';
-    include './PHP/display.php';
+    include_once(__DIR__ . '/PHP/userFactory.php');
+    include_once(__DIR__ . '/PHP/display.php');
 
     //Include functions for displaying
     include './PHP/navBar.php';
@@ -64,51 +63,9 @@
         <div class="gameHeader"><h1>Tabletop Games</h1></div>
         <!-- Regular Games Container-->
         <div class="gameContainer">
-
-            <!-- Row Container -->
-            <div class="rowContainer">
-                <div class="smallGameBox">
-                    <p>Game Title</p>
-                    <p>Rating: 7/10</p>
-                    <p>This is a board game and it is fun!</p>
-                    <button>View Description</button>
-                </div>
-                <div class="smallGameBox"> 
-                    <p>Game Title</p>
-                    <p>Rating: 7/10</p>
-                    <p>This is a board game and it is fun!</p>
-                    <button>View Description</button>
-                </div>
-                <div class="smallGameBox">
-                    <p>Game Title</p>
-                    <p>Rating: 7/10</p>
-                    <p>This is a board game and it is fun!</p>
-                    <button>View Description</button>
-                </div>
-            </div>
-    
-            <!-- Row Container 2 -->
-            <div class="rowContainer">
-                <div class="smallGameBox">
-                    <p>Game Title</p>
-                    <p>Rating: 7/10</p>
-                    <p>This is a board game and it is fun!</p>
-                    <button>View Description</button>
-                </div>
-                <div class="smallGameBox">
-                    <p>Game Title</p>
-                    <p>Rating: 7/10</p>
-                    <p>This is a board game and it is fun!</p>
-                    <button>View Description</button>
-                </div>
-                <div class="smallGameBox">
-                    <p>Game Title</p>
-                    <p>Rating: 7/10</p>
-                    <p>This is a board game and it is fun!</p>
-                    <button>View Description</button>
-                </div>
-            </div>
-    
+            <?php
+                $display->displayAllGames();
+            ?>
         </div>
     </div>
 </body>
