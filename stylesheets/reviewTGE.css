@@ -45,6 +45,16 @@ form {
     width: 75%;
 }
 
+textarea {
+    width: 600px !important;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.nameFeedback {
+    color: #6B5F77;
+    font-size: larger;
+}
+
 /* Styles the desired element to resemble more of a header 
 */ 
 .name {
