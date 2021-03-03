@@ -20,20 +20,27 @@ class Display {
     
     //Function Name: limitChars
     //Purpose: To truncate the text to a specific length and append '...' to the end of the string
-    //Parameters: 0
-    //Parameters: none
-    //Returns: N/A
-    //Side Effects: Displays all approved TGE's on the site in mini boxes
+    //Parameters: 
+    //   <1> $text: the string to be appended
+    //   <2> $length: the length of the string you want returned with "..." appended to it
+    //Returns: 
+    //   <1> $text: if the string's length is <= length
+    //   <2> $newString: the substring of length $length with "..." appended to it
+    //Side Effects: None
     private function limitChars ($text, $length) {
+        //If the string is already short enough, return it
         if (strlen($text) <= $length) {
             return $text;
         } else {
+            //Create a new string the size of $length, append "..."
             $newString = substr($text, 0, $length) . "...";
 
+            //Return this new string
             return $newString;
         }
     }
 
+    //-----------------index.php display functions--------------------//
     public function displayAllGames() {
         //Get all of the games from the DB
         $allGamesQuery = "SELECT gameTitle FROM GameDescriptionStatus WHERE status = 1 OR status = 2 OR status = 0";
@@ -44,29 +51,38 @@ class Display {
         //Create an array to hold all of the objects
         $newGame = array();
 
-        //For each of the results, create an object
+        //For each of the results, create an object and store it in the newGame array
         if (mysqli_num_rows($allGamesResult) > 0) {
             while ($resultRows = mysqli_fetch_assoc($allGamesResult)) {
                 $newGame[] = new TGE($resultRows["gameTitle"]);
             }
         }
 
+        //If the newGame array is not empty (i.e. there are no results)
         if (sizeof($newGame) != 0) {
+            //While there are still games to display
             while (sizeof($newGame) != 0) {
+                //Set a counter to enforce three per row
                 $counter = 0;
 
+                //Print a row container
                 echo '<div class="rowContainer">';
 
+                //While there is room for 1 more game box (3 max)
+                //While there are still games to display
                 while ($counter <= 3 && sizeof($newGame) != 0) {
+                    //Display the card for this TGE
                     $this->displayTGECard($newGame[0]);
 
+                    //Remove this TGE from the array
                     array_shift($newGame);
 
+                    //Increment the counter
                     $counter++;
                 }
 
+                //Close the row div so we can start a new one after 3 are printed
                 echo '</div>';
-    
             }
         } else {
             //Echo an error statement
