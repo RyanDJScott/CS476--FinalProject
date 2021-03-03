@@ -1,5 +1,6 @@
 <?php
     //Include search class
+    include_once(__DIR__ . '/PHP/userFactory.php');
     include_once(__DIR__ . '/PHP/searchScript.php');
     include_once(__DIR__ . '/PHP/navBar.php');
 
