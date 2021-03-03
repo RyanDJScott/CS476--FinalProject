@@ -1,0 +1,119 @@
+/* Outer box that will contain all inside elements of this page
+*/
+.pageAllignment {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+/* This is used to contain the game description as well
+as the feedback to the user. Inside text should not be 
+centred
+*/
+.textBox {
+    display: flex;
+    text-align: left;
+    width: 75%;
+    border: 1px solid #AAA0B4;
+    background-color: #F5F0F9;
+    padding: 5px;
+    margin: 20px;
+}
+/* nowrap*/
+.textBoxBottom {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    text-align: left;
+    align-items: center;
+    min-width: 100%;
+    border: 1px solid #AAA0B4;
+    background-color: #F5F0F9;
+    padding: 5px;
+}
+
+/* flexbox was struggling due to the form, so had to
+add some styling elements to it
+-> flexbox was confining itself to the form (which 
+was not wide enough for proper alignment)
+*/ 
+form {
+    margin-top: 20px;
+    width: 75%;
+}
+
+/* Styles the desired element to resemble more of a header 
+*/ 
+.name {
+    color: #6B5F77;
+    font-size: larger;
+}
+
+/* This is the inside containers which hold different information
+in each one (determined in associated file). These neeed to line up
+together in line 
+*/
+.innerContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+/* Contains the images associated with the game which will
+be displayed between the description and feedback area.
+*/
+.imageContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    border: 1px solid #AAA0B4;
+    background-color: #F5F0F9;
+}
+
+/* images are only contained in the image container, there should
+be four across in a row, centred but should expand to the left 
+and right edges of the image container.
+*/
+.image {
+    width: 350px;
+    border: 1px solid #AAA0B4;
+    margin: 20px;
+}
+
+/* alligns the buttons to the center of the page
+*/
+.buttonContainer {
+    display: flex;
+    width: 100%;
+    margin: 20px; 
+    justify-content: center;
+}
+
+/* styles the buttons to match the rest of the website better
+*/
+.button {
+    background-color: #ffffff;
+    padding: 5px;
+    margin-right: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+    font-weight: 800 !important;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #6B5F77 !important;
+    min-width: 100px;
+}
+
+/* animates the buttons (as on rest of the page)
+*/
+.button:hover, .button:focus {
+    border-radius: 50px;
+    transition: all 0.3s ease 0s;
+    background-color: #F0E5FC;
+    text-decoration: none;
+    cursor: pointer;
+}
