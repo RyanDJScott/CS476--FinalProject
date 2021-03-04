@@ -1,9 +1,12 @@
 <?php
+    //Include definitions for login check
+    include_once(__DIR__ . '/PHP/userFactory.php');
+    
     //Check for continued session
     session_start();
 
     //Check to see if they are already logged in; redirect if so
-    if (isset($_SESSION["UID"]) && $_SESSION["UID"] > 0)
+    if (isset($_SESSION["UID"]) && $_SESSION["UID"] > 0 && is_object($_SESSION["userObj"]))
         header("Location: dashboard.php");
 ?>
 <!DOCTYPE html>
@@ -22,9 +25,10 @@
     <!-- The navigation bar -->
     <nav> 
         <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.php" class="navButton">Login</a>
-        <a href="signup.html" class="navButton">Signup</a>
-        <a href ="search.html" class="navButton">Search</a>
+        <?php
+            //This page can only be accessed by logged out users
+            loggedOutNavBar();   
+        ?>
     </nav>
 
     <!-- login header image -->

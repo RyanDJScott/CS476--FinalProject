@@ -1,3 +1,21 @@
+<?php
+    //Include class definitions for login check
+    include_once(__DIR__ . '/PHP/userFactory.php');
+
+    //Include functions for displaying
+    include_once(__DIR__ . '/PHP/navBar.php');
+
+    //Continue the session
+    session_start();
+
+    //Check to see if they are already logged in; redirect if so
+    if (isset($_SESSION["UID"]) && $_SESSION["UID"] > 0 && is_object($_SESSION["userObj"]))
+        header("Location: dashboard.php");
+
+    //If the form was submitted, execute the signup process
+    if ($_SERVER["REQUEST_METHOD"] === "POST")
+        //----Create a signup object here----//
+?>
 <!DOCTYPE html>
 <HTML lang="en">
 
@@ -11,11 +29,12 @@
 
 <body>
     <!-- The navigation bar -->
-    <nav>
-        <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.html" class="navButton">Login</a>
-        <a href="signup.html" class="navButton">Signup</a>
-        <a href="search.html" class="navButton">Search</a>
+    <nav> 
+        <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <?php
+            //This page can only be accessed by logged out users
+            loggedOutNavBar();   
+        ?>
     </nav>
 
     <!-- Signup header image -->
@@ -24,16 +43,17 @@
     </div>
 
     <!-- Signup Form Container -->
-    <form>
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
         <div class="alignmentContainer">
             <div class="signupContainer">
+                <p class="errorMessage"><?php echo htmlspecialchars($errorMessage) ?></p>
                 <!-- outer container for flexbox design-->
         
                 <!-- First Name and Error -->
                 <div class="rowContainer">
                     <label for="signupFName">First Name:</label>
                     <div class="itemContainer">
-                        <input type="text" id="signupFName" placeholder="first name here">
+                        <input type="text" id="signupFName" name="signupFName" placeholder="first name here">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupFNameError"></div>
                         </div>
@@ -44,7 +64,7 @@
                 <div class="rowContainer">
                     <label for="signupLName">Last Name:</label>
                     <div class="itemContainer">
-                        <input type="text" id="signupLName" placeholder="last name here">
+                        <input type="text" id="signupLName" name="signupLName" placeholder="last name here">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupLNameError"></div>
                         </div>
@@ -55,7 +75,7 @@
                 <div class="rowContainer">
                     <label for="signupEmail">Email:</label>
                     <div class="itemContainer">
-                        <input type="email" id="signupEmail" placeholder="enter email here">
+                        <input type="email" id="signupEmail" name="signupEmail" placeholder="enter email here">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupEmailError"></div>
                         </div>
@@ -66,7 +86,7 @@
                 <div class="rowContainer">
                     <label for="signupScreenname">Screenname:</label>
                     <div class="itemContainer">
-                        <input type="text" id="signupScreenname" placeholder="enter screenname here">
+                        <input type="text" id="signupScreenname" name="signupScreenname" placeholder="enter screenname here">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupScreennameError"></div>
                         </div>
@@ -77,7 +97,7 @@
                 <div class="rowContainer">
                     <label for="signupPassword">Password:</label>
                     <div class="itemContainer">
-                        <input type="password" id="signupPassword" placeholder="provide a password">
+                        <input type="password" id="signupPassword" name="signupPassword" placeholder="provide a password">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupPasswordError"></div>
                         </div>
@@ -88,7 +108,7 @@
                 <div class="rowContainer">
                     <label for="signupPasswordConfirm">Confirm Password:</label>
                     <div class="itemContainer">
-                        <input type="password" id="signupPasswordConfirm" placeholder="confirm password">
+                        <input type="password" id="signupPasswordConfirm" name="signupPasswordConfirm" placeholder="confirm password">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupPasswordConfirmError"></div>
                         </div>
@@ -99,7 +119,7 @@
                 <div class="rowContainer">
                     <label for="signupBirthday">Birthday:</label>
                     <div class="itemContainer">
-                        <input type="date" id="signupBirthday">
+                        <input type="date" id="signupBirthday" name="signupBirthday">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupBirthdayError"></div>
                         </div>
@@ -110,7 +130,7 @@
                 <div class="rowContainer">
                     <label for="signupFavGame">Favourite Game:</label>
                     <div class="itemContainer">
-                        <input type="text" id="signupFavGame" placeholder="favourite game here">
+                        <input type="text" id="signupFavGame" name="signupFavGame" placeholder="favourite game here">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupFavGameError"></div>
                         </div>
@@ -121,7 +141,7 @@
                 <div class="rowContainer">
                     <label for="signupFavGameType">Favourite Type:</label>
                     <div class="itemContainer">
-                        <select id="signupFavGameType">
+                        <select id="signupFavGameType" name="signupFavGameType">
                             <option value="Board Game">Board Game</option>
                             <option value="Card Game">Card Game</option>
                             <option value="Dice Game">Dice Game</option>
@@ -140,7 +160,7 @@
                 <div class="rowContainer">
                     <label for="signupGameTime">Time Playing Games:</label>
                     <div class="itemContainer">
-                        <select id="signupGameTime">
+                        <select id="signupGameTime" name="signupGameTime">
                             <option value="0-1 years">0-1 years</option>
                             <option value="1-3 years">1-3 years</option>
                             <option value="3-6 years">3-6 years</option>
@@ -155,7 +175,7 @@
                 <!-- Biography -->
                 <div class="rowContainer">
                     <label for="signupBiography">Biography:</label>
-                        <input class="bioBoxBig" type="text" id="signupBiography" placeholder="tell us a bit about yourself...">
+                        <input class="bioBoxBig" type="text" id="signupBiography" name="signupBiopgraphy" placeholder="tell us a bit about yourself...">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupBiographyError"></div>
                         </div>
@@ -165,7 +185,7 @@
                 <div class="rowContainer">
                     <label for="signupPic">Picture:</label>
                     <div class="itemContainer">
-                        <input type="file" id="signupPic">
+                        <input type="file" id="signupPic" name="signupPic">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupPicError"></div>
                         </div>
