@@ -33,10 +33,8 @@ abstract class userProfileSubmission {
     protected function valFirstName() {
         if (strlen($this->firstName) >= 1 && strlen($this->firstName) <= 25)
             return TRUE;
-        else {
-            error_log("firstName error triggered", 0);
+        else 
             return FALSE;
-        }
     }
 
     // Function Name: valLastName
@@ -49,10 +47,8 @@ abstract class userProfileSubmission {
     protected function valLastName() {
         if (strlen($this->lastName) >= 1 && strlen($this->lastName) <= 25)
             return TRUE;
-        else {
-            error_log("lastName error triggered", 0);
+        else 
             return FALSE;
-        }
     }
 
     // Function Name: valEmail
@@ -65,10 +61,8 @@ abstract class userProfileSubmission {
     protected function valEmail() {
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) && strlen($this->email) >= 1 && strlen($this->email) <= 320)
             return TRUE;
-        else {
-            error_log("email error triggered", 0);
+        else 
             return FALSE;
-        }
     }
 
     // Function Name: valScreenName
@@ -81,10 +75,8 @@ abstract class userProfileSubmission {
     protected function valScreenName() {
         if (strlen($this->screenName) >= 1 && strlen($this->screenName) <= 50)
             return TRUE;
-        else {
-            error_log("screenName error triggered", 0);
+        else 
             return FALSE;
-        }
     }
 
     // Function Name: valPassword
@@ -97,10 +89,8 @@ abstract class userProfileSubmission {
     protected function valPassword() {
         if (strlen($this->password) >= 8 && strlen($this->password) <= 25 && preg_match("/[A-Z]+/", $this->password) && preg_match("/\W+/", $this->password) && $this->password === $this->confirmPassword)
             return TRUE;
-        else {
-            error_log("password error triggered", 0);
+        else 
             return FALSE;
-        }
     }
 
     // Function Name: valBirthday
@@ -120,12 +110,9 @@ abstract class userProfileSubmission {
 
             if ($dateTest["year"] > 0 && $dateTest["mon"] > 0 && $dateTest["mday"] > 0)
                 return TRUE;
-            else {
-                error_log("birthday error triggered", 0);
+            else 
                 return FALSE;
-            }
         } else {
-            error_log("birthday error triggered", 0);
             return FALSE;
         }
     }
@@ -140,10 +127,8 @@ abstract class userProfileSubmission {
     protected function valFavGame() {
         if (strlen($this->favGame) >= 0 && strlen($this->favGame) <= 60)
             return TRUE;
-        else {
-            error_log("favGame error triggered", 0);
+        else 
             return FALSE;
-        }
     }
 
     // Function Name: favGameType
@@ -154,18 +139,9 @@ abstract class userProfileSubmission {
     //   <2> FALSE: If $gameType doesn't pass validation
     // Side Effects: None
     protected function valGameType() {
-        if (strlen($this->gameType) <= 30 && ($this->gameType === "Board Game" ||
-            $this->gameType === "Card Game" ||
-            $this->gameType === "Dice Game" ||
-            $this->gameType === "Paper and Pencil Game" ||
-            $this->gameType === "Role-Playing Game" ||
-            $this->gameType === "Strategy Game" ||
-            $this->gameType === "Tile-Based Game" ||
-            $this->gameType === "")) {
-
-            error_log("" . $this->gameType . " entered.", 0);
-
-            return TRUE; }
+        if (strlen($this->gameType) <= 30 && ($this->gameType === "Board Game" || $this->gameType === "Card Game" || $this->gameType === "Dice Game" || $this->gameType === "Paper and Pencil Game" ||
+            $this->gameType === "Role-Playing Game" || $this->gameType === "Strategy Game" || $this->gameType === "Tile-Based Game" || $this->gameType === "")) 
+            return TRUE; 
         else 
             return FALSE;
     }
@@ -178,12 +154,8 @@ abstract class userProfileSubmission {
     //   <2> FALSE: If $playTime doesn't pass validation
     // Side Effects: None
     protected function valPlayTime() {
-        if (strlen($this->playTime) <= 9 && ($this->playTime === "0-1 years" ||
-            $this->playTime === "1-3 years" ||
-            $this->playTime === "3-6 years" ||
-            $this->playTime === "6+ years")) {
-            error_log("" . $this->playTime . " entered.", 0);
-            return TRUE; }
+        if (strlen($this->playTime) <= 9 && ($this->playTime === "0-1 years" || $this->playTime === "1-3 years" || $this->playTime === "3-6 years" || $this->playTime === "6+ years")) 
+            return TRUE; 
         else
             return FALSE;
     }
@@ -198,10 +170,8 @@ abstract class userProfileSubmission {
     protected function valBiography() {
         if (strlen($this->biography) >= 0 && strlen($this->biography) <= 500)
             return TRUE;
-        else {
-            error_log("Biography error triggered.", 0);
+        else 
             return FALSE;
-        }
     }
 
     // Function Name: uploadImage
@@ -216,7 +186,6 @@ abstract class userProfileSubmission {
         //If there is no file, add the default picture URL
         if (!isset($_FILES['signupPic']['error'])) {
             $this->avatarURL = "/uploads/userPictures/defaultPic.png";
-            error_log("No file uploaded, default inserted", 0);
             return TRUE;
         }
         
@@ -226,31 +195,26 @@ abstract class userProfileSubmission {
             return FALSE;
         }
 
-        //If there was an upload error, return false
+        //If there was an upload error, return false.
+        //If the error was no file, and wasn't caught earlier, return true w/ defautPic.png
         switch ($_FILES['signupPic']['error']) {
             case UPLOAD_ERR_OK:
-                error_log("No errors during upload", 0);
                 break;
             case UPLOAD_ERR_NO_FILE:
                 $this->avatarURL = "/uploads/userPictures/defaultPic.png";
-                error_log("No file uploaded, default inserted", 0);
                 return TRUE;
                 break;
             case UPLOAD_ERR_INI_SIZE:
             case UPLOAD_ERR_FORM_SIZE:
-                error_log("Error: Size too big", 0);
                 return FALSE;
                 break;
             default:
-                error_log("Unknown error", 0);
                 return FALSE;
         }
 
         //If the file size is greater than 10 MB
-        if ($_FILES['signupPic']['size'] > 10485760) {
-            error_log("File larger than 10 MB", 0);
+        if ($_FILES['signupPic']['size'] > 10485760) 
             return FALSE;
-        }
 
         //Check to see if it's an actual image by checking the file info object
         $finfo = new finfo(FILEINFO_MIME_TYPE);
@@ -262,7 +226,6 @@ abstract class userProfileSubmission {
                 'png' => 'image/png',
                 'gif' => 'image/gif',
             ),true)) {
-                error_log("File is not an image", 0);
                 return FALSE;
             } 
 
@@ -277,11 +240,9 @@ abstract class userProfileSubmission {
                 $ext
             )
         )) {
-            error_log("File wasn't moved to the correct folder", 0);
             return FALSE;
         } else {
             $this->avatarURL = $filePath;
-            error_log("avatarURL = " . $this->avatarURL . "", 0);
             return TRUE;
         }
     }
