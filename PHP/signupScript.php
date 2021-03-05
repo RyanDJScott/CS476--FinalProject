@@ -4,22 +4,22 @@ include_once(__DIR__ . '/database.php');
 
 abstract class userProfileSubmission {
     //Member variables
-    private $firstName = NULL;
-    private $lastName = NULL;
-    private $email = NULL;
-    private $birthday = NULL;
-    private $password = NULL;
-    private $confirmPassword = NULL;
-    private $screenName = NULL;
-    private $avatarURL = NULL;
-    private $biography = NULL;
-    private $favGame = NULL;
-    private $gameType = NULL;
-    private $playTime = NULL;
+    protected $firstName = NULL;
+    protected $lastName = NULL;
+    protected $email = NULL;
+    protected $birthday = NULL;
+    protected $password = NULL;
+    protected $confirmPassword = NULL;
+    protected $screenName = NULL;
+    protected $avatarURL = NULL;
+    protected $biography = NULL;
+    protected $favGame = NULL;
+    protected $gameType = NULL;
+    protected $playTime = NULL;
 
     //Database variables
-    private $db = NULL;
-    private $dbConnect = NULL;
+    protected $db = NULL;
+    protected $dbConnect = NULL;
 
     //Member functions: validation functions for both classes
 
@@ -30,7 +30,7 @@ abstract class userProfileSubmission {
     //   <1> TRUE: If the name passes validation
     //   <2> FALSE: If the name doesn't pass validation
     // Side Effects: None
-    private function valFirstName() {
+    protected function valFirstName() {
         if (strlen($this->firstName) >= 1 && strlen($this->firstName) <= 25)
             return TRUE;
         else 
@@ -44,7 +44,7 @@ abstract class userProfileSubmission {
     //   <1> TRUE: If the name passes validation
     //   <2> FALSE: If the name doesn't pass validation
     // Side Effects: None
-    private function valLastName() {
+    protected function valLastName() {
         if (strlen($this->lastName) >= 1 && strlen($this->lastName) <= 25)
             return TRUE;
         else
@@ -58,7 +58,7 @@ abstract class userProfileSubmission {
     //   <1> TRUE: If the email passes validation
     //   <2> FALSE: If the email doesn't pass validation
     // Side Effects: None
-    private function valEmail() {
+    protected function valEmail() {
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) && strlen($this->email) >= 1 && strlen($this->email) <= 320)
             return TRUE;
         else
@@ -72,7 +72,7 @@ abstract class userProfileSubmission {
     //   <1> TRUE: If the screenname passes validation
     //   <2> FALSE: If the screenname doesn't pass validation
     // Side Effects: None
-    private function valScreenName() {
+    protected function valScreenName() {
         if (strlen($this->screenName) >= 1 && strlen($this->screenName) <= 50)
             return TRUE;
         else
@@ -86,7 +86,7 @@ abstract class userProfileSubmission {
     //   <1> TRUE: If the password passes validation and matches the confirm password
     //   <2> FALSE: If the password doesn't pass validation or doesn't match the confirm password
     // Side Effects: None
-    private function valPassword() {
+    protected function valPassword() {
         if (strlen($this->password) >= 8 && strlen($this->password) <= 25 && preg_match("/[A-Z]+/", $this->password) && preg_match("/\W+/", $this->password) && $this->password === $this->confirmPassword)
             return TRUE;
         else
@@ -101,7 +101,7 @@ abstract class userProfileSubmission {
     //   <2> FALSE: If the birthday doesn't pass validation
     // Side Effects: 
     //   <1> The $birthday variable is converted to a MySQL date format
-    private function valBirthday() {
+    protected function valBirthday() {
         if (strlen($this->birthday) > 0) {
             //Convert the birthday to a corret MySQL date format
             $this->birthday = date("Y-m-d", strtotime($this->birthday));
@@ -119,7 +119,7 @@ abstract class userProfileSubmission {
     //   <1> TRUE: If favGame passes validation
     //   <2> FALSE: If favGame doesn't pass validation
     // Side Effects: None
-    private function valFavGame() {
+    protected function valFavGame() {
         if (strlen($this->favGame) >= 0 && strlen($this->favGame) <= 60)
             return TRUE;
         else
@@ -133,7 +133,7 @@ abstract class userProfileSubmission {
     //   <1> TRUE: If $gameType passes validation
     //   <2> FALSE: If $gameType doesn't pass validation
     // Side Effects: None
-    private function valGameType() {
+    protected function valGameType() {
         if (strlen($this->gameType) <= 30 && ($this->gameType === "Board Game" ||
             $this->gameType === "Card Game" ||
             $this->gameType === "Dice Game" ||
@@ -155,7 +155,7 @@ abstract class userProfileSubmission {
     //   <1> TRUE: If $playTime passes validation
     //   <2> FALSE: If $playTime doesn't pass validation
     // Side Effects: None
-    private function valPlayTime() {
+    protected function valPlayTime() {
         if (strlen($this->playTime) <= 9 && ($this->playTime === "0-1 years" ||
             $this->playTime === "1-3 years" ||
             $this->playTime === "3-6 years" ||
@@ -173,7 +173,7 @@ abstract class userProfileSubmission {
     //   <1> TRUE: If $biography passes validation
     //   <2> FALSE: If $biography doesn't pass validation
     // Side Effects: None
-    private function valBiography() {
+    protected function valBiography() {
         if (strlen($this->biography) >= 0 && strlen($this->biography) <= 500)
             return TRUE;
         else
@@ -188,9 +188,15 @@ abstract class userProfileSubmission {
     //   <2> FALSE: The image was not uploaded to the server
     // Side Effects:
     //   <1> An image is uploaded to the server
-    private function uploadImage() {
-        //If there is no file, or someone is trying to sneak multiple files
-        if (!isset($_FILES['upfile']['error']) || is_array($_FILES['upfile']['error']))
+    protected function uploadImage() {
+        //If there is no file, add the default picture URL
+        if (!isset($_FILES['upfile']['error'])) {
+            $this->avatarURL = "/uploads/userPictures/defaultPic.png";
+            return TRUE;
+        }
+        
+        //If the user is trying to sneak multiple files, return false
+        if (is_array($_FILES['upfile']['error']))
             return FALSE;
 
         //If there was an upload error, return false
@@ -240,10 +246,8 @@ abstract class userProfileSubmission {
         }
     }
 
-
     //Abstract functions to be defined in child classes
     abstract public function submitForm();
-  
 }
 
 class userSignup extends userProfileSubmission {
@@ -274,7 +278,28 @@ class userSignup extends userProfileSubmission {
     }
 
     //Implementation of abstract methods
-    public function submitForm () {}
+    public function submitForm () {
+        if ($this->valFirstName() && $this->valLastName() && $this->valEmail() && $this->valScreenName() && $this->valPassword() && $this->valBirthday() 
+            && $this->valFavGame() && $this->valGameType() && $this->valPlayTime() && $this->valBiography() && $this->uploadImage()) {
+                //Create insert query
+                $signupQuery = "INSERT INTO Users (userType, fistName, lastName, email, screenName, password, birthday, favGame, gameType, playTime, biography, avatarURL, lastLogin)
+                VALUES (1, '" . $this->dbConnect->real_escape_string($this->firstName) . "', '" . $this->dbConnect->real_escape_string($this->lastName) . "', '" . $this->dbConnect->real_escape_string($this->email) . "'
+                , '" . $this->dbConnect->real_escape_string($this->screenName) . "', '" . $this->dbConnect->real_escape_string($this->password) . "', '" . $this->dbConnect->real_escape_string($this->birthday) . "'
+                , '" . $this->dbConnect->real_escape_string($this->favGame) . "', '" . $this->dbConnect->real_escape_string($this->gameType) . "', '" . $this->dbConnect->real_escape_string($this->playTime) . "'
+                , '" . $this->dbConnect->real_escape_string($this->biography) . "', '" . $this->dbConnect->real_escape_string($this->uploadImage) . "', '0000-00-00')";
+
+                //Execute query
+                $signupResults = $this->dbConnect->query($signupQuery);
+
+                //Check if the insert worked
+                if ($signupResults === TRUE)
+                    header("Location: ../login.php");
+                else 
+                    header("Location: ../signup.php?error=db_error");
+            } else {
+                header("Location: ../signup.php?error=val_error");
+            }
+    }
 
 }
 
