@@ -33,8 +33,10 @@ abstract class userProfileSubmission {
     protected function valFirstName() {
         if (strlen($this->firstName) >= 1 && strlen($this->firstName) <= 25)
             return TRUE;
-        else 
+        else {
+            error_log("firstName error triggered", 0);
             return FALSE;
+        }
     }
 
     // Function Name: valLastName
@@ -47,8 +49,10 @@ abstract class userProfileSubmission {
     protected function valLastName() {
         if (strlen($this->lastName) >= 1 && strlen($this->lastName) <= 25)
             return TRUE;
-        else
+        else {
+            error_log("lastName error triggered", 0);
             return FALSE;
+        }
     }
 
     // Function Name: valEmail
@@ -61,8 +65,10 @@ abstract class userProfileSubmission {
     protected function valEmail() {
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) && strlen($this->email) >= 1 && strlen($this->email) <= 320)
             return TRUE;
-        else
+        else {
+            error_log("email error triggered", 0);
             return FALSE;
+        }
     }
 
     // Function Name: valScreenName
@@ -75,8 +81,10 @@ abstract class userProfileSubmission {
     protected function valScreenName() {
         if (strlen($this->screenName) >= 1 && strlen($this->screenName) <= 50)
             return TRUE;
-        else
+        else {
+            error_log("screenName error triggered", 0);
             return FALSE;
+        }
     }
 
     // Function Name: valPassword
@@ -89,8 +97,10 @@ abstract class userProfileSubmission {
     protected function valPassword() {
         if (strlen($this->password) >= 8 && strlen($this->password) <= 25 && preg_match("/[A-Z]+/", $this->password) && preg_match("/\W+/", $this->password) && $this->password === $this->confirmPassword)
             return TRUE;
-        else
+        else {
+            error_log("password error triggered", 0);
             return FALSE;
+        }
     }
 
     // Function Name: valBirthday
@@ -106,8 +116,16 @@ abstract class userProfileSubmission {
             //Convert the birthday to a corret MySQL date format
             $this->birthday = date("Y-m-d", strtotime($this->birthday));
             
-            return TRUE;
+            $dateTest = getdate($this->birthday);
+
+            if ($dateTest["year"] > 0 && $dateTest["mon"] > 0 && $dateTest["mday"] > 0)
+                return TRUE;
+            else {
+                error_log("birthday error triggered", 0);
+                return FALSE;
+            }
         } else {
+            error_log("birthday error triggered", 0);
             return FALSE;
         }
     }
@@ -122,8 +140,10 @@ abstract class userProfileSubmission {
     protected function valFavGame() {
         if (strlen($this->favGame) >= 0 && strlen($this->favGame) <= 60)
             return TRUE;
-        else
+        else {
+            error_log("favGame error triggered", 0);
             return FALSE;
+        }
     }
 
     // Function Name: favGameType
@@ -141,10 +161,12 @@ abstract class userProfileSubmission {
             $this->gameType === "Role-Playing Game" ||
             $this->gameType === "Strategy Game" ||
             $this->gameType === "Tile-Based Game" ||
-            $this->gameType === ""))
+            $this->gameType === "")) {
 
-            return TRUE;
-        else
+            error_log("" . $this->gameType . " entered.", 0);
+
+            return TRUE; }
+        else 
             return FALSE;
     }
 
@@ -159,9 +181,9 @@ abstract class userProfileSubmission {
         if (strlen($this->playTime) <= 9 && ($this->playTime === "0-1 years" ||
             $this->playTime === "1-3 years" ||
             $this->playTime === "3-6 years" ||
-            $this->playTime === "6+ years"))
-
-            return TRUE;
+            $this->playTime === "6+ years")) {
+            error_log("" . $this->playTime . " entered.", 0);
+            return TRUE; }
         else
             return FALSE;
     }
@@ -176,8 +198,10 @@ abstract class userProfileSubmission {
     protected function valBiography() {
         if (strlen($this->biography) >= 0 && strlen($this->biography) <= 500)
             return TRUE;
-        else
+        else {
+            error_log("Biography error triggered.", 0);
             return FALSE;
+        }
     }
 
     // Function Name: uploadImage
@@ -208,8 +232,9 @@ abstract class userProfileSubmission {
                 error_log("No errors during upload", 0);
                 break;
             case UPLOAD_ERR_NO_FILE:
-                error_log("Error: No File", 0);
-                return FALSE;
+                $this->avatarURL = "/uploads/userPictures/defaultPic.png";
+                error_log("No file uploaded, default inserted", 0);
+                return TRUE;
                 break;
             case UPLOAD_ERR_INI_SIZE:
             case UPLOAD_ERR_FORM_SIZE:
@@ -297,8 +322,8 @@ class userSignup extends userProfileSubmission {
         if ($this->valFirstName() && $this->valLastName() && $this->valEmail() && $this->valScreenName() && $this->valPassword() && $this->valBirthday() 
             && $this->valFavGame() && $this->valGameType() && $this->valPlayTime() && $this->valBiography() && $this->uploadImage()) {
                 //Create insert query
-                $signupQuery = "INSERT INTO Users (userType, fistName, lastName, email, screenName, password, birthday, favGame, gameType, playTime, biography, avatarURL, lastLogin)
-                VALUES (1, '" . $this->dbConnect->real_escape_string($this->firstName) . "', '" . $this->dbConnect->real_escape_string($this->lastName) . "', '" . $this->dbConnect->real_escape_string($this->email) . "'
+                $signupQuery = "INSERT INTO Users (userType, firstName, lastName, email, screenName, password, birthday, favGame, gameType, playTime, biography, avatarURL, lastLogin)
+                VALUES (0, '" . $this->dbConnect->real_escape_string($this->firstName) . "', '" . $this->dbConnect->real_escape_string($this->lastName) . "', '" . $this->dbConnect->real_escape_string($this->email) . "'
                 , '" . $this->dbConnect->real_escape_string($this->screenName) . "', '" . $this->dbConnect->real_escape_string($this->password) . "', '" . $this->dbConnect->real_escape_string($this->birthday) . "'
                 , '" . $this->dbConnect->real_escape_string($this->favGame) . "', '" . $this->dbConnect->real_escape_string($this->gameType) . "', '" . $this->dbConnect->real_escape_string($this->playTime) . "'
                 , '" . $this->dbConnect->real_escape_string($this->biography) . "', '" . $this->dbConnect->real_escape_string($this->avatarURL) . "', '0000-00-00')";
@@ -307,7 +332,7 @@ class userSignup extends userProfileSubmission {
                 $signupResults = $this->dbConnect->query($signupQuery);
 
                 //Check if the insert worked
-                if ($signupResults === TRUE)
+                if ($signupResults == TRUE)
                     header("Location: ../login.php");
                 else 
                     header("Location: ../signup.php?error=db_error");
