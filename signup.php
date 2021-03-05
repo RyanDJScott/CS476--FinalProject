@@ -1,7 +1,7 @@
 <?php
     //Include class definitions for login check
     include_once(__DIR__ . '/PHP/userFactory.php');
-    include_once(__DIR__ . '/PHP/searchScript.php');
+    include_once(__DIR__ . '/PHP/userProfileScripts.php');
 
     //Include functions for displaying
     include_once(__DIR__ . '/PHP/navBar.php');
