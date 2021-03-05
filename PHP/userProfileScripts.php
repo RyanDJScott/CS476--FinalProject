@@ -190,58 +190,73 @@ abstract class userProfileSubmission {
     //   <1> An image is uploaded to the server
     protected function uploadImage() {
         //If there is no file, add the default picture URL
-        if (!isset($_FILES['upfile']['error'])) {
+        if (!isset($_FILES['signupPic']['error'])) {
             $this->avatarURL = "/uploads/userPictures/defaultPic.png";
+            error_log("No file uploaded, default inserted", 0);
             return TRUE;
         }
         
         //If the user is trying to sneak multiple files, return false
-        if (is_array($_FILES['upfile']['error']))
+        if (is_array($_FILES['signupPic']['error'])) {
+            error_log("User trying to insert multiple files.", 0);
             return FALSE;
+        }
 
         //If there was an upload error, return false
-        switch ($_FILES['upfile']['error']) {
+        switch ($_FILES['signupPic']['error']) {
             case UPLOAD_ERR_OK:
+                error_log("No errors during upload", 0);
                 break;
             case UPLOAD_ERR_NO_FILE:
+                error_log("Error: No File", 0);
                 return FALSE;
                 break;
             case UPLOAD_ERR_INI_SIZE:
             case UPLOAD_ERR_FORM_SIZE:
+                error_log("Error: Size too big", 0);
                 return FALSE;
                 break;
             default:
+                error_log("Unknown error", 0);
                 return FALSE;
         }
 
         //If the file size is greater than 10 MB
-        if ($_FILES['upfile']['size'] > 10485760) 
+        if ($_FILES['signupPic']['size'] > 10485760) {
+            error_log("File larger than 10 MB", 0);
             return FALSE;
-        
+        }
+
         //Check to see if it's an actual image by checking the file info object
         $finfo = new finfo(FILEINFO_MIME_TYPE);
 
         if (false === $ext = array_search(
-            $finfo->file($_FILES['upfile']['tmp_name']),
+            $finfo->file($_FILES['signupPic']['tmp_name']),
             array(
                 'jpg' => 'image/jpeg',
                 'png' => 'image/png',
                 'gif' => 'image/gif',
             ),true)) {
+                error_log("File is not an image", 0);
                 return FALSE;
             } 
 
+        //Prepare the URL incase the file upload works
+        $filePath = "/uploads/userPics/" . sha1_file($_FILES["signupPic"]["tmp_name"]) . "." . $ext . "";
+
         //Try to move the file to the uploads folder
-        if (!move_uploaded_file($_FILES['upfile']['tmp_name'],
-            $fileName = sprintf(
-                '../uploads/userPictures/%s.%s',
-                sha1_file($_FILES['upfile']['tmp_name']),
+        if (!move_uploaded_file($_FILES['signupPic']['tmp_name'],
+            sprintf(
+                __DIR__ . '/../uploads/userPictures/%s.%s',
+                sha1_file($_FILES['signupPic']['tmp_name']),
                 $ext
             )
         )) {
+            error_log("File wasn't moved to the correct folder", 0);
             return FALSE;
         } else {
-            $this->avatarURL = $fileName;
+            $this->avatarURL = $filePath;
+            error_log("avatarURL = " . $this->avatarURL . "", 0);
             return TRUE;
         }
     }
@@ -286,7 +301,7 @@ class userSignup extends userProfileSubmission {
                 VALUES (1, '" . $this->dbConnect->real_escape_string($this->firstName) . "', '" . $this->dbConnect->real_escape_string($this->lastName) . "', '" . $this->dbConnect->real_escape_string($this->email) . "'
                 , '" . $this->dbConnect->real_escape_string($this->screenName) . "', '" . $this->dbConnect->real_escape_string($this->password) . "', '" . $this->dbConnect->real_escape_string($this->birthday) . "'
                 , '" . $this->dbConnect->real_escape_string($this->favGame) . "', '" . $this->dbConnect->real_escape_string($this->gameType) . "', '" . $this->dbConnect->real_escape_string($this->playTime) . "'
-                , '" . $this->dbConnect->real_escape_string($this->biography) . "', '" . $this->dbConnect->real_escape_string($this->uploadImage) . "', '0000-00-00')";
+                , '" . $this->dbConnect->real_escape_string($this->biography) . "', '" . $this->dbConnect->real_escape_string($this->avatarURL) . "', '0000-00-00')";
 
                 //Execute query
                 $signupResults = $this->dbConnect->query($signupQuery);

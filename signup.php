@@ -25,11 +25,11 @@
     //If the user was sent here with the GET method for errors, set the error
     if ($_SERVER["REQUEST_METHOD"] === "GET") {
         //Insertion error
-        if ($_GET["error"] === "db_error")
+        if (isset($_GET["error"]) && $_GET["error"] === "db_error")
             $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
         
         //Validation error
-        if ($_GET["error"] === "val_error")
+        if (isset($_GET["error"]) && $_GET["error"] === "val_error")
             $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
     }
 ?>
@@ -192,7 +192,7 @@
                 <!-- Biography -->
                 <div class="rowContainer">
                     <label for="signupBiography">Biography:</label>
-                        <input class="bioBoxBig" type="text" id="signupBiography" name="signupBiopgraphy" placeholder="tell us a bit about yourself...">
+                        <input class="bioBoxBig" type="text" id="signupBiography" name="signupBiography" placeholder="tell us a bit about yourself...">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupBiographyError"></div>
                         </div>
