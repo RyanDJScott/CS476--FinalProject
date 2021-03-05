@@ -2,7 +2,7 @@
 //Include database definitions
 include_once(__DIR__ . '/database.php');
 
-class userSignup {
+abstract class userProfileSubmission {
     //Member variables
     private $firstName = NULL;
     private $lastName = NULL;
@@ -21,53 +21,7 @@ class userSignup {
     private $db = NULL;
     private $dbConnect = NULL;
 
-    //Member functions
-
-    // Function Name: Constructor
-    // Purpose: To intialize all class variables
-    // Parameters: None
-    // Returns: None
-    // Side Effects:
-    //   <1> The database member variables are initialized with a database connection
-    //   <2> All member variables are initialized with the input to the fields
-    public function __construct() {
-        //Initialize the db connection
-        $this->db = new database();
-        $this->dbConnect = $this->db->getDBConnection();
-
-        //Initialize the member variables with the post method
-        $this->firstName = trim($_POST["signupFName"]);
-        $this->lastName = trim($_POST["signupLName"]);
-        $this->email = trim($_POST["signupEmail"]);
-        $this->screenName = trim($_POST["signupScreenname"]);
-        $this->password = trim($_POST["signupPassword"]);
-        $this->confirmPassword = trim($_POST["signupPasswordConfirm"]);
-        $this->birthday = trim($_POST["signupBirthday"]);
-        $this->favGame = trim($_POST["signupFavGame"]);
-        $this->gameType = trim($_POST["signupFavGameType"]);
-        $this->playTime = trim($_POST["signupGameTime"]);
-        $this->biography = trim($_POST["signupBiography"]);
-    }
-
-    // Function Name: submitSignupForm
-    // Purpose: To insert this user into the database, provided all validation passes
-    // Parameters: None
-    // Returns: N/A
-    // Side Effects:
-    //   <1> If the validation passes, the information is inserted into the database.
-    //       The user is directed to the login page if successful
-    //   <2> If the validation failes, the user is redirected to the same page with an error message
-    public function submitSignupForm() {
-        if ($this->valFirstName() &&
-            $this->valLastName() &&
-            $this->valEmail() &&
-            $this->valScreenName() && 
-            $this->valPassword() && 
-            $this->valBirthday() && 
-            $this->valFavGame() &&
-            $this->valGameType() &&
-            $this->valBiography())
-    }
+    //Member functions: validation functions for both classes
 
     // Function Name: valFirstName
     // Purpose: To validate the information contained in $firstName
@@ -172,7 +126,7 @@ class userSignup {
             return FALSE;
     }
 
-    // Functioan Name: favGameType
+    // Function Name: favGameType
     // Purpose: To validate the information contained in $gameType
     // Parameters: None
     // Returns:
@@ -194,7 +148,7 @@ class userSignup {
             return FALSE;
     }
 
-    // Functioan Name: favPlayTime
+    // Function Name: favPlayTime
     // Purpose: To validate the information contained in $playTime
     // Parameters: None
     // Returns:
@@ -212,7 +166,7 @@ class userSignup {
             return FALSE;
     }
 
-    // Functioan Name: favBiography
+    // Function Name: favBiography
     // Purpose: To validate the information contained in $biography
     // Parameters: None
     // Returns:
@@ -226,10 +180,135 @@ class userSignup {
             return FALSE;
     }
 
-    //Image uploading functions
-    private function setAvatarURL() {}
+    // Function Name: uploadImage
+    // Purpose: To attempt to upload an image to the server
+    // Parameters: None
+    // Returns: 
+    //   <1> TRUE: The image was uploaded and moved to the uploads/userPictures folder
+    //   <2> FALSE: The image was not uploaded to the server
+    // Side Effects:
+    //   <1> An image is uploaded to the server
+    private function uploadImage() {
+        //If there is no file, or someone is trying to sneak multiple files
+        if (!isset($_FILES['upfile']['error']) || is_array($_FILES['upfile']['error']))
+            return FALSE;
 
-    
+        //If there was an upload error, return false
+        switch ($_FILES['upfile']['error']) {
+            case UPLOAD_ERR_OK:
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                return FALSE;
+                break;
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                return FALSE;
+                break;
+            default:
+                return FALSE;
+        }
+
+        //If the file size is greater than 10 MB
+        if ($_FILES['upfile']['size'] > 10485760) 
+            return FALSE;
+        
+        //Check to see if it's an actual image by checking the file info object
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+
+        if (false === $ext = array_search(
+            $finfo->file($_FILES['upfile']['tmp_name']),
+            array(
+                'jpg' => 'image/jpeg',
+                'png' => 'image/png',
+                'gif' => 'image/gif',
+            ),true)) {
+                return FALSE;
+            } 
+
+        //Try to move the file to the uploads folder
+        if (!move_uploaded_file($_FILES['upfile']['tmp_name'],
+            $fileName = sprintf(
+                '../uploads/userPictures/%s.%s',
+                sha1_file($_FILES['upfile']['tmp_name']),
+                $ext
+            )
+        )) {
+            return FALSE;
+        } else {
+            $this->avatarURL = $fileName;
+            return TRUE;
+        }
+    }
+
+
+    //Abstract functions to be defined in child classes
+    abstract public function submitForm();
+  
+}
+
+class userSignup extends userProfileSubmission {
+    // Function Name: Constructor
+    // Purpose: To intialize all class variables
+    // Parameters: None
+    // Returns: None
+    // Side Effects:
+    //   <1> The database member variables are initialized with a database connection
+    //   <2> All member variables are initialized with the input to the fields
+    public function __construct() {
+        //Initialize the db connection
+        $this->db = new database();
+        $this->dbConnect = $this->db->getDBConnection();
+
+        //Initialize the member variables with the post method
+        $this->firstName = trim($_POST["signupFName"]);
+        $this->lastName = trim($_POST["signupLName"]);
+        $this->email = trim($_POST["signupEmail"]);
+        $this->screenName = trim($_POST["signupScreenname"]);
+        $this->password = trim($_POST["signupPassword"]);
+        $this->confirmPassword = trim($_POST["signupPasswordConfirm"]);
+        $this->birthday = trim($_POST["signupBirthday"]);
+        $this->favGame = trim($_POST["signupFavGame"]);
+        $this->gameType = trim($_POST["signupFavGameType"]);
+        $this->playTime = trim($_POST["signupGameTime"]);
+        $this->biography = trim($_POST["signupBiography"]);
+    }
+
+    //Implementation of abstract methods
+    public function submitForm () {}
+
+}
+
+class userEditProfile extends userProfileSubmission {
+    // Function Name: Constructor
+    // Purpose: To intialize all class variables
+    // Parameters: None
+    // Returns: None
+    // Side Effects:
+    //   <1> The database member variables are initialized with a database connection
+    //   <2> All member variables are initialized with the input to the fields
+    public function __construct() {
+        //Initialize the db connection
+        $this->db = new database();
+        $this->dbConnect = $this->db->getDBConnection();
+
+        //Initialize the member variables with the post method
+        $this->firstName = trim($_POST["signupFName"]);
+        $this->lastName = trim($_POST["signupLName"]);
+        $this->email = trim($_POST["signupEmail"]);
+        $this->screenName = trim($_POST["signupScreenname"]);
+        $this->password = trim($_POST["signupPassword"]);
+        $this->confirmPassword = trim($_POST["signupPasswordConfirm"]);
+        $this->birthday = trim($_POST["signupBirthday"]);
+        $this->favGame = trim($_POST["signupFavGame"]);
+        $this->gameType = trim($_POST["signupFavGameType"]);
+        $this->playTime = trim($_POST["signupGameTime"]);
+        $this->biography = trim($_POST["signupBiography"]);
+    }
+
+    //Implementation of abstract methods
+    public function submitForm() {
+
+    }
 }
 
 ?>
