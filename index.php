@@ -36,8 +36,7 @@
             if ((isset($_SESSION["UID"]) && $_SESSION["UID"] > 0) && is_object($_SESSION["userObj"])) 
                 loggedInNavBar();
              else 
-                loggedOutNavBar();
-            
+                loggedOutNavBar();   
         ?>
     </nav>
 
