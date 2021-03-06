@@ -47,11 +47,13 @@
 <body>
 
     <!-- The navigation bar -->
-    <nav>
+    <!-- The navigation bar -->
+    <nav> 
         <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.php" class="navButton">Login</a>
-        <a href="signup.html" class="navButton">Signup</a>
-        <a href="search.html" class="navButton">Search</a>
+        <?php
+            //This page can only be accessed by logged in
+            loggedInNavBar();   
+        ?>
     </nav>
 
     <!-- Main header image -->
@@ -139,7 +141,7 @@
             <div class="rowContainer">
                 <label for="editBirthday">Birthday:</label>
                 <div class="itemContainer">
-                    <input type="date" id="editBirthday" name="editBirthday">
+                    <input type="date" id="editBirthday" name="editBirthday" value="<?php echo htmlspecialchars($_SESSION["userObj"]->getBirthday()); ?>">
                     <div class="errorContainer">
                         <div class="errorMessage" id="editBirthdayError"></div>
                     </div>
@@ -150,7 +152,7 @@
             <div class="rowContainer">
                 <label for="editFavGame">Favourite Game:</label>
                 <div class="itemContainer">
-                    <input type="text" id="editFavGame" name="editFavGame" placeholder="favourite game here">
+                    <input type="text" id="editFavGame" name="editFavGame" value="<?php echo htmlspecialchars($_SESSION["userObj"]->getFavGame()); ?>">
                     <div class="errorContainer">
                         <div class="errorMessage" id="editFavGameError"></div>
                     </div>
@@ -162,6 +164,7 @@
                 <label for="editFavGameType">Favourite Type:</label>
                 <div class="itemContainer">
                     <select id="editFavGameType" name="editFavGameType">
+                        <option value="" selected disabled hidden><?php echo htmlspecialchars($_SESSION["userObj"]->getGameType()); ?></option>
                         <option value="Board Game">Board Game</option>
                         <option value="Card Game">Card Game</option>
                         <option value="Dice Game">Dice Game</option>
@@ -181,6 +184,7 @@
                 <label for="editGameTime">Time Playing Games:</label>
                 <div class="itemContainer">
                     <select id="editGameTime" name="editGameTime">
+                        <option value="" selected disabled hidden><?php echo htmlspecialchars($_SESSION["userObj"]->getPlayTime()); ?></option>
                         <option value="0-1 years">0-1 years</option>
                         <option value="1-3 years">1-3 years</option>
                         <option value="3-6 years">3-6 years</option>
@@ -195,7 +199,7 @@
             <!-- Biography -->
             <div class="rowContainer">
                 <label for="editBiography">Biography:</label>
-                    <input class="bioBoxBig" type="text" id="editBiography" name="editBiography" placeholder="tell us a bit about yourself...">
+                    <input class="bioBoxBig" type="text" id="editBiography" name="editBiography" value="<?php echo htmlspecialchars($_SESSION["userObj"]->getBiography()); ?>">
                     <div class="errorContainer">
                         <div class="errorMessage" id="editBiographyError"></div>
                     </div>
