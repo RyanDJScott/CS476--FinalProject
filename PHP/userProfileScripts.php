@@ -325,26 +325,26 @@ class userEditProfile extends userProfileSubmission {
         $this->user = $userObj;
 
         //Initialize the member variables with the post method
-        $this->firstName = trim($_POST["signupFName"]);
-        $this->lastName = trim($_POST["signupLName"]);
-        $this->email = trim($_POST["signupEmail"]);
-        $this->screenName = trim($_POST["signupScreenname"]);
-        $this->password = trim($_POST["signupPassword"]);
-        $this->confirmPassword = trim($_POST["signupPasswordConfirm"]);
-        $this->birthday = trim($_POST["signupBirthday"]);
-        $this->favGame = trim($_POST["signupFavGame"]);
-        $this->gameType = trim($_POST["signupFavGameType"]);
-        $this->playTime = trim($_POST["signupGameTime"]);
-        $this->biography = trim($_POST["signupBiography"]);
+        $this->firstName = trim($_POST["editFName"]);
+        $this->lastName = trim($_POST["editLName"]);
+        $this->email = trim($_POST["editEmail"]);
+        $this->screenName = trim($_POST["editScreenname"]);
+        $this->password = trim($_POST["editPassword"]);
+        $this->confirmPassword = trim($_POST["editPasswordConfirm"]);
+        $this->birthday = trim($_POST["editBirthday"]);
+        $this->favGame = trim($_POST["editFavGame"]);
+        $this->gameType = trim($_POST["editFavGameType"]);
+        $this->playTime = trim($_POST["editGameTime"]);
+        $this->biography = trim($_POST["editBiography"]);
     }
 
     //Implementation of abstract methods
     public function submitForm() {
-        if ($this->valFirstName() && $this->valLastName() && $this->valEmail() && $this->valScreenName() && $this->valPassword() && $this->valBirthday() 
+        if ($this->valFirstName() && $this->valLastName() && $this->valEmail() && $this->valScreenName() && $this->valBirthday() 
             && $this->valFavGame() && $this->valGameType() && $this->valPlayTime() && $this->valBiography() && $this->uploadImage()) {
                 //Use the setters from the user to update the information in their profile, if the information has changed
                 //Capture the results in variables for redirection
-                $editFirstName = $editLastName = $editEmail = $editScreenname = $editPassword = $editBirthday = $editFavGame = $editGameType = $editPlayTime = $editBiography = $editAvatar = TRUE;
+                $editFirstName = $editLastName = $editEmail = $editScreenname = $editBirthday = $editFavGame = $editGameType = $editPlayTime = $editBiography = $editAvatar = $editPassword = TRUE;
 
                 if ($this->firstName != $this->user->getFirstName())
                     $editFirstName = $this->user->setFirstName($this->firstName);
@@ -357,9 +357,6 @@ class userEditProfile extends userProfileSubmission {
 
                 if ($this->screenName != $this->user->getScreenName())
                     $editScreenname = $this->user->setScreenName($this->screenName);
-
-                if ($this->password != $this->user->getPassword())
-                    $editPassword = $this->user->setPassword($this->password);
 
                 if ($this->birthday != $this->user->getBirthday())
                     $editBirthday = $this->user->setBirthday($this->birthday);
@@ -378,6 +375,15 @@ class userEditProfile extends userProfileSubmission {
 
                 if ($this->avatarURL != $this->user->getAvatarURL())
                     $editAvatar = $this->user->setAvatarURL($this->avatarURL);
+
+                //Perform password update manually; no access to password through object
+                if ($this->password != "" && $this->confirmPassword != "" && $this->valPassword()) {
+                    //Build an update query
+                    $updatePassword = "UPDATE Users SET password = '" . $this->dbConnect->real_escape_string($this->password) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->user->getUID()) . "'";
+
+                    //Execute query
+                    $editPassword = $this->dbConnect->query($updatePassword);
+                }
 
                 //Check to see if the variables are set, and if they are all true. If so, redirect to dashboard. Otherwise, re-send to editprofile
                 if ($editFirstName && $editLastName && $editEmail && $editScreenname && $editPassword && $editBirthday && $editFavGame && $editGameType && $editPlayTime && $editBiography && $editAvatar)
