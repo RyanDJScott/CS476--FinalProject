@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<HTML>
+
+<head>
+    <title> View Tabletop Game - Queen City's Gambit </title>
+    <meta charset="UTF=8">
+    <!--=============================Stylesheets=======================================-->
+    <link rel="stylesheet" href="stylesheets/siteStyles.css">
+    <link rel="stylesheet" href="stylesheets/signup.css">
+</head>
+
+<body>
+
+    <!-- The navigation bar -->
+    <nav>
+        <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <a href="login.php" class="navButton">Login</a>
+        <a href="signup.html" class="navButton">Signup</a>
+        <a href="search.html" class="navButton">Search</a>
+    </nav>
+
+    <!-- Main header image -->
+    <div class="mainPageHeader">
+        <img src="dependencies/boardGameHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
+    </div>
+
+    <!-- 
+        User can change everything (anything on signup)
+    -->
+<!-- Edit Profile Form Container -->
+<form>
+    <div class="alignmentContainer">
+        <div class="signupContainer">
+            <!-- outer container for flexbox design-->
+    
+            <!-- First Name and Error -->
+            <div class="rowContainer">
+                <label for="editFName">First Name:</label>
+                <div class="itemContainer">
+                    <input type="text" id="editFName" name="editFName" placeholder="first name here">
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editFNameError"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Last Name and Error -->
+            <div class="rowContainer">
+                <label for="editLName">Last Name:</label>
+                <div class="itemContainer">
+                    <input type="text" id="editLName" name="editLName" placeholder="last name here">
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editLNameError"></div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Email -->
+            <div class="rowContainer">
+                <label for="editEmail">Email:</label>
+                <div class="itemContainer">
+                    <input type="email" id="editEmail" name="editEmail" placeholder="enter email here">
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editEmailError"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screenname -->
+            <div class="rowContainer">
+                <label for="editScreenname">Screenname:</label>
+                <div class="itemContainer">
+                    <input type="text" id="editScreenname" name="editScreenname" placeholder="enter screenname here">
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editScreennameError"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="rowContainer">
+                <label for="editPassword">Password:</label>
+                <div class="itemContainer">
+                    <input type="password" id="editPassword" name="editPassword" placeholder="provide a password">
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editPasswordError"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password Confirm -->
+            <div class="rowContainer">
+                <label for="editPasswordConfirm">Confirm Password:</label>
+                <div class="itemContainer">
+                    <input type="password" id="editPasswordConfirm" name="editPasswordConfirm" placeholder="confirm password">
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editPasswordConfirmError"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Birthday -->
+            <div class="rowContainer">
+                <label for="editBirthday">Birthday:</label>
+                <div class="itemContainer">
+                    <input type="date" id="editBirthday" name="editBirthday">
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editBirthdayError"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favourite Boardgame -->
+            <div class="rowContainer">
+                <label for="editFavGame">Favourite Game:</label>
+                <div class="itemContainer">
+                    <input type="text" id="editFavGame" name="editFavGame" placeholder="favourite game here">
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editFavGameError"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favourite Boargame Type -->
+            <div class="rowContainer">
+                <label for="editFavGameType">Favourite Type:</label>
+                <div class="itemContainer">
+                    <select id="editFavGameType" name="editFavGameType">
+                        <option value="Board Game">Board Game</option>
+                        <option value="Card Game">Card Game</option>
+                        <option value="Dice Game">Dice Game</option>
+                        <option value="Paper and Pencil Game">Paper and Pencil Game</option>
+                        <option value="Role-Playing Game">Role-Playing Game</option>
+                        <option value="Strategy Game">Strategy Game</option>
+                        <option value="Tile-Based Game">Tile-Based Game</option>
+                    </select>
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editFavGameTypeError"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time Playing Tabletop Games -->
+            <div class="rowContainer">
+                <label for="editGameTime">Time Playing Games:</label>
+                <div class="itemContainer">
+                    <select id="editGameTime" name="editGameTime">
+                        <option value="0-1 years">0-1 years</option>
+                        <option value="1-3 years">1-3 years</option>
+                        <option value="3-6 years">3-6 years</option>
+                        <option value="6+ years">6+ years</option>
+                    </select>
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editGameTimeError"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biography -->
+            <div class="rowContainer">
+                <label for="editBiography">Biography:</label>
+                    <input class="bioBoxBig" type="text" id="editBiography" name="editBiography" placeholder="tell us a bit about yourself...">
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editBiographyError"></div>
+                    </div>
+            </div>
+
+            <!-- Image -->
+            <div class="rowContainer">
+                <label for="editPic">Picture:</label>
+                <div class="itemContainer">
+                    <input type="file" id="editPic" name="editPic">
+                    <div class="errorContainer">
+                        <div class="errorMessage" id="editPicError"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rowContainer">
+                <input type="submit" id="editSubmit" name="editSubmit" class="submitButton">
+            </div>
+            
+        </div>
+    </div>
+</form>
+
+</body>
+
+</HTML>
+
+<!-- Signup Element Template
+<div class="rowContainer">                  this div contains the row, as to stack the elements
+    <label for=""></label>                      this is the label for the form element
+    <div class="itemContainer">                    this div arranges the input and error to be together
+        <input>                             this holds the input type/info 
+        <div class="errorContainer">                    this div is used for maintaining the error
+            <div class="errorMessage" id=""></div>      this div is just for the error message itself
+        </div>                                      exit error maint. div
+    </div>                                      exit item container
+</div>                                      exit row container
+-->
