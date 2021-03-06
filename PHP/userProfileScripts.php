@@ -1,6 +1,7 @@
 <?php
 //Include database definitions
 include_once(__DIR__ . '/database.php');
+include_once(__DIR__ . '/userFactory.php');
 
 abstract class userProfileSubmission {
     //Member variables
@@ -305,6 +306,9 @@ class userSignup extends userProfileSubmission {
 }
 
 class userEditProfile extends userProfileSubmission {
+    //Extra member variable for user object
+    private $user = NULL;
+
     // Function Name: Constructor
     // Purpose: To intialize all class variables
     // Parameters: None
@@ -312,10 +316,13 @@ class userEditProfile extends userProfileSubmission {
     // Side Effects:
     //   <1> The database member variables are initialized with a database connection
     //   <2> All member variables are initialized with the input to the fields
-    public function __construct() {
+    public function __construct(object $userObj) {
         //Initialize the db connection
         $this->db = new database();
         $this->dbConnect = $this->db->getDBConnection();
+
+        //Initialize the user member variable to the passed user
+        $this->user = $userObj;
 
         //Initialize the member variables with the post method
         $this->firstName = trim($_POST["signupFName"]);
@@ -333,7 +340,53 @@ class userEditProfile extends userProfileSubmission {
 
     //Implementation of abstract methods
     public function submitForm() {
+        if ($this->valFirstName() && $this->valLastName() && $this->valEmail() && $this->valScreenName() && $this->valPassword() && $this->valBirthday() 
+            && $this->valFavGame() && $this->valGameType() && $this->valPlayTime() && $this->valBiography() && $this->uploadImage()) {
+                //Use the setters from the user to update the information in their profile, if the information has changed
+                //Capture the results in variables for redirection
+                $editFirstName = $editLastName = $editEmail = $editScreenname = $editPassword = $editBirthday = $editFavGame = $editGameType = $editPlayTime = $editBiography = $editAvatar = TRUE;
 
+                if ($this->firstName != $this->user->getFirstName())
+                    $editFirstName = $this->user->setFirstName($this->firstName);
+                
+                if ($this->lastName != $this->user->getLastName())
+                    $editLastName = $this->user->setLastName($this->lastName);
+
+                if ($this->email != $this->user->getEmail())
+                    $editEmail = $this->user->setEmail($this->email);
+
+                if ($this->screenName != $this->user->getScreenName())
+                    $editScreenname = $this->user->setScreenName($this->screenName);
+
+                if ($this->password != $this->user->getPassword())
+                    $editPassword = $this->user->setPassword($this->password);
+
+                if ($this->birthday != $this->user->getBirthday())
+                    $editBirthday = $this->user->setBirthday($this->birthday);
+                
+                if ($this->favGame != $this->user->getFavGame())
+                    $editFavGame = $this->user->setFavGame($this->favGame);
+            
+                if ($this->gameType != $this->user->getGameType())
+                    $editGameType = $this->user->setGameType($this->gameType);
+
+                if ($this->playTime != $this->user->getPlayTime())
+                    $editPlayTime = $this->user->setPlayTime($this->playTime);
+
+                if ($this->biography != $this->user->getBiography())
+                    $editBiography = $this->user->setBiography($this->biography);
+
+                if ($this->avatarURL != $this->user->getAvatarURL())
+                    $editAvatar = $this->user->setAvatarURL($this->avatarURL);
+
+                //Check to see if the variables are set, and if they are all true. If so, redirect to dashboard. Otherwise, re-send to editprofile
+                if ($editFirstName && $editLastName && $editEmail && $editScreenname && $editPassword && $editBirthday && $editFavGame && $editGameType && $editPlayTime && $editBiography && $editAvatar)
+                    header("Location: ../dashboard.php?editProfile=TRUE");
+                else
+                    header("Location: ../editProfile.php?error=db_error");
+        } else {
+            header("Location: ../editProfile.php?error=val_error");
+        }
     }
 }
 
