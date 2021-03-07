@@ -131,7 +131,7 @@ abstract class userProfileSubmission {
     // Purpose: To validate the information contained in $gameType
     // Parameters: None
     // Returns:
-    //   <1> TRUE: If $gameType passes validation
+    //   <1> TRUE: If $gameType passes validation (N_C = No Change, allow to pass)
     //   <2> FALSE: If $gameType doesn't pass validation
     // Side Effects: None
     protected function valGameType() {
@@ -146,7 +146,7 @@ abstract class userProfileSubmission {
     // Purpose: To validate the information contained in $playTime
     // Parameters: None
     // Returns:
-    //   <1> TRUE: If $playTime passes validation
+    //   <1> TRUE: If $playTime passes validation (N_C = No Change, allow to pass)
     //   <2> FALSE: If $playTime doesn't pass validation
     // Side Effects: None
     protected function valPlayTime() {
@@ -181,16 +181,13 @@ abstract class userProfileSubmission {
     protected function uploadImage() {
         //If there is no file, add the default picture URL
         if (!isset($_FILES['uploadPic']['error'])) {
-            error_log("Empty File, First Check", 0);
             $this->avatarURL = "/uploads/userPictures/defaultPic.png";
             return TRUE;
         }
         
         //If the user is trying to sneak multiple files, return false
-        if (is_array($_FILES['uploadPic']['error'])) {
-            error_log("User trying to insert multiple files.", 0);
+        if (is_array($_FILES['uploadPic']['error']))
             return FALSE;
-        }
 
         //If there was an upload error, return false.
         //If the error was no file, and wasn't caught earlier, return true w/ defautPic.png
@@ -198,13 +195,11 @@ abstract class userProfileSubmission {
             case UPLOAD_ERR_OK:
                 break;
             case UPLOAD_ERR_NO_FILE:
-                error_log("Empty pic, second check", 0);
                 $this->avatarURL = "/uploads/userPictures/defaultPic.png";
                 return TRUE;
                 break;
             case UPLOAD_ERR_INI_SIZE:
             case UPLOAD_ERR_FORM_SIZE:
-                error_log("Size issue, first check", 0);
                 return FALSE;
                 break;
             default:
@@ -212,10 +207,8 @@ abstract class userProfileSubmission {
         }
 
         //If the file size is greater than 2 MB
-        if ($_FILES['uploadPic']['size'] > 2097152) {
-            error_log("Size issue, second check", 0);
+        if ($_FILES['uploadPic']['size'] > 2097152) 
             return FALSE;
-        }
 
         //Check to see if it's an actual image by checking the file info object
         $finfo = new finfo(FILEINFO_MIME_TYPE);
@@ -227,7 +220,6 @@ abstract class userProfileSubmission {
                 'png' => 'image/png',
                 'gif' => 'image/gif',
             ),true)) {
-                error_log("NOT a picture file!", 0);
                 return FALSE;
             } 
 
@@ -242,11 +234,9 @@ abstract class userProfileSubmission {
                 $ext
             )
         )) {
-            error_log("Move failed.", 0);
             return FALSE;
         } else {
             $this->avatarURL = $filePath;
-            error_log("Move worked.", 0);
             return TRUE;
         }
     }
@@ -283,6 +273,15 @@ class userSignup extends userProfileSubmission {
     }
 
     //Implementation of abstract methods
+
+    // Function Name: submitForm
+    // Purpose: To submit all of the information on signup.php after it passes validation to the database
+    // Parameters: None
+    // Returns: None
+    // Side Effects:
+    //   <1> If the signup is successful, the user is redirected to the login page
+    //   <2> If validation fails, the user is returned to the signup page with errors
+    //   <3> If the database insertion fails, the user is returned to the signup page with errors
     public function submitForm () {
         if ($this->valFirstName() && $this->valLastName() && $this->valEmail() && $this->valScreenName() && $this->valPassword() && $this->valBirthday() 
             && $this->valFavGame() && $this->valGameType() && $this->valPlayTime() && $this->valBiography() && $this->uploadImage()) {
@@ -340,6 +339,7 @@ class userEditProfile extends userProfileSubmission {
         $this->biography = trim($_POST["editBiography"]);
 
         //Some values may be unset, check before setting
+        //Use N_C to indicate no change in the validatio
         if (isset($_POST["editFavGameType"]))
             $this->gameType = trim($_POST["editFavGameType"]);
         else 
@@ -349,19 +349,19 @@ class userEditProfile extends userProfileSubmission {
             $this->playTime = trim($_POST["editGameTime"]);
         else   
             $this->playTime = "N_C";
-
-        //Debugging
-        error_log("FirstName: " . $this->firstName . ", LastName: " . $this->lastName . ", Email: " . $this->email . ", Screenname: " . $this->screenName . 
-            ", Password: " . $this->password . ", Confirm: " . $this->confirmPassword . ", birthday: " . $this->birthday . ", favGame: " . $this->favGame . ", gameType: " . $this->gameType . 
-            ", playTime: " . $this->playTime . ", Bio: " . $this->biography . "", 0);
     }
 
     //Implementation of abstract methods
-    public function submitForm() {
-        error_log("FirstName: " . $this->valFirstName() . ", LastName: " . $this->valLastName() . ", Email: " . $this->valEmail() . ", Screenname: " . $this->valScreenName() . 
-        ", Password: " . $this->password . ", Confirm: " . $this->confirmPassword . ", birthday: " . $this->valBirthday() . ", favGame: " . $this->valFavGame() . ", gameType: " . $this->valGameType() . 
-        ", playTime: " . $this->valPlayTime() . ", Bio: " . $this->valBiography() . "", 0);
 
+    // Function Name: submitForm
+    // Purpose: To submit any of the changed information on editProfile.php after it passes validation to the database
+    // Parameters: None
+    // Returns: None
+    // Side Effects:
+    //   <1> If the submission was successful, the user is returned to the edit profile page with a success message
+    //   <2> If validation fails, the user is returned to the edit profile page with errors
+    //   <3> If the database insertion fails, the user is returned to the edit profile page with errors
+    public function submitForm() {
         //See if all fields pass validation
         if ($this->valFirstName() && $this->valLastName() && $this->valEmail() && $this->valScreenName() && $this->valBirthday() && $this->valFavGame() && $this->valGameType() && $this->valPlayTime() && $this->valBiography()) {
             //Set edit flags all to true
@@ -412,12 +412,11 @@ class userEditProfile extends userProfileSubmission {
             else if ($imageUploaded == FALSE)
                 $editAvatarURL = FALSE;
 
-            //Check to see if the variables are set, and if they are all true. If so, redirect to dashboard. Otherwise, re-send to editprofile
+            //Check to see if the variables are set, and if they are all true. If so, show success message. Otherwise, re-send to editprofile with errors
             if ($editFirstName && $editLastName && $editEmail && $editScreenName && $editPassword && $editBirthday && $editFavGame && $editGameType && $editPlayTime && $editBiography && $editAvatarURL)
                 header("Location: ../editProfile.php?error=success");
             else
                 header("Location: ../editProfile.php?error=db_error");
-
         } else {
             header("Location: ../editProfile.php?error=val_error");
         }
