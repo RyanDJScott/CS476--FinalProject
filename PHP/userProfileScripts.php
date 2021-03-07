@@ -107,12 +107,7 @@ abstract class userProfileSubmission {
             //Convert the birthday to a corret MySQL date format
             $this->birthday = date("Y-m-d", strtotime($this->birthday));
             
-            $dateTest = getdate($this->birthday);
-
-            if ($dateTest["year"] > 0 && $dateTest["mon"] > 0 && $dateTest["mday"] > 0)
-                return TRUE;
-            else 
-                return FALSE;
+            return TRUE;
         } else {
             return FALSE;
         }
@@ -136,12 +131,12 @@ abstract class userProfileSubmission {
     // Purpose: To validate the information contained in $gameType
     // Parameters: None
     // Returns:
-    //   <1> TRUE: If $gameType passes validation
+    //   <1> TRUE: If $gameType passes validation (N_C = No Change, allow to pass)
     //   <2> FALSE: If $gameType doesn't pass validation
     // Side Effects: None
     protected function valGameType() {
-        if (strlen($this->gameType) <= 30 && ($this->gameType === "Board Game" || $this->gameType === "Card Game" || $this->gameType === "Dice Game" || $this->gameType === "Paper and Pencil Game" ||
-            $this->gameType === "Role-Playing Game" || $this->gameType === "Strategy Game" || $this->gameType === "Tile-Based Game" || $this->gameType === "")) 
+        if ($this->gameType === "N_C" || (strlen($this->gameType) <= 30 && ($this->gameType === "Board Game" || $this->gameType === "Card Game" || $this->gameType === "Dice Game" || $this->gameType === "Paper and Pencil Game" ||
+            $this->gameType === "Role-Playing Game" || $this->gameType === "Strategy Game" || $this->gameType === "Tile-Based Game" || $this->gameType === "")))
             return TRUE; 
         else 
             return FALSE;
@@ -151,11 +146,11 @@ abstract class userProfileSubmission {
     // Purpose: To validate the information contained in $playTime
     // Parameters: None
     // Returns:
-    //   <1> TRUE: If $playTime passes validation
+    //   <1> TRUE: If $playTime passes validation (N_C = No Change, allow to pass)
     //   <2> FALSE: If $playTime doesn't pass validation
     // Side Effects: None
     protected function valPlayTime() {
-        if (strlen($this->playTime) <= 9 && ($this->playTime === "0-1 years" || $this->playTime === "1-3 years" || $this->playTime === "3-6 years" || $this->playTime === "6+ years")) 
+        if ($this->playTime === "N_C" || (strlen($this->playTime) <= 9 && ($this->playTime === "0-1 years" || $this->playTime === "1-3 years" || $this->playTime === "3-6 years" || $this->playTime === "6+ years"))) 
             return TRUE; 
         else
             return FALSE;
@@ -185,20 +180,18 @@ abstract class userProfileSubmission {
     //   <1> An image is uploaded to the server
     protected function uploadImage() {
         //If there is no file, add the default picture URL
-        if (!isset($_FILES['signupPic']['error'])) {
+        if (!isset($_FILES['uploadPic']['error'])) {
             $this->avatarURL = "/uploads/userPictures/defaultPic.png";
             return TRUE;
         }
         
         //If the user is trying to sneak multiple files, return false
-        if (is_array($_FILES['signupPic']['error'])) {
-            error_log("User trying to insert multiple files.", 0);
+        if (is_array($_FILES['uploadPic']['error']))
             return FALSE;
-        }
 
         //If there was an upload error, return false.
         //If the error was no file, and wasn't caught earlier, return true w/ defautPic.png
-        switch ($_FILES['signupPic']['error']) {
+        switch ($_FILES['uploadPic']['error']) {
             case UPLOAD_ERR_OK:
                 break;
             case UPLOAD_ERR_NO_FILE:
@@ -213,15 +206,15 @@ abstract class userProfileSubmission {
                 return FALSE;
         }
 
-        //If the file size is greater than 10 MB
-        if ($_FILES['signupPic']['size'] > 10485760) 
+        //If the file size is greater than 2 MB
+        if ($_FILES['uploadPic']['size'] > 2097152) 
             return FALSE;
 
         //Check to see if it's an actual image by checking the file info object
         $finfo = new finfo(FILEINFO_MIME_TYPE);
 
         if (false === $ext = array_search(
-            $finfo->file($_FILES['signupPic']['tmp_name']),
+            $finfo->file($_FILES['uploadPic']['tmp_name']),
             array(
                 'jpg' => 'image/jpeg',
                 'png' => 'image/png',
@@ -231,13 +224,13 @@ abstract class userProfileSubmission {
             } 
 
         //Prepare the URL incase the file upload works
-        $filePath = "/uploads/userPics/" . sha1_file($_FILES["signupPic"]["tmp_name"]) . "." . $ext . "";
+        $filePath = "/uploads/userPics/" . sha1_file($_FILES["uploadPic"]["tmp_name"]) . "." . $ext . "";
 
         //Try to move the file to the uploads folder
-        if (!move_uploaded_file($_FILES['signupPic']['tmp_name'],
+        if (!move_uploaded_file($_FILES['uploadPic']['tmp_name'],
             sprintf(
                 __DIR__ . '/../uploads/userPictures/%s.%s',
-                sha1_file($_FILES['signupPic']['tmp_name']),
+                sha1_file($_FILES['uploadPic']['tmp_name']),
                 $ext
             )
         )) {
@@ -280,6 +273,15 @@ class userSignup extends userProfileSubmission {
     }
 
     //Implementation of abstract methods
+
+    // Function Name: submitForm
+    // Purpose: To submit all of the information on signup.php after it passes validation to the database
+    // Parameters: None
+    // Returns: None
+    // Side Effects:
+    //   <1> If the signup is successful, the user is redirected to the login page
+    //   <2> If validation fails, the user is returned to the signup page with errors
+    //   <3> If the database insertion fails, the user is returned to the signup page with errors
     public function submitForm () {
         if ($this->valFirstName() && $this->valLastName() && $this->valEmail() && $this->valScreenName() && $this->valPassword() && $this->valBirthday() 
             && $this->valFavGame() && $this->valGameType() && $this->valPlayTime() && $this->valBiography() && $this->uploadImage()) {
@@ -316,7 +318,8 @@ class userEditProfile extends userProfileSubmission {
     // Side Effects:
     //   <1> The database member variables are initialized with a database connection
     //   <2> All member variables are initialized with the input to the fields
-    public function __construct(object $userObj) {
+    //   <3> The new $user member variable is initialized to $userObj
+    public function __construct($userObj) {
         //Initialize the db connection
         $this->db = new database();
         $this->dbConnect = $this->db->getDBConnection();
@@ -325,65 +328,95 @@ class userEditProfile extends userProfileSubmission {
         $this->user = $userObj;
 
         //Initialize the member variables with the post method
-        $this->firstName = trim($_POST["signupFName"]);
-        $this->lastName = trim($_POST["signupLName"]);
-        $this->email = trim($_POST["signupEmail"]);
-        $this->screenName = trim($_POST["signupScreenname"]);
-        $this->password = trim($_POST["signupPassword"]);
-        $this->confirmPassword = trim($_POST["signupPasswordConfirm"]);
-        $this->birthday = trim($_POST["signupBirthday"]);
-        $this->favGame = trim($_POST["signupFavGame"]);
-        $this->gameType = trim($_POST["signupFavGameType"]);
-        $this->playTime = trim($_POST["signupGameTime"]);
-        $this->biography = trim($_POST["signupBiography"]);
+        $this->firstName = trim($_POST["editFName"]);
+        $this->lastName = trim($_POST["editLName"]);
+        $this->email = trim($_POST["editEmail"]);
+        $this->screenName = trim($_POST["editScreenname"]);
+        $this->password = trim($_POST["editPassword"]);
+        $this->confirmPassword = trim($_POST["editPasswordConfirm"]);
+        $this->birthday = trim($_POST["editBirthday"]);
+        $this->favGame = trim($_POST["editFavGame"]);
+        $this->biography = trim($_POST["editBiography"]);
+
+        //Some values may be unset, check before setting
+        //Use N_C to indicate no change in the validatio
+        if (isset($_POST["editFavGameType"]))
+            $this->gameType = trim($_POST["editFavGameType"]);
+        else 
+            $this->gameType = "N_C";
+        
+        if (isset($_POST["editGameTime"]))
+            $this->playTime = trim($_POST["editGameTime"]);
+        else   
+            $this->playTime = "N_C";
     }
 
     //Implementation of abstract methods
+
+    // Function Name: submitForm
+    // Purpose: To submit any of the changed information on editProfile.php after it passes validation to the database
+    // Parameters: None
+    // Returns: None
+    // Side Effects:
+    //   <1> If the submission was successful, the user is returned to the edit profile page with a success message
+    //   <2> If validation fails, the user is returned to the edit profile page with errors
+    //   <3> If the database insertion fails, the user is returned to the edit profile page with errors
     public function submitForm() {
-        if ($this->valFirstName() && $this->valLastName() && $this->valEmail() && $this->valScreenName() && $this->valPassword() && $this->valBirthday() 
-            && $this->valFavGame() && $this->valGameType() && $this->valPlayTime() && $this->valBiography() && $this->uploadImage()) {
-                //Use the setters from the user to update the information in their profile, if the information has changed
-                //Capture the results in variables for redirection
-                $editFirstName = $editLastName = $editEmail = $editScreenname = $editPassword = $editBirthday = $editFavGame = $editGameType = $editPlayTime = $editBiography = $editAvatar = TRUE;
+        //See if all fields pass validation
+        if ($this->valFirstName() && $this->valLastName() && $this->valEmail() && $this->valScreenName() && $this->valBirthday() && $this->valFavGame() && $this->valGameType() && $this->valPlayTime() && $this->valBiography()) {
+            //Set edit flags all to true
+            $editFirstName = $editLastName = $editEmail = $editScreenName = $editPassword = $editBirthday = $editFavGame = $editGameType = $editPlayTime = $editBiography = $editAvatarURL = TRUE;
 
-                if ($this->firstName != $this->user->getFirstName())
-                    $editFirstName = $this->user->setFirstName($this->firstName);
-                
-                if ($this->lastName != $this->user->getLastName())
-                    $editLastName = $this->user->setLastName($this->lastName);
+            //Check each field. If it was updated, set that field in the user object
+            if ($this->firstName != $this->user->getFirstName())
+                $editFirstName = $this->user->setFirstName($this->firstName);
 
-                if ($this->email != $this->user->getEmail())
-                    $editEmail = $this->user->setEmail($this->email);
+            if ($this->lastName != $this->user->getLastName())
+                $editLastName = $this->user->setLastName($this->lastName);
 
-                if ($this->screenName != $this->user->getScreenName())
-                    $editScreenname = $this->user->setScreenName($this->screenName);
+            if ($this->email != $this->user->getEmail() )
+                $editEmail = $this->user->setEmail($this->email);
 
-                if ($this->password != $this->user->getPassword())
-                    $editPassword = $this->user->setPassword($this->password);
+            if ($this->screenName != $this->user->getScreenName() )
+                $editScreenName = $this->user->setScreenName($this->screenName);
 
-                if ($this->birthday != $this->user->getBirthday())
-                    $editBirthday = $this->user->setBirthday($this->birthday);
-                
-                if ($this->favGame != $this->user->getFavGame())
-                    $editFavGame = $this->user->setFavGame($this->favGame);
+            if ($this->birthday != $this->user->getBirthday() )
+                $editBirthday = $this->user->setBirthday($this->birthday);
+
+            if ($this->favGame != $this->user->getFavGame() )
+                $editFavGame = $this->user->setFavGame($this->favGame);
+
+            if ($this->gameType != "N_C" && $this->gameType != $this->user->getGameType() )
+                $editGameType = $this->user->setGameType($this->gameType);
             
-                if ($this->gameType != $this->user->getGameType())
-                    $editGameType = $this->user->setGameType($this->gameType);
+            if ($this->playTime != "N_C" && $this->playTime != $this->user->getPlayTime())
+                $editPlayTime = $this->user->setPlayTime($this->playTime);
+            
+            if ($this->biography != $this->user->getBiography())
+                $editBiography = $this->user->setBiography($this->biography);
 
-                if ($this->playTime != $this->user->getPlayTime())
-                    $editPlayTime = $this->user->setPlayTime($this->playTime);
+            //Perform password update manually; no access to password through object
+            if ($this->password != "" && $this->confirmPassword != "" && $this->valPassword()) {
+                //Build an update query
+                $updatePassword = "UPDATE Users SET password = '" . $this->dbConnect->real_escape_string($this->password) . "' WHERE UID = '" . $this->dbConnect->real_escape_string($this->user->getUID()) . "'";
 
-                if ($this->biography != $this->user->getBiography())
-                    $editBiography = $this->user->setBiography($this->biography);
+                //Execute query
+                $editPassword = $this->dbConnect->query($updatePassword);
+            }
 
-                if ($this->avatarURL != $this->user->getAvatarURL())
-                    $editAvatar = $this->user->setAvatarURL($this->avatarURL);
+            $imageUploaded = $this->uploadImage();
 
-                //Check to see if the variables are set, and if they are all true. If so, redirect to dashboard. Otherwise, re-send to editprofile
-                if ($editFirstName && $editLastName && $editEmail && $editScreenname && $editPassword && $editBirthday && $editFavGame && $editGameType && $editPlayTime && $editBiography && $editAvatar)
-                    header("Location: ../dashboard.php?editProfile=TRUE");
-                else
-                    header("Location: ../editProfile.php?error=db_error");
+            //Check image separately, if it's default do nothing
+            if ($imageUploaded == TRUE && !($this->avatarURL == "/uploads/userPictures/defaultPic.png"))
+                $editAvatarURL = $this->user->setAvatarURL($this->avatarURL);
+            else if ($imageUploaded == FALSE)
+                $editAvatarURL = FALSE;
+
+            //Check to see if the variables are set, and if they are all true. If so, show success message. Otherwise, re-send to editprofile with errors
+            if ($editFirstName && $editLastName && $editEmail && $editScreenName && $editPassword && $editBirthday && $editFavGame && $editGameType && $editPlayTime && $editBiography && $editAvatarURL)
+                header("Location: ../editProfile.php?error=success");
+            else
+                header("Location: ../editProfile.php?error=db_error");
         } else {
             header("Location: ../editProfile.php?error=val_error");
         }

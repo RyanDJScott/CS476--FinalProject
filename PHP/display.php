@@ -52,8 +52,8 @@ class Display {
         $newGame = array();
 
         //For each of the results, create an object and store it in the newGame array
-        if (mysqli_num_rows($allGamesResult) > 0) {
-            while ($resultRows = mysqli_fetch_assoc($allGamesResult)) {
+        if ($allGamesResult->num_rows > 0) {
+            while ($resultRows = $allGamesResult->fetch_assoc()) {
                 $newGame[] = new TGE($resultRows["gameTitle"]);
             }
         }

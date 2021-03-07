@@ -48,7 +48,7 @@
             $reviewResults = $this->dbConnect->query($reviewQuery);
 
             //If the object exists, set the information for this object
-            if (mysqli_num_rows($reviewResults) > 0) {
+            if ($reviewResults->num_rows > 0) {
                 //Fetch the information
                 $resultRows = $reviewResults->fetch_assoc();
 

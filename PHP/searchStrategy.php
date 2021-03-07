@@ -78,7 +78,7 @@ class userSearch implements searchStrategy {
         $dbReturn = array();
 
         //If there are results, return them
-        if (mysqli_num_rows($userResults) > 0) {
+        if ($userResults->num_rows > 0) {
             //Put each row into the new array
             while ($resultRows = mysqli_fetch_assoc($userResults)) {
                 $dbReturn[] = $resultRows;
@@ -145,7 +145,7 @@ class gameSearch implements searchStrategy {
         $dbReturn = array();
 
         //If there are results, return them
-        if (mysqli_num_rows($gameResults) > 0) {
+        if ($gameResults->num_rows > 0) {
             //Get an image for this game
             while ($resultRows1 = mysqli_fetch_assoc($gameResults)) {
                 //Execute another query to get a single image for this game
@@ -155,7 +155,7 @@ class gameSearch implements searchStrategy {
                 $gameObjResults = $dbConnect->query($gameObjQuery);
 
                 //If there are results, put the game title and one image in the array
-                if (mysqli_num_rows($gameObjResults) > 0) {
+                if ($gameObjResults->num_rows > 0) {
                     while ($resultRows2 = mysqli_fetch_assoc($gameObjResults)) {
                         $dbReturn[] = $resultRows2;
                     }
@@ -223,7 +223,7 @@ class gameSearch implements searchStrategy {
         $userResults = $dbConnect->query($userSearchQuery);
 
         //If there are results, return them
-        if (mysqli_num_rows($userResults) > 0) {
+        if ($userResults->num_rows > 0) {
             //Put each row into the new array
             while ($resultRows = mysqli_fetch_assoc($userResults)) {
                 $dbReturn["users"][] = $resultRows;
@@ -237,7 +237,7 @@ class gameSearch implements searchStrategy {
         $gameResults = $dbConnect->query($gameSearchQuery);
 
         //If there are results, return them
-        if (mysqli_num_rows($gameResults) > 0) {
+        if ($gameResults->num_rows > 0) {
             //Get an image for this game
             while ($resultRows1 = mysqli_fetch_assoc($gameResults)) {
                 //Execute another query to get a single image for this game
@@ -247,7 +247,7 @@ class gameSearch implements searchStrategy {
                 $gameObjResults = $dbConnect->query($gameObjQuery);
 
                 //If there are results, put the game title and one image in the array
-                if (mysqli_num_rows($gameObjResults) > 0) {
+                if ($gameObjResults->num_rows > 0) {
                     while ($resultRows2 = mysqli_fetch_assoc($gameObjResults)) {
                         $dbReturn["games"][] = $resultRows2;
                     }

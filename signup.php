@@ -1,5 +1,5 @@
 <?php
-    //Include class definitions for login check
+    //Include class definitions for login check, form submission
     include_once(__DIR__ . '/PHP/userFactory.php');
     include_once(__DIR__ . '/PHP/userProfileScripts.php');
 
@@ -202,7 +202,7 @@
                 <div class="rowContainer">
                     <label for="signupPic">Picture:</label>
                     <div class="itemContainer">
-                        <input type="file" id="signupPic" name="signupPic">
+                        <input type="file" id="signupPic" name="uploadPic">
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupPicError"></div>
                         </div>
