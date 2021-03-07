@@ -1,5 +1,5 @@
 <?php
-    //Include class definitions for login check
+    //Include class definitions for login check, form submission
     include_once(__DIR__ . '/PHP/userFactory.php');
     include_once(__DIR__ . '/PHP/userProfileScripts.php');
 

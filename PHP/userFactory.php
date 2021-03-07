@@ -64,7 +64,7 @@ abstract class user {
         $queryResult = $this->dbConnect->query($userQuery);
 
         //If there is a result, instantiate all variables
-        if (mysqli_num_rows($queryResult) > 0) {
+        if ($queryResult->num_rows > 0) {
             //Fetch the information
             $resultRows = $queryResult->fetch_assoc();
 
@@ -85,6 +85,18 @@ abstract class user {
             //Set the UID for this object
             $this->UID = $objUID;
         }
+    }
+
+    //Function Name: wakeup
+    //Purpose: To re-establish the DB connection when the object is unserialized
+    //Parameters: None
+    //Returns: None
+    //Side Effects:
+    //   <1> $this->db is reinitialized with a DB object
+    //   <2> $this->dbConnect is reinitialized with a DB connection
+    public function __wakeup() {
+            $this->db = new database();
+            $this->dbConnect = $this->db->getDBConnection();
     }
     
     //Note: No setter; set in the constructor
@@ -505,7 +517,7 @@ abstract class user {
     //   <2> FALSE: THe information was not updated in the DB
     //Side Effects:
     //   <1> $playTime is set to the value of $newPlayTime
-    public function setPlayTIme($newPlayTime) {
+    public function setPlayTime($newPlayTime) {
         //Check if the passed variable is empty, return false if so
         if(!isset($newPlayTime)) {
             return FALSE;

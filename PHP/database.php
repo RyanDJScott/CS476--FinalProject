@@ -27,14 +27,15 @@
             return $this->dbConnect;
         }
 
-        // Function Name: Destructor
-        // Purpose: To close the database connection
-        // Parameters: None
-        // Returns: N/A
-        // Side Effects: 
-        //   <1> The member variables are set to the login credentials for connecting to the database
-        public function __destruct() {
-            mysqli_close($this->dbConnect);
+        //Function Name: wakeup
+        //Purpose: To re-establish the DB connection when the object is unserialized
+        //Parameters: None
+        //Returns: None
+        //Side Effects:
+        //   <1> $this->dbConnect is reinitialized with a DB object
+        public function __wakeup()
+        {
+            $this->dbConnect = new mysqli("localhost", "geekagog", "5i4C-o5tN)7MhA", "geekagog_QueenCityGambit");
         }
     }
     

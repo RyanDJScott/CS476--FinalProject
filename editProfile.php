@@ -10,9 +10,9 @@
     session_start();
 
     //Set the error message to be blank
-    $errorMessage = "";
+    $errorMessage = $successMessage = "";
 
-    //Check to see if they are not logged in; redirect if not
+    //Check to see if they are logged in; redirect if not
     if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]))
         header("Location: login.php");
 
@@ -24,6 +24,10 @@
 
     //If the user was sent here with the GET method for errors, set the error
     if ($_SERVER["REQUEST_METHOD"] === "GET") {
+        //Profile successfully updated
+        if (isset($_GET["error"]) && $_GET["error"] === "success")
+            $successMessage = "Your profile was successfully updated!";
+
         //Insertion error
         if (isset($_GET["error"]) && $_GET["error"] === "db_error")
             $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
@@ -68,7 +72,8 @@
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
     <div class="alignmentContainer">
         <div class="signupContainer">
-        <p class="errorMessage"><?php echo htmlspecialchars($errorMessage) ?></p>
+            <p><?php echo htmlspecialchars($successMessage); ?></p>
+            <p class="errorMessage"><?php echo htmlspecialchars($errorMessage); ?></p>
             <!-- outer container for flexbox design-->
     
             <!-- First Name and Error -->
@@ -164,7 +169,7 @@
                 <label for="editFavGameType">Favourite Type:</label>
                 <div class="itemContainer">
                     <select id="editFavGameType" name="editFavGameType">
-                        <option value="" selected disabled hidden><?php echo htmlspecialchars($_SESSION["userObj"]->getGameType()); ?></option>
+                        <option value="DEFAULT" selected disabled hidden><?php echo htmlspecialchars($_SESSION["userObj"]->getGameType()); ?></option>
                         <option value="Board Game">Board Game</option>
                         <option value="Card Game">Card Game</option>
                         <option value="Dice Game">Dice Game</option>
@@ -184,7 +189,7 @@
                 <label for="editGameTime">Time Playing Games:</label>
                 <div class="itemContainer">
                     <select id="editGameTime" name="editGameTime">
-                        <option value="" selected disabled hidden><?php echo htmlspecialchars($_SESSION["userObj"]->getPlayTime()); ?></option>
+                        <option value="DEFAULT" selected disabled hidden><?php echo htmlspecialchars($_SESSION["userObj"]->getPlayTime()); ?></option>
                         <option value="0-1 years">0-1 years</option>
                         <option value="1-3 years">1-3 years</option>
                         <option value="3-6 years">3-6 years</option>

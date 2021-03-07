@@ -60,7 +60,7 @@ class TGE {
         $queryResult = $this->dbConnect->query($gameQuery);
 
         //If the game exists, set the information for this object
-        if (mysqli_num_rows($queryResult) > 0) {
+        if ($queryResult->num_rows > 0) {
             //Fetch the information from the DB object
             $resultRows = $queryResult->fetch_assoc();
 
@@ -90,7 +90,7 @@ class TGE {
         $queryResult = $this->dbConnect->query($imagesQuery);
 
         //If the database doesn't yield any results, set this variable to FALSE
-        if (mysqli_num_rows($queryResult) > 0) {
+        if ($queryResult->num_rows > 0) {
             //Initialize $images as an array
             $this->images = array();
 
@@ -108,7 +108,7 @@ class TGE {
         $queryResult = $this->dbConnect->query($reviewQuery);
 
         //If the database doesn't yield any results, set this variable to FALSE
-        if (mysqli_num_rows($queryResult) > 0) {
+        if ($queryResult->num_rows > 0) {
             //Initialize $gameReviews to an array
             $this->gameReviews = array();
 
@@ -126,7 +126,7 @@ class TGE {
         $queryResult = $this->dbConnect->query($ratingQuery);
 
         //If the database doesn't yield any results, set this variable to FALSE
-        if (mysqli_num_rows($queryResult) > 0) {
+        if ($queryResult->num_rows > 0) {
             $resultRows = $queryResult->fetch_assoc();
 
             //Set the overallRating variable to the calculation done in the DB
@@ -623,7 +623,7 @@ class TGE {
         $queryResult = $this->dbConnect->query($ratingQuery);
 
         //If the database doesn't yield any results, set this variable to FALSE
-        if (mysqli_num_rows($queryResult) > 0) {
+        if ($queryResult->num_rows > 0) {
             $resultRows = $queryResult->fetch_assoc();
 
             //Set the overallRating variable to the calculation done in the DB
