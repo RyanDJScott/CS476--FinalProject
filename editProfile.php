@@ -214,7 +214,7 @@
             <div class="rowContainer">
                 <label for="editPic">Picture:</label>
                 <div class="itemContainer">
-                    <input type="file" id="editPic" name="editPic">
+                    <input type="file" id="editPic" name="uploadPic">
                     <div class="errorContainer">
                         <div class="errorMessage" id="editPicError"></div>
                     </div>

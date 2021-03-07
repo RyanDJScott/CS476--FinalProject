@@ -150,7 +150,7 @@ abstract class userProfileSubmission {
     //   <2> FALSE: If $playTime doesn't pass validation
     // Side Effects: None
     protected function valPlayTime() {
-        if ($this->gameType === "N_C" || (strlen($this->playTime) <= 9 && ($this->playTime === "0-1 years" || $this->playTime === "1-3 years" || $this->playTime === "3-6 years" || $this->playTime === "6+ years"))) 
+        if ($this->playTime === "N_C" || (strlen($this->playTime) <= 9 && ($this->playTime === "0-1 years" || $this->playTime === "1-3 years" || $this->playTime === "3-6 years" || $this->playTime === "6+ years"))) 
             return TRUE; 
         else
             return FALSE;
@@ -180,65 +180,73 @@ abstract class userProfileSubmission {
     //   <1> An image is uploaded to the server
     protected function uploadImage() {
         //If there is no file, add the default picture URL
-        if (!isset($_FILES['signupPic']['error'])) {
+        if (!isset($_FILES['uploadPic']['error'])) {
+            error_log("Empty File, First Check", 0);
             $this->avatarURL = "/uploads/userPictures/defaultPic.png";
             return TRUE;
         }
         
         //If the user is trying to sneak multiple files, return false
-        if (is_array($_FILES['signupPic']['error'])) {
+        if (is_array($_FILES['uploadPic']['error'])) {
             error_log("User trying to insert multiple files.", 0);
             return FALSE;
         }
 
         //If there was an upload error, return false.
         //If the error was no file, and wasn't caught earlier, return true w/ defautPic.png
-        switch ($_FILES['signupPic']['error']) {
+        switch ($_FILES['uploadPic']['error']) {
             case UPLOAD_ERR_OK:
                 break;
             case UPLOAD_ERR_NO_FILE:
+                error_log("Empty pic, second check", 0);
                 $this->avatarURL = "/uploads/userPictures/defaultPic.png";
                 return TRUE;
                 break;
             case UPLOAD_ERR_INI_SIZE:
             case UPLOAD_ERR_FORM_SIZE:
+                error_log("Size issue, first check", 0);
                 return FALSE;
                 break;
             default:
                 return FALSE;
         }
 
-        //If the file size is greater than 10 MB
-        if ($_FILES['signupPic']['size'] > 10485760) 
+        //If the file size is greater than 2 MB
+        if ($_FILES['uploadPic']['size'] > 2097152) {
+            error_log("Size issue, second check", 0);
             return FALSE;
+        }
 
         //Check to see if it's an actual image by checking the file info object
         $finfo = new finfo(FILEINFO_MIME_TYPE);
 
         if (false === $ext = array_search(
-            $finfo->file($_FILES['signupPic']['tmp_name']),
+            $finfo->file($_FILES['uploadPic']['tmp_name']),
             array(
                 'jpg' => 'image/jpeg',
                 'png' => 'image/png',
                 'gif' => 'image/gif',
             ),true)) {
+                error_log("NOT a picture file!", 0);
                 return FALSE;
             } 
 
         //Prepare the URL incase the file upload works
-        $filePath = "/uploads/userPics/" . sha1_file($_FILES["signupPic"]["tmp_name"]) . "." . $ext . "";
+        $filePath = "/uploads/userPics/" . sha1_file($_FILES["uploadPic"]["tmp_name"]) . "." . $ext . "";
 
         //Try to move the file to the uploads folder
-        if (!move_uploaded_file($_FILES['signupPic']['tmp_name'],
+        if (!move_uploaded_file($_FILES['uploadPic']['tmp_name'],
             sprintf(
                 __DIR__ . '/../uploads/userPictures/%s.%s',
-                sha1_file($_FILES['signupPic']['tmp_name']),
+                sha1_file($_FILES['uploadPic']['tmp_name']),
                 $ext
             )
         )) {
+            error_log("Move failed.", 0);
             return FALSE;
         } else {
             $this->avatarURL = $filePath;
+            error_log("Move worked.", 0);
             return TRUE;
         }
     }
@@ -363,7 +371,7 @@ class userEditProfile extends userProfileSubmission {
             if ($this->firstName != $this->user->getFirstName())
                 $editFirstName = $this->user->setFirstName($this->firstName);
 
-            if ($this->lastName != $this->user->getLastName() )
+            if ($this->lastName != $this->user->getLastName())
                 $editLastName = $this->user->setLastName($this->lastName);
 
             if ($this->email != $this->user->getEmail() )
@@ -396,9 +404,13 @@ class userEditProfile extends userProfileSubmission {
                 $editPassword = $this->dbConnect->query($updatePassword);
             }
 
+            $imageUploaded = $this->uploadImage();
+
             //Check image separately, if it's default do nothing
-            if ($this->uploadImage() === TRUE && !($this->avatarURL == "/uploads/userPictures/defaultPic.png"))
+            if ($imageUploaded == TRUE && !($this->avatarURL == "/uploads/userPictures/defaultPic.png"))
                 $editAvatarURL = $this->user->setAvatarURL($this->avatarURL);
+            else if ($imageUploaded == FALSE)
+                $editAvatarURL = FALSE;
 
             //Check to see if the variables are set, and if they are all true. If so, redirect to dashboard. Otherwise, re-send to editprofile
             if ($editFirstName && $editLastName && $editEmail && $editScreenName && $editPassword && $editBirthday && $editFavGame && $editGameType && $editPlayTime && $editBiography && $editAvatarURL)

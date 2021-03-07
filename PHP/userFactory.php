@@ -185,13 +185,13 @@ abstract class user {
             $nameResult = $this->dbConnect->query($nameQuery);
 
             //See if the update worked
-            if ($nameQuery === TRUE) {
+            if ($nameResult === TRUE) {
                 //Update the object information
                 $this->lastName = $newLastName;
 
                 //Exit the function
                 return TRUE;
-            } else if ($nameQuery === FALSE) {
+            } else if ($nameResult === FALSE) {
                 return FALSE;
             }
         }
