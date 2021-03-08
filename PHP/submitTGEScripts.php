@@ -44,6 +44,13 @@ class submitTGE {
         $this->expansions = trim($_POST["submitTGEExpansions"]);
     }
 
+    // Function Name: valGameTitle
+    // Purpose: To validate the information contained in $gameTitle
+    // Parameters: None
+    // Returns:
+    //   <1> TRUE: If the game title passes validation
+    //   <2> FALSE: If the game title doesn't pass validation
+    // Side Effects: None
     private function valGameTitle () {
         if (is_string($this->gameTitle) && strlen($this->gameTitle) > 0 && strlen($this->gameTitle) <= 60)
             return TRUE;
@@ -51,6 +58,13 @@ class submitTGE {
             return FALSE;
     }
 
+    // Function Name: valNumPlayers
+    // Purpose: To validate the information contained in $numPlayers
+    // Parameters: None
+    // Returns:
+    //   <1> TRUE: If the number of players passes validation
+    //   <2> FALSE: If the number of players doesn't pass validation
+    // Side Effects: None
     private function valNumPlayers () {
         if (is_int($this->numPlayers) && $this->numPlayers > 0 && $this->numPlayers < 20)
             return TRUE;
@@ -58,6 +72,13 @@ class submitTGE {
             return FALSE;
     }
 
+    // Function Name: valAgeRating
+    // Purpose: To validate the information contained in $ageRating
+    // Parameters: None
+    // Returns:
+    //   <1> TRUE: If the screenname passes validation
+    //   <2> FALSE: If the screenname doesn't pass validation
+    // Side Effects: None
     private function valAgeRating () {
         if (is_int($this->ageRating) && $this->ageRating > 0 && $this->ageRating < 19)
             return TRUE;
@@ -65,6 +86,13 @@ class submitTGE {
             return FALSE;
     }
 
+    // Function Name: valPlayTime
+    // Purpose: To validate the information contained in $playTime
+    // Parameters: None
+    // Returns:
+    //   <1> TRUE: If the play time passes validation
+    //   <2> FALSE: If the play time doesn't pass validation
+    // Side Effects: None
     private function valPlayTime () {
         if (is_float($this->playTime) && $this->playTime > 0)
             return TRUE;
@@ -72,6 +100,13 @@ class submitTGE {
             return FALSE;
     }
 
+    // Function Name: valDescription
+    // Purpose: To validate the information contained in $description
+    // Parameters: None
+    // Returns:
+    //   <1> TRUE: If the description passes validation
+    //   <2> FALSE: If the description doesn't pass validation
+    // Side Effects: None
     private function valDescription () {
         if (is_string($this->description) && strlen($this->description) > 0)
             return TRUE;
@@ -79,6 +114,13 @@ class submitTGE {
             return FALSE;
     }
 
+    // Function Name: valCompany
+    // Purpose: To validate the information contained in $company
+    // Parameters: None
+    // Returns:
+    //   <1> TRUE: If the company passes validation
+    //   <2> FALSE: If the company doesn't pass validation
+    // Side Effects: None
     private function valCompany () {
         if (is_string($this->company) && strlen($this->company) > 0 && strlen($this->company) <= 100)
             return TRUE;
@@ -86,6 +128,13 @@ class submitTGE {
             return FALSE;
     }
 
+    // Function Name: valExpansions
+    // Purpose: To validate the information contained in $expansions
+    // Parameters: None
+    // Returns:
+    //   <1> TRUE: If the expansions number passes validation
+    //   <2> FALSE: If the expansions number doesn't pass validation
+    // Side Effects: None
     private function valExpansions () {
         if (is_int($this->expansions) && $this->expansions >= 0 && $this->expansions <= 30)
             return TRUE;
