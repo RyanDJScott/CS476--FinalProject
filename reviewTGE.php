@@ -19,8 +19,8 @@ if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
             $_SESSION["userObj"]->setTGEStatus($thisGame, 0, $_POST["gameFeedback"]);
     }
 }
-
 ?>
+
 <!DOCTYPE html>
 <!-- very similar to review flagged review -->
 <html>
@@ -95,7 +95,7 @@ if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image" />
         </div>
 
-        <form name="approvalForm" method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <form name="approvalForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <!-- leave feedback -->
             <div class="textBoxBottom">
                 <div class="nameFeedback">
@@ -111,10 +111,10 @@ if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
             <!-- buttons -->
             <div class="buttonContainer">
 
-                <!-- Removes the Flag - i.e. the review is fine -->
+                <!-- Approves the TGE -->
                 <input class="button" type="submit" name="approveTGE" value="APPROVE">
 
-                <!-- Deletes the review - i.e. the revie violated rules -->
+                <!-- Rejects the TGE -->
                 <input class="button" type="submit" name="rejectTGE" value="REJECT">
 
             </div>

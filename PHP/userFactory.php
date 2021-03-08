@@ -868,7 +868,19 @@ class adminUser extends user {
     //   <2> FALSE: The status information was not successfully set in the database
     // Side Effects:
     //   <1> The TGE has it's status information updated
-    public function setTGEStatus(TGE $TGE, int $status, int $reason) {}
+    public function setTGEStatus(TGE $TGE, int $status, int $reason) {
+        //Perform UPDATE query
+        $updateStatus = "UPDATE GameDescriptionStatus SET status = '" . $this->dbConnect->real_escape_string($status) . "', reason = '" . $this->dbConnect->real_escape_string($reason) . "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($TGE->getGameTitle()) . "'";
+    
+        //Execute query
+        $statusResults = $this->dbConnect->query($updateStatus);
+
+        //Check if status was successfully updated
+        if ($statusResults == TRUE)
+            return TRUE;
+        else
+            return FALSE;
+    }
 
     // Function Name: promoteUser
     // Purpose: To promote a user to an administrator
