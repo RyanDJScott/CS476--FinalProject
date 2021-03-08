@@ -10,15 +10,24 @@ if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]) && !(is_a($_SES
 if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
     $gameTitle = $_GET["gameTitle"];
     $thisGame = new TGE($gameTitle);
-
+    
     //Execute admin functions depending on what was pressed
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isset($_POST["approveTGE"]) && $_POST["approveTGE"] === "APPROVE")
-            $_SESSION["userObj"]->setTGEStatus($thisGame, 1, $_POST["gameFeedback"]);
+            $updateResult = $_SESSION["userObj"]->setTGEStatus($thisGame, 1, $_POST["gameFeedback"]);
         else if (isset($_POST["rejectTGE"]) && $_POST["rejectTGE"] === "REJECT")
-            $_SESSION["userObj"]->setTGEStatus($thisGame, 0, $_POST["gameFeedback"]);
+            $updateResult = $_SESSION["userObj"]->setTGEStatus($thisGame, 0, $_POST["gameFeedback"]);
     }
+
+    if ($updateResult)
+        header("Location: dashboard.php");
+    else
+        header("Location: reviewTGE.php?error=st_error");
 }
+
+//Error checking
+if (isset($_GET["error"]) && $_GET["error"] === "st_error")
+    $errorMessage = "There was an error updating the status of this game. Please try again.";
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +70,7 @@ if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
 
         <!-- Displays game information -->
         <div class="textBox">
-
+            <p class="errorMessage"><?php echo $errorMessage; ?></p>
             <!-- left side of the information-->
             <div class="innerContainer">
                 <div class="name">Gamename</div>
