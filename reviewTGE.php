@@ -10,6 +10,7 @@ if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]) && !(is_a($_SES
 if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
     $gameTitle = $_GET["gameTitle"];
     $thisGame = new TGE($gameTitle);
+    $display = new Display();
     
     //Execute admin functions depending on what was pressed
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -39,6 +40,7 @@ if (isset($_GET["error"]) && $_GET["error"] === "st_error")
     <meta charset="UTF-8">
     <!-- ================Stylesheets=================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
+    <link rel="stylesheet" href="stylesheets/viewTg.css">
     <link rel="stylesheet" href="stylesheets/reviewTGE.css">
 </head>
 
@@ -67,43 +69,8 @@ if (isset($_GET["error"]) && $_GET["error"] === "st_error")
             Buttons to accept or reject
     -->
     <div class="pageAllignment">
-
-        <!-- Displays game information -->
-        <div class="textBox">
-            <p class="errorMessage"><?php echo $errorMessage; ?></p>
-            <!-- left side of the information-->
-            <div class="innerContainer">
-                <div class="name">Gamename</div>
-                Submitted by screenname<br>
-                Company: ________ <br>
-                Play Time: ________ <br>
-                Age Rating: ________ <br>
-                Number of Players: ________ <br>
-                Expenses: ________ <br>
-            </div>
-
-            <!-- right side (description)-->
-            <div class="innerContainer">
-                <p><br>
-                    This is a game and here is the description.
-                    This is a game and here is the description.
-                    This is a game and here is the description.
-                    This is a game and here is the description.
-                    This is a game and here is the description.
-                </p>
-            </div>
-        </div>
-
-        <!-- Container for images of the tabletop game-->
-        <div class="imageContainer">
-            <!-- Images of the boardgame, ideally should appear
-             as four in a row-->
-            <img class="image" src="dependencies/placeholder.png" alt="tabletop game image" />
-            <img class="image" src="dependencies/placeholder.png" alt="tabletop game image" />
-            <img class="image" src="dependencies/placeholder.png" alt="tabletop game image" />
-            <img class="image" src="dependencies/placeholder.png" alt="tabletop game image" />
-        </div>
-
+    <p class="errorMessage"><?php echo $errorMessage; ?></p>
+        <?php $display->displayTGE($thisGame); ?>
         <form name="approvalForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <!-- leave feedback -->
             <div class="textBoxBottom">

@@ -166,11 +166,51 @@ class Display {
 
     //------------TGE Display Functions--------------------//
     //Function Name: displayTGE
-    //Purpose: To display the contents of a tabletop game description on the viewTGE.php page
-    //Parameters: N/A
+    //Purpose: To display the contents of a tabletop game description on the viewTGE.php/reviewTGE.php page
+    //Parameters: 
+    //   <1> $TGE: the tabletop game entry being displayed
     //Returns: N/A
     //Side Effects: Displays the contents of a tabletop game description on the viewTGE.php page
-    public function displayTGE($TGE) {
+    public function displayTGE(TGE $TGE) {
+        $images = $TGE->getImages();
 
+        echo '<!-- Container for tabletop game description -->
+        <div class="elementContainer">
+            
+            <!--
+                Display name, user who submitted
+                and other information on one side
+            -->
+            <div class="innerContainer">
+                <div class="name">' . $TGE->getGameTitle() . '</div>
+                Submitted by ' . $TGE->getScreenName() . ' on ' . $TGE->getDateSubmitted() . '<br>
+                Company: ' . $TGE->getCompany() . ' <br>
+                Play Time: ' . $TGE->getPlayTime() . ' hours <br>
+                Age Rating: ' . $TGE->getAgeRating() . '+ <br>
+                Number of Players: ' . $TGE->getNumPlayers() . ' <br>
+                Expansions: ' . $TGE->getExpansions() . ' <br>
+            </div>
+
+            <!-- 
+                The game description itseld on
+                the other (right) side
+            -->
+            <div class="innerContainer">
+                <p><br>
+                '. $TGE->getDescription() .'    
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Container for images of the tabletop game-->
+        <div class="imageContainer">
+            <!-- Images of the boardgame, ideally should appear
+             as four in a row-->';
+        
+        foreach ($images as $displayImages)
+             echo '<img class="image" src="' . $displayImages . '" alt="Image for ' . $TGE->getGameTitle() . '"/>';
+             
+        echo '</div>';
     }
 }
