@@ -151,26 +151,7 @@
             <!-- Upload Button -->
             <div class="uploadImageFile">
                 <label for="submitTGEUpload">Upload a file:</label>
-                <input type="file" id="submitTGEUpload" name="submitTGEUpload">
-            </div>
-
-            <!-- image upload container -->
-            <div class="uploadContainer">
-
-                <!-- images themselves -->
-                <div class="uploadImagePreview">
-                    <img class="previewImg" src="dependencies/uploadPreview.png">
-                </div>
-                <div class="uploadImagePreview">
-                    <img class="previewImg" src="dependencies/uploadPreview.png">
-                </div>
-                <div class="uploadImagePreview">
-                    <img class="previewImg" src="dependencies/uploadPreview.png">
-                </div>
-                <div class="uploadImagePreview">
-                    <img class="previewImg" src="dependencies/uploadPreview.png">
-                </div>
-
+                <input type="file" id="submitTGEUpload" name="submitTGEUpload[]" multiple>
             </div>
 
             <!-- Submit button -->
