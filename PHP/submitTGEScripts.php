@@ -146,7 +146,6 @@ class submitTGE {
     private function uploadImages () {
         //Get the number of uploaded files
         $fileNumber = count($_FILES['submitTGEUpload']['name']);
-        error_log("Number of pictures: " . $fileNumber . ".", 0);
 
         //Check to see if there are more than 4 files. If so, reject.
         if ($fileNumber > 4 || $fileNumber <= 0)
@@ -221,7 +220,6 @@ class submitTGE {
     //   <5> If any of 1-4 fails, the user is directed back to the submitTGE page with errors
     //   <6> If 1-4 succeeds, the user is directed back to their dashboard
     public function submitForm() {
-        error_log("Title: " . $this->valGameTitle() . ", numPlayers: " . $this->valNumPlayers() . ", ageRating: " . $this->valAgeRating() . ", playTime: " . $this->valPlayTime() . ", description: " . $this->valDescription() . ", company: " . $this->valCompany() . " expansions: " .  $this->valExpansions() . ".", 0);
         //Check to see if all validation checks pass, if not redirect back to the page
         if ($this->valGameTitle() && $this->valNumPlayers() && $this->valAgeRating() && $this->valPlayTime() && $this->valDescription() && $this->valCompany() && $this->valExpansions()) {
             //Attempt to upload the images. If successful, start inserting into the DB
