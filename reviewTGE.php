@@ -1,6 +1,11 @@
 <?php
+include_once(__DIR__ . '/PHP/navBar.php');
 include_once(__DIR__ . '/PHP/userFactory.php');
 include_once(__DIR__ . '/PHP/TGE.php');
+include_once(__DIR__ . '/PHP/display.php');
+
+//Continue the session
+session_start();
 
 //Check to see if they are logged in AND an administrator; redirect if not
 if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]) && !(is_a($_SESSION["userObj"], 'adminUser')))
@@ -8,18 +13,22 @@ if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]) && !(is_a($_SES
 
 //Get the game title from the GET method, instantiate new TGE
 if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
+    //Get the game title, create a new TGE object from it, then create display object
     $gameTitle = $_GET["gameTitle"];
     $thisGame = new TGE($gameTitle);
     $display = new Display();
-    
-    //Execute admin functions depending on what was pressed
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if (isset($_POST["approveTGE"]) && $_POST["approveTGE"] === "APPROVE")
-            $updateResult = $_SESSION["userObj"]->setTGEStatus($thisGame, 1, $_POST["gameFeedback"]);
-        else if (isset($_POST["rejectTGE"]) && $_POST["rejectTGE"] === "REJECT")
-            $updateResult = $_SESSION["userObj"]->setTGEStatus($thisGame, 0, $_POST["gameFeedback"]);
-    }
+}
 
+//Execute admin functions depending on what was pressed
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    //Retrieve the gameTitle, create an object, send it to the functions
+    $gameTitle = $_POST["gameTitle"];
+
+    if (isset($_POST["approveTGE"]) && $_POST["approveTGE"] === "APPROVE")
+        $updateResult = $_SESSION["userObj"]->setTGEStatus($gameTitle, 1, $_POST["gameFeedback"]);
+    else if (isset($_POST["rejectTGE"]) && $_POST["rejectTGE"] === "REJECT")
+        $updateResult = $_SESSION["userObj"]->setTGEStatus($gameTitle, 0, $_POST["gameFeedback"]);
+    
     if ($updateResult)
         header("Location: dashboard.php");
     else
@@ -27,6 +36,8 @@ if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
 }
 
 //Error checking
+$errorMessage = "";
+
 if (isset($_GET["error"]) && $_GET["error"] === "st_error")
     $errorMessage = "There was an error updating the status of this game. Please try again.";
 ?>
@@ -92,11 +103,13 @@ if (isset($_GET["error"]) && $_GET["error"] === "st_error")
 
                 <!-- Rejects the TGE -->
                 <input class="button" type="submit" name="rejectTGE" value="REJECT">
+                
+                <input type="hidden" name="gameTitle" value="<?php echo $gameTitle; ?>">
 
             </div>
         </form>
     </div>
-
+<?php echo gettype($thisGame); ?>
 </body>
 
 </html>
