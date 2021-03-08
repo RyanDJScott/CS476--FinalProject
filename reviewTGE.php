@@ -1,9 +1,32 @@
+<?php
+include_once(__DIR__ . '/PHP/userFactory.php');
+include_once(__DIR__ . '/PHP/TGE.php');
+
+//Check to see if they are logged in AND an administrator; redirect if not
+if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]) && !(is_a($_SESSION["userObj"], 'adminUser')))
+    header("Location: login.php");
+
+//Get the game title from the GET method, instantiate new TGE
+if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
+    $gameTitle = $_GET["gameTitle"];
+    $thisGame = new TGE($gameTitle);
+
+    //Execute admin functions depending on what was pressed
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if (isset($_POST["approveTGE"]) && $_POST["approveTGE"] === "APPROVE")
+            $_SESSION["userObj"]->setTGEStatus($thisGame, 1, $_POST["gameFeedback"]);
+        else if (isset($_POST["rejectTGE"]) && $_POST["rejectTGE"] === "REJECT")
+            $_SESSION["userObj"]->setTGEStatus($thisGame, 0, $_POST["gameFeedback"]);
+    }
+}
+
+?>
 <!DOCTYPE html>
 <!-- very similar to review flagged review -->
 <html>
 
 <head>
-    <title> Flagged Review - Queen City's Gambit </title>
+    <title> Review Tabletop Game Entry - Queen City's Gambit </title>
     <meta charset="UTF-8">
     <!-- ================Stylesheets=================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
@@ -12,11 +35,12 @@
 
 <body>
     <!-- The navigation bar -->
-    <nav>
-        <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.html" class="navButton">Login</a>
-        <a href="signup.html" class="navButton">Signup</a>
-        <a href="search.html" class="navButton">Search</a>
+    <nav> 
+        <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <?php
+            //This page can only be accessed by logged in
+            loggedInNavBar();   
+        ?>
     </nav>
 
     <!-- review game header image -->
@@ -71,7 +95,7 @@
             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image" />
         </div>
 
-        <form name="approvalForm" method="POST">
+        <form name="approvalForm" method="POST" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <!-- leave feedback -->
             <div class="textBoxBottom">
                 <div class="nameFeedback">
@@ -88,10 +112,10 @@
             <div class="buttonContainer">
 
                 <!-- Removes the Flag - i.e. the review is fine -->
-                <input class="button" type="submit" name="removeFlag" value="APPROVE">
+                <input class="button" type="submit" name="approveTGE" value="APPROVE">
 
                 <!-- Deletes the review - i.e. the revie violated rules -->
-                <input class="button" type="submit" name="deleteReview" value="DELETE">
+                <input class="button" type="submit" name="rejectTGE" value="REJECT">
 
             </div>
         </form>

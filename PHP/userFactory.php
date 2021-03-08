@@ -607,7 +607,7 @@ abstract class user {
     abstract public function deleteUser(int $userID);
     abstract public function removeFlag(Review $review);
     abstract public function deleteReview(Review $review);
-    abstract public function setTGEStatus(TGE $TGE);
+    abstract public function setTGEStatus(TGE $TGE, int $status, int $reason);
     abstract public function promoteUser(int $userID);
 }
 
@@ -708,7 +708,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function setTGEStatus(TGE $TGE) {
+    public function setTGEStatus(TGE $TGE, int $status, int $reason) {
         return;
     }
 
@@ -868,7 +868,7 @@ class adminUser extends user {
     //   <2> FALSE: The status information was not successfully set in the database
     // Side Effects:
     //   <1> The TGE has it's status information updated
-    public function setTGEStatus(TGE $TGE) {}
+    public function setTGEStatus(TGE $TGE, int $status, int $reason) {}
 
     // Function Name: promoteUser
     // Purpose: To promote a user to an administrator
