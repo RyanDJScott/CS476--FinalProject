@@ -34,6 +34,7 @@ class submitTGE {
         $this->dbConnect = $this->db->getDBConnection();
 
         //Initialize member variables 
+        //playTime cast to a float for check purposes (just incase user enters int)
         $this->UID = $userID;
         $this->gameTitle = trim($_POST["submitTGEName"]);
         $this->numPlayers = trim($_POST["submitTGEPlayers"]);
@@ -147,7 +148,7 @@ class submitTGE {
         $fileNumber = count($_FILES['submitTGEUpload']['name']);
 
         //Check to see if there are more than 4 files. If so, reject.
-        if ($fileNumber > 4)
+        if ($fileNumber > 4 || $fileNumber = 0)
             return FALSE;
 
         //Cycle through each image, and perform a series of checks
@@ -216,7 +217,64 @@ class submitTGE {
         return TRUE;
     }
 
-    public function submitForm() {}
+    public function submitForm() {
+        //Check to see if all validation checks pass, if not redirect back to the page
+        if ($this->valGameTitle() && $this->valNumPlayers() && $this->valAgeRating() && $this->valPlayTime() && $this->valDescription() && $this->valCompany() && $this->valExpansions()) {
+            //Attempt to upload the images. If successful, start inserting into the DB
+            if ($this->uploadImages()) {
+                //Execute a query to insert this game into the DB
+                $submitTGEQuery = "INSERT INTO GameDescriptions (gameTitle, UID, dateSubmitted, numPlayers, ageRating, playTime, description, company, expansions) VALUES ('" . $this->dbConnect->real_escape_string($this->gameTitle) . "'
+                , '" . $this->dbConnect->real_escape_string($this->UID) . "', NOW(), '" . $this->dbConnect->real_escape_string($this->numPlayers) . "', '" . $this->dbConnect->real_escape_string($this->ageRating) . "'
+                , '" . $this->dbConnect->real_escape_string($this->playTime) . "', '" . $this->dbConnect->real_escape_string($this->description) . "', '" . $this->dbConnect->real_escape_string($this->company) . "'
+                , '" . $this->dbConnect->real_escape_string($this->expansions) . "')";
+
+                $submitResult = $this->dbConnect->query($submitTGEQuery);
+
+                //If the initial submit worked, set the status 
+                if ($submitResult == TRUE) {
+                    //Set default values into the status table
+                    $statusQuery = "INSERT INTO GameDescriptionStatus (gameTitle, status, reason) VALUES ('" . $this->dbConnect->real_escape_string($this->gameTitle) . "', 2, 'This tabletop game entry has yet to be reviewed.')";
+
+                    $statusResults = $this->dbConnect->query($statusQuery);
+
+                    //If the status submit worked, set the images
+                    if ($statusResults == TRUE) {
+                        //Set a insert flag
+                        $imageInsertFlag = TRUE;
+
+                        //Go through the images array and insert these into the DB
+                        for ($i = 0; $i < count($this->images); $i++) {
+                            $imageInsert = "INSERT INTO DescriptionPics (gameTitle, pictureURL) VALUES ('" . $this->dbConnect->real_escape_string($this->gameTitle) . "', '" . $this->dbConnect->real_escape_string($this->images[$i]) . "')";
+
+                            $imageResults = $this->dbConnect->query($imageInsert);
+
+                            //Set the flag if this didn't work
+                            if ($imageResults == TRUE)
+                                continue;
+                            else {
+                                $imageInsertFlag = FALSE;
+                                break;
+                            }
+                        }
+
+                        //Check if the images worked, if so, send the user to their dashboard
+                        if ($imageInsertFlag == TRUE)
+                            header("Location: ../dashboard.php");
+                        else 
+                            header("Location: ../submitTGE.php?error=dbimg_error");
+                    } else {
+                        header("Location: ../submitTGE.php?error=st_error");
+                    }
+                } else {
+                    header("Location: ../submitTGE.php?error=db_error");
+                }
+            } else {
+                header("Location: ../submitTGE.php?error=img_error");
+            }
+        } else {
+            header("Location: ../submitTGE.php?error=val_error");
+        }
+    }
 }
 
 ?>

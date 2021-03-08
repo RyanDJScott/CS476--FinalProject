@@ -30,6 +30,18 @@
         //Validation error
         if (isset($_GET["error"]) && $_GET["error"] === "val_error")
             $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
+
+        //Validation error
+        if (isset($_GET["error"]) && $_GET["error"] === "st_error")
+            $errorMessage = "There was a problem setting the status of your tabletop game entry. Please contact the site administrators!";
+
+        //Validation error
+        if (isset($_GET["error"]) && $_GET["error"] === "img_error")
+            $errorMessage = "Your images could not be uploaded to the site. Please try again!";
+
+        //Validation error
+        if (isset($_GET["error"]) && $_GET["error"] === "dbimg_error")
+            $errorMessage = "Your images could not be saved in the database. Please contact the site administrators!";
     }
 ?>
 <!DOCTYPE html>
@@ -61,6 +73,7 @@
     <div class="container">
         <!-- Container for Submission Form -->
         <div class="formContainer">
+        <p class="errorMessage"><?php echo htmlspecialchars($errorMessage); ?></p>
 
             <!-- Game Name and Error -->
             <div class="submitTable">
