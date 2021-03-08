@@ -34,12 +34,12 @@ class submitTGE {
         $this->dbConnect = $this->db->getDBConnection();
 
         //Initialize member variables 
-        //playTime cast to a float for check purposes (just incase user enters int)
+        //Numbers are cast to ensure good DB insertions
         $this->UID = $userID;
         $this->gameTitle = trim($_POST["submitTGEName"]);
         $this->numPlayers = trim($_POST["submitTGEPlayers"]);
         $this->ageRating = trim($_POST["submitTGEAge"]);
-        $this->playTime = (float)trim($_POST["submitTGEPlaytime"]);
+        $this->playTime = trim($_POST["submitTGEPlaytime"]);
         $this->description = trim($_POST["description"]);
         $this->company = trim($_POST["submitTGECompanyName"]);
         $this->expansions = trim($_POST["submitTGEExpansions"]);
@@ -53,7 +53,7 @@ class submitTGE {
     //   <2> FALSE: If the game title doesn't pass validation
     // Side Effects: None
     private function valGameTitle () {
-        if (is_string($this->gameTitle) && strlen($this->gameTitle) > 0 && strlen($this->gameTitle) <= 60)
+        if (strlen($this->gameTitle) > 0 && strlen($this->gameTitle) <= 60)
             return TRUE;
         else
             return FALSE;
@@ -67,7 +67,7 @@ class submitTGE {
     //   <2> FALSE: If the number of players doesn't pass validation
     // Side Effects: None
     private function valNumPlayers () {
-        if (is_int($this->numPlayers) && $this->numPlayers > 0 && $this->numPlayers < 20)
+        if ($this->numPlayers > 0 && $this->numPlayers < 20)
             return TRUE;
         else 
             return FALSE;
@@ -81,7 +81,7 @@ class submitTGE {
     //   <2> FALSE: If the screenname doesn't pass validation
     // Side Effects: None
     private function valAgeRating () {
-        if (is_int($this->ageRating) && $this->ageRating > 0 && $this->ageRating < 19)
+        if ($this->ageRating > 0 && $this->ageRating < 19)
             return TRUE;
         else
             return FALSE;
@@ -95,7 +95,7 @@ class submitTGE {
     //   <2> FALSE: If the play time doesn't pass validation
     // Side Effects: None
     private function valPlayTime () {
-        if (is_float($this->playTime) && $this->playTime > 0)
+        if ($this->playTime > 0)
             return TRUE;
         else
             return FALSE;
@@ -109,7 +109,7 @@ class submitTGE {
     //   <2> FALSE: If the description doesn't pass validation
     // Side Effects: None
     private function valDescription () {
-        if (is_string($this->description) && strlen($this->description) > 0)
+        if (strlen($this->description) > 0)
             return TRUE;
         else
             return FALSE;
@@ -123,7 +123,7 @@ class submitTGE {
     //   <2> FALSE: If the company doesn't pass validation
     // Side Effects: None
     private function valCompany () {
-        if (is_string($this->company) && strlen($this->company) > 0 && strlen($this->company) <= 100)
+        if (strlen($this->company) > 0 && strlen($this->company) <= 100)
             return TRUE;
         else
             return FALSE;
@@ -137,7 +137,7 @@ class submitTGE {
     //   <2> FALSE: If the expansions number doesn't pass validation
     // Side Effects: None
     private function valExpansions () {
-        if (is_int($this->expansions) && $this->expansions >= 0 && $this->expansions <= 30)
+        if ($this->expansions >= 0 && $this->expansions <= 30)
             return TRUE;
         else
             return FALSE;
@@ -146,34 +146,30 @@ class submitTGE {
     private function uploadImages () {
         //Get the number of uploaded files
         $fileNumber = count($_FILES['submitTGEUpload']['name']);
+        error_log("Number of pictures: " . $fileNumber . ".", 0);
 
         //Check to see if there are more than 4 files. If so, reject.
-        if ($fileNumber > 4 || $fileNumber = 0)
+        if ($fileNumber > 4 || $fileNumber <= 0)
             return FALSE;
 
         //Cycle through each image, and perform a series of checks
         for ($i = 0; $i < $fileNumber; $i++) {
-            //Set a flag
-            $imgOk = TRUE;
-
-            //If there was an upload error, set the flag to false
+            //If there was an upload error on any of the images, return false
             switch ($_FILES['submitTGEUpload']['error'][$i]) {
                 case UPLOAD_ERR_OK:
                     break;
                 case UPLOAD_ERR_NO_FILE:
-                    $imgOk = FALSE;
-                    break;
+                    return FALSE;
                 case UPLOAD_ERR_INI_SIZE:
                 case UPLOAD_ERR_FORM_SIZE:
-                    $imgOk = FALSE;
-                    break;
+                    return FALSE;
                 default:
-                    $imgOk = FALSE;
+                    return FALSE;
             }
 
             //If the file size is greater than 2 MB
             if ($_FILES['submitTGEUpload']['size'][$i] > 2097152) 
-                $imgOk = FALSE;
+                return FALSE;
 
             //Check to see if it's an actual image by checking the file info object
             $finfo = new finfo(FILEINFO_MIME_TYPE);
@@ -185,12 +181,8 @@ class submitTGE {
                     'png' => 'image/png',
                     'gif' => 'image/gif',
                 ),true)) {
-                    $imgOk = FALSE;
+                    return FALSE;
             } 
-
-            //If the error flag was set, exit the function
-            if ($imgOk === FALSE)
-                return FALSE;
         }
 
 
@@ -217,7 +209,19 @@ class submitTGE {
         return TRUE;
     }
 
+    // Function Name: submitForm
+    // Purpose: To submit all of the information in the input fields on submitTGE.php and to upload all images to the site
+    // Parameters: None
+    // Returns: None
+    // Side Effects:
+    //   <1> All game information is inserted into the GameDescriptions table
+    //   <2> All of the status information is inserted into the GameDescriptionStatus table
+    //   <3> All submitted images are uploaded to the website
+    //   <4> All image URLs are inserted into the DescriptionPics table
+    //   <5> If any of 1-4 fails, the user is directed back to the submitTGE page with errors
+    //   <6> If 1-4 succeeds, the user is directed back to their dashboard
     public function submitForm() {
+        error_log("Title: " . $this->valGameTitle() . ", numPlayers: " . $this->valNumPlayers() . ", ageRating: " . $this->valAgeRating() . ", playTime: " . $this->valPlayTime() . ", description: " . $this->valDescription() . ", company: " . $this->valCompany() . " expansions: " .  $this->valExpansions() . ".", 0);
         //Check to see if all validation checks pass, if not redirect back to the page
         if ($this->valGameTitle() && $this->valNumPlayers() && $this->valAgeRating() && $this->valPlayTime() && $this->valDescription() && $this->valCompany() && $this->valExpansions()) {
             //Attempt to upload the images. If successful, start inserting into the DB

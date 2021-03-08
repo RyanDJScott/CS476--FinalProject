@@ -18,7 +18,8 @@
 
     //If the form was submitted, execute the signup process
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        
+        $submitTGE = new submitTGE($_SESSION["UID"]);
+        $submitTGE->submitForm();
     }
 
     //If the user was sent here with the GET method for errors, set the error
@@ -37,7 +38,7 @@
 
         //Validation error
         if (isset($_GET["error"]) && $_GET["error"] === "img_error")
-            $errorMessage = "Your images could not be uploaded to the site. Please try again!";
+            $errorMessage = "Your images could not be uploaded to the site, you submitted too many (max of 4), or you haven't submitted any! Please try again!";
 
         //Validation error
         if (isset($_GET["error"]) && $_GET["error"] === "dbimg_error")
