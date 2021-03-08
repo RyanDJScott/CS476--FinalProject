@@ -1,3 +1,37 @@
+<?php
+    //Include class definitions for login check, form submission
+    include_once(__DIR__ . '/PHP/userFactory.php');
+    include_once(__DIR__ . '/PHP/submitTGEScripts.php');
+
+    //Include functions for displaying
+    include_once(__DIR__ . '/PHP/navBar.php');
+
+    //Continue the session
+    session_start();
+
+    //Set the error message to be blank
+    $errorMessage = "";
+
+    //Check to see if they are logged in; redirect if not
+    if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]))
+        header("Location: login.php");
+
+    //If the form was submitted, execute the signup process
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        
+    }
+
+    //If the user was sent here with the GET method for errors, set the error
+    if ($_SERVER["REQUEST_METHOD"] === "GET") {
+        //Insertion error
+        if (isset($_GET["error"]) && $_GET["error"] === "db_error")
+            $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
+        
+        //Validation error
+        if (isset($_GET["error"]) && $_GET["error"] === "val_error")
+            $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
+    }
+?>
 <!DOCTYPE html>
 <HTML lang="en">
 
@@ -11,11 +45,12 @@
 
 <body>
     <!-- The navigation bar -->
-    <nav>
-        <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.html" class="navButton">Login</a>
-        <a href="signup.html" class="navButton">Signup</a>
-        <a href="search.html" class="navButton">Search</a>
+    <nav> 
+        <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <?php
+            //This page can only be accessed by logged in
+            loggedInNavBar();   
+        ?>
     </nav>
 
     <!-- Submit TGE header image -->
@@ -29,7 +64,7 @@
 
             <!-- Game Name and Error -->
             <div class="submitTable">
-                <form method="POST">
+                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                     <table>
 
                         <!-- Submit TGE Name and Error-->
