@@ -12,7 +12,7 @@ class submitTGE {
     private $description = NULL;
     private $company = NULL;
     private $expansions = NULL;
-    private $images = NULL;
+    private $images = array();
 
     //Database connection variables
     private $db = NULL;
@@ -142,7 +142,79 @@ class submitTGE {
             return FALSE;
     }
 
-    private function uploadImages () {}
+    private function uploadImages () {
+        //Get the number of uploaded files
+        $fileNumber = count($_FILES['submitTGEUpload']['name']);
+
+        //Check to see if there are more than 4 files. If so, reject.
+        if ($fileNumber > 4)
+            return FALSE;
+
+        //Cycle through each image, and perform a series of checks
+        for ($i = 0; $i < $fileNumber; $i++) {
+            //Set a flag
+            $imgOk = TRUE;
+
+            //If there was an upload error, set the flag to false
+            switch ($_FILES['submitTGEUpload']['error'][$i]) {
+                case UPLOAD_ERR_OK:
+                    break;
+                case UPLOAD_ERR_NO_FILE:
+                    $imgOk = FALSE;
+                    break;
+                case UPLOAD_ERR_INI_SIZE:
+                case UPLOAD_ERR_FORM_SIZE:
+                    $imgOk = FALSE;
+                    break;
+                default:
+                    $imgOk = FALSE;
+            }
+
+            //If the file size is greater than 2 MB
+            if ($_FILES['submitTGEUpload']['size'][$i] > 2097152) 
+                $imgOk = FALSE;
+
+            //Check to see if it's an actual image by checking the file info object
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+
+            if (false === $ext = array_search(
+                $finfo->file($_FILES['submitTGEUpload']['tmp_name'][$i]),
+                array(
+                    'jpg' => 'image/jpeg',
+                    'png' => 'image/png',
+                    'gif' => 'image/gif',
+                ),true)) {
+                    $imgOk = FALSE;
+            } 
+
+            //If the error flag was set, exit the function
+            if ($imgOk === FALSE)
+                return FALSE;
+        }
+
+
+        //If you made it out of the loop, all images are ready to be uploaded
+        for ($j = 0; $j < $fileNumber; $j++) {
+            //Prepare the URL incase the file upload works
+            $filePath = "/uploads/gamePictures/" . sha1_file($_FILES["submitTGEUpload"]["tmp_name"][$j]) . "." . $ext . "";
+
+            //Try to move the file to the uploads folder
+            if (!move_uploaded_file($_FILES['submitTGEUpload']['tmp_name'][$j],
+                sprintf(
+                    __DIR__ . '/../uploads/gamePictures/%s.%s',
+                    sha1_file($_FILES['submitTGEUpload']['tmp_name'][$j]),
+                    $ext
+                )
+            )) {
+                return FALSE;
+            } else {
+                $this->images[] = $filePath;
+            }
+        }
+
+        //If you made it out of the loop, all images were moved correctly
+        return TRUE;
+    }
 
     public function submitForm() {}
 }
