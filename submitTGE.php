@@ -1,3 +1,50 @@
+<?php
+    //Include class definitions for login check, form submission
+    include_once(__DIR__ . '/PHP/userFactory.php');
+    include_once(__DIR__ . '/PHP/submitTGEScripts.php');
+
+    //Include functions for displaying
+    include_once(__DIR__ . '/PHP/navBar.php');
+
+    //Continue the session
+    session_start();
+
+    //Set the error message to be blank
+    $errorMessage = "";
+
+    //Check to see if they are logged in; redirect if not
+    if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]))
+        header("Location: login.php");
+
+    //If the form was submitted, execute the signup process
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $submitTGE = new submitTGE($_SESSION["UID"]);
+        $submitTGE->submitForm();
+    }
+
+    //If the user was sent here with the GET method for errors, set the error
+    if ($_SERVER["REQUEST_METHOD"] === "GET") {
+        //Insertion error
+        if (isset($_GET["error"]) && $_GET["error"] === "db_error")
+            $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
+        
+        //Validation error
+        if (isset($_GET["error"]) && $_GET["error"] === "val_error")
+            $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
+
+        //Validation error
+        if (isset($_GET["error"]) && $_GET["error"] === "st_error")
+            $errorMessage = "There was a problem setting the status of your tabletop game entry. Please contact the site administrators!";
+
+        //Validation error
+        if (isset($_GET["error"]) && $_GET["error"] === "img_error")
+            $errorMessage = "Your images could not be uploaded to the site, you submitted too many (max of 4), or you haven't submitted any! Please try again!";
+
+        //Validation error
+        if (isset($_GET["error"]) && $_GET["error"] === "dbimg_error")
+            $errorMessage = "Your images could not be saved in the database. Please contact the site administrators!";
+    }
+?>
 <!DOCTYPE html>
 <HTML lang="en">
 
@@ -11,11 +58,12 @@
 
 <body>
     <!-- The navigation bar -->
-    <nav>
-        <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.html" class="navButton">Login</a>
-        <a href="signup.html" class="navButton">Signup</a>
-        <a href="search.html" class="navButton">Search</a>
+    <nav> 
+        <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <?php
+            //This page can only be accessed by logged in
+            loggedInNavBar();   
+        ?>
     </nav>
 
     <!-- Submit TGE header image -->
@@ -26,10 +74,11 @@
     <div class="container">
         <!-- Container for Submission Form -->
         <div class="formContainer">
+        <p class="errorMessage"><?php echo htmlspecialchars($errorMessage); ?></p>
 
             <!-- Game Name and Error -->
             <div class="submitTable">
-                <form method="POST">
+                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                     <table>
 
                         <!-- Submit TGE Name and Error-->
@@ -116,26 +165,7 @@
             <!-- Upload Button -->
             <div class="uploadImageFile">
                 <label for="submitTGEUpload">Upload a file:</label>
-                <input type="file" id="submitTGEUpload" name="submitTGEUpload">
-            </div>
-
-            <!-- image upload container -->
-            <div class="uploadContainer">
-
-                <!-- images themselves -->
-                <div class="uploadImagePreview">
-                    <img class="previewImg" src="dependencies/uploadPreview.png">
-                </div>
-                <div class="uploadImagePreview">
-                    <img class="previewImg" src="dependencies/uploadPreview.png">
-                </div>
-                <div class="uploadImagePreview">
-                    <img class="previewImg" src="dependencies/uploadPreview.png">
-                </div>
-                <div class="uploadImagePreview">
-                    <img class="previewImg" src="dependencies/uploadPreview.png">
-                </div>
-
+                <input type="file" id="submitTGEUpload" name="submitTGEUpload[]" multiple>
             </div>
 
             <!-- Submit button -->

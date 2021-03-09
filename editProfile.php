@@ -49,8 +49,6 @@
 </head>
 
 <body>
-
-    <!-- The navigation bar -->
     <!-- The navigation bar -->
     <nav> 
         <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>

@@ -224,7 +224,7 @@ abstract class userProfileSubmission {
             } 
 
         //Prepare the URL incase the file upload works
-        $filePath = "/uploads/userPics/" . sha1_file($_FILES["uploadPic"]["tmp_name"]) . "." . $ext . "";
+        $filePath = "/uploads/userPictures/" . sha1_file($_FILES["uploadPic"]["tmp_name"]) . "." . $ext . "";
 
         //Try to move the file to the uploads folder
         if (!move_uploaded_file($_FILES['uploadPic']['tmp_name'],
