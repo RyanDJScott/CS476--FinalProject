@@ -862,12 +862,14 @@ class adminUser extends user {
     // Function Name: setTGEStatus
     // Purpose: To set the status information of a TGE
     // Parameters: 
-    //   <1> $TGE: A tabletop game entry object
+    //   <1> $gameTitle: The title of the TGE being updated
+    //   <2> $status: The new status of the entry
+    //   <3> $reason: The reason for updating the new status
     // Returns:
     //   <1> TRUE: The status information was successfully set in the database
     //   <2> FALSE: The status information was not successfully set in the database
     // Side Effects:
-    //   <1> The TGE has it's status information updated
+    //   <1> The Tabletop Game Entry has it's status information updated
     public function setTGEStatus(string $gameTitle, int $status, string $reason) {
         //Perform UPDATE query
         $updateStatus = "UPDATE GameDescriptionStatus SET status = '" . $this->dbConnect->real_escape_string($status) . "', reason = '" . $this->dbConnect->real_escape_string($reason) . "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($gameTitle) . "'";
