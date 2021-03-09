@@ -2,6 +2,8 @@
     //Include class definitions for login check
     include_once(__DIR__ . '/PHP/userFactory.php');
     include_once(__DIR__ . '/PHP/display.php');
+    include_once(__DIR__ . '/PHP/TGE.php');
+    include_once(__DIR__ . '/PHP/review.php');
 
     //Include functions for displaying
     include_once(__DIR__ . '/PHP/navBar.php');
@@ -16,6 +18,16 @@
     if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
         $gameTitle = $_GET["gameTitle"];
         $thisGame = new TGE($gameTitle);
+    }
+
+    //If the user presses the flag button, set the flag
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["gameTitle"]) && isset($_POST["UID"])) {
+        if (isset($_SESSION["UID"]) && is_object($_SESSION["userObj"])) {
+            $thisReview = new Review($_POST["gameTitle"], $_POST["UID"]);
+            $_SESSION["userObj"]->flagReview($thisReview);
+        } else {
+            header("Location: login.php");
+        }
     }
 ?>
 <!DOCTYPE html>
