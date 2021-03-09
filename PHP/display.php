@@ -40,6 +40,14 @@ class Display {
         }
     }
 
+    private function displayRecommend(bool $recommend) {
+        //If the flag is true, return yes string, return no otherwise
+        if ($recommend == TRUE)
+            return "Yes, I would recommend this game!";
+        else if ($recommend == FALSE)
+            return "No, I would not recommend this game.";
+    }
+
     //-----------------index.php display functions--------------------//
     public function displayAllGames() {
         //Get all of the games from the DB
@@ -154,7 +162,54 @@ class Display {
 
     private function displayDashboardPendingTGE() {}
 
-    public function displayReviewTGE($TGE) {}
+    //Function Name: displayTGE
+    //Purpose: To display the contents of a tabletop game description on the reviewTGE.php page
+    //Parameters: 
+    //   <1> $TGE: the tabletop game entry being displayed
+    //Returns: N/A
+    //Side Effects: Displays the contents of a tabletop game description on the reviewTGE.php page
+    public function displayReviewTGE(TGE $TGE) {
+        $images = $TGE->getImages();
+
+        echo '<!-- Container for tabletop game description -->
+        <div class="elementContainer">
+            
+            <!--
+                Display name, user who submitted
+                and other information on one side
+            -->
+            <div class="innerContainer">
+                <div class="name">' . $TGE->getGameTitle() . '</div>
+                Submitted by ' . $TGE->getScreenName() . ' on ' . $TGE->getDateSubmitted() . '<br>
+                Company: ' . $TGE->getCompany() . ' <br>
+                Play Time: ' . $TGE->getPlayTime() . ' hours <br>
+                Age Rating: ' . $TGE->getAgeRating() . '+ <br>
+                Number of Players: ' . $TGE->getNumPlayers() . ' <br>
+                Expansions: ' . $TGE->getExpansions() . ' <br>
+            </div>
+
+            <!-- 
+                The game description itseld on
+                the other (right) side
+            -->
+            <div class="innerContainer">
+                <p><br>
+                '. $TGE->getDescription() .'    
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Container for images of the tabletop game-->
+        <div class="imageContainer">
+            <!-- Images of the boardgame, ideally should appear
+             as four in a row-->';
+        
+        foreach ($images as $displayImages)
+             echo '<img class="image" src="' . $displayImages . '" alt="Image for ' . $TGE->getGameTitle() . '"/>';
+             
+        echo '</div>';
+    }
 
     //-------------Review Display Functions----------------//
     //Function Name: displayReview
@@ -162,11 +217,49 @@ class Display {
     //Parameters: N/A
     //Returns: N/A
     //Side Effects: The contents of this review are displayed on a webpage
-    public function displayReview() {}
+    public function displayReview(Review $review) {
+        echo '<div class="elementContainer">
+            
+            <!-- 
+                left side for rating information
+            -->
+            <div class="innerContainer">
+                <div class="name">Rating ' . $review->getRating() . '</div>
+                Submitted By: ' . $review->getSubmittedBy() . '<br>
+                Recommended? ' . $this->displayRecommend($review->getRecommend()) . '<br>
+                Number of Players: ' . $review->getNumPlays() . '<br>
+                Age of Players: ' . $review->getAvgAge() . '<br>
+                Time for one Round: ' . $review->getAvgPlayTime() . '<br>
+                Percieved Difficulty: ' . $review->getDifficulty() . '<br>
+                Number of Times Played: ' . $review->getNumPlays() . '<br>
+            </div> 
+
+            <!--
+                right side for review itself and flag button
+            -->
+            <div class="innerContainer">
+                <p><br>'
+                   . $review->getReview() .  
+                '</p>';
+            
+            //Set logic for displaying buttons or not
+            if ($review->getFlag() == 0) {
+                echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
+                    <input class="flag" type="submit" name="flag" id="flag" value="FLAG REVIEW">
+                    <input type="hidden" name="gameTitle" value="' . $review->getGameTitle() . '">
+                    <input type="hidden" name="UID" value="' . $review->getUID() . '">
+                </form>';
+            } else {
+                echo '<p class="errorMessage">This review has already been flagged.</p>';
+            }
+
+        echo '</div>
+            </div>';
+    }
 
     //------------TGE Display Functions--------------------//
     //Function Name: displayTGE
-    //Purpose: To display the contents of a tabletop game description on the viewTGE.php/reviewTGE.php page
+    //Purpose: To display the contents of a tabletop game description on the viewTGE.php page
     //Parameters: 
     //   <1> $TGE: the tabletop game entry being displayed
     //Returns: N/A
@@ -184,6 +277,7 @@ class Display {
             <div class="innerContainer">
                 <div class="name">' . $TGE->getGameTitle() . '</div>
                 Submitted by ' . $TGE->getScreenName() . ' on ' . $TGE->getDateSubmitted() . '<br>
+                Rating: ' . $TGE->getOverallRating() . '<br>
                 Company: ' . $TGE->getCompany() . ' <br>
                 Play Time: ' . $TGE->getPlayTime() . ' hours <br>
                 Age Rating: ' . $TGE->getAgeRating() . '+ <br>

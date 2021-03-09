@@ -644,5 +644,15 @@ class TGE {
     public function getOverallRating () {
         return $this->overallRating;
     }
+
+    //Function Name: getReviews
+    //Purpose: To get the reviews for this tabletop game entry
+    //Parameters: N/A
+    //Returns:
+    //   <1> $this->gameReviews
+    //Side Effects: N/A
+    public function getReviews () {
+        return $this->gameReviews;
+    }
 }
 ?>

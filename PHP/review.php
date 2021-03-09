@@ -437,38 +437,7 @@
             return $this->numPlays;
         }
 
-        //Function Name: setFlag
-        //Purpose: To set the value of $flagStatus
-        //Parameters: 
-        //   <1> $flagVal: The new value of $flag (0 or 1)
-        //Returns:
-        //   <1> True: If the information was updated in the DB
-        //   <2> False: If the information was not updated in the DB
-        //Side Effects: $flag is set to the value of $flagVal
-        public function setFlag(int $flagVal) {
-            //Check to see if date is set
-            if (!isset($flagVal)) {
-                return FALSE;
-            } else {
-                //Write an update query
-                $flagQuery = "UPDATE Reviews SET flag = '" . $this->dbConnect->real_escape_string($flagVal) . "
-                    ' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($this->UID) . "'";
-                
-                //Execute query
-                $queryResults = $this->dbConnect->query($flagQuery);
-
-                //See if the update worked
-                if ($queryResults === TRUE) {
-                    //Update the object variable
-                    $this->flag = $flagVal;
-
-                    return TRUE;
-                } else {
-                    return FALSE;
-                }
-            }
-        }
-
+        //Note: No setter; only logged in users can set a flag
         //Function Name: getFlag
         //Purpose: To get the value of $flagStatus
         //Parameters: N/A
