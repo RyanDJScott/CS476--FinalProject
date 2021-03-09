@@ -16,8 +16,14 @@
 
     //Fetch game title from the GET method
     if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
+        //Get the game title
         $gameTitle = $_GET["gameTitle"];
+
+        //Create a new TGE object 
         $thisGame = new TGE($gameTitle);
+
+        //Get the status information for this game
+        $gameStatus = $thisGame->getStatusInfo();
     }
 
     //If the user presses the flag button, set the flag
@@ -25,6 +31,7 @@
         if (isset($_SESSION["UID"]) && is_object($_SESSION["userObj"])) {
             $thisReview = new Review($_POST["gameTitle"], $_POST["UID"]);
             $_SESSION["userObj"]->flagReview($thisReview);
+            header("Location: viewTG.php?gameTitle=" . $_POST["gameTitle"] . "");
         } else {
             header("Location: login.php");
         }
@@ -58,6 +65,14 @@
         <img src="dependencies/boardGameHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!"/>
     </div> 
 
+    <?php
+        if ($gameStatus["status"] == 0 || $gameStatus["status"] == 2) {
+    ?>
+    <p class="errorMessage">This game has not been approved for publication on the site.</p>
+    <p class="errorMessage">Please contact the site administrators for more information!</p>
+    <?php
+        } else {
+    ?>
     <!-- Container for page elements -->
     <div class="overallContainer">
         <?php $display->displayTGE($thisGame); ?>
@@ -72,6 +87,7 @@
             }
         ?>
     </div>
+        <?php }?>
 
 </body>
 </HTML>

@@ -244,13 +244,13 @@ class Display {
             
             //Set logic for displaying buttons or not
             if ($review->getFlag() == 0) {
-                echo '<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                    <input class="flag" type="button" name="flag" id="flag" value="FLAG REVIEW">
+                echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
+                    <input class="flag" type="submit" name="flag" id="flag" value="FLAG REVIEW">
                     <input type="hidden" name="gameTitle" value="' . $review->getGameTitle() . '">
                     <input type="hidden" name="UID" value="' . $review->getUID() . '">
                 </form>';
             } else {
-                echo '<input class="flag" type="button" name="flag" id="flag" value="This review has already been flagged" disabled>';
+                echo '<p class="errorMessage">This review has already been flagged.</p>';
             }
 
         echo '</div>
