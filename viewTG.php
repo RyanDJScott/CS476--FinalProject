@@ -1,3 +1,21 @@
+<?php
+    //Include class definitions for login check
+    include_once(__DIR__ . '/PHP/userFactory.php');
+    include_once(__DIR__ . '/PHP/display.php');
+
+    //Include functions for displaying
+    include_once(__DIR__ . '/PHP/navBar.php');
+
+    //Continue the session
+    session_start();
+
+    //Create a display object for the page
+    $display = new Display();
+
+    //Fetch game title from the GET method
+    if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0)
+        $gameTitle = $_GET["gameTitle"];
+?>
 <!DOCTYPE html>
 <HTML lang="en">
 <head>
@@ -12,9 +30,13 @@
     <!-- The navigation bar -->
     <nav> 
         <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.php" class="navButton">Login</a>
-        <a href="signup.html" class="navButton">Signup</a>
-        <a href ="search.html" class="navButton">Search</a>
+        <?php
+            //Check if the user is logged in
+            if ((isset($_SESSION["UID"]) && $_SESSION["UID"] > 0) && is_object($_SESSION["userObj"])) 
+                loggedInNavBar();
+             else 
+                loggedOutNavBar();   
+        ?>
     </nav>
 
     <!-- Main header image -->
@@ -24,50 +46,7 @@
 
     <!-- Container for page elements -->
     <div class="overallContainer">
-    
-        <!-- Container for tabletop game description -->
-        <div class="elementContainer">
-            
-            <!--
-                Display name, user who submitted
-                and other information on one side
-            -->
-            <div class="innerContainer">
-                <div class="name">Gamename</div>
-                Submitted by screenname<br>
-                Company: ________ <br>
-                Play Time: ________ <br>
-                Age Rating: ________ <br>
-                Number of Players: ________ <br>
-                Expenses: ________ <br>
-            </div>
-
-            <!-- 
-                The game description itseld on
-                the other (right) side
-            -->
-            <div class="innerContainer">
-                <p><br>
-                    This is a game and here is the description.
-                    This is a game and here is the description.
-                    This is a game and here is the description.
-                    This is a game and here is the description.
-                    This is a game and here is the description.
-                </p>
-            </div>
-
-        </div>
-
-        <!-- Container for images of the tabletop game-->
-        <div class="imageContainer">
-            <!-- Images of the boardgame, ideally should appear
-             as four in a row-->
-             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
-             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
-             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
-             <img class="image" src="dependencies/placeholder.png" alt="tabletop game image"/>
-        </div>
-
+        <?php $display->displayTGE($gameTitle); ?>
         <!-- Container for each review... multiples will be added -->
         <div class="elementContainer">
             

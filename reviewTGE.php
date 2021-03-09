@@ -92,7 +92,7 @@ if (isset($_GET["error"])) {
     -->
     <div class="pageAllignment">
     <p class="errorMessage"><?php echo $errorMessage; ?></p>
-        <?php $display->displayTGE($thisGame); ?>
+        <?php $display->displayReviewTGE($thisGame); ?>
         <form name="approvalForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <!-- leave feedback -->
             <div class="textBoxBottom">
