@@ -40,6 +40,14 @@ class Display {
         }
     }
 
+    private function displayRecommend(bool $recommend) {
+        //If the flag is true, return yes string, return no otherwise
+        if ($recommend == TRUE)
+            return "Yes, I would recommend this game!";
+        else if ($recommend == FALSE)
+            return "No, I would not recommend this game.";
+    }
+
     //-----------------index.php display functions--------------------//
     public function displayAllGames() {
         //Get all of the games from the DB
@@ -154,6 +162,12 @@ class Display {
 
     private function displayDashboardPendingTGE() {}
 
+    //Function Name: displayTGE
+    //Purpose: To display the contents of a tabletop game description on the reviewTGE.php page
+    //Parameters: 
+    //   <1> $TGE: the tabletop game entry being displayed
+    //Returns: N/A
+    //Side Effects: Displays the contents of a tabletop game description on the reviewTGE.php page
     public function displayReviewTGE(TGE $TGE) {
         $images = $TGE->getImages();
 
@@ -203,7 +217,38 @@ class Display {
     //Parameters: N/A
     //Returns: N/A
     //Side Effects: The contents of this review are displayed on a webpage
-    public function displayReview() {}
+    public function displayReview(Review $review) {
+        echo '<div class="elementContainer">
+            
+            <!-- 
+                left side for rating information
+            -->
+            <div class="innerContainer">
+                <div class="name">Rating ' . $review->getRating() . '</div>
+                Submitted By: ' . $review->getSubmittedBy() . '<br>
+                Recommended? ' . $this->displayRecommend($review->getRecommend()) . '<br>
+                Number of Players: ' . $review->getNumPlays() . '<br>
+                Age of Players: ' . $review->getAvgAge() . '<br>
+                Time for one Round: ' . $review->getAvgPlayTime() . '<br>
+                Percieved Difficulty: ' . $review->getDifficulty() . '<br>
+                Number of Times Played: ' . $review->getNumPlays() . '<br>
+            </div> 
+
+            <!--
+                right side for review itself and flag button
+            -->
+            <div class="innerContainer">
+                <p><br>'
+                   . $review->getReview() .  
+                '</p>
+                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                    <input class="flag" type="button" name="flag" id="flag" value="FLAG REVIEW">
+                    <input type="hidden" name="gameTitle" value="' . $review->getGameTitle() . '">
+                    <input type="hidden" name="UID" value="' . $review->getUID() . '">
+                </form>
+            </div>
+        </div>';
+    }
 
     //------------TGE Display Functions--------------------//
     //Function Name: displayTGE

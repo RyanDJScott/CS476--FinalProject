@@ -13,8 +13,10 @@
     $display = new Display();
 
     //Fetch game title from the GET method
-    if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0)
+    if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
         $gameTitle = $_GET["gameTitle"];
+        $thisGame = new TGE($gameTitle);
+    }
 ?>
 <!DOCTYPE html>
 <HTML lang="en">
@@ -46,39 +48,17 @@
 
     <!-- Container for page elements -->
     <div class="overallContainer">
-        <?php $display->displayTGE($gameTitle); ?>
+        <?php $display->displayTGE($thisGame); ?>
         <!-- Container for each review... multiples will be added -->
-        <div class="elementContainer">
-            
-            <!-- 
-                left side for rating information
-            -->
-            <div class="innerContainer">
-                <div class="name">Rating 0/10</div>
-                Submitted By: Screenname<br>
-                Recommended? Yes<br>
-                Number of Players: ____<br>
-                Age of Players: ____<br>
-                Time for one Round: ____<br>
-                Percieved Difficulty: easy<br>
-                Number of Times Played: ____<br>
-            </div> 
+        <?php
+            //Get all of the reviews for this tabletop game 
+            $reviews = $thisGame->getReviews();
 
-            <!--
-                right side for review itself and flag button
-            -->
-            <div class="innerContainer">
-                <p><br>
-                    This is a review for a game and this is where the reviews
-                    will go. This is a review for a game and this is where the reviews
-                    will go. This is a review for a game and this is where the reviews
-                    will go. This is a review for a game and this is where the reviews
-                    will go. This is a review for a game and this is where the reviews
-                    will go.
-                </p>
-                <input class="flag" type="button" name="flag" id="flag" value="FLAG REVIEW">
-            </div>
-        </div>
+            //Print each review on this page
+            foreach($reviews as $gameReview) {
+                $display->displayReview($gameReview);
+            }
+        ?>
     </div>
 
 </body>
