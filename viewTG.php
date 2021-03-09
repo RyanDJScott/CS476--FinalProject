@@ -28,11 +28,18 @@
 
     //If the user presses the flag button, set the flag
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["gameTitle"]) && isset($_POST["UID"])) {
+        //If the user is logged in, they are allowed to flag a review
         if (isset($_SESSION["UID"]) && is_object($_SESSION["userObj"])) {
+            //Instantiate the review from the information
             $thisReview = new Review($_POST["gameTitle"], $_POST["UID"]);
+            
+            //Use the user to flag this review
             $_SESSION["userObj"]->flagReview($thisReview);
+
+            //Take them back to the same page
             header("Location: viewTG.php?gameTitle=" . $_POST["gameTitle"] . "");
         } else {
+            //They aren't logged in, take them to the login page
             header("Location: login.php");
         }
     }
@@ -66,11 +73,13 @@
     </div> 
 
     <?php
+        //If the game has been rejected or is pending, show error information
         if ($gameStatus["status"] == 0 || $gameStatus["status"] == 2) {
     ?>
     <p class="errorMessage">This game has not been approved for publication on the site.</p>
     <p class="errorMessage">Please contact the site administrators for more information!</p>
     <?php
+        //Otherwise, display the information for the review
         } else {
     ?>
     <!-- Container for page elements -->
