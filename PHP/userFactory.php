@@ -1,6 +1,6 @@
 <?php
 include_once(__DIR__ . '/database.php');
-include_once(__DIR__. '/review.php');
+include_once(__DIR__ . '/review.php');
 
 abstract class userFactory {
     abstract function makeUser($userID);
@@ -607,7 +607,7 @@ abstract class user {
     abstract public function deleteUser(int $userID);
     abstract public function removeFlag(Review $review);
     abstract public function deleteReview(Review $review);
-    abstract public function setTGEStatus(TGE $TGE);
+    abstract public function setTGEStatus(string $gameTitle, int $status, string $reason);
     abstract public function promoteUser(int $userID);
 }
 
@@ -708,7 +708,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function setTGEStatus(TGE $TGE) {
+    public function setTGEStatus(string $gameTitle, int $status, string $reason) {
         return;
     }
 
@@ -862,13 +862,27 @@ class adminUser extends user {
     // Function Name: setTGEStatus
     // Purpose: To set the status information of a TGE
     // Parameters: 
-    //   <1> $TGE: A tabletop game entry object
+    //   <1> $gameTitle: The title of the TGE being updated
+    //   <2> $status: The new status of the entry
+    //   <3> $reason: The reason for updating the new status
     // Returns:
     //   <1> TRUE: The status information was successfully set in the database
     //   <2> FALSE: The status information was not successfully set in the database
     // Side Effects:
-    //   <1> The TGE has it's status information updated
-    public function setTGEStatus(TGE $TGE) {}
+    //   <1> The Tabletop Game Entry has it's status information updated
+    public function setTGEStatus(string $gameTitle, int $status, string $reason) {
+        //Perform UPDATE query
+        $updateStatus = "UPDATE GameDescriptionStatus SET status = '" . $this->dbConnect->real_escape_string($status) . "', reason = '" . $this->dbConnect->real_escape_string($reason) . "' WHERE gameTitle = '" . $this->dbConnect->real_escape_string($gameTitle) . "'";
+    
+        //Execute query
+        $statusResults = $this->dbConnect->query($updateStatus);
+
+        //Check if status was successfully updated
+        if ($statusResults == TRUE)
+            return TRUE;
+        else
+            return FALSE;
+    }
 
     // Function Name: promoteUser
     // Purpose: To promote a user to an administrator
