@@ -33,7 +33,7 @@ if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
 $errorMessage = "";
 
 //Error checking
-if (isset($_GET["error"]) && $_GET["error"] === "db_error");
+if (isset($_GET["error"]) && $_GET["error"] === "db_error")
     $errorMessage = "There was an issue executing your decision on this flagged review. Please try again, or contact the DB administrator.";
 
 //If the method is POST, execute admin actions
@@ -42,11 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $gameTitle = $_POST["gameTitle"];
     $userID = $_POST["UID"];
 
-    //If the approve button was selected, remove the flag
+    //If the approve button was selected, remove the flag. Otherwise, delete the review from the DB
     if (isset($_POST["removeFlag"]) && $_POST["removeFlag"] === "APPROVE")
         $reviewFlag = $_SESSION["userObj"]->removeFlag($gameTitle, $userID);
     else if (isset($_POST["deleteReview"]) && $_POST["deleteReview"] === "DELETE")
-        $reviewFlag = $_SESSION["userObj"]->deleteFlag($gameTitle, $userID);
+        $reviewFlag = $_SESSION["userObj"]->deleteReview($gameTitle, $userID);
     
     //If the action worked, send them to their dashboard, otherwise send them back with a message
     if ($reviewFlag)
@@ -94,25 +94,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <!-- page container -->
     <div class="pageAllignment">
+        <?php
+            //Check if this review is actually flagged
+            if ($thisReview->getFlag() == 1) {
+            
+            //This review has been flagged; implement all display functions etc.
+        ?>
         <p class="errorMessage"><?=$errorMessage?></p>
 
         <?php $display->displayTGE($thisGame); ?>
         
         <!-- another field for the flagged review to be displayed -->
-        <?php $display->displayReview($thisReview); ?>
+        <?php $display->displayFlaggedReview($thisReview); ?>
 
         <!-- This is where the buttons will go -->
         <div class="buttonContainer">
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">"
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <!-- Removes the Flag - i.e. the review is fine -->
-                <input class="button" type="button" name="removeFlag" value="APPROVE"> 
+                <input class="button" type="submit" name="removeFlag" value="APPROVE"> 
 
                 <!-- Deletes the review - i.e. the revie violated rules -->
-                <input class="button" type="button" name="deleteReview" value="DELETE">
+                <input class="button" type="submit" name="deleteReview" value="DELETE">
                 <input type="hidden" name="gameTitle" value="<?=$gameTitle?>">
                 <input type="hidden" name="UID" value="<?=$UID?>">
             </form>
         </div>
+        <?php
+            //This review hasn't been flagged; show error message
+            } else if ($thisReview->getFlag() == 0) {
+        ?>
+        <p class="errorMessage">This review hasn't been flagged!</p>
+        <?php
+            }
+        ?>
 
     </div>
 </body>
