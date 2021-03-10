@@ -27,7 +27,6 @@ class submitReview {
 
         //Initialize the other variables via the POST method
         $this->rating = $_POST["reviewRating"];
-        $this->recommend = $_POST["reviewRecommended"];
         $this->numPlays = $_POST["reviewPlayers"];
         $this->avgAge = $_POST["reviewAge"];
         $this->avgPlayTime = $_POST["reviewPlaytime"];
@@ -35,6 +34,12 @@ class submitReview {
         $this->difficulty = $_POST["reviewDifficulty"];
         $this->review = $_POST["reviewText"];
 
+        //Initialize recommend to BOOL value
+        if ($_POST["reviewRecommended"] === "YES")
+            $this->recommend = TRUE;
+        else if ($_POST["reviewRecommended"] === "NO")
+            $this->recommend = FALSE;
+        
         //Initialize db connection 
         $this->db = new database();
         $this->dbConnect = $this->db->getDBConnection();
@@ -49,7 +54,64 @@ class submitReview {
             $resultRow = $screenNameResult->fetch_assoc();
 
             $this->submittedBy = $resultRow["UID"];
-        }
+        } 
+    }
+
+
+    private function valSubmittedBy () {
+        if (isset($this->submittedBy) && strlen($this->submittedBy) > 0)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    private function valRating () {
+        if (isset($this->rating) && $this->rating >= 0 && $this->rating <= 10)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    private function valReview () {
+        if (isset($this->review) && strlen($this->review) > 0)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    private function valRecommend () {
+        if (isset($this->recommend))
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    private function valAvgAge() {
+        if (isset($this->avgAge) && $this->avgAge > 0 && $this->avgAge <= 100)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    private function valAvgPlayTime() {
+        if (isset($this->avgPlayTime) && $this->avgPlayTime > 0)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    private function valDifficulty() {
+        if (isset($this->difficulty) && ($this->difficulty === "Easy" || $this->difficulty === "Moderate" || $this->difficulty === "Difficult"))
+            return TRUE;
+        else
+            return FALSE;
+    }
+    
+    private function valNumPlays() {
+        if (isset($this->numPlays) && $this->numPlays > 0)
+            return TRUE;
+        else
+            return FALSE;
     }
 }
 ?>

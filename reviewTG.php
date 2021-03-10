@@ -131,8 +131,8 @@
                         <td>
                             <select id="reviewDifficulty" name="reviewDifficulty">
                                 <option value="Easy">Easy</option>
-                                <option value="Medium">Moderate</option>
-                                <option value="Hard">Difficulty</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Difficult">Difficulty</option>
                         </td>
                     </tr>
                     <tr>
