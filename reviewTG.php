@@ -1,3 +1,32 @@
+<?php
+    //Include class definitions for login check, form submission
+    include_once(__DIR__ . '/PHP/userFactory.php');
+    include_once(__DIR__ . '/PHP/reviewTGScripts.php');
+
+    //Include functions for displaying
+    include_once(__DIR__ . '/PHP/navBar.php');
+
+    //Continue the session
+    session_start();
+
+    //Set the error message to be blank
+    $errorMessage = "";
+
+    //Check to see if they are logged in; redirect if not
+    if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]))
+        header("Location: login.php");
+
+    //Get the game title from the GET method
+    if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0)
+        $gameTitle = $_GET["gameTitle"];
+
+    //If the post method was used, create an object and submit the form
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $submitReview = new submitReview();
+        $submitReview->submitForm();
+    }
+
+?>
 <!DOCTYPE html>
 <HTML lang="en">
 
@@ -11,11 +40,12 @@
 
 <body>
     <!-- The navigation bar -->
-    <nav>
-        <a href="index.html"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
-        <a href="login.html" class="navButton">Login</a>
-        <a href="signup.html" class="navButton">Signup</a>
-        <a href="search.html" class="navButton">Search</a>
+    <nav> 
+        <a href="index.php"><img src="dependencies/miniLogo.png" alt="Mini Logo Home Button" class="miniLogo" /></a>
+        <?php
+            //This page can only be accessed by logged in
+            loggedInNavBar();   
+        ?>
     </nav>
 
     <!-- Signup header image -->
@@ -28,7 +58,7 @@
 
         <!-- Form container -->
         <div class="formContainer">
-            <form method="post">
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <table class="reviewTableForm">
 
                     <!-- Rating -->
