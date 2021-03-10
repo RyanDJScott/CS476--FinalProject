@@ -257,6 +257,34 @@ class Display {
             </div>';
     }
 
+    public function displayFlaggedReview(Review $review) {
+        echo '<div class="elementContainer">
+            
+            <!-- 
+                left side for rating information
+            -->
+            <div class="innerContainer">
+                <div class="name">Rating ' . $review->getRating() . '</div>
+                Submitted By: ' . $review->getSubmittedBy() . '<br>
+                Recommended? ' . $this->displayRecommend($review->getRecommend()) . '<br>
+                Number of Players: ' . $review->getNumPlays() . '<br>
+                Age of Players: ' . $review->getAvgAge() . '<br>
+                Time for one Round: ' . $review->getAvgPlayTime() . '<br>
+                Percieved Difficulty: ' . $review->getDifficulty() . '<br>
+                Number of Times Played: ' . $review->getNumPlays() . '<br>
+            </div> 
+
+            <!--
+                right side for review itself and flag button
+            -->
+            <div class="innerContainer">
+                <p><br>'
+                   . $review->getReview() .  
+                '</p>
+                </div>
+            </div>';
+    }
+
     //------------TGE Display Functions--------------------//
     //Function Name: displayTGE
     //Purpose: To display the contents of a tabletop game description on the viewTGE.php page
