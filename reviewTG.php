@@ -25,7 +25,6 @@
         $submitReview = new submitReview();
         $submitReview->submitForm();
     }
-
 ?>
 <!DOCTYPE html>
 <HTML lang="en">
@@ -51,6 +50,9 @@
     <!-- Signup header image -->
     <div class="mainPageHeader">
         <img src="dependencies/boardGameHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
+        <div class="headerImageMessage">
+            Leave a review for <?php echo $gameTitle; ?>
+        </div>
     </div>
 
     <!-- Alignment Container -->
@@ -76,26 +78,14 @@
                     <!-- Recommended? -->
                     <tr>
                         <td><label for="reviewRecommended">Would you recommend?</label></td>
-                        <td><input type="radio" id="yes" name="reviewRecommendedTrue">Yes &nbsp;
-                            <input type="radio" id="no" name="reviewRecommendedFalse">No
+                        <td><input type="radio" id="yes" name="reviewRecommended" value="YES">Yes &nbsp;
+                            <input type="radio" id="no" name="reviewRecommended" value="NO">No
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
                             <div class="errorMessage" id="reviewRecommendedError"></div>
-                        </td>
-                    </tr>
-
-                    <!-- How Many Players-->
-                    <tr>
-                        <td><label for="reviewPlayers">How many players?</label></td>
-                        <td><input type="number" id="reviewPlayers" name="reviewPlayers"></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <div class="errorMessage" id="reviewPlayersError"></div>
                         </td>
                     </tr>
 
@@ -139,10 +129,10 @@
                     <tr>
                         <td><label for="reviewDifficulty">Percieved Difficulty</label></td>
                         <td>
-                            <select id="reviewDifficulty">
+                            <select id="reviewDifficulty" name="reviewDifficulty">
                                 <option value="Easy">Easy</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hard">Hard</option>
+                                <option value="Medium">Moderate</option>
+                                <option value="Hard">Difficulty</option>
                         </td>
                     </tr>
                     <tr>
