@@ -22,9 +22,16 @@
 
     //If the post method was used, create an object and submit the form
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $submitReview = new submitReview();
+        $submitReview = new submitReview($gameTitle, $_SESSION["UID"]);
         $submitReview->submitForm();
     }
+
+    //Error checking
+    if (isset($_GET["error"]) && $_GET["error"] === "val_error")
+        $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
+
+    if (isset($_GET["error"]) && $_GET["error"] === "db_error")
+        $errorMessage = "There was an issue submitting your review. Please contact the site administrators, or try again!";
 ?>
 <!DOCTYPE html>
 <HTML lang="en">

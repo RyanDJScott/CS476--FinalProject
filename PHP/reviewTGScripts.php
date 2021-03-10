@@ -178,5 +178,28 @@ class submitReview {
         else
             return FALSE;
     }
+
+    public function submitForm() {
+        //Check that all input information passes validation
+        if ($this->valSubmittedBy() && $this->valRating() && $this->valReview() && $this->valRecommend() && $this->valAvgAge() && $this->valAvgPlayTime() && $this->valDifficulty() && $this->valNumPlays()) {
+            //Build an insert query into the DB
+            $reviewQuery = "INSERT INTO Reviews (gameTitle, UID, submittedBy, submitDate, rating, review, recommend, avgAge, avgPlayTime, difficulty, numPlays, flag) VALUES ('" . $this->dbConnect->real_escape_string($this->gameTitle) . "'
+            , '" . $this->dbConnect->real_escape_string($this->UID) . "', '" . $this->dbConnect->real_escape_string($this->submittedBy) . "', CURRENT_DATE(), '" . $this->dbConnect->real_escape_string($this->rating) . "'
+            , '" . $this->dbConnect->real_escape_string($this->review) . "', '" . $this->dbConnect->real_escape_string($this->recommend) . "', '" . $this->dbConnect->real_escape_string($this->avgAge) . "'
+            , '" . $this->dbConnect->real_escape_string($this->avgPlayTime) . "', '" . $this->dbConnect->real_escape_string($this->difficulty) . "', '" . $this->dbConnect->real_escape_string($this->numPlays) . "'
+            , 0)";
+
+            //Execute query
+            $reviewResults = $this->dbConnect->query($reviewQuery);
+
+            //If it worked, redirect back to the viewTG.php page, otherwise return to current page with error
+            if ($reviewResults)
+                header("Location: viewTG.php?gameTitle=" . $this->gameTitle . "");
+            else
+                header("Location: reviewTG.php?error=db_error");
+        } else {
+            header("Location: reviewTG.php?error=val_error");
+        }
+    }
 }
 ?>
