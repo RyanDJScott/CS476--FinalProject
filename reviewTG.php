@@ -20,18 +20,19 @@
     if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0)
         $gameTitle = $_GET["gameTitle"];
 
-    //If the post method was used, create an object and submit the form
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $submitReview = new submitReview($gameTitle, $_SESSION["UID"]);
-        $submitReview->submitForm();
-    }
-
     //Error checking
     if (isset($_GET["error"]) && $_GET["error"] === "val_error")
-        $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
+    $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
 
     if (isset($_GET["error"]) && $_GET["error"] === "db_error")
         $errorMessage = "There was an issue submitting your review. Please contact the site administrators, or try again!";
+
+    //If the post method was used, create an object and submit the form
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $gameTitle = $_POST["gameTitle"];
+        $submitReview = new submitReview($gameTitle, $_SESSION["UID"]);
+        $submitReview->submitForm();
+    }
 ?>
 <!DOCTYPE html>
 <HTML lang="en">
@@ -67,13 +68,14 @@
 
         <!-- Form container -->
         <div class="formContainer">
+        <p class="errorMessage"><?=$errorMessage?></p>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <table class="reviewTableForm">
 
                     <!-- Rating -->
                     <tr>
                         <td><label for="reviewRating">Rating:</label></td>
-                        <td><input type="number" id="reviewRating" name="reviewRating">&nbsp;/10</td>
+                        <td><input type="input" id="reviewRating" name="reviewRating">&nbsp;/10</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -99,7 +101,7 @@
                     <!-- Average Age of Players -->
                     <tr>
                         <td><label for="reviewAge">Average age of players:</label></td>
-                        <td><input type="number" id="reviewAge" name="reviewAge">&nbsp;years</td>
+                        <td><input type="input" id="reviewAge" name="reviewAge">&nbsp;years</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -111,7 +113,7 @@
                     <!-- Playtime for one round -->
                     <tr>
                         <td><label for="reviewPlaytime">Time for one round:</label></td>
-                        <td><input type="number" id="reviewPlaytime" name="reviewPlaytime">&nbsp;hour(s)</td>
+                        <td><input type="input" id="reviewPlaytime" name="reviewPlaytime">&nbsp;hour(s)</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -123,7 +125,7 @@
                     <!-- Number of Times Player -->
                     <tr>
                         <td><label for="reviewPlayedQuantity">Number of times played:</label></td>
-                        <td><input type="number" id="reviewPlayedQuantity" name="reviewPlayedQuantity"></td>
+                        <td><input type="input" id="reviewPlayedQuantity" name="reviewPlayedQuantity"></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -139,7 +141,7 @@
                             <select id="reviewDifficulty" name="reviewDifficulty">
                                 <option value="Easy">Easy</option>
                                 <option value="Moderate">Moderate</option>
-                                <option value="Difficult">Difficulty</option>
+                                <option value="Difficult">Difficult</option>
                         </td>
                     </tr>
                     <tr>
@@ -162,6 +164,7 @@
 
                 <!-- submit button-->
                 <input class="reviewSubmitButton" type="submit">
+                <input type="hidden" name="gameTitle" value="<?=$gameTitle?>">
             </form>
         </div>
     </div>

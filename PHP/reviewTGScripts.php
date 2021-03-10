@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__ . 'database.php');
+include_once(__DIR__ . '/database.php');
 
 class submitReview {
     //Member variables
@@ -37,7 +37,7 @@ class submitReview {
 
         //Initialize the other variables via the POST method
         $this->rating = $_POST["reviewRating"];
-        $this->numPlays = $_POST["reviewPlayers"];
+        $this->numPlays = $_POST["reviewPlayedQuantity"];
         $this->avgAge = $_POST["reviewAge"];
         $this->avgPlayTime = $_POST["reviewPlaytime"];
         $this->numPlays = $_POST["reviewPlayedQuantity"];
@@ -63,8 +63,10 @@ class submitReview {
         if ($screenNameResult->num_rows > 0) {
             $resultRow = $screenNameResult->fetch_assoc();
 
-            $this->submittedBy = $resultRow["UID"];
+            $this->submittedBy = $resultRow["screenName"];
         } 
+
+        error_log("Rating: " . $this->rating . ", NumPlays: " . $this->numPlays . ", AvgAge: " . $this->avgAge . ", AvgPlayTime: " . $this->avgPlayTime . ", Difficulty: " . $this->difficulty . ", Review: " . $this->review . ", Recommend: " . $this->recommend . ", screenName: " . $this->submittedBy . "", 0);
     }
 
     // Function Name: valSubmittedBy
@@ -75,7 +77,7 @@ class submitReview {
     //   <2> FALSE: The input value doesn't pass validation
     // Side Effects: N/A
     private function valSubmittedBy () {
-        if (isset($this->submittedBy) && strlen($this->submittedBy) > 0)
+        if (isset($this->submittedBy) && !empty($this->submittedBy) && strlen($this->submittedBy) > 0)
             return TRUE;
         else
             return FALSE;
@@ -89,7 +91,7 @@ class submitReview {
     //   <2> FALSE: The input value doesn't pass validation
     // Side Effects: N/A
     private function valRating () {
-        if (isset($this->rating) && $this->rating >= 0 && $this->rating <= 10)
+        if (isset($this->rating) && !empty($this->rating) && $this->rating >= 0 && $this->rating <= 10)
             return TRUE;
         else
             return FALSE;
@@ -103,7 +105,7 @@ class submitReview {
     //   <2> FALSE: The input value doesn't pass validation
     // Side Effects: N/A
     private function valReview () {
-        if (isset($this->review) && strlen($this->review) > 0)
+        if (isset($this->review) && !empty($this->review) && strlen($this->review) > 0)
             return TRUE;
         else
             return FALSE;
@@ -117,7 +119,7 @@ class submitReview {
     //   <2> FALSE: The input value doesn't pass validation
     // Side Effects: N/A
     private function valRecommend () {
-        if (isset($this->recommend))
+        if (isset($this->recommend) && !empty($this->recommend))
             return TRUE;
         else
             return FALSE;
@@ -131,7 +133,7 @@ class submitReview {
     //   <2> FALSE: The input value doesn't pass validation
     // Side Effects: N/A
     private function valAvgAge() {
-        if (isset($this->avgAge) && $this->avgAge > 0 && $this->avgAge <= 100)
+        if (isset($this->avgAge) && !empty($this->avgAge) && $this->avgAge > 0 && $this->avgAge <= 100)
             return TRUE;
         else
             return FALSE;
@@ -145,7 +147,7 @@ class submitReview {
     //   <2> FALSE: The input value doesn't pass validation
     // Side Effects: N/A
     private function valAvgPlayTime() {
-        if (isset($this->avgPlayTime) && $this->avgPlayTime > 0)
+        if (isset($this->avgPlayTime) && !empty($this->avgPlayTime) && $this->avgPlayTime > 0)
             return TRUE;
         else
             return FALSE;
@@ -159,7 +161,7 @@ class submitReview {
     //   <2> FALSE: The input value doesn't pass validation
     // Side Effects: N/A
     private function valDifficulty() {
-        if (isset($this->difficulty) && ($this->difficulty === "Easy" || $this->difficulty === "Moderate" || $this->difficulty === "Difficult"))
+        if (isset($this->difficulty) && !empty($this->difficulty) && ($this->difficulty === "Easy" || $this->difficulty === "Moderate" || $this->difficulty === "Difficult"))
             return TRUE;
         else
             return FALSE;
@@ -173,12 +175,20 @@ class submitReview {
     //   <2> FALSE: The input value doesn't pass validation
     // Side Effects: N/A
     private function valNumPlays() {
-        if (isset($this->numPlays) && $this->numPlays > 0)
+        if (isset($this->numPlays) && !empty($this->numPlays) && $this->numPlays > 0)
             return TRUE;
         else
             return FALSE;
     }
 
+    // Function Name: submitForm
+    // Purpose: To submit the review information into the DB
+    // Parameters: None
+    // Returns: N/A
+    // Side Effects:
+    //   <1> If the input fields pass validation, the review is submitted into the database and the use is taken to the viewTG.php page
+    //   <2> If there is a DB error, the user is returned to the reviewTG.php page with an error
+    //   <3> If the input fields don't pass validation, the user is returned to the reviewTG.php page with an error
     public function submitForm() {
         //Check that all input information passes validation
         if ($this->valSubmittedBy() && $this->valRating() && $this->valReview() && $this->valRecommend() && $this->valAvgAge() && $this->valAvgPlayTime() && $this->valDifficulty() && $this->valNumPlays()) {
@@ -196,9 +206,10 @@ class submitReview {
             if ($reviewResults)
                 header("Location: viewTG.php?gameTitle=" . $this->gameTitle . "");
             else
-                header("Location: reviewTG.php?error=db_error");
+                header("Location: reviewTG.php?gameTitle=" . $this->gameTitle . "&error=db_error");
         } else {
-            header("Location: reviewTG.php?error=val_error");
+            //Forms did not pass validation, return with error
+            header("Location: reviewTG.php?gameTitle=" . $this->gameTitle . "&error=val_error");
         }
     }
 }
