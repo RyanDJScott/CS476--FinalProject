@@ -120,7 +120,6 @@ if (isset($_GET["error"])) {
             </div>
         </form>
     </div>
-<?php echo gettype($thisGame); ?>
 </body>
 
 </html>

@@ -605,8 +605,8 @@ abstract class user {
     //Admin: implements these functions
     //Comm. Users: Block the user from using these functions
     abstract public function deleteUser(int $userID);
-    abstract public function removeFlag(Review $review);
-    abstract public function deleteReview(Review $review);
+    abstract public function removeFlag(string $gameTitle, int $userID);
+    abstract public function deleteReview(string $gameTitle, int $userID);
     abstract public function setTGEStatus(string $gameTitle, int $status, string $reason);
     abstract public function promoteUser(int $userID);
 }
@@ -690,7 +690,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function removeFlag(Review $review) {
+    public function removeFlag(string $gameTitle, int $userID) {
         return;
     }
 
@@ -699,7 +699,7 @@ class communityUser extends user {
     // Parameters: None
     // Returns: None
     // Side Effects: None
-    public function deleteReview(Review $review) {
+    public function deleteReview(string $gameTitle, int $userID) {
         return;
     }
 
@@ -819,9 +819,9 @@ class adminUser extends user {
     //   <2> FALSE: The review did not have the flag set back to 0
     // Side Effects: 
     //   <1> The review has it's flag set back to 0
-    public function removeFlag(Review $review) {
+    public function removeFlag(string $gameTitle, int $userID) {
         //Perform update query
-        $removeFlagQuery = "UPDATE Reviews SET flag = 0 WHERE gameTitle = '" . $this->dbConnect->real_escape_string($review->getGameTitle()) . "' AND UID = '" . $this->dbConnect->real_escape_string($review->getUID()) . "'";
+        $removeFlagQuery = "UPDATE Reviews SET flag = 0 WHERE gameTitle = '" . $this->dbConnect->real_escape_string($gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($userID) . "'";
     
         //Execute query
         $removeResult = $this->dbConnect->query($removeFlagQuery);
@@ -844,9 +844,9 @@ class adminUser extends user {
     //   <2> FALSE: The review was not successfully deleted from the database
     // Side Effects:
     //   <1> The review is deleted from the database
-    public function deleteReview(Review $review) {
+    public function deleteReview(string $gameTitle, int $userID) {
         //Perform delete query
-        $deleteReviewQuery = "DELETE FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($review->getGameTitle()) . "' AND UID = '" . $this->dbConnect->real_escape_string($review->getUID()) . "'";
+        $deleteReviewQuery = "DELETE FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($gameTitle) . "' AND UID = '" . $this->dbConnect->real_escape_string($userID) . "'";
     
         //Execute the query
         $deleteResult = $this->dbConnect->query($deleteReviewQuery);
