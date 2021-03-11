@@ -48,6 +48,20 @@ class Display {
             return "No, I would not recommend this game.";
     }
 
+    private function convertStatus(int $status) {
+        //If the status is 0, it's been rejected
+        switch ($status) {
+            case 0:
+                return "Rejected";
+            case 1:
+                return "Accepted";
+            case 2: 
+                return "Pending Review";
+            default:
+                return "Error";
+        }
+    }
+
     //-----------------index.php display functions--------------------//
     public function displayAllGames() {
         //Get all of the games from the DB
@@ -200,17 +214,200 @@ class Display {
         } 
     }
 
-    public function displayDashboard($user) {}
+    public function displayDashboard($user) {
+        //Display the contents of the dashboard that has the users personal info on it
+        $this->displayDashboardTitle($user);
+        $this->displayDashboardProfile($user);
+        $this->displayDashboardTGEBox($user);
 
-    private function displayDashboardTitle($user) {}
+        //If this user is an administrator, display the admin functions too
+        //Close the div if they are not an admin
+        if (is_a($user, 'adminUser')) {
+            $this->displayDashboardFlaggedReviews();
+            $this->displayDashboardPendingTGE();
+        } else {
+            echo '</div>';
+        }
+    }
 
-    private function displayDashboardProfile($user) {}
+    private function displayDashboardTitle($user) {
+        echo '<!-- Dashboard header image -->
+            <div class="dashboardHeader">
+                <img src="dependencies/dashboardImage.png" class="dashboardHeaderImage" alt="Welcome to Queen City\'s Gambit!" />
+                    <div class="headerImageMessage">
+                        <p>Welcome Back ' . $user->getScreenName() . '</p>
+                        <p>Last Login: ' . $user->getLastLogin() . '</p>
+                    </div>
+            </div>';
+    }
 
-    private function displayDashboardTGEBox($user) {}
+    private function displayDashboardProfile($user) {
+        echo '<h1>' . $user->getScreenName() . '</h1>
+        <!-- Main Area Container Which holds all -->
+        <div class="mainContainer">
+    
+            <!-- user information container -->
+            <div class="userInformation">
+    
+                <!-- image and basic information container -->
+                <div class="userInformationLeft">
+    
+                    <!-- image container -->
+                    <div class="userProfileImage">
+                        <img src="' . $user->getAvatarURL() . '" alt="' . $user->getScreenName() . '\'s profile picture">
+                    </div>
+    
+                    <!-- information container -->
+                    <div class="simpleUserInfo">
+                        <p>' . $user->getFirstName() . ' ' . $user->getLastName() . '</p>
+                        <p>' . $user->getBirthday() . '</p>
+                        <p>' . $user->getEmail() . '</p>
+                    </div>
+                </div>
+    
+                <!-- biography, favourites, and edit profile container-->
+                <div class="userInformationRight">
+                    
+                    <!-- biography -->
+                    <div class="userBiography">
+                        <p>' . $user->getBiography() . '</p>
+                    </div>
+    
+                    <!-- right side information-->
+                    <div class="favouritesInfo">
+                        <p>Favourite Game: ' . $user->getFavGame() . '</p>
+                        <p>Type: ' . $user->getGameType() . '</p>
+                        <p>Time Playing Game: ' . $user->getPlayTime() . ' years</p>
+                    </div>
+    
+                    <!-- edit profile button-->
+                    <div class="editProfileButton">
+                        <a href="editProfile.php">
+                            <input class="buttonButton" type="button" value="EDIT PROFILE">
+                        </a>
+                    </div>
+                </div>
+    
+            </div>';
+    }
 
-    private function displayDashboardFlaggedReviews() {}
+    private function displayDashboardTGEBox($user) {
+        echo '<!-- submit game description and pending container-->
+        <div class="submitPending">
 
-    private function displayDashboardPendingTGE() {}
+            <!-- submit game description-->
+            <div class="submitDescription">
+                <a href="submitTGE.php">
+                    <input type="button" value="SUBMIT A GAME DESCRIPTION" class="submitDescriptionButton">
+                </a>
+            </div>
+            
+            <!-- pending table -->
+            <div class="pendingTableContainer">
+                <table>
+                    <!-- header row -->
+                    <tr>
+                        <th>TITLE</th>
+                        <th>DATE SUBMITTED</th>
+                        <th>STATUS</th>
+                        <th>REASON</th>
+                    </tr>
+
+                    <!-- information -->';
+
+        //Grab all of the pending entries for this user
+        $pendingEntriesQuery = "SELECT GameDescriptions.gameTitle, GameDescriptions.dateSubmitted, GameDescriptionStatus.status, GameDescriptionStatus.reason FROM GameDescriptions INNER JOIN GameDescriptionStatus ON (GameDescriptions.gameTitle = GameDescriptionStatus.gameTitle) WHERE GameDescriptions.UID = '" . $this->dbConnect->real_escape_string($user->getUID()) . "'";
+
+        //Execute query
+        $pendingResults = $this->dbConnect->query($pendingEntriesQuery);
+
+        //If there are results, display them
+        if ($pendingResults->num_rows > 0) {
+            while ($resultRow = $pendingResults->fetch_assoc()) {
+                echo '<tr>
+                        <td>' . $resultRow["gameTitle"] . '</td>
+                        <td>' . $resultRow["dateSubmitted"] . '</td>
+                        <td>' . $this->convertStatus($resultRow["status"]) . '</td>
+                        <td>' . $resultRow["reason"] . '</td> 
+                    </tr>';
+            }
+        }
+        
+        echo '</table>
+                </div>
+                </div>';
+    }
+
+    private function displayDashboardFlaggedReviews() {
+        echo '<!-- heading for admin area-->
+        <div class="adminContainer">
+            <div class="adminHeading">Administrator Area</div>
+        </div>
+
+        <!-- admin functionality -->
+        <div class="adminArea">
+        <!-- flags -->
+            <div class="flagTable">
+                <table>
+                    <tr>
+                        <th>Game Title</th>
+                        <th>User Screenname</th>
+                        <th>Link</th>
+                    </tr>';
+
+        //Find all flagged reviews in DB
+        $flaggedReviewsQuery = "SELECT Reviews.gameTitle, Reviews.UID, Users.screenName FROM Users INNER JOIN Reviews ON (Users.UID = Reviews.UID) WHERE Reviews.flag = 1";
+
+        //Execute query
+        $flaggedResults = $this->dbConnect->query($flaggedReviewsQuery);
+
+        //If there are results, display them
+        if ($flaggedResults->num_rows > 0) {
+            while ($resultRow = $flaggedResults->fetch_assoc()) {
+                echo '<tr>
+                        <td>' . $resultRow["gameTitle"] . '</td>
+                        <td>' . $resultRow["screenName"] . '</td>
+                        <td><a href="reviewFlag.php?gameTitle=' . $resultRow["gameTitle"] . '&UID=' . $resultRow["UID"] . '">Review Flag</a></td>
+                    </tr>';
+            }
+        }
+
+        echo '</table>
+                </div>'; 
+    }
+
+    private function displayDashboardPendingTGE() {
+        echo '<!-- Descriptions -->
+            <div class="descriptionReview">
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date Submitted</th>
+                        <th>Revision Link</th> 
+                    </tr>';
+
+        //Find all pending reviews
+        $pendingReviewQuery = "SELECT GameDescriptions.gameTitle, GameDescriptions.dateSubmitted FROM GameDescriptions INNER JOIN GameDescriptionStatus ON (GameDescriptions.gameTitle = GameDescriptionStatus.gameTitle) WHERE GameDescriptionStatus.status = 2";
+
+        //Execute query
+        $pendingResults = $this->dbConnect->query($pendingReviewQuery);
+
+        //If there are results, display them
+        if ($pendingResults->num_rows > 0) {
+            while ($resultRow = $pendingResults->fetch_assoc()) {
+                echo '<tr>
+                        <td>' . $resultRow["gameTitle"] . '</td>
+                        <td>' . $resultRow["dateSubmitted"] . '</td>
+                        <td><a href="reviewTGE.php?gameTitle=' . $resultRow["gameTitle"] . '">Review this game</a></td>
+                    </tr>';
+            }
+        }
+                    
+        echo '</table>
+                </div>
+                </div>
+                </div>';            
+    }
 
     //Function Name: displayTGE
     //Purpose: To display the contents of a tabletop game description on the reviewTGE.php page
