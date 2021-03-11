@@ -362,17 +362,7 @@ class Display {
             </div>
             
             <!-- pending table -->
-            <div class="pendingTableContainer">
-                <table>
-                    <!-- header row -->
-                    <tr>
-                        <th>TITLE</th>
-                        <th>DATE SUBMITTED</th>
-                        <th>STATUS</th>
-                        <th>REASON</th>
-                    </tr>
-
-                    <!-- information -->';
+            <div class="pendingTableContainer">';
 
         //Grab all of the pending entries for this user
         $pendingEntriesQuery = "SELECT GameDescriptions.gameTitle, GameDescriptions.dateSubmitted, GameDescriptionStatus.status, GameDescriptionStatus.reason FROM GameDescriptions INNER JOIN GameDescriptionStatus ON (GameDescriptions.gameTitle = GameDescriptionStatus.gameTitle) WHERE GameDescriptions.UID = '" . $this->dbConnect->real_escape_string($user->getUID()) . "'";
@@ -382,6 +372,18 @@ class Display {
 
         //If there are results, display them
         if ($pendingResults->num_rows > 0) {
+            echo '<table>
+                    <!-- header row -->
+                    <tr>
+                        <th>TITLE</th>
+                        <th>DATE SUBMITTED</th>
+                        <th>STATUS</th>
+                        <th>REASON</th>
+                    </tr>
+
+                    <!-- information -->';
+            
+            //Fill the table rows
             while ($resultRow = $pendingResults->fetch_assoc()) {
                 echo '<tr>
                         <td>' . $resultRow["gameTitle"] . '</td>
@@ -390,10 +392,13 @@ class Display {
                         <td>' . $resultRow["reason"] . '</td> 
                     </tr>';
             }
+
+            echo '</table>';
+        } else {
+         echo '<p>You haven\'t submitted any tabletop game entries!</p>';
         }
         
-        echo '</table>
-                </div>
+        echo '</div>
                 </div>';
     }
 
@@ -412,13 +417,7 @@ class Display {
         <!-- admin functionality -->
         <div class="adminArea">
         <!-- flags -->
-            <div class="flagTable">
-                <table>
-                    <tr>
-                        <th>Game Title</th>
-                        <th>User Screenname</th>
-                        <th>Link</th>
-                    </tr>';
+            <div class="flagTable">';
 
         //Find all flagged reviews in DB
         $flaggedReviewsQuery = "SELECT Reviews.gameTitle, Reviews.UID, Users.screenName FROM Users INNER JOIN Reviews ON (Users.UID = Reviews.UID) WHERE Reviews.flag = 1";
@@ -428,6 +427,14 @@ class Display {
 
         //If there are results, display them
         if ($flaggedResults->num_rows > 0) {
+            echo '<table>
+                    <tr>
+                        <th>Game Title</th>
+                        <th>User Screenname</th>
+                        <th>Link</th>
+                    </tr>';
+            
+            //Display all rows in the table
             while ($resultRow = $flaggedResults->fetch_assoc()) {
                 echo '<tr>
                         <td>' . $resultRow["gameTitle"] . '</td>
@@ -435,10 +442,13 @@ class Display {
                         <td><a href="reviewFlag.php?gameTitle=' . $resultRow["gameTitle"] . '&UID=' . $resultRow["UID"] . '">Review Flag</a></td>
                     </tr>';
             }
+
+            echo '</table>';
+        } else {
+            echo '<p>There are no flagged reviews on the site!';
         }
 
-        echo '</table>
-                </div>'; 
+        echo '</div>'; 
     }
 
     // Function Name: displayDashboardPendingTGE
@@ -449,13 +459,7 @@ class Display {
     //   <1> Displays all pending TG entries requiring moderation on the administrators dashboard
     private function displayDashboardPendingTGE() {
         echo '<!-- Descriptions -->
-            <div class="descriptionReview">
-                <table>
-                    <tr>
-                        <th>Title</th>
-                        <th>Date Submitted</th>
-                        <th>Revision Link</th> 
-                    </tr>';
+            <div class="descriptionReview">';
 
         //Find all pending reviews
         $pendingReviewQuery = "SELECT GameDescriptions.gameTitle, GameDescriptions.dateSubmitted FROM GameDescriptions INNER JOIN GameDescriptionStatus ON (GameDescriptions.gameTitle = GameDescriptionStatus.gameTitle) WHERE GameDescriptionStatus.status = 2";
@@ -465,6 +469,14 @@ class Display {
 
         //If there are results, display them
         if ($pendingResults->num_rows > 0) {
+            echo '<table>
+            <tr>
+                <th>Title</th>
+                <th>Date Submitted</th>
+                <th>Revision Link</th> 
+            </tr>';
+
+            //Display all rows in the table
             while ($resultRow = $pendingResults->fetch_assoc()) {
                 echo '<tr>
                         <td>' . $resultRow["gameTitle"] . '</td>
@@ -472,10 +484,13 @@ class Display {
                         <td><a href="reviewTGE.php?gameTitle=' . $resultRow["gameTitle"] . '">Review this game</a></td>
                     </tr>';
             }
+
+            echo '</table>';
+        } else {
+            echo '<p>There are no pending tabletop game entries to review!</p>';
         }
                     
-        echo '</table>
-                </div>
+        echo '</div>
                 </div>
                 </div>';            
     }
