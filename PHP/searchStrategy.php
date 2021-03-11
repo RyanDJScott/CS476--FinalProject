@@ -188,7 +188,7 @@ class gameSearch implements searchStrategy {
             
             //For each entry in the array, print their information
             foreach ($dbReturn as $games) {
-                echo '<a href="viewTGE.php?gameTitle=' . $games["gameTitle"] . '">
+                echo '<a href="viewTG.php?gameTitle=' . $games["gameTitle"] . '">
                         <div class="resultBox">
                             <img class="resultImg" src="' . $games["pictureURL"] . '" alt="result image"><br>
                             ' . $games["gameTitle"] . '
@@ -312,7 +312,7 @@ class gameSearch implements searchStrategy {
             
             //For each entry in the array, print their information
             foreach ($gameResults as $games) {
-                echo '<a href="viewTGE.php?gameTitle=' . $games["gameTitle"] . '">
+                echo '<a href="viewTG.php?gameTitle=' . $games["gameTitle"] . '">
                         <div class="resultBox">
                             <img class="resultImg" src="' . $games["pictureURL"] . '" alt="result image"><br>
                             ' . $games["gameTitle"] . '
