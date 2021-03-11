@@ -5,7 +5,7 @@ include_once(__DIR__ . '/review.php');
 include_once(__DIR__ . '/userFactory.php');
 include_once(__DIR__ . '/database.php');
 
-//Implement display class
+
 class Display {
     //Database variables
     private $db = NULL;
@@ -16,7 +16,7 @@ class Display {
         $this->dbConnect = $this->db->getDBConnection();
     }
     
-    //Utility Member Functions
+    //-----------Utility Member Functions------------//
     
     //Function Name: limitChars
     //Purpose: To truncate the text to a specific length and append '...' to the end of the string
@@ -77,9 +77,16 @@ class Display {
     }
 
     //-----------------index.php display functions--------------------//
+    // Function Name: displayAllGames
+    // Purpose: To display all of the games as mini cards on index.php
+    // Parameters: None 
+    // Returns: None 
+    // Side Effects: 
+    //   <1> All approved games are displayed as mini cards on index.php, if they exist
+    //   <2> An error message is displayed if no games meet this criteria
     public function displayAllGames() {
         //Get all of the games from the DB
-        $allGamesQuery = "SELECT gameTitle FROM GameDescriptionStatus WHERE status = 1 OR status = 2 OR status = 0";
+        $allGamesQuery = "SELECT gameTitle FROM GameDescriptionStatus WHERE status = 1";
 
         //Execute the query
         $allGamesResult = $this->dbConnect->query($allGamesQuery);
@@ -127,11 +134,12 @@ class Display {
     }
 
     //Function Name: displayTGECard
-    //Purpose: To display the contents of a tabletop game description as a mini-card
+    //Purpose: To display the contents of a tabletop game description as a mini card
     //Parameters: 
     //   <1> $TGE: a tabletop game entry object
     //Returns: N/A
-    //Side Effects: Displays the contents of a tabletop game description as a mini-card
+    //Side Effects: 
+    //   <1> Displays the contents of a tabletop game description as a mini card
     public function displayTGECard(TGE $TGE) {
         echo '<div class="smallGameBox">
                 <p>' . htmlspecialchars($TGE->getGameTitle()) . '</p>
@@ -145,7 +153,8 @@ class Display {
     //Purpose: To display the contents of a tabletop game description as a feature game box
     //Parameters: N/A
     //Returns: N/A
-    //Side Effects: Displays the contents of a tabletop game description as a feature game box
+    //Side Effects: 
+    //   <1> Displays the contents of a tabletop game description as a feature game box
     public function displayTGEFeatureGameBox(string $featureGame) {
         //Create new TGE object from the game
         $TGE = new TGE($featureGame);
@@ -174,6 +183,14 @@ class Display {
     }
 
     //--------------User Display Functions----------------//
+    // Function Name: displayViewProfile
+    // Purpose: To display the contents of a users information on viewProfile.php
+    // Parameters:
+    //   <1> $userID: The UID of the user being displayed
+    // Returns: N/A
+    // Side Effects:
+    //   <1> The information of the user is displayed on the viewProfile.php page
+    //   <2> An error is displayed if the user does not exist 
     public function displayViewProfile($userID) {
         //Get info from DB; we don't want to instantiate a user through this
         $userQuery = "SELECT firstName, lastName, birthday, email, screenName, avatarURL, biography, favGame, gameType, playTime FROM Users WHERE UID = '" . $this->dbConnect->real_escape_string($userID) . "'";
@@ -227,6 +244,14 @@ class Display {
         } 
     }
 
+    // Function Name: displayDashboard
+    // Purpose: To display the dashboard of the give user on dashboard.php
+    // Parameters:
+    //   <1> $user: a user object 
+    // Returns: N/A
+    // Side Effects: 
+    //   <1> The user dashboard is displayed
+    //   <2> The administrator privledges are displayed if the user is an administrator
     public function displayDashboard($user) {
         //Display the contents of the dashboard that has the users personal info on it
         $this->displayDashboardTitle($user);
@@ -243,6 +268,13 @@ class Display {
         }
     }
 
+    // Function Name: displayDashboardTitle
+    // Purpose: To display the user information over the header image on dashboard.php
+    // Parameters:
+    //   <1> $user: a user object 
+    // Returns: N/A
+    // Side Effects:
+    //   <1> The user screen name and last login are displayed over the header image on dashboard.php 
     private function displayDashboardTitle($user) {
         echo '<!-- Dashboard header image -->
             <div class="dashboardHeader">
@@ -254,6 +286,13 @@ class Display {
             </div>';
     }
 
+    // Function Name: displayDashboardProfile
+    // Purpose: To display the user information on dashboard.php
+    // Parameters:
+    //   <1> $user: a user object 
+    // Returns: N/A
+    // Side Effects:
+    //   <1> The basic user information is displayed on dashboard.php 
     private function displayDashboardProfile($user) {
         echo '<h1>' . $user->getScreenName() . '</h1>
         <!-- Main Area Container Which holds all -->
@@ -304,6 +343,13 @@ class Display {
             </div>';
     }
 
+    // Function Name: displayDashboardTGEBox
+    // Purpose: To display the TGE information for the user on dashboard.php
+    // Parameters:
+    //   <1> $user: a user object 
+    // Returns: N/A
+    // Side Effects:
+    //   <1> Displays the TGE information for the user on dashboard.php 
     private function displayDashboardTGEBox($user) {
         echo '<!-- submit game description and pending container-->
         <div class="submitPending">
@@ -351,6 +397,12 @@ class Display {
                 </div>';
     }
 
+    // Function Name: displayDashboardFlaggedReviews
+    // Purpose: To display all the flagged reviews for an admin to moderate
+    // Parameters: None
+    // Returns: None
+    // Side Effects: 
+    //   <1> To display all flagged reviews for moderation on an administrators dashboard
     private function displayDashboardFlaggedReviews() {
         echo '<!-- heading for admin area-->
         <div class="adminContainer">
@@ -389,6 +441,12 @@ class Display {
                 </div>'; 
     }
 
+    // Function Name: displayDashboardPendingTGE
+    // Purpose: To display all pending TG entries needing moderation
+    // Parameters: None
+    // Returns: N/A 
+    // Side Effects: 
+    //   <1> Displays all pending TG entries requiring moderation on the administrators dashboard
     private function displayDashboardPendingTGE() {
         echo '<!-- Descriptions -->
             <div class="descriptionReview">
@@ -427,7 +485,8 @@ class Display {
     //Parameters: 
     //   <1> $TGE: the tabletop game entry being displayed
     //Returns: N/A
-    //Side Effects: Displays the contents of a tabletop game description on the reviewTGE.php page
+    //Side Effects: 
+    //   <1> Displays the contents of a tabletop game description on the reviewTGE.php page
     public function displayReviewTGE(TGE $TGE) {
         $images = $TGE->getImages();
 
@@ -476,7 +535,8 @@ class Display {
     //Purpose: To display the contents of this review 
     //Parameters: N/A
     //Returns: N/A
-    //Side Effects: The contents of this review are displayed on a webpage
+    //Side Effects: 
+    //   <1> The contents of this review are displayed on a webpage
     public function displayReview(Review $review) {
         echo '<div class="elementContainer">
             
@@ -517,6 +577,13 @@ class Display {
             </div>';
     }
 
+    // Function Name: displayFlaggedReview
+    // Purpose: To display a flagged review on reviewFlag.php
+    // Parameters:
+    //   <1> $review: A Review object
+    // Returns: N/A
+    // Side Effects:
+    //   <1> Displays the flagged review on reviewFlag.php 
     public function displayFlaggedReview(Review $review) {
         echo '<div class="elementContainer">
             
@@ -551,7 +618,8 @@ class Display {
     //Parameters: 
     //   <1> $TGE: the tabletop game entry being displayed
     //Returns: N/A
-    //Side Effects: Displays the contents of a tabletop game description on the viewTGE.php page
+    //Side Effects: 
+    //   <1> Displays the contents of a tabletop game description on the viewTGE.php page
     public function displayTGE(TGE $TGE) {
         $images = $TGE->getImages();
 
