@@ -13,8 +13,6 @@ function getSearchObject() {
     $query = $_POST["searchInput"];
     $searchOption = "";
 
-    
-
     //Figure out what kind of search
     if (isset($_POST["user"]) && $_POST["user"] == "USER") {
         if (isset($_POST["game"]) && $_POST["game"] == "GAME")
@@ -26,6 +24,7 @@ function getSearchObject() {
     }
 
     //If you have the required information, create the object
-    return new Search($searchOption, $query);
+    if (isset($searchOption) && !empty($searchOption))
+        return new Search($searchOption, $query);
 }
 ?>

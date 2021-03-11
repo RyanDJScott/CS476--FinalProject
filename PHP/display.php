@@ -146,10 +146,60 @@ class Display {
         </div>';
     }
 
-
-
-
     //--------------User Display Functions----------------//
+    public function displayViewProfile($userID) {
+        //Get info from DB; we don't want to instantiate a user through this
+        $userQuery = "SELECT firstName, lastName, birthday, email, screenName, avatarURL, biography, favGame, gameType, playTime FROM Users WHERE UID = '" . $this->dbConnect->real_escape_string($userID) . "'";
+
+        //Execute query
+        $userResult = $this->dbConnect->query($userQuery);
+
+        //If there are results, display them
+        if ($userResult->num_rows > 0) {
+            $resultRow = $userResult->fetch_assoc();
+
+            echo '<h1>' . $resultRow["screenName"] . '</h1>
+                <!-- Main Area Container Which holds all -->
+                <div class="mainContainer">
+            
+                <!-- user information container -->
+                <div class="userInformation">
+                <!-- image and basic information container -->
+                <div class="userInformationLeft">
+
+                <!-- image container -->
+                <div class="userProfileImage">
+                    <img src="' . $resultRow["avatarURL"] . '" alt="' . $resultRow["screenName"] . '\'s avatar" class="userImg">
+                </div>
+                <!-- information container -->
+                <div class="simpleUserInfo">
+                    <p>' . $resultRow["firstName"] . ' ' . $resultRow["lastName"] . '</p>
+                    <p>' . $resultRow["birthday"] . '</p>
+                    <p>' . $resultRow["email"] . '</p>
+                </div>
+                </div>
+
+                <!-- biography, favourites, and edit profile container-->
+                <div class="userInformationRight">
+
+                <!-- biography -->
+                <div class="userBiography">
+                    <p>' . $resultRow["biography"] . '</p>
+                </div>
+
+                <!-- right side information-->
+                <div class="favouritesInfo">
+                    <p>Favourite Game: ' . $resultRow["favGame"] . '</p>
+                    <p>Type: ' . $resultRow["gameType"] . '</p>
+                    <p>Time Playing Game: ' . $resultRow["playTime"] . ' years</p>
+                </div>
+                </div>
+                </div>';
+        } else {
+            echo '<h1>This user does not exist! Please contact the site administrator!</h1>';
+        } 
+    }
+
     public function displayDashboard($user) {}
 
     private function displayDashboardTitle($user) {}
