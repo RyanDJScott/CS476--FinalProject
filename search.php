@@ -8,7 +8,7 @@
     session_start();
 
     //If the user pressed the search button, create a search object
-    if ($_SERVER["REQUEST_METHOD"] === "POST")
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["user"]) || isset($_POST["game"])))
         $thisSearch = getSearchObject();
 ?>
 
@@ -60,12 +60,13 @@
                     <label for="game">&nbsp GAME</label>
                     <input type="checkbox" id="game" name="game" value="GAME">
                 </div>
+                <p class="errorMessage"><?=$errorMessage?></p>
             </form>
         </div>
 
         <div class="rowAlignment">
         <?php
-        if ($_SERVER["REQUEST_METHOD"] === "POST")
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["user"]) || isset($_POST["game"])))
             $thisSearch->publishResults();
         ?>
         </div>
