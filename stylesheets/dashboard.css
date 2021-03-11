@@ -98,6 +98,13 @@
     text-decoration: none;
 }
 
+/* Copied over for delete/promote buttons*/
+.buttonContainer {
+    display: flex;
+    width: 75%;
+    margin: 20px; 
+    justify-content: center;
+}
 
 /*Styling for shared dashboard components involving submissions */
 .submitPending {
