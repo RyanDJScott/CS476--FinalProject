@@ -45,7 +45,7 @@
     <div class="dashboardHeader">
         <img src="dependencies/dashboardImage.png" class="dashboardHeaderImage" alt="Welcome to Queen City's Gambit!" />
     </div>
-
+    
     <?php $display->displayViewProfile($userID); ?>    
 
 </body>

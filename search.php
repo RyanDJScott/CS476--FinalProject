@@ -60,7 +60,6 @@
                     <label for="game">&nbsp GAME</label>
                     <input type="checkbox" id="game" name="game" value="GAME">
                 </div>
-                <p class="errorMessage"><?=$errorMessage?></p>
             </form>
         </div>
 
