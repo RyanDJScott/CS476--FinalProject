@@ -50,6 +50,11 @@
     margin-bottom: 5px;
 }
 
+.userImg {
+    height: 198px;
+    width: 198px;
+}
+
 .simpleUserInfo {
     min-width: 200px;
     background-color: white;

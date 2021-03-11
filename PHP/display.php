@@ -149,7 +149,7 @@ class Display {
     //--------------User Display Functions----------------//
     public function displayViewProfile($userID) {
         //Get info from DB; we don't want to instantiate a user through this
-        $userQuery = "SELECT firstName, lastName, birthday, email, screenName, avatarURL, biography, favGame, gameType, playTime FROM Users WHERE UID = '" . $this->dbConnect->real_escape_string($userID) . "";
+        $userQuery = "SELECT firstName, lastName, birthday, email, screenName, avatarURL, biography, favGame, gameType, playTime FROM Users WHERE UID = '" . $this->dbConnect->real_escape_string($userID) . "'";
 
         //Execute query
         $userResult = $this->dbConnect->query($userQuery);
@@ -169,7 +169,7 @@ class Display {
 
                 <!-- image container -->
                 <div class="userProfileImage">
-                    <img src="' . $resultRow["avatarURL"] . '" alt="' . $resultRow["screenName"] . '\'s avatar">
+                    <img src="' . $resultRow["avatarURL"] . '" alt="' . $resultRow["screenName"] . '\'s avatar" class="userImg">
                 </div>
                 <!-- information container -->
                 <div class="simpleUserInfo">
@@ -191,7 +191,7 @@ class Display {
                 <div class="favouritesInfo">
                     <p>Favourite Game: ' . $resultRow["favGame"] . '</p>
                     <p>Type: ' . $resultRow["gameType"] . '</p>
-                    <p>Time Playing Game: ' . $resultRow["playTime"] . 'years</p>
+                    <p>Time Playing Game: ' . $resultRow["playTime"] . ' years</p>
                 </div>
                 </div>
                 </div>';
