@@ -146,10 +146,12 @@ class Display {
         </div>';
     }
 
-
-
-
     //--------------User Display Functions----------------//
+    public function displayViewProfile($user) {
+        $this->displayDashboardProfile($user);
+        
+    }
+
     public function displayDashboard($user) {}
 
     private function displayDashboardTitle($user) {}
