@@ -3,6 +3,7 @@
     include_once(__DIR__ . '/PHP/userFactory.php');
 
     //Include functions for displaying
+    include_once(__DIR__ . '/PHP/display.php');
     include_once(__DIR__ . '/PHP/navBar.php');
 
     //Continue the session

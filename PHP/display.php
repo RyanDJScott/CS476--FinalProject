@@ -40,6 +40,13 @@ class Display {
         }
     }
 
+    // Function Name: displayRecommend
+    // Purpose: To convert the boolean value into text
+    // Parameters:
+    //   <1> $recommend: Boolean value
+    // Returns:
+    //   <1> A string that says Yes or No, depending on the value of $recommend
+    // Side Effects: N/A
     private function displayRecommend(bool $recommend) {
         //If the flag is true, return yes string, return no otherwise
         if ($recommend == TRUE)
@@ -48,6 +55,13 @@ class Display {
             return "No, I would not recommend this game.";
     }
 
+    // Function Name: convertStatus
+    // Purpose: To convert the status into text
+    // Parameters:
+    //   <1> $status: integer that is either 0, 1, or 2
+    // Returns:
+    //   <1> A string that says rejected, accepted, or pending review depending on the value of $status
+    // Side Effects: N/A
     private function convertStatus(int $status) {
         //If the status is 0, it's been rejected
         switch ($status) {
@@ -118,7 +132,6 @@ class Display {
     //   <1> $TGE: a tabletop game entry object
     //Returns: N/A
     //Side Effects: Displays the contents of a tabletop game description as a mini-card
-
     public function displayTGECard(TGE $TGE) {
         echo '<div class="smallGameBox">
                 <p>' . htmlspecialchars($TGE->getGameTitle()) . '</p>
@@ -235,8 +248,8 @@ class Display {
             <div class="dashboardHeader">
                 <img src="dependencies/dashboardImage.png" class="dashboardHeaderImage" alt="Welcome to Queen City\'s Gambit!" />
                     <div class="headerImageMessage">
-                        <p>Welcome Back ' . $user->getScreenName() . '</p>
-                        <p>Last Login: ' . $user->getLastLogin() . '</p>
+                        Welcome Back ' . $user->getScreenName() . '<br>
+                        Last Login: ' . $user->getLastLogin() . '
                     </div>
             </div>';
     }
