@@ -195,9 +195,31 @@ class Display {
                 </div>
                 </div>
                 </div>';
+
+                //If the viewing user is an admin, show the promote/delete buttons
+                if (is_a($_SESSION["userObj"], 'adminUser'))
+                    $this->displayAdminButtons($userID);
         } else {
             echo '<h1>This user does not exist! Please contact the site administrator!</h1>';
         } 
+    }
+
+    // Function Name: displayAdminButtons
+    // Purpose: To display the promote and delete buttons for administrators
+    // Parameters: 
+    //   <1> $userID: The UID of the user being displayed
+    // Returns: N/A
+    // Side Effects:
+    //   <1> Displays the promote and delete buttons for the viewProfile.php page
+    private function displayAdminButtons(int $userID) {
+        echo '<!-- This is where the buttons will go -->
+        <div class="buttonContainer">
+            <form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
+                <input class="buttonButton" type="submit" name="promoteUser" value="PROMOTE"> 
+                <input class="buttonButton" type="submit" name="deleteUser" value="DELETE">
+                <input type="hidden" name="UID" value="' . $userID . '">
+            </form>
+        </div>';
     }
 
     public function displayDashboard($user) {}
