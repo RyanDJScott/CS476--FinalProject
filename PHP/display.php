@@ -518,7 +518,54 @@ class Display {
                 </div>';            
     }
 
-    //Function Name: displayTGE
+    //-------------Review Display Functions----------------//
+    //Function Name: displayReview
+    //Purpose: To display the contents of this review 
+    //Parameters: N/A
+    //Returns: N/A
+    //Side Effects: 
+    //   <1> The contents of this review are displayed on a webpage
+    public function displayReview(Review $review) {
+        echo '<div class="elementContainer">
+            
+            <!-- 
+                left side for rating information
+            -->
+            <div class="innerContainer">
+                <div class="name">Rating ' . $review->getRating() . '</div>
+                Submitted By: ' . $review->getSubmittedBy() . '<br>
+                Recommended? ' . $this->displayRecommend($review->getRecommend()) . '<br>
+                Number of Players: ' . $review->getNumPlays() . '<br>
+                Age of Players: ' . $review->getAvgAge() . '<br>
+                Time for one Round: ' . $review->getAvgPlayTime() . '<br>
+                Percieved Difficulty: ' . $review->getDifficulty() . '<br>
+                Number of Times Played: ' . $review->getNumPlays() . '<br>
+            </div> 
+
+            <!--
+                right side for review itself and flag button
+            -->
+            <div class="innerContainer">
+                <p><br>'
+                   . $review->getReview() .  
+                '</p>';
+            
+            //Set logic for displaying buttons or not
+            if ($review->getFlag() == 0) {
+                echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
+                    <input class="flag" type="submit" name="flag" id="flag" value="FLAG REVIEW">
+                    <input type="hidden" name="gameTitle" value="' . $review->getGameTitle() . '">
+                    <input type="hidden" name="UID" value="' . $review->getUID() . '">
+                </form>';
+            } else {
+                echo '<p class="errorMessage">This review has already been flagged.</p>';
+            }
+
+        echo '</div>
+            </div>';
+    }
+    
+    //Function Name: displayReviewTGE
     //Purpose: To display the contents of a tabletop game description on the reviewTGE.php page
     //Parameters: 
     //   <1> $TGE: the tabletop game entry being displayed
@@ -566,53 +613,6 @@ class Display {
              echo '<img class="image" src="' . $displayImages . '" alt="Image for ' . $TGE->getGameTitle() . '"/>';
              
         echo '</div>';
-    }
-
-    //-------------Review Display Functions----------------//
-    //Function Name: displayReview
-    //Purpose: To display the contents of this review 
-    //Parameters: N/A
-    //Returns: N/A
-    //Side Effects: 
-    //   <1> The contents of this review are displayed on a webpage
-    public function displayReview(Review $review) {
-        echo '<div class="elementContainer">
-            
-            <!-- 
-                left side for rating information
-            -->
-            <div class="innerContainer">
-                <div class="name">Rating ' . $review->getRating() . '</div>
-                Submitted By: ' . $review->getSubmittedBy() . '<br>
-                Recommended? ' . $this->displayRecommend($review->getRecommend()) . '<br>
-                Number of Players: ' . $review->getNumPlays() . '<br>
-                Age of Players: ' . $review->getAvgAge() . '<br>
-                Time for one Round: ' . $review->getAvgPlayTime() . '<br>
-                Percieved Difficulty: ' . $review->getDifficulty() . '<br>
-                Number of Times Played: ' . $review->getNumPlays() . '<br>
-            </div> 
-
-            <!--
-                right side for review itself and flag button
-            -->
-            <div class="innerContainer">
-                <p><br>'
-                   . $review->getReview() .  
-                '</p>';
-            
-            //Set logic for displaying buttons or not
-            if ($review->getFlag() == 0) {
-                echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
-                    <input class="flag" type="submit" name="flag" id="flag" value="FLAG REVIEW">
-                    <input type="hidden" name="gameTitle" value="' . $review->getGameTitle() . '">
-                    <input type="hidden" name="UID" value="' . $review->getUID() . '">
-                </form>';
-            } else {
-                echo '<p class="errorMessage">This review has already been flagged.</p>';
-            }
-
-        echo '</div>
-            </div>';
     }
 
     // Function Name: displayFlaggedReview
