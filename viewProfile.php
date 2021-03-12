@@ -16,6 +16,28 @@
         //Create a display object
         $display = new Display();
     }
+
+    //Set error message
+    $errorMessage = "";
+
+    //If you were sent by the GET method, and it's an error, display error
+    if (isset($_GET["error"]) && $_GET["error"] === "db_error") 
+        $errorMessage = "There was an issue modiyfing this user in the database. Please contact the site administrators.";
+
+
+    if ((isset($_SESSION["UID"]) && is_object($_SESSION["userObj"]) && is_a($_SESSION["userObj"], 'adminUser')) && (isset($_POST["promoteUser"]) || isset($_POST["deleteUser"]))) {
+        $editUser = FALSE;
+        
+        if (isset($_POST["promoteUser"]) && $_POST["promoteUser"] === "PROMOTE")
+            $editUser = $_SESSION["userObj"]->promoteUser($_POST["UID"]);
+        else if (isset($_POST["deleteUser"]) && $_POST["deleteUser"] === "DELETE")
+            $editUser = $_SESSION["userObj"]->deleteUser($_POST["UID"]);
+
+        if ($editUser == TRUE)
+            header("Location: dashboard.php");
+        else if ($editUser == FALSE)
+            header("Location: viewProfile.php?UID=" . $_POST["UID"] . "&error=db_error");
+    }
 ?>
 <!DOCTYPE html>
 <HTML lang="en">
@@ -45,6 +67,8 @@
     <div class="dashboardHeader">
         <img src="dependencies/dashboardImage.png" class="dashboardHeaderImage" alt="Welcome to Queen City's Gambit!" />
     </div>
+
+    <p class="errorMessage"><?=$errorMessage?></p>
     
     <?php $display->displayViewProfile($userID); ?>    
 
