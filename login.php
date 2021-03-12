@@ -1,6 +1,7 @@
 <?php
     //Include definitions for login check
     include_once(__DIR__ . '/PHP/userFactory.php');
+    include_once(__DIR__. ' /PHP/navBar.php');
     
     //Check for continued session
     session_start();
