@@ -159,7 +159,6 @@
                     <label for="signupFavGameType">Favourite Type:</label>
                     <div class="itemContainer">
                         <select id="signupFavGameType" name="signupFavGameType">
-                            <option value="DEFAULT" selected disabled hidden>Pick a Game Type</option>
                             <option value="Board Game">Board Game</option>
                             <option value="Card Game">Card Game</option>
                             <option value="Dice Game">Dice Game</option>
@@ -179,7 +178,6 @@
                     <label for="signupGameTime">Time Playing Games:</label>
                     <div class="itemContainer">
                         <select id="signupGameTime" name="signupGameTime">
-                            <option value="DEFAULT" selected disabled hidden>Pick a Time Span</option>
                             <option value="0-1 years">0-1 years</option>
                             <option value="1-3 years">1-3 years</option>
                             <option value="3-6 years">3-6 years</option>
