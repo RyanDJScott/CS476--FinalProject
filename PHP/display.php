@@ -158,28 +158,33 @@ class Display {
     public function displayTGEFeatureGameBox(string $featureGame) {
         //Create new TGE object from the game
         $TGE = new TGE($featureGame);
+        $status = ($TGE->getStatusInfo())["status"];
         
-        //Get images array for output
-        $images = $TGE->getImages();
+        if ($TGE->getGameTitle() != NULL && $status == 1) {
+            //Get images array for output
+            $images = $TGE->getImages();
 
-        echo '<!-- left div for header + information -->
-        <div class="featuredItemLeft">
-            <a href="viewTG.php?gameTitle="' . htmlspecialchars($TGE->getGameTitle()) . '" <h2>' . htmlspecialchars($TGE->getGameTitle()) . '</h2></a>
-            <p>Submitted by: ' . htmlspecialchars($TGE->getScreenName()) . '</p>
-            <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '</p>
-            <p>Number of Players: ' . htmlspecialchars($TGE->getNumPlayers()) . '</p>
-            <p>Company: ' . htmlspecialchars($TGE->getCompany()) . '</p>
-            <p>Game time: ' . htmlspecialchars($TGE->getPlayTime()) . ' hours </p>
-            <p>Age Rating: ' . htmlspecialchars($TGE->getAgeRating()) . ' yrs</p>
-            <p>Number of Expansions: ' . htmlspecialchars($TGE->getExpansions()) . '</p>
-            <p>Description:</p>
-            <p>' . htmlspecialchars($TGE->getDescription()) . '</p>
-        </div>
+            echo '<!-- left div for header + information -->
+            <div class="featuredItemLeft">
+                <a href="viewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '"><h2>' . htmlspecialchars($TGE->getGameTitle()) . '</h2></a>
+                <p>Submitted by: ' . htmlspecialchars($TGE->getScreenName()) . '</p>
+                <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '</p>
+                <p>Number of Players: ' . htmlspecialchars($TGE->getNumPlayers()) . '</p>
+                <p>Company: ' . htmlspecialchars($TGE->getCompany()) . '</p>
+                <p>Game time: ' . htmlspecialchars($TGE->getPlayTime()) . ' hours </p>
+                <p>Age Rating: ' . htmlspecialchars($TGE->getAgeRating()) . ' yrs</p>
+                <p>Number of Expansions: ' . htmlspecialchars($TGE->getExpansions()) . '</p>
+                <p>Description:</p>
+                <p>' . htmlspecialchars($TGE->getDescription()) . '</p>
+            </div>
 
-        <!-- Right div for feature image-->
-        <div class="featuredItemRight">
-            <img src="' . htmlspecialchars($images[0]) . '" class="featureImage" alt="Featured Game Image" />
-        </div>';
+            <!-- Right div for feature image-->
+            <div class="featuredItemRight">
+                <img src="' . htmlspecialchars($images[0]) . '" class="featureImage" alt="Featured Game Image" />
+            </div>';
+        } else {
+            echo '<p class="errorMessage">This game has not been verified yet!</p>';
+        }
     }
 
     //--------------User Display Functions----------------//
