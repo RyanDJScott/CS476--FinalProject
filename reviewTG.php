@@ -21,9 +21,11 @@
             $gameTitle = $_GET["gameTitle"];
 
         //Error checking
+        //Validation error
         if (isset($_GET["error"]) && $_GET["error"] === "val_error")
-        $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
+            $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
 
+        //Database error
         if (isset($_GET["error"]) && $_GET["error"] === "db_error")
             $errorMessage = "There was an issue submitting your review. Please contact the site administrators, or try again!";
 

@@ -48,9 +48,11 @@ else {
 
     //Throw error depending on error variable
     if (isset($_GET["error"])) {
+        //DB error of some sort
         if ($_GET["error"] === "st_error")
             $errorMessage = "There was an error updating the status of this game. Please try again.";
         
+        //Validation error
         if($_GET["error"] === "fb_empty")
             $errorMessage = "You must provide a reason for your decision.";
     }
