@@ -10,14 +10,14 @@ class Search {
     private $db = NULL;
     private $dbConnect = NULL;
 
-    //Function Name: Constructor
-    //Purpose: Construct the member variables and choose the search strategy
+    // Function Name: Constructor
+    // Purpose: Construct the member variables and choose the search strategy
     //   to implement
-    //Parameters:
+    // Parameters:
     //   <1> $searchOption: the option the user pressed for searching (USER, GAME, or BOTH)
     //   <2> $searchQuery: the query string to be submitted to the DB
-    //Returns: N/A
-    //Side Effects: assigns values to $query, connects to the DB, and instantiates an object to $searchStrategy
+    // Returns: N/A
+    // Side Effects: assigns values to $query, connects to the DB, and instantiates an object to $searchStrategy
     public function __construct (string $searchOption, string $searchQuery) {
         //Construct member variables
         $this->query = $searchQuery;
@@ -40,12 +40,12 @@ class Search {
         }
     }
 
-    //Function Name: publishResults
-    //Purpose: To publish the results of the string to the search page
-    //Parameters: 
+    // Function Name: publishResults
+    // Purpose: To publish the results of the string to the search page
+    // Parameters: 
     //   <1> getResults(dbConnect, query): array of results returned from the database
-    //Returns: N/A
-    //Side Effects: 
+    // Returns: N/A
+    // Side Effects: 
     //   <1> Publishes the results of the query to the search page. Diplay depends on search strategy
     public function publishResults () {
         return $this->searchStrategy->displayResults($this->searchStrategy->getResults($this->dbConnect, $this->query));
@@ -59,14 +59,14 @@ interface searchStrategy {
 }
 
 class userSearch implements searchStrategy {
-    //Function Name: getResults
-    //Purpose: To collect the results of a user query from the DB
-    //Parameters:
+    // Function Name: getResults
+    // Purpose: To collect the results of a user query from the DB
+    // Parameters:
     //   <1> $dbConnect: the database connection mysqli object
     //   <2> $query: the query string to be submitted to the DB
-    //Returns: 
+    // Returns: 
     //   <1> $dbReturn: An array that contains all of the retrieved information
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getResults(mysqli $dbConnect, string $query) {
         //Create search query
         $userSearchQuery = "SELECT UID, screenName, avatarURL FROM Users WHERE MATCH (firstName, lastName, screenName, favGame) AGAINST ('" . $dbConnect->real_escape_string($query) . "')";
@@ -89,12 +89,12 @@ class userSearch implements searchStrategy {
         return $dbReturn; 
     }
 
-    //Function Name: displayResults
-    //Purpose: To display all of the users that were retrieved from the DB
-    //Parameters:
+    // Function Name: displayResults
+    // Purpose: To display all of the users that were retrieved from the DB
+    // Parameters:
     //   <1> $dbReturn: an array that contains all of the information retrieved from the DB
-    //Returns: N/A
-    //Side Effects: All of the DB information will be displayed on the website
+    // Returns: N/A
+    // Side Effects: All of the DB information will be displayed on the website
     public function displayResults(array $dbReturn) {
         //Print out the header
         echo '<!-- User Returns-->
@@ -126,14 +126,14 @@ class userSearch implements searchStrategy {
 }
 
 class gameSearch implements searchStrategy {
-    //Function Name: getResults
-    //Purpose: To collect the results of a game query from the DB
-    //Parameters:
+    // Function Name: getResults
+    // Purpose: To collect the results of a game query from the DB
+    // Parameters:
     //   <1> $dbConnect: the database connection mysqli object
     //   <2> $query: the query string to be submitted to the DB
-    //Returns: 
+    // Returns: 
     //   <1> $dbReturn: An array that contains all of the retrieved information
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getResults(mysqli $dbConnect, string $query) {
         //Create search query
         $gameSearchQuery = "SELECT gameTitle FROM GameDescriptions WHERE MATCH (gameTitle, description, company) AGAINST ('" . $dbConnect->real_escape_string($query) . "')";
@@ -167,12 +167,12 @@ class gameSearch implements searchStrategy {
         return $dbReturn;
     }
 
-    //Function Name: displayResults
-    //Purpose: To display all of the games that were retrieved from the DB
-    //Parameters:
+    // Function Name: displayResults
+    // Purpose: To display all of the games that were retrieved from the DB
+    // Parameters:
     //   <1> $dbReturn: an object that contains all of the information retrieved from the DB
-    //Returns: N/A
-    //Side Effects: All of the DB information will be displayed on the website
+    // Returns: N/A
+    // Side Effects: All of the DB information will be displayed on the website
     public function displayResults(array $dbReturn) {
         //Print out the header
         echo '<!-- Game Returns-->
@@ -204,14 +204,14 @@ class gameSearch implements searchStrategy {
 }
 
  class searchBoth implements searchStrategy {
-     //Function Name: getResults
-    //Purpose: To collect the results of a user+game query from the DB
-    //Parameters:
+    // Function Name: getResults
+    // Purpose: To collect the results of a user+game query from the DB
+    // Parameters:
     //   <1> $dbConnect: the database connection mysqli object
     //   <2> $query: the query string to be submitted to the DB
-    //Returns: 
+    // Returns: 
     //   <1> $dbReturn: An array that contains all of the retrieved information
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getResults(mysqli $dbConnect, string $query) {
         //Create the array that will hold the results
         $dbReturn = array("users" => array(), "games" => array());
@@ -259,12 +259,12 @@ class gameSearch implements searchStrategy {
         return $dbReturn;
     }
 
-    //Function Name: displayResults
-    //Purpose: To display all of the user+game that were retrieved from the DB
-    //Parameters:
+    // Function Name: displayResults
+    // Purpose: To display all of the user+game that were retrieved from the DB
+    // Parameters:
     //   <1> $dbReturn: an object that contains all of the information retrieved from the DB
-    //Returns: N/A
-    //Side Effects: All of the DB information will be displayed on the website
+    // Returns: N/A
+    // Side Effects: All of the DB information will be displayed on the website
     public function displayResults(array $dbReturn) {
         //Split the array into separate arrays
         $userResults = $dbReturn["users"];

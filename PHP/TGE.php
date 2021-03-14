@@ -33,12 +33,12 @@ class TGE {
 
     //Member Functions
 
-    //Function Name: Constructor
-    //Purpose: To construct the member variables
-    //Parameters:
+    // Function Name: Constructor
+    // Purpose: To construct the member variables
+    // Parameters:
     //   <1> $gameTitle: The title of the game being constructed
-    //Returns: N/A
-    //Side Effects:
+    // Returns: N/A
+    // Side Effects:
     //   <1> $entryInfo is initialized as an array with all game information
     //   <2> $images is initialized as an array with all picture URLs in it
     //   <3> $gameReviews is initialized as an array of review objects
@@ -134,14 +134,14 @@ class TGE {
         }
     }
 
-    //Function Name: setGameTitle
-    //Purpose: To set $gameTitle with the information given
-    //Parameters: 
+    // Function Name: setGameTitle
+    // Purpose: To set $gameTitle with the information given
+    // Parameters: 
     //   <1> $title: The new title of the tabletop game
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects: $gameTitle is set to the new information contained in $title
+    // Side Effects: $gameTitle is set to the new information contained in $title
     //   and updated in the database
     public function setGameTitle(string $title) {
         //Check to see if title is empty, return FALSE if it is empty
@@ -168,35 +168,36 @@ class TGE {
         }
     }
 
-    //Function Name: getGameTitle
-    //Purpose: To get the game title of this tabletop game entry
-    //Parameters: N/A
-    //Returns: 
+    // Function Name: getGameTitle
+    // Purpose: To get the game title of this tabletop game entry
+    // Parameters: N/A
+    // Returns: 
     //   <1> $this->gameTitle 
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getGameTitle() {
         return $this->gameTitle;
     }
 
-    //Function Name: getScreenName
-    //Purpose: To get the screenname of the person who wrote this tabletop game entry
-    //Parameters: N/A
-    //Returns: 
+    // Function Name: getScreenName
+    // Purpose: To get the screenname of the person who wrote this tabletop game entry
+    // Parameters: N/A
+    // Returns: 
     //   <1> $this->screenName 
-    //Side Effects: N/A
-    //Note: No setter required; it is not a function of the GameDescription table but rather the user who wrote it
+    // Side Effects: N/A
+    // Note: 
+    //   <1> No setter required; it is not a function of the GameDescription table but rather the user who wrote it
     public function getScreenName () {
         return $this->screenName;
     }
 
-    //Function Name: setDateSubmitted
-    //Purpose: To set $dateSubmitted with the information given
-    //Parameters: 
+    // Function Name: setDateSubmitted
+    // Purpose: To set $dateSubmitted with the information given
+    // Parameters: 
     //   <1> $date: The new submission date of the tabletop game
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects: $dateSubmitted is set to the new information contained in $date
+    // Side Effects: $dateSubmitted is set to the new information contained in $date
     //   and updated in the database
     public function setDateSubmitted(object $date) {
         //Check to see if date is empty, return FALSE if it is empty
@@ -223,24 +224,24 @@ class TGE {
         }
     }
 
-    //Function Name: getDateSubmitted
-    //Purpose: To get the submission date for this tabletop game entry
-    //Parameters: N/A
-    //Returns: 
+    // Function Name: getDateSubmitted
+    // Purpose: To get the submission date for this tabletop game entry
+    // Parameters: N/A
+    // Returns: 
     //   <1> $this->dateSubmitted
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getDateSubmitted() {
         return $this->dateSubmitted;
     }
 
-    //Function Name: setNumPlayers
-    //Purpose: To set $numPlayers with the information given
-    //Parameters: 
+    // Function Name: setNumPlayers
+    // Purpose: To set $numPlayers with the information given
+    // Parameters: 
     //   <1> $number: The number of players for this tabletop game entry
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects: $numPlayers is set to the new information contained in $number
+    // Side Effects: $numPlayers is set to the new information contained in $number
     //   and updated in the database
     public function setNumPlayers(int $number) {
         //Check to see if number is empty, return FALSE if it is empty
@@ -267,24 +268,24 @@ class TGE {
         }
     }
 
-    //Function Name: getNumPlayers
-    //Purpose: To get the number of players for this tabletop game entry
-    //Parameters: N/A
-    //Returns: 
+    // Function Name: getNumPlayers
+    // Purpose: To get the number of players for this tabletop game entry
+    // Parameters: N/A
+    // Returns: 
     //   <1> $this->numPlayers
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getNumPlayers() {
         return $this->numPlayers;
     }
 
-    //Function Name: setAgeRating
-    //Purpose: To set $ageRating with the information given
-    //Parameters: 
+    // Function Name: setAgeRating
+    // Purpose: To set $ageRating with the information given
+    // Parameters: 
     //   <1> $age: The new age rating of the tabletop game entry
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects: $ageRating is set to the new information contained in $age
+    // Side Effects: $ageRating is set to the new information contained in $age
     //   and updated in the database
     public function setAgeRating(int $age) {
         //Check to see if age is empty, return FALSE if it is empty
@@ -311,24 +312,24 @@ class TGE {
         }
     }
 
-    //Function Name: getAgeRating
-    //Purpose: To get the age rating for this tabletop game entry
-    //Parameters: N/A
-    //Returns: 
+    // Function Name: getAgeRating
+    // Purpose: To get the age rating for this tabletop game entry
+    // Parameters: N/A
+    // Returns: 
     //   <1> $this->ageRating
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getAgeRating() {
         return $this->ageRating;
     }
 
-    //Function Name: setPlayTime
-    //Purpose: To set $playTime with the information given
-    //Parameters: 
+    // Function Name: setPlayTime
+    // Purpose: To set $playTime with the information given
+    // Parameters: 
     //   <1> $time: The new play time of this tabletop game entry
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects: $playTime is set to the new information contained in $time
+    // Side Effects: $playTime is set to the new information contained in $time
     //   and updated in the database
     public function setPlayTime(float $time) {
         //Check to see if time is empty, return FALSE if it is empty
@@ -355,24 +356,24 @@ class TGE {
         }
     }
 
-    //Function Name: getPlayTime
-    //Purpose: To get the play time for this tabletop game entry
-    //Parameters: N/A
-    //Returns: 
+    // Function Name: getPlayTime
+    // Purpose: To get the play time for this tabletop game entry
+    // Parameters: N/A
+    // Returns: 
     //   <1> $this->playTime
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getPlayTime() {
         return $this->playTime;
     }
 
-    //Function Name: setDescription
-    //Purpose: To set $description with the information given
-    //Parameters: 
+    // Function Name: setDescription
+    // Purpose: To set $description with the information given
+    // Parameters: 
     //   <1> $newDescription: The new description of this tabletop game entry
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects: $description is set to the new information contained in $newDescription
+    // Side Effects: $description is set to the new information contained in $newDescription
     //   and updated in the database
     public function setDescription (string $newDescription) {
         //Check to see if newDescription is empty, return FALSE if it is empty
@@ -399,24 +400,24 @@ class TGE {
         }
     }
 
-    //Function Name: getDescription
-    //Purpose: To get the description for this tabletop game entry
-    //Parameters: N/A
-    //Returns: 
+    // Function Name: getDescription
+    // Purpose: To get the description for this tabletop game entry
+    // Parameters: N/A
+    // Returns: 
     //   <1> $this->description
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getDescription () {
         return $this->description;
     }
 
-    //Function Name: setCompany
-    //Purpose: To set $company with the information given
-    //Parameters: 
+    // Function Name: setCompany
+    // Purpose: To set $company with the information given
+    // Parameters: 
     //   <1> $newCompany: The new company that produced this tabletop game entry
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects: $company is set to the new information contained in $newCompany
+    // Side Effects: $company is set to the new information contained in $newCompany
     //   and updated in the database
     public function setCompany (string $newCompany) {
         //Check to see if newCompany is empty, return FALSE if it is empty
@@ -443,24 +444,24 @@ class TGE {
         }
     }
 
-    //Function Name: getCompany
-    //Purpose: To get the producing company for this tabletop game entry
-    //Parameters: N/A
-    //Returns: 
+    // Function Name: getCompany
+    // Purpose: To get the producing company for this tabletop game entry
+    // Parameters: N/A
+    // Returns: 
     //   <1> $this->company
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getCompany () {
         return $this->company;
     }
 
-    //Function Name: setExpansions
-    //Purpose: To set $expansions with the information given
-    //Parameters: 
+    // Function Name: setExpansions
+    // Purpose: To set $expansions with the information given
+    // Parameters: 
     //   <1> $numExpans: The number of expansions for this tabletop game entry
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects: $expansions is set to the new information contained in $numExpans
+    // Side Effects: $expansions is set to the new information contained in $numExpans
     //   and updated in the database
     public function setExpansions (int $numExpans) {
         //Check to see if numExpans is empty, return FALSE if it is empty
@@ -487,24 +488,24 @@ class TGE {
         }
     }
 
-    //Function Name: getExpansions
-    //Purpose: To get the number of expansions for this tabletop game entry
-    //Parameters: N/A
-    //Returns: 
+    // Function Name: getExpansions
+    // Purpose: To get the number of expansions for this tabletop game entry
+    // Parameters: N/A
+    // Returns: 
     //   <1> $this->expansions
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getExpansions () {
         return $this->expansions;
     }
 
-    //Function Name: setImages
-    //Purpose: To set the $images array with image URLs
-    //Parameters:
+    // Function Name: setImages
+    // Purpose: To set the $images array with image URLs
+    // Parameters:
     //   <1> $imageURLs: An array containing all of the imageURLs to be set
-    //Returns:
+    // Returns:
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects: $images is set to the new information contained in $imageURLs
+    // Side Effects: $images is set to the new information contained in $imageURLs
     //   and updated in the database
     public function setImages(array $imageURLs) {
         //Determine if the imageURLs array is empty, if so return FALSE
@@ -551,25 +552,25 @@ class TGE {
         }
     }
 
-    //Function Name: getImages
-    //Purpose: To get the image URLs for this tabletop game
-    //Parameters: N/A
-    //Returns:
+    // Function Name: getImages
+    // Purpose: To get the image URLs for this tabletop game
+    // Parameters: N/A
+    // Returns:
     //   <1> $this->images: an array containing all image URLs for this tabletop game entry
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getImages() {
         return $this->images;
     }
     
-    //Function Name: setStatusInfo
-    //Purpose: To set the $statusInfo array to the information contained in $status and $reason
-    //Parameters:
+    // Function Name: setStatusInfo
+    // Purpose: To set the $statusInfo array to the information contained in $status and $reason
+    // Parameters:
     //   <1> $status: the status of the tabletop game entry
     //   <2> $reason: the reason why the entry was accepted/rejected
-    //Returns:
+    // Returns:
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects: $statusInfo is set to the new information contained in $status and $reason
+    // Side Effects: $statusInfo is set to the new information contained in $status and $reason
     //   and updated in the database
     public function setStatusInfo (int $status, string $reason) {
         //Check to see if status is empty, return FALSE if it is empty
@@ -598,23 +599,23 @@ class TGE {
         }
     }
 
-    //Function Name: getStatusInfo
-    //Purpose: To get the status information for this tabletop game entry
-    //Parameters: N/A
-    //Returns:
+    // Function Name: getStatusInfo
+    // Purpose: To get the status information for this tabletop game entry
+    // Parameters: N/A
+    // Returns:
     //   <1> $this->statusInfo: an array containing the status of this entry and reason for acceptance/rejection
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getStatusInfo () {
         return $this->statusInfo;
     }
 
-    //Function Name: setOverallRating
-    //Purpose: To recalculate the overall rating of this tabletop game entry
-    //Parameters: None
-    //Returns:
+    // Function Name: setOverallRating
+    // Purpose: To recalculate the overall rating of this tabletop game entry
+    // Parameters: None
+    // Returns:
     //   <1> TRUE: The information was retrieved from the DB
     //   <2> FALSE: The information was retrieved from the DB
-    //Side Effects: $overallRating is set to the new information obtained from the database
+    // Side Effects: $overallRating is set to the new information obtained from the database
     public function setOverallRating () {
         //Query the database to get the avg rating for this game
         $ratingQuery = "SELECT AVG(rating) AS overallRating FROM Reviews WHERE gameTitle = '" . $this->dbConnect->real_escape_string($this->gameTitle) . "'";
@@ -635,22 +636,22 @@ class TGE {
         }
     }
 
-    //Function Name: getOverallRating
-    //Purpose: To get the overall rating of this tabletop game entry
-    //Parameters: N/A
-    //Returns:
+    // Function Name: getOverallRating
+    // Purpose: To get the overall rating of this tabletop game entry
+    // Parameters: N/A
+    // Returns:
     //   <1> $this->overallRating
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getOverallRating () {
         return $this->overallRating;
     }
 
-    //Function Name: getReviews
-    //Purpose: To get the reviews for this tabletop game entry
-    //Parameters: N/A
-    //Returns:
+    // Function Name: getReviews
+    // Purpose: To get the reviews for this tabletop game entry
+    // Parameters: N/A
+    // Returns:
     //   <1> $this->gameReviews
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getReviews () {
         return $this->gameReviews;
     }
