@@ -18,8 +18,12 @@
 
     //If the form was submitted, execute the signup process
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $editProfileObject = new userEditProfile($_SESSION["userObj"]);
-        $editProfileObject->submitForm();
+        if (isset($_POST["editSubmit"]) && $_POST["editSubmit"] === "EDIT") {
+            $editProfileObject = new userEditProfile($_SESSION["userObj"]);
+            $editProfileObject->submitForm();
+        } else if (isset($_POST["deleteProfile"]) && $_POST["deleteProfile"] === "DELETE") {
+            $_SESSION["userObj"]->deleteAccount();
+        }
     }
 
     //If the user was sent here with the GET method for errors, set the error
@@ -220,7 +224,8 @@
             </div>
 
             <div class="rowContainer">
-                <input type="submit" id="editSubmit" name="editSubmit" class="submitButton">
+                <input type="submit" id="editSubmit" name="editSubmit" class="submitButton" value="EDIT">
+                <input type="submit" id="deleteProfile" name="deleteProfile" class="submitButton" value="DELETE">
             </div>
             
         </div>

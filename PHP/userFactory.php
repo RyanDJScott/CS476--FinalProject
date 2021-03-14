@@ -627,7 +627,7 @@ class communityUser extends user {
 
         //If delete worked, log them out
         if ($deleteResult === TRUE) {
-            header("Location: http://www.queencitysgambit.geekagogo.com/PHP/logoutScript.php");
+            header("Location: http://www.queencitysgambit.geekagogo.ca/PHP/logoutScript.php");
         } else if ($deleteResult === FALSE) {
             return FALSE;
         }
@@ -738,7 +738,7 @@ class adminUser extends user {
 
         //If delete worked, log them out
         if ($deleteResult === TRUE) {
-            header("Location: http://www.queencitysgambit.geekagogo.com/PHP/logoutScript.php");
+            header("Location: http://www.queencitysgambit.geekagogo.ca/PHP/logoutScript.php");
         } else if ($deleteResult === FALSE) {
             return FALSE;
         }
