@@ -607,6 +607,7 @@ class Display {
                 </p>
             </div>
 
+
         </div>
 
         <!-- Container for images of the tabletop game-->
@@ -676,7 +677,7 @@ class Display {
             <div class="innerContainer">
                 <div class="name">' . $TGE->getGameTitle() . '</div>
                 Submitted by ' . $TGE->getScreenName() . ' on ' . $TGE->getDateSubmitted() . '<br>
-                Rating: ' . $TGE->getOverallRating() . '<br>
+                Rating: ' . round($TGE->getOverallRating(), 1) . '<br>
                 Company: ' . $TGE->getCompany() . ' <br>
                 Play Time: ' . $TGE->getPlayTime() . ' hours <br>
                 Age Rating: ' . $TGE->getAgeRating() . '+ <br>
@@ -693,7 +694,7 @@ class Display {
                 '. $TGE->getDescription() .'    
                 </p>
             </div>
-
+            <a href="reviewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton">Leave A Review!</a>
         </div>
 
         <!-- Container for images of the tabletop game-->
