@@ -9,6 +9,7 @@
     //Check to see if they are already logged in; redirect if so
     if (isset($_SESSION["UID"]) && $_SESSION["UID"] > 0 && is_object($_SESSION["userObj"]))
         header("Location: dashboard.php");
+    else {
 ?>
 <!DOCTYPE html>
 <HTML lang="en">
@@ -88,3 +89,4 @@
 </body>
 
 </HTML>
+<?php } ?>

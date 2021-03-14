@@ -9,29 +9,28 @@
     //Continue the session
     session_start();
 
-    //Set the error message to be blank
-    $errorMessage = "";
-
     //Check to see if they are already logged in; redirect if so
     if (isset($_SESSION["UID"]) && $_SESSION["UID"] > 0 && is_object($_SESSION["userObj"]))
         header("Location: dashboard.php");
+    else {
+        //Set the error message to be blank
+        $errorMessage = "";
+        //If the form was submitted, execute the signup process
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $signUpObject = new userSignup;
+            $signUpObject->submitForm();
+        }
 
-    //If the form was submitted, execute the signup process
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $signUpObject = new userSignup;
-        $signUpObject->submitForm();
-    }
-
-    //If the user was sent here with the GET method for errors, set the error
-    if ($_SERVER["REQUEST_METHOD"] === "GET") {
-        //Insertion error
-        if (isset($_GET["error"]) && $_GET["error"] === "db_error")
-            $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
-        
-        //Validation error
-        if (isset($_GET["error"]) && $_GET["error"] === "val_error")
-            $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
-    }
+        //If the user was sent here with the GET method for errors, set the error
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+            //Insertion error
+            if (isset($_GET["error"]) && $_GET["error"] === "db_error")
+                $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
+            
+            //Validation error
+            if (isset($_GET["error"]) && $_GET["error"] === "val_error")
+                $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
+        }
 ?>
 <!DOCTYPE html>
 <HTML lang="en">
@@ -219,7 +218,7 @@
 </body>
 
 </HTML>
-
+<?php } ?>
 <!-- Signup Element Template
 <div class="rowContainer">                  this div contains the row, as to stack the elements
     <label for=""></label>                      this is the label for the form element

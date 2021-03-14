@@ -10,11 +10,11 @@
     session_start();
 
     //Check to see if they are logged in; redirect if not
-    if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]))
+    if (!isset($_SESSION["UID"]) && !isset($_SESSION["userObj"]))
         header("Location: login.php");
-
-    //Create a display object
-    $display = new Display();
+    else {
+        //Create a display object
+        $display = new Display();
 ?>
 <!DOCTYPE html>
 <HTML lang="en">
@@ -41,3 +41,4 @@
 </body>
 
 </html>
+<?php } ?>
