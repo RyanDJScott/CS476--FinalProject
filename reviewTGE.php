@@ -8,10 +8,13 @@ include_once(__DIR__ . '/PHP/display.php');
 //Continue the session
 session_start();
 
-//Check to see if they are logged in AND an administrator; redirect if not
-if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]) && !(is_a($_SESSION["userObj"], 'adminUser')))
+//Check to see if they are logged in, if not redirect to login page
+if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"])) 
     header("Location: login.php");
 
+//Check to see if they are an administrator; redirect to dashboard if not
+if (!(is_a($_SESSION["userObj"], 'adminUser')))
+    header("Location: dashboard.php");
 //Get the game title from the GET method, instantiate new TGE/Display
 if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0) {
     //Get the game title, create a new TGE object from it, then create display object
