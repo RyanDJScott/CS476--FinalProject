@@ -24,15 +24,18 @@
     if (isset($_GET["error"]) && $_GET["error"] === "db_error") 
         $errorMessage = "There was an issue modiyfing this user in the database. Please contact the site administrators.";
 
-
+    //If you're logged in, an administrator, and pressed either the promote or delete button, execute the following actions
     if ((isset($_SESSION["UID"]) && is_object($_SESSION["userObj"]) && is_a($_SESSION["userObj"], 'adminUser')) && (isset($_POST["promoteUser"]) || isset($_POST["deleteUser"]))) {
         $editUser = FALSE;
         
+        //Promote the user to administrator
         if (isset($_POST["promoteUser"]) && $_POST["promoteUser"] === "PROMOTE")
             $editUser = $_SESSION["userObj"]->promoteUser($_POST["UID"]);
+        //Delete the users account
         else if (isset($_POST["deleteUser"]) && $_POST["deleteUser"] === "DELETE")
             $editUser = $_SESSION["userObj"]->deleteUser($_POST["UID"]);
 
+        //If the action succeeded, go to the dashboard. Otherwise, post an error.
         if ($editUser == TRUE)
             header("Location: dashboard.php");
         else if ($editUser == FALSE)

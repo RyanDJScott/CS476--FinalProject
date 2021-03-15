@@ -9,33 +9,37 @@
     //Continue the session
     session_start();
 
-    //Set the error message to be blank
-    $errorMessage = $successMessage = "";
-
     //Check to see if they are logged in; redirect if not
-    if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]))
+    if (!isset($_SESSION["UID"]) && !isset($_SESSION["userObj"]))
         header("Location: login.php");
+    else {
+        //Set the error message to be blank
+        $errorMessage = $successMessage = "";
 
-    //If the form was submitted, execute the signup process
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $editProfileObject = new userEditProfile($_SESSION["userObj"]);
-        $editProfileObject->submitForm();
-    }
+        //If the form was submitted, execute the signup process
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            if (isset($_POST["editSubmit"]) && $_POST["editSubmit"] === "EDIT") {
+                $editProfileObject = new userEditProfile($_SESSION["userObj"]);
+                $editProfileObject->submitForm();
+            } else if (isset($_POST["deleteProfile"]) && $_POST["deleteProfile"] === "DELETE") {
+                $_SESSION["userObj"]->deleteAccount();
+            }
+        }
 
-    //If the user was sent here with the GET method for errors, set the error
-    if ($_SERVER["REQUEST_METHOD"] === "GET") {
-        //Profile successfully updated
-        if (isset($_GET["error"]) && $_GET["error"] === "success")
-            $successMessage = "Your profile was successfully updated!";
+        //If the user was sent here with the GET method for errors, set the error
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+            //Profile successfully updated
+            if (isset($_GET["error"]) && $_GET["error"] === "success")
+                $successMessage = "Your profile was successfully updated!";
 
-        //Insertion error
-        if (isset($_GET["error"]) && $_GET["error"] === "db_error")
-            $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
-        
-        //Validation error
-        if (isset($_GET["error"]) && $_GET["error"] === "val_error")
-            $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
-    }
+            //Insertion error
+            if (isset($_GET["error"]) && $_GET["error"] === "db_error")
+                $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
+            
+            //Validation error
+            if (isset($_GET["error"]) && $_GET["error"] === "val_error")
+                $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
+        }
 ?>
 <!DOCTYPE html>
 <HTML>
@@ -220,7 +224,8 @@
             </div>
 
             <div class="rowContainer">
-                <input type="submit" id="editSubmit" name="editSubmit" class="submitButton">
+                <input type="submit" id="editSubmit" name="editSubmit" class="submitButton" value="EDIT">
+                <input type="submit" id="deleteProfile" name="deleteProfile" class="submitButton" value="DELETE">
             </div>
             
         </div>
@@ -230,7 +235,7 @@
 </body>
 
 </HTML>
-
+<?php }?>
 <!-- Signup Element Template
 <div class="rowContainer">                  this div contains the row, as to stack the elements
     <label for=""></label>                      this is the label for the form element

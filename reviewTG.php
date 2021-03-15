@@ -9,30 +9,32 @@
     //Continue the session
     session_start();
 
-    //Set the error message to be blank
-    $errorMessage = "";
-
     //Check to see if they are logged in; redirect if not
-    if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]))
+    if (!isset($_SESSION["UID"]) && !isset($_SESSION["userObj"]))
         header("Location: login.php");
+    else {
+        //Set the error message to be blank
+        $errorMessage = "";
 
-    //Get the game title from the GET method
-    if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0)
-        $gameTitle = $_GET["gameTitle"];
+        //Get the game title from the GET method
+        if (isset($_GET["gameTitle"]) && strlen($_GET["gameTitle"]) > 0)
+            $gameTitle = $_GET["gameTitle"];
 
-    //Error checking
-    if (isset($_GET["error"]) && $_GET["error"] === "val_error")
-    $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
+        //Error checking
+        //Validation error
+        if (isset($_GET["error"]) && $_GET["error"] === "val_error")
+            $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
 
-    if (isset($_GET["error"]) && $_GET["error"] === "db_error")
-        $errorMessage = "There was an issue submitting your review. Please contact the site administrators, or try again!";
+        //Database error
+        if (isset($_GET["error"]) && $_GET["error"] === "db_error")
+            $errorMessage = "There was an issue submitting your review. Please contact the site administrators, or try again!";
 
-    //If the post method was used, create an object and submit the form
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $gameTitle = $_POST["gameTitle"];
-        $submitReview = new submitReview($gameTitle, $_SESSION["UID"]);
-        $submitReview->submitForm();
-    }
+        //If the post method was used, create an object and submit the form
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $gameTitle = $_POST["gameTitle"];
+            $submitReview = new submitReview($gameTitle, $_SESSION["UID"]);
+            $submitReview->submitForm();
+        }
 ?>
 <!DOCTYPE html>
 <HTML lang="en">
@@ -172,3 +174,4 @@
 </body>
 
 </HTML>
+<?php } ?>

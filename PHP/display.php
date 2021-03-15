@@ -11,6 +11,12 @@ class Display {
     private $db = NULL;
     private $dbConnect = NULL;
  
+    // Function Name: constructor
+    // Purpose: To establish a DB connection for the display
+    // Parameters: None
+    // Returns: N/A
+    // Side Effects:
+    //   <1> db/dbConnect are initialized
     public function __construct() {
         $this->db = new database();
         $this->dbConnect = $this->db->getDBConnection();
@@ -18,15 +24,15 @@ class Display {
     
     //-----------Utility Member Functions------------//
     
-    //Function Name: limitChars
-    //Purpose: To truncate the text to a specific length and append '...' to the end of the string
-    //Parameters: 
+    // Function Name: limitChars
+    // Purpose: To truncate the text to a specific length and append '...' to the end of the string
+    // Parameters: 
     //   <1> $text: the string to be appended
     //   <2> $length: the length of the string you want returned with "..." appended to it
-    //Returns: 
+    // Returns: 
     //   <1> $text: if the string's length is <= length
     //   <2> $newString: the substring of length $length with "..." appended to it
-    //Side Effects: None
+    // Side Effects: None
     private function limitChars ($text, $length) {
         //If the string is already short enough, return it
         if (strlen($text) <= $length) {
@@ -133,12 +139,12 @@ class Display {
         }
     }
 
-    //Function Name: displayTGECard
-    //Purpose: To display the contents of a tabletop game description as a mini card
-    //Parameters: 
+    // Function Name: displayTGECard
+    // Purpose: To display the contents of a tabletop game description as a mini card
+    // Parameters: 
     //   <1> $TGE: a tabletop game entry object
-    //Returns: N/A
-    //Side Effects: 
+    // Returns: N/A
+    // Side Effects: 
     //   <1> Displays the contents of a tabletop game description as a mini card
     public function displayTGECard(TGE $TGE) {
         echo '<div class="smallGameBox">
@@ -149,37 +155,42 @@ class Display {
             </div>';
     }
 
-    //Function Name: displayTGEFeatureGameBox
-    //Purpose: To display the contents of a tabletop game description as a feature game box
-    //Parameters: N/A
-    //Returns: N/A
-    //Side Effects: 
+    // Function Name: displayTGEFeatureGameBox
+    // Purpose: To display the contents of a tabletop game description as a feature game box
+    // Parameters: N/A
+    // Returns: N/A
+    // Side Effects: 
     //   <1> Displays the contents of a tabletop game description as a feature game box
     public function displayTGEFeatureGameBox(string $featureGame) {
         //Create new TGE object from the game
         $TGE = new TGE($featureGame);
+        $status = ($TGE->getStatusInfo())["status"];
         
-        //Get images array for output
-        $images = $TGE->getImages();
+        if ($TGE->getGameTitle() != NULL && $status == 1) {
+            //Get images array for output
+            $images = $TGE->getImages();
 
-        echo '<!-- left div for header + information -->
-        <div class="featuredItemLeft">
-            <a href="viewTG.php?gameTitle="' . htmlspecialchars($TGE->getGameTitle()) . '" <h2>' . htmlspecialchars($TGE->getGameTitle()) . '</h2></a>
-            <p>Submitted by: ' . htmlspecialchars($TGE->getScreenName()) . '</p>
-            <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '</p>
-            <p>Number of Players: ' . htmlspecialchars($TGE->getNumPlayers()) . '</p>
-            <p>Company: ' . htmlspecialchars($TGE->getCompany()) . '</p>
-            <p>Game time: ' . htmlspecialchars($TGE->getPlayTime()) . ' hours </p>
-            <p>Age Rating: ' . htmlspecialchars($TGE->getAgeRating()) . ' yrs</p>
-            <p>Number of Expansions: ' . htmlspecialchars($TGE->getExpansions()) . '</p>
-            <p>Description:</p>
-            <p>' . htmlspecialchars($TGE->getDescription()) . '</p>
-        </div>
+            echo '<!-- left div for header + information -->
+            <div class="featuredItemLeft">
+                <a href="viewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '"><h2>' . htmlspecialchars($TGE->getGameTitle()) . '</h2></a>
+                <p>Submitted by: ' . htmlspecialchars($TGE->getScreenName()) . '</p>
+                <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '</p>
+                <p>Number of Players: ' . htmlspecialchars($TGE->getNumPlayers()) . '</p>
+                <p>Company: ' . htmlspecialchars($TGE->getCompany()) . '</p>
+                <p>Game time: ' . htmlspecialchars($TGE->getPlayTime()) . ' hours </p>
+                <p>Age Rating: ' . htmlspecialchars($TGE->getAgeRating()) . ' yrs</p>
+                <p>Number of Expansions: ' . htmlspecialchars($TGE->getExpansions()) . '</p>
+                <p>Description:</p>
+                <p>' . htmlspecialchars($TGE->getDescription()) . '</p>
+            </div>
 
-        <!-- Right div for feature image-->
-        <div class="featuredItemRight">
-            <img src="' . htmlspecialchars($images[0]) . '" class="featureImage" alt="Featured Game Image" />
-        </div>';
+            <!-- Right div for feature image-->
+            <div class="featuredItemRight">
+                <img src="' . htmlspecialchars($images[0]) . '" class="featureImage" alt="Featured Game Image" />
+            </div>';
+        } else {
+            echo '<p class="errorMessage">This game has not been verified yet!</p>';
+        }
     }
 
     //--------------User Display Functions----------------//
@@ -519,11 +530,11 @@ class Display {
     }
 
     //-------------Review Display Functions----------------//
-    //Function Name: displayReview
-    //Purpose: To display the contents of this review 
-    //Parameters: N/A
-    //Returns: N/A
-    //Side Effects: 
+    // Function Name: displayReview
+    // Purpose: To display the contents of this review 
+    // Parameters: N/A
+    // Returns: N/A
+    // Side Effects: 
     //   <1> The contents of this review are displayed on a webpage
     public function displayReview(Review $review) {
         echo '<div class="elementContainer">
@@ -565,12 +576,12 @@ class Display {
             </div>';
     }
     
-    //Function Name: displayReviewTGE
-    //Purpose: To display the contents of a tabletop game description on the reviewTGE.php page
-    //Parameters: 
+    // Function Name: displayReviewTGE
+    // Purpose: To display the contents of a tabletop game description on the reviewTGE.php page
+    // Parameters: 
     //   <1> $TGE: the tabletop game entry being displayed
-    //Returns: N/A
-    //Side Effects: 
+    // Returns: N/A
+    // Side Effects: 
     //   <1> Displays the contents of a tabletop game description on the reviewTGE.php page
     public function displayReviewTGE(TGE $TGE) {
         $images = $TGE->getImages();
@@ -601,6 +612,7 @@ class Display {
                 '. $TGE->getDescription() .'    
                 </p>
             </div>
+
 
         </div>
 
@@ -651,12 +663,12 @@ class Display {
     }
 
     //------------TGE Display Functions--------------------//
-    //Function Name: displayTGE
-    //Purpose: To display the contents of a tabletop game description on the viewTGE.php page
-    //Parameters: 
+    // Function Name: displayTGE
+    // Purpose: To display the contents of a tabletop game description on the viewTGE.php page
+    // Parameters: 
     //   <1> $TGE: the tabletop game entry being displayed
-    //Returns: N/A
-    //Side Effects: 
+    // Returns: N/A
+    // Side Effects: 
     //   <1> Displays the contents of a tabletop game description on the viewTGE.php page
     public function displayTGE(TGE $TGE) {
         $images = $TGE->getImages();
@@ -671,7 +683,7 @@ class Display {
             <div class="innerContainer">
                 <div class="name">' . $TGE->getGameTitle() . '</div>
                 Submitted by ' . $TGE->getScreenName() . ' on ' . $TGE->getDateSubmitted() . '<br>
-                Rating: ' . $TGE->getOverallRating() . '<br>
+                Rating: ' . round($TGE->getOverallRating(), 1) . '<br>
                 Company: ' . $TGE->getCompany() . ' <br>
                 Play Time: ' . $TGE->getPlayTime() . ' hours <br>
                 Age Rating: ' . $TGE->getAgeRating() . '+ <br>
@@ -688,7 +700,7 @@ class Display {
                 '. $TGE->getDescription() .'    
                 </p>
             </div>
-
+            <a href="reviewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton">Leave A Review!</a>
         </div>
 
         <!-- Container for images of the tabletop game-->

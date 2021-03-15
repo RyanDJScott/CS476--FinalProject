@@ -13,37 +13,37 @@
     $errorMessage = "";
 
     //Check to see if they are logged in; redirect if not
-    if (!isset($_SESSION["UID"]) && !is_object($_SESSION["userObj"]))
+    if (!isset($_SESSION["UID"]) && !isset($_SESSION["userObj"]))
         header("Location: login.php");
-
+    else {
     //If the form was submitted, execute the signup process
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $submitTGE = new submitTGE($_SESSION["UID"]);
-        $submitTGE->submitForm();
-    }
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $submitTGE = new submitTGE($_SESSION["UID"]);
+            $submitTGE->submitForm();
+        }
 
-    //If the user was sent here with the GET method for errors, set the error
-    if ($_SERVER["REQUEST_METHOD"] === "GET") {
-        //Insertion error
-        if (isset($_GET["error"]) && $_GET["error"] === "db_error")
-            $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
-        
-        //Validation error
-        if (isset($_GET["error"]) && $_GET["error"] === "val_error")
-            $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
+        //If the user was sent here with the GET method for errors, set the error
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+            //Insertion error
+            if (isset($_GET["error"]) && $_GET["error"] === "db_error")
+                $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
+            
+            //Validation error
+            if (isset($_GET["error"]) && $_GET["error"] === "val_error")
+                $errorMessage = "There is a problem with one of the fields below. Please enable JavaScript for help with the signup form!";
 
-        //Validation error
-        if (isset($_GET["error"]) && $_GET["error"] === "st_error")
-            $errorMessage = "There was a problem setting the status of your tabletop game entry. Please contact the site administrators!";
+            //Validation error
+            if (isset($_GET["error"]) && $_GET["error"] === "st_error")
+                $errorMessage = "There was a problem setting the status of your tabletop game entry. Please contact the site administrators!";
 
-        //Validation error
-        if (isset($_GET["error"]) && $_GET["error"] === "img_error")
-            $errorMessage = "Your images could not be uploaded to the site, you submitted too many (max of 4), or you haven't submitted any! Please try again!";
+            //Validation error
+            if (isset($_GET["error"]) && $_GET["error"] === "img_error")
+                $errorMessage = "Your images could not be uploaded to the site, you submitted too many (max of 4), or you haven't submitted any! Please try again!";
 
-        //Validation error
-        if (isset($_GET["error"]) && $_GET["error"] === "dbimg_error")
-            $errorMessage = "Your images could not be saved in the database. Please contact the site administrators!";
-    }
+            //Validation error
+            if (isset($_GET["error"]) && $_GET["error"] === "dbimg_error")
+                $errorMessage = "Your images could not be saved in the database. Please contact the site administrators!";
+        }
 ?>
 <!DOCTYPE html>
 <HTML lang="en">
@@ -180,3 +180,4 @@
 </body>
 
 </html>
+<?php } ?>

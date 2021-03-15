@@ -402,6 +402,8 @@ class userEditProfile extends userProfileSubmission {
 
                 //Execute query
                 $editPassword = $this->dbConnect->query($updatePassword);
+            } else {
+                $editPassword = FALSE;
             }
 
             $imageUploaded = $this->uploadImage();

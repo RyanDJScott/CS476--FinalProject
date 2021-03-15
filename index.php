@@ -54,7 +54,7 @@
         <!-- featured item container-->
         <div class="featuredItem">
             <?php
-                $display->displayTGEFeatureGameBox("Betrayal at House on the Hill");
+                $display->displayTGEFeatureGameBox("Pandemic");
             ?>
         </div>
 

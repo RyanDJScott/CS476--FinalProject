@@ -25,13 +25,13 @@
 
         //Member functions
 
-        //Function Name: Constructor
-        //Purpose: To construct a review object
-        //Parameters:
+        // Function Name: Constructor
+        // Purpose: To construct a review object
+        // Parameters:
         //   <1> $gameTitle: The title of the game being reviewed
         //   <2> $userID: The UID of the user who left the review
-        //Returns: N/A
-        //Side Effects:
+        // Returns: N/A
+        // Side Effects:
         //   <1> $reviewInformation: initialized to an array containing all review info
         //   <2> $flagStatus: initialized to 0 or 1
         public function __construct(string $objGameTitle, int $reviewerUID) {
@@ -70,45 +70,46 @@
             } 
         }
 
-        //Function Name: getGameTitle
-        //Purpose: To get the value of $gameTitle
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getGameTitle
+        // Purpose: To get the value of $gameTitle
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->gameTitle
-        //Side Effects: N/A
+        // Side Effects: N/A
         public function getGameTitle () {
             return $this->gameTitle;
         }
 
-        //Function Name: getUID
-        //Purpose: To get the value of $UID
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getUID
+        // Purpose: To get the value of $UID
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->UID
-        //Side Effects: N/A
+        // Side Effects: N/A
         public function getUID () {
             return $this->UID;
         }
 
-        //Note: No setter, should not be manipulated by this class
-        //Function Name: getSubmittedDBy
-        //Purpose: To get the value of $submittedBy
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getSubmittedDBy
+        // Purpose: To get the value of $submittedBy
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->submittedBy
-        //Side Effects: N/A
+        // Side Effects: N/A
+        // Note: 
+        //   <1> No setter, should not be manipulated by this class
         public function getSubmittedBy () {
             return $this->submittedBy;
         }
 
-        //Function Name: setSubmitDate
-        //Purpose: To set the value of $submitDate
-        //Parameters: 
+        // Function Name: setSubmitDate
+        // Purpose: To set the value of $submitDate
+        // Parameters: 
         //   <1> $date: The new value of $submitDate
-        //Returns:
+        // Returns:
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
-        //Side Effects: $submitDate is set to the value of $date
+        // Side Effects: $submitDate is set to the value of $date
         public function setSubmitDate (object $date) {
             //Check to see if date is set
             if (!isset($date)) {
@@ -133,24 +134,24 @@
             }
         }
 
-        //Function Name: getSubmitDate
-        //Purpose: To get the value of $submitDate
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getSubmitDate
+        // Purpose: To get the value of $submitDate
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->submitDate
-        //Side Effects: N/A
+        // Side Effects: N/A
         public function getSubmitDate () {
             return $this->submitDate;
         }
 
-        //Function Name: setRating
-        //Purpose: To set the value of $rating
-        //Parameters: 
+        // Function Name: setRating
+        // Purpose: To set the value of $rating
+        // Parameters: 
         //   <1> $newRating: The new value of $rating
-        //Returns:
+        // Returns:
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
-        //Side Effects: $rating is set to the value of $newRating
+        // Side Effects: $rating is set to the value of $newRating
         public function setRating (float $newRating) {
             //Check to see if date is set
             if (!isset($newRating)) {
@@ -175,24 +176,24 @@
             }
         }
 
-        //Function Name: getRating
-        //Purpose: To get the value of $rating
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getRating
+        // Purpose: To get the value of $rating
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->rating
-        //Side Effects: N/A
+        // Side Effects: N/A
         public function getRating () {
             return $this->rating;
         }
         
-        //Function Name: setReview
-        //Purpose: To set the value of $review
-        //Parameters: 
+        // Function Name: setReview
+        // Purpose: To set the value of $review
+        // Parameters: 
         //   <1> $newReview: The new value of $review
-        //Returns:
+        // Returns:
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
-        //Side Effects: $review is set to the value of $newReview
+        // Side Effects: $review is set to the value of $newReview
         public function setReview (string $newReview) {
             //Check to see if date is set
             if (!isset($newReview)) {
@@ -217,24 +218,24 @@
             }
         }
 
-        //Function Name: getReview
-        //Purpose: To get the value of $review
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getReview
+        // Purpose: To get the value of $review
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->review
-        //Side Effects: N/A
+        // Side Effects: N/A
         public function getReview () {
             return $this->review;
         }
 
-        //Function Name: setRecommend
-        //Purpose: To set the value of $recommend
-        //Parameters: 
+        // Function Name: setRecommend
+        // Purpose: To set the value of $recommend
+        // Parameters: 
         //   <1> $newRecommend: The new value of $recommend
-        //Returns:
+        // Returns:
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
-        //Side Effects: $recommend is set to the value of $newRecommend
+        // Side Effects: $recommend is set to the value of $newRecommend
         public function setRecommend (bool $newRecommend) {
             //Check to see if date is set
             if (!isset($newRecommend)) {
@@ -259,24 +260,24 @@
             }
         }
 
-        //Function Name: getRecommend
-        //Purpose: To get the value of $recommend
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getRecommend
+        // Purpose: To get the value of $recommend
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->recommend
-        //Side Effects: N/A
+        // Side Effects: N/A
         public function getRecommend () {
             return $this->recommend;
         }
         
-        //Function Name: setAvgAge
-        //Purpose: To set the value of $avgAge
-        //Parameters: 
+        // Function Name: setAvgAge
+        // Purpose: To set the value of $avgAge
+        // Parameters: 
         //   <1> $age: The new value of $avgAge
-        //Returns:
+        // Returns:
         //   <1> True: The information was updated in the DB
         //   <2> False: The information was not updated in the DB
-        //Side Effects: $avgAge is set to the value of $age
+        // Side Effects: $avgAge is set to the value of $age
         public function setAvgAge (int $age) {
             //Check to see if date is set
             if (!isset($age)) {
@@ -301,24 +302,24 @@
             }
         }
 
-        //Function Name: getAvgAge
-        //Purpose: To get the value of $avgAge
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getAvgAge
+        // Purpose: To get the value of $avgAge
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->avgAge
-        //Side Effects: N/A
+        // Side Effects: N/A
         public function getAvgAge () {
             return $this->avgAge;
         }
         
-        //Function Name: setAvgPlayTime
-        //Purpose: To set the value of $avgPlayTime
-        //Parameters: 
+        // Function Name: setAvgPlayTime
+        // Purpose: To set the value of $avgPlayTime
+        // Parameters: 
         //   <1> $playTime: The new value of $avgPlayTime
-        //Returns:
+        // Returns:
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
-        //Side Effects: $avgPlayTime is set to the value of $playTime
+        // Side Effects: $avgPlayTime is set to the value of $playTime
         public function setAvgPlayTime (float $playTime) {
             //Check to see if date is set
             if (!isset($playTime)) {
@@ -343,24 +344,24 @@
             }
         }
 
-        //Function Name: getAvgPlayTime
-        //Purpose: To get the value of $avgPlayTime
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getAvgPlayTime
+        // Purpose: To get the value of $avgPlayTime
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->avgPlayTime
-        //Side Effects: N/A
+        // Side Effects: N/A
         public function getAvgPlayTime () {
             return $this->avgPlayTime;
         }
 
-        //Function Name: setDifficulty
-        //Purpose: To set the value of $difficulty
-        //Parameters: 
+        // Function Name: setDifficulty
+        // Purpose: To set the value of $difficulty
+        // Parameters: 
         //   <1> $newDifficulty: The new value of $difficulty
-        //Returns:
+        // Returns:
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
-        //Side Effects: $difficulty is set to the value of $newDifficulty
+        // Side Effects: $difficulty is set to the value of $newDifficulty
         public function setDifficulty (string $newDifficulty) {
             //Check to see if date is set
             if (!isset($newDifficulty)) {
@@ -385,24 +386,24 @@
             }
         }
 
-        //Function Name: getDifficulty
-        //Purpose: To get the value of $difficulty
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getDifficulty
+        // Purpose: To get the value of $difficulty
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->difficulty
-        //Side Effects: N/A
+        // Side Effects: N/A
         public function getDifficulty () {
             return $this->difficulty;
         }
 
-        //Function Name: setNumPlays
-        //Purpose: To set the value of $numPlays
-        //Parameters: 
+        // Function Name: setNumPlays
+        // Purpose: To set the value of $numPlays
+        // Parameters: 
         //   <1> $numberPlays: The new value of $numPlays
-        //Returns:
+        // Returns:
         //   <1> True: If the information was updated in the DB
         //   <2> False: If the information was not updated in the DB
-        //Side Effects: $numPlays is set to the value of $numberPlays
+        // Side Effects: $numPlays is set to the value of $numberPlays
         public function setNumPlays (int $numberPlays) {
             //Check to see if date is set
             if (!isset($numberPlays)) {
@@ -427,23 +428,24 @@
             }
         }
 
-        //Function Name: getNumPlays
-        //Purpose: To get the value of $numPlays
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getNumPlays
+        // Purpose: To get the value of $numPlays
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->numPlays
-        //Side Effects: N/A
+        // Side Effects: N/A
         public function getNumPlays () {
             return $this->numPlays;
         }
 
-        //Note: No setter; only logged in users can set a flag
-        //Function Name: getFlag
-        //Purpose: To get the value of $flagStatus
-        //Parameters: N/A
-        //Returns: 
+        // Function Name: getFlag
+        // Purpose: To get the value of $flagStatus
+        // Parameters: N/A
+        // Returns: 
         //   <1> $this->flag
-        //Side Effects: N/A
+        // Side Effects: N/A
+        //Note: 
+        //   <1> No setter; only logged in users can set a flag
         public function getFlag() {
             return $this->flag;
         }      

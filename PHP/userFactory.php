@@ -42,12 +42,12 @@ abstract class user {
 
     //Common functions to both user types
 
-    //Function Name: Constructor
-    //Purpose: To construct a user object
-    //Parameters:
+    // Function Name: Constructor
+    // Purpose: To construct a user object
+    // Parameters:
     //   <1> $objUID: The UID of the user being constructed
-    //Returns: N/A
-    //Side Effects:
+    // Returns: N/A
+    // Side Effects:
     //   <1> The DB variables are set for the object
     //   <2> All profile variables are set to their DB variables
     //   <3> $UID and $userType are set for the user object
@@ -87,11 +87,11 @@ abstract class user {
         }
     }
 
-    //Function Name: wakeup
-    //Purpose: To re-establish the DB connection when the object is unserialized
-    //Parameters: None
-    //Returns: None
-    //Side Effects:
+    // Function Name: wakeup
+    // Purpose: To re-establish the DB connection when the object is unserialized
+    // Parameters: None
+    // Returns: None
+    // Side Effects:
     //   <1> $this->db is reinitialized with a DB object
     //   <2> $this->dbConnect is reinitialized with a DB connection
     public function __wakeup() {
@@ -99,36 +99,40 @@ abstract class user {
             $this->dbConnect = $this->db->getDBConnection();
     }
     
-    //Note: No setter; set in the constructor
-    //Function Name: getUID
-    //Purpose: To get the UID of this object
-    //Parameters: None
-    //Returns: 
+    
+    // Function Name: getUID
+    // Purpose: To get the UID of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->UID
-    //Side Effects: N/A
+    // Side Effects: N/A
+    // Note: 
+    //   <1> No setter; set in the constructor
     public function getUID() {
         return $this->UID;
     }
 
-    //Note: No setter; only administrators have this right
-    //Function Name: getUserType
-    //Purpose: To get the userType of this object
-    //Parameters: None
-    //Returns: 
+    
+    // Function Name: getUserType
+    // Purpose: To get the userType of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->userType
-    //Side Effects: N/A
+    // Side Effects: N/A
+    // Note: 
+    //   <1> No setter; only administrators have this right
     public function getUserType () {
         return $this->userType;
     }
 
-    //Function Name: setFirstName
-    //Purpose: To set the value of $firstName
-    //Parameters:
+    // Function Name: setFirstName
+    // Purpose: To set the value of $firstName
+    // Parameters:
     //   <1> $newFirstName: The new value of $firstName
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $firstName is set to the value of $newFirstName
     public function setFirstName($newFirstName) {
         //Check if the passed variable is empty, return false if so
@@ -154,24 +158,24 @@ abstract class user {
         }
     }
 
-    //Function Name: getFirstName
-    //Purpose: To get the firstName of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getFirstName
+    // Purpose: To get the firstName of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->firstName
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getFirstName() {
         return $this->firstName;
     }
 
-    //Function Name: setLastName
-    //Purpose: To set the value of $lastName
-    //Parameters:
+    // Function Name: setLastName
+    // Purpose: To set the value of $lastName
+    // Parameters:
     //   <1> $newFirstName: The new value of $lastName
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $lastName is set to the value of $newLastName
     public function setLastName($newLastName) {
         //Check if the passed variable is empty, return false if so
@@ -197,24 +201,24 @@ abstract class user {
         }
     }
 
-    //Function Name: getLastName
-    //Purpose: To get the lastName of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getLastName
+    // Purpose: To get the lastName of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->lastName
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getLastName() {
         return $this->lastName;
     }
 
-    //Function Name: setBirthday
-    //Purpose: To set the value of $birthday
-    //Parameters:
+    // Function Name: setBirthday
+    // Purpose: To set the value of $birthday
+    // Parameters:
     //   <1> $newBday: The new value of $birthday
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $birthday is set to the value of $newBday
     public function setBirthday($newBday) {
         //Check if the passed variable is empty, return false if so
@@ -240,24 +244,24 @@ abstract class user {
         }
     }
 
-    //Function Name: getBirthday
-    //Purpose: To get the birthday of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getBirthday
+    // Purpose: To get the birthday of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->birthday
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getBirthday() {
         return $this->birthday;
     }
 
-    //Function Name: setEmail
-    //Purpose: To set the value of $email
-    //Parameters:
+    // Function Name: setEmail
+    // Purpose: To set the value of $email
+    // Parameters:
     //   <1> $newEmail The new value of $email
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: The information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $email is set to the value of $newEmail
     public function setEmail($newEmail) {
         //Check if the passed variable is empty, return false if so
@@ -283,24 +287,24 @@ abstract class user {
         }
     }
 
-    //Function Name: getEmail
-    //Purpose: To get the email of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getEmail
+    // Purpose: To get the email of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->email
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getEmail() {
         return $this->email;
     }
 
-    //Function Name: setScreenName
-    //Purpose: To set the value of $screenName
-    //Parameters:
+    // Function Name: setScreenName
+    // Purpose: To set the value of $screenName
+    // Parameters:
     //   <1> $newSN: The new value of $screenName
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: THe information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $screenName is set to the value of $newSN
     public function setScreenName($newSN) {
         //Check if the passed variable is empty, return false if so
@@ -326,24 +330,24 @@ abstract class user {
         }
     }
 
-    //Function Name: getScreenName
-    //Purpose: To get the screenName of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getScreenName
+    // Purpose: To get the screenName of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->screenName
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getScreenName() {
         return $this->screenName;
     }
 
-    //Function Name: setAvatarURL
-    //Purpose: To set the value of $avatarURL
-    //Parameters:
+    // Function Name: setAvatarURL
+    // Purpose: To set the value of $avatarURL
+    // Parameters:
     //   <1> $newAvatar: The new value of $avatarURL
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: THe information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $avatarURL is set to the value of $newAvatar
     public function setAvatarURL($newAvatar) {
         //Check if the passed variable is empty, return false if so
@@ -369,24 +373,24 @@ abstract class user {
         }
     }
 
-    //Function Name: getAvatarURL
-    //Purpose: To get the avatarURL of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getAvatarURL
+    // Purpose: To get the avatarURL of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->avatarURL
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getAvatarURL() {
         return $this->avatarURL;
     }
 
-    //Function Name: setBiography
-    //Purpose: To set the value of $biography
-    //Parameters:
+    // Function Name: setBiography
+    // Purpose: To set the value of $biography
+    // Parameters:
     //   <1> $newBio The new value of $biography
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: THe information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $biography is set to the value of $newBio
     public function setBiography($newBio) {
         //Check if the passed variable is empty, return false if so
@@ -412,24 +416,24 @@ abstract class user {
         }
     }
 
-    //Function Name: getBiography
-    //Purpose: To get the biography of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getBiography
+    // Purpose: To get the biography of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->biography
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getBiography() {
         return $this->biography;
     }
 
-    //Function Name: setFavGame
-    //Purpose: To set the value of $favGame
-    //Parameters:
+    // Function Name: setFavGame
+    // Purpose: To set the value of $favGame
+    // Parameters:
     //   <1> $newFavGame: The new value of $favGame
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: THe information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $favGame is set to the value of $newFavGame
     public function setFavGame($newFavGame) {
         //Check if the passed variable is empty, return false if so
@@ -455,24 +459,24 @@ abstract class user {
         }
     }
 
-    //Function Name: getFavGame
-    //Purpose: To get the favGame of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getFavGame
+    // Purpose: To get the favGame of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->favGame
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getFavGame() {
         return $this->favGame;
     }
 
-    //Function Name: setGameType
-    //Purpose: To set the value of $gameType
-    //Parameters:
+    // Function Name: setGameType
+    // Purpose: To set the value of $gameType
+    // Parameters:
     //   <1> $newGameType: The new value of $gameType
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: THe information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $gameType is set to the value of $newGameType
     public function setGameType($newGameType) {
         //Check if the passed variable is empty, return false if so
@@ -498,24 +502,24 @@ abstract class user {
         }
     }
 
-    //Function Name: getGameType
-    //Purpose: To get the gameType of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getGameType
+    // Purpose: To get the gameType of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->gameType
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getGameType() {
         return $this->gameType;
     }
 
-    //Function Name: setPlayTime
-    //Purpose: To set the value of $playTime
-    //Parameters:
+    // Function Name: setPlayTime
+    // Purpose: To set the value of $playTime
+    // Parameters:
     //   <1> $newPlayTime: The new value of $playTime
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: THe information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $playTime is set to the value of $newPlayTime
     public function setPlayTime($newPlayTime) {
         //Check if the passed variable is empty, return false if so
@@ -541,24 +545,24 @@ abstract class user {
         }
     }
 
-    //Function Name: getPlayTime
-    //Purpose: To get the playTime of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getPlayTime
+    // Purpose: To get the playTime of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->playTime
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getPlayTime() {
         return $this->playTime;
     }
 
-    //Function Name: setLastLogin
-    //Purpose: To set the value of $lastLogin
-    //Parameters:
+    // Function Name: setLastLogin
+    // Purpose: To set the value of $lastLogin
+    // Parameters:
     //   <1> $newLogin: The new value of $lastLogin
-    //Returns: 
+    // Returns: 
     //   <1> TRUE: The information was updated in the DB
     //   <2> FALSE: THe information was not updated in the DB
-    //Side Effects:
+    // Side Effects:
     //   <1> $lastLogin is set to the value of $newLogin
     public function setLastLogin($newLogin) {
         //Check if the passed variable is empty, return false if so
@@ -584,12 +588,12 @@ abstract class user {
         }
     }
 
-    //Function Name: getLastLogin
-    //Purpose: To get the lastLogin of this object
-    //Parameters: None
-    //Returns: 
+    // Function Name: getLastLogin
+    // Purpose: To get the lastLogin of this object
+    // Parameters: None
+    // Returns: 
     //   <1> $this->lastLogin
-    //Side Effects: N/A
+    // Side Effects: N/A
     public function getLastLogin() {
         return $this->lastLogin;
     }
@@ -627,7 +631,7 @@ class communityUser extends user {
 
         //If delete worked, log them out
         if ($deleteResult === TRUE) {
-            header("Location: http://www.queencitysgambit.geekagogo.com/PHP/logoutScript.php");
+            header("Location: http://www.queencitysgambit.geekagogo.ca/PHP/logoutScript.php");
         } else if ($deleteResult === FALSE) {
             return FALSE;
         }
@@ -738,7 +742,7 @@ class adminUser extends user {
 
         //If delete worked, log them out
         if ($deleteResult === TRUE) {
-            header("Location: http://www.queencitysgambit.geekagogo.com/PHP/logoutScript.php");
+            header("Location: http://www.queencitysgambit.geekagogo.ca/PHP/logoutScript.php");
         } else if ($deleteResult === FALSE) {
             return FALSE;
         }
