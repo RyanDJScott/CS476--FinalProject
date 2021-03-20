@@ -118,7 +118,7 @@ function passwordConfirmChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This password is invalid";
+        errorMsg = "Cannot confirm passwords";
     }
     return validInput;
 }

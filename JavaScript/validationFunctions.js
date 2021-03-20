@@ -232,3 +232,197 @@ function pictureValidation(filePath)
     
     return validInput;
 }
+
+//*****************************************************************************************
+//*****************************************************************************************
+/*
+Validation functions for game-related inputs. These inputs will also
+be moderated by admins, so these functions will simply ensure the 
+input is within accepted parameters. 
+These return a true/false value to the wrapper function, false will
+indicate an error message should be displayed and true allows the
+input to be passed.
+*/
+
+/*
+Name function
+- can't be blank
+- less than 60 characters 
+*/ 
+function TGENameValidation(gameName)
+{
+    var validInput = true;
+
+    if (gameName == "")
+    {
+        validInput = false;
+    }
+    if (gameName.length > 60)
+    {
+        validInput = false;
+    }
+
+    return validInput;
+}
+
+/*
+Company that produced the game
+- can't be blank
+- less than 100 characters 
+*/
+function TGECompanyNameValidation(companyName)
+{
+    var validInput = true;
+
+    if (companyName == "")
+    {
+        validInput = false;
+    }
+    if (companyName.length > 100)
+    {
+        validInput = false;
+    }
+
+    return validInput;
+}
+
+/*
+Amount of time required to play the name
+- can't be blank
+- floating point
+- greater than 0
+*/
+function TGEPlaytimeValidation(playtime)
+{
+    var validInput = true;
+
+    if(playtime == "")
+    {
+        validInput = false;
+    }
+    if(validInput <= 0)
+    {
+        validInput = false;
+    }
+    //check if not a number
+    if(isNaN(playtime))
+    {
+        validInput = false;
+    }
+
+    return validInput;
+}
+
+/*
+Age rating provided by the game, will be displayed as ("input+ years" i.e. Recommends 3+ years to play)
+- can't be blank
+- must be a number
+- between 0 and 19
+*/
+function TGEAgeValidation(age)
+{
+    var validInput = true;
+
+    if(age == "")
+    {
+        validInput = false;
+    }
+    if(isNaN(age))
+    {
+        validInput = false;
+    }
+    if(age > 19 || age < 0)
+    {
+        validInput = false;
+    }
+
+    return validInput;
+}
+
+/*
+(minimum/recommended) Number of players
+- can't be blank
+- must be a number
+- between 0 and 20
+*/
+function TGEPlayersValidation(players)
+{
+    var validInput = true;
+
+    if(players == "")
+    {
+        validInput = false;
+    }
+    if(isNaN(players))
+    {
+        validInput = false;
+    }
+    if(players < 0 || players > 20)
+    {
+        validInput = false; 
+    }
+
+    return validInput;
+}
+
+
+/*
+Number of expansions available for the game
+- can't be blank
+- Number less than 30
+*/
+function TGEExpansionsValidation(expansions)
+{
+    var validInput = true;
+
+    if(expansions == "")
+    {
+        validInput = false;
+    }
+    if(isNaN(expansions))
+    {
+        validInput = false;
+    }
+    if(expansions < 0 || expansions > 30)
+    {
+        validInput = false; 
+    }
+
+    return validInput;
+}
+
+
+/*
+Description of the game as provided by the user
+- can't be blank
+- there's no limit to the number of characters the description can be
+*/
+function descriptionValidation(description)
+{
+    var validInput = true;
+
+    if(description == "")
+    {
+        validInput = false;
+    }
+
+    return validInput;
+}
+
+/*
+Checks the uploads for the images that the user can provide
+- make sure that at least one photo has been uploaded
+- all uploads have to be of a valid filetype
+*/
+function TGEUploadValidation(filePath)
+{
+    var validInput = true;
+
+    if(filePath == "")
+    {
+        validInput = false; 
+    }
+    pictureValidation(filePath)
+    
+    return validInput;
+}
