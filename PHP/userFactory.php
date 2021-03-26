@@ -597,7 +597,6 @@ abstract class user {
     //Base user functionalities here
     //Both users implement these functions
     abstract public function deleteAccount();
-    abstract public function leaveReview();
 
     //Admin functionalities here
     //Admin: implements these functions
