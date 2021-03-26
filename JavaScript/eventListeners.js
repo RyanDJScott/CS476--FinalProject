@@ -1,7 +1,6 @@
 //Event listeners for fields for user information,
 // i.e. signup and edit profile
 
-
 //=======================User Info Listeners====================
 //first name
 document.getElementById("editFName").addEventListener("blur", firstNameChecker, false);
@@ -52,6 +51,9 @@ document.getElementById("signupBiogrpahy").addEventListener("blur", biographyChe
 //profile picture
 document.getElementById("editPic").addEventListener("change", pictureChecker, false);
 document.getElementById("signupPic").addEventListener("change", pictureChecker, false);
+
+//login submit
+document.getElementById("loginButton").addEventListener("submit", loginCheck, false);
 
 //=======================Game Listeners ========================
 
