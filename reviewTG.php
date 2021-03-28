@@ -108,7 +108,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <div class="errorMessage" id=""></div>
+                            <div class="errorMessage" id="reviewAgeError"></div>
                         </td>
                     </tr>
 
@@ -159,14 +159,15 @@
 
                 <div class="reviewSection">
                     Please tell us about your experience with this game:<br>
-                    <textarea rows="15" cols="75" name="reviewText">Leave your review here...</textarea>
+                    <textarea rows="15" cols="75" name="reviewText" id="reviewTGTextArea">Leave your review here...</textarea>
                     <div class="errorMessage" id="reviewTextError"></div>
                 </div>
 
 
                 <!-- submit button-->
-                <input class="reviewSubmitButton" type="submit">
+                <input class="reviewSubmitButton" type="submit" id="reviewSubmitButton">
                 <input type="hidden" name="gameTitle" value="<?=$gameTitle?>">
+                <div class="errorMessage" id="reviewSubmitError"></div>
             </form>
         </div>
     </div>
