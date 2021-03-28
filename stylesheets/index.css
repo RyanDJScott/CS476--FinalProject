@@ -77,3 +77,8 @@
     text-align: left;
     width: 100%;
 }
+
+/*for the headers on the display box*/
+.attributeHeader {
+    font-weight: bold;
+}

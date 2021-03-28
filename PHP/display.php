@@ -173,14 +173,14 @@ class Display {
             echo '<!-- left div for header + information -->
             <div class="featuredItemLeft">
                 <a href="viewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '"><h2>' . htmlspecialchars($TGE->getGameTitle()) . '</h2></a>
-                <p>Submitted by: ' . htmlspecialchars($TGE->getScreenName()) . '</p>
-                <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '</p>
-                <p>Number of Players: ' . htmlspecialchars($TGE->getNumPlayers()) . '</p>
-                <p>Company: ' . htmlspecialchars($TGE->getCompany()) . '</p>
-                <p>Game time: ' . htmlspecialchars($TGE->getPlayTime()) . ' hours </p>
-                <p>Age Rating: ' . htmlspecialchars($TGE->getAgeRating()) . ' yrs</p>
-                <p>Number of Expansions: ' . htmlspecialchars($TGE->getExpansions()) . '</p>
-                <p>Description:</p>
+                <p><span class="attributeHeader">Submitted by: </span>' . htmlspecialchars($TGE->getScreenName()) . '</p>
+                <p><span class="attributeHeader">Rating: </span>' . htmlspecialchars($TGE->getOverallRating()) . '</p>
+                <p><span class="attributeHeader">Number of Players: </span>' . htmlspecialchars($TGE->getNumPlayers()) . '</p>
+                <p><span class="attributeHeader">Company: </span>' . htmlspecialchars($TGE->getCompany()) . '</p>
+                <p><span class="attributeHeader">Game time: </span>' . htmlspecialchars($TGE->getPlayTime()) . ' hours </p>
+                <p><span class="attributeHeader">Age Rating: </span>' . htmlspecialchars($TGE->getAgeRating()) . ' yrs</p>
+                <p><span class="attributeHeader">Number of Expansions: </span>' . htmlspecialchars($TGE->getExpansions()) . '</p>
+                <p><span class="attributeHeader">Description: </span></p>
                 <p>' . htmlspecialchars($TGE->getDescription()) . '</p>
             </div>
 
