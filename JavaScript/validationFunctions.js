@@ -557,3 +557,12 @@ function difficultyValidation(difficulty)
 
     return validInput;
 }
+
+//*****************************************************************************************
+//*****************************************************************************************
+/*
+Function(s) for making sure that flagged reviews have a reason given
+as well. These functions will return a true/false value based on 
+the input given, this value will be returned to the wrapper function
+to allow page validation
+*/
