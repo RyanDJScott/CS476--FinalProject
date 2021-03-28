@@ -13,7 +13,7 @@ document.getElementById("signupLName").addEventListener("blur", lastNameChecker,
 //email
 document.getElementById("editEmail").addEventListener("blur", emailChecker, false);
 document.getElementById("signupEmail").addEventListener("blur", emailChecker, false);
-document.getElementById("loginEmail").addEventListener("blur", emailChecker, false);
+
 
 //screenname
 document.getElementById("editScreenname").addEventListener("blur", screennameChecker, false);
@@ -22,7 +22,6 @@ document.getElementById("signupScreenname").addEventListener("blur", screennameC
 //password
 document.getElementById("editPassword").addEventListener("blur", passwordChecker, false);
 document.getElementById("signupPassword").addEventListener("blur", passwordChecker, false);
-document.getElementById("loginPassword").addEventListener("blur", passwordChecker, false);
 
 //password confirmation
 document.getElementById("editPasswordConfirm").addEventListener("blur", passwordConfirmChecker, false);
