@@ -108,3 +108,10 @@ document.getElementById("reviewTGTextArea").addEventListener("blur", reviewDescr
 
 //submission
 document.getElementById("reviewSubmitButton").addEventListener("submit", reviewSubmitChecker, false);
+
+
+//===========================Reviewing a Flag=====================
+
+//
+document.getElementById("approveTGE").addEventListener("submit", submissionChecker, false);
+document.getElementById("rejectTGE").addEventListener("submit", submissionChecker, false);

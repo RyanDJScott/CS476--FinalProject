@@ -108,20 +108,26 @@ else {
                     <!-- input box -->
                     <textarea name="gameFeedback" id="gameFeedback" rows="10" cols="50"></textarea>
                 </div>
+                <div>
+                    <div class="errorMessage" id="reviewFlagDescError"></div>
+                </div>
             </div>
 
             <!-- buttons -->
             <div class="buttonContainer">
 
                 <!-- Approves the TGE -->
-                <input class="button" type="submit" name="approveTGE" value="APPROVE">
+                <input class="button" type="submit" name="approveTGE" value="APPROVE" id="approveTGE">
 
                 <!-- Rejects the TGE -->
-                <input class="button" type="submit" name="rejectTGE" value="REJECT">
+                <input class="button" type="submit" name="rejectTGE" value="REJECT" id="rejectTGE">
                 
                 <input type="hidden" name="gameTitle" value="<?php echo $gameTitle; ?>">
 
             </div>
+            <div>
+                    <div class="errorMessage" id="reviewFlagSubmitError"></div>
+                </div>
         </form>
     </div>
 </body>
