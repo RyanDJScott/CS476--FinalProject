@@ -148,10 +148,14 @@ class Display {
     //   <1> Displays the contents of a tabletop game description as a mini card
     public function displayTGECard(TGE $TGE) {
         echo '<div class="smallGameBox">
-                <p>' . htmlspecialchars($TGE->getGameTitle()) . '</p>
-                <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '/10</p>
-                <p>' . htmlspecialchars($this->limitChars($TGE->getDescription(), 200)) . '</p>
+            <div class="topContainer">
+                <p><span class="attributeHeader">' . htmlspecialchars($TGE->getGameTitle()) . '</span></p>
+                <p><span class="attributeHeader">Rating: </span>' . htmlspecialchars($TGE->getOverallRating()) . '/10</p>
+                <p>' . htmlspecialchars($this->limitChars($TGE->getDescription(), 260)) . '</p>
+            </div>
+            <div class="bottomContainer">
                 <a href="viewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton">View Game Description</a>
+            </div>
             </div>';
     }
 

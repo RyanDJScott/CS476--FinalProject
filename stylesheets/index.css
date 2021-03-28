@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: top;
     justify-items: center;
     max-width: 75%;
     border: 1px solid #AAA0B4;
@@ -26,7 +26,8 @@
     order: 1;
     flex-grow: 2;
     flex-basis: 66%;
-    justify-content: center;
+    justify-content: top;
+    align-content: top;
 }
 
 /* video/image content */
@@ -66,6 +67,8 @@
     flex-wrap: nowrap;
     align-items: center;
     width: 75%;
+    min-height: 400px;
+    max-height: 400px;
 }
 
 /* alignment of header */
@@ -81,4 +84,5 @@
 /*for the headers on the display box*/
 .attributeHeader {
     font-weight: bold;
+    line-height: 1.8;
 }
