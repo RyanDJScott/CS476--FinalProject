@@ -20,6 +20,8 @@
     <!--==============================Stylesheets===========================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
     <link rel="stylesheet" href="stylesheets/login.css">
+    <!--==============================Script Files==========================-->
+    <link rel="text/javascript" src="JavaScript/validationFunctions.js"></script>
 </head>
 
 <body>
@@ -90,6 +92,6 @@
 
     </div>
 </body>
-
+<link rel="text/javascript" src="JavaScript/loginEventListeners.js"></script>
 </HTML>
 <?php } ?>
