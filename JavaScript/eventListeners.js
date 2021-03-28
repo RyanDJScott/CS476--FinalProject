@@ -55,6 +55,7 @@ document.getElementById("signupPic").addEventListener("change", pictureChecker, 
 //login submit
 document.getElementById("loginButton").addEventListener("submit", loginCheck, false);
 
+
 //=======================Game Listeners ========================
 
 //game name
@@ -83,3 +84,27 @@ document.getElementById("submitTGEUpload").addEventListener("change", TGEUploadC
 
 //submit button
 document.getElementById("").addEventListener("submit", submitChecker, false);
+
+
+//==============================reviewing a game listeners=========
+
+//rating
+document.getElementById("reviewRating").addEventListener("blur", ratingChecker, false);
+
+//age
+document.getElementById("reviewAge").addEventListener("blur", ageChecker, false);
+
+//playtime
+document.getElementById("reviewPlaytime").addEventListener("blur", playtimeChecker, false);
+
+//times played
+document.getElementById("reviewPlayedQuantity").addEventListener("blur", playedQuantityChecker, false);
+
+//difficulty
+document.getElementById("reviewDifficulty").addEventListener("change", difficultyChecker, false);
+
+//description
+document.getElementById("reviewTGTextArea").addEventListener("blur", reviewDescriptionChecker, false);
+
+//submission
+document.getElementById("reviewSubmitButton").addEventListener("submit", reviewSubmitChecker, false);

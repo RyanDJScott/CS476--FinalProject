@@ -54,9 +54,11 @@ function loginCheck(event)
     if(validInput == true)
     {
         errorMsg = "";
+        event.preventDefault();
     }
     if(validInput == false)
     {
         errorMsg = "This was not a valid login, please check your login and try again";
+        event.preventDefault();
     }
 }

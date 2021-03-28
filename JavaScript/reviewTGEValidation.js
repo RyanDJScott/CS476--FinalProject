@@ -1,4 +1,0 @@
-/*
-functions for validating the inputs when a user is writing a review
-for a tabletop game
-*/

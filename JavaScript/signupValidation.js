@@ -23,7 +23,6 @@ function firstNameChecker(event)
     {
         firstNameErrorMsg.innerHTML = "This is an invalid name";
     }
-    return validInput;
 }
 
 function lastNameChecker(event)
@@ -42,7 +41,6 @@ function lastNameChecker(event)
     {
         lastNameErrorMsg.innerHTML = "This is an invalid last name";
     }
-    return validInput;
 }
 
 function emailChecker(event)
@@ -61,7 +59,6 @@ function emailChecker(event)
     {
         errorMsg = "This email is invalid";
     }
-    return validInput;
 }
 
 function screennameChecker(event)
@@ -80,7 +77,6 @@ function screennameChecker(event)
     {
         errorMsg = "This screenname is invalid";
     }
-    return validInput;
 }
 
 function passwordChecker(event)
@@ -99,7 +95,6 @@ function passwordChecker(event)
     {
         errorMsg = "This password is invalid";
     }
-    return validInput;
 }
 
 function passwordConfirmChecker(event)
@@ -120,7 +115,6 @@ function passwordConfirmChecker(event)
     {
         errorMsg = "Cannot confirm passwords";
     }
-    return validInput;
 }
 
 function birthdayChecker(event)
@@ -139,7 +133,6 @@ function birthdayChecker(event)
     {
         errorMsg = "This birthday is invalid";
     }
-    return validInput;
 }
 
 function faveGameChecker(event)
@@ -158,7 +151,6 @@ function faveGameChecker(event)
     {
         errorMsg = "This input is invalid";
     }
-    return validInput;
 }
 
 function faveGameTypeChecker(event)
@@ -177,7 +169,6 @@ function faveGameTypeChecker(event)
     {
         errorMsg = "This input is invalid";
     }
-    return validInput;
 }
 
 function gameTimeChecker(event)
@@ -196,7 +187,6 @@ function gameTimeChecker(event)
     {
         errorMsg = "This input is invalid";
     }
-    return validInput;
 }
 
 function biographyChecker(event)
@@ -215,7 +205,6 @@ function biographyChecker(event)
     {
         errorMsg = "This biography is invalid";
     }
-    return validInput;
 }
 
 function pictureChecker(event)
@@ -234,7 +223,6 @@ function pictureChecker(event)
     {
         errorMsg = "This picture is invalid";
     }
-    return validInput;
 }
 
 /*

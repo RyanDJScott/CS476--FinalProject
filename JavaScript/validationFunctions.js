@@ -426,3 +426,134 @@ function TGEUploadValidation(filePath)
     
     return validInput;
 }
+
+//*****************************************************************************************
+//*****************************************************************************************
+/*
+Validation functions for game review-related inputs. These inputs will also
+be moderated by admins, so these functions will simply ensure the 
+input is within accepted parameters. 
+These return a true/false value to the wrapper function, false will
+indicate an error message should be displayed and true allows the
+input to be passed.
+description can be validated with function from other section
+line(400)
+*/
+
+/*
+ratingValidation
+checks the rating the user leaves for a game review
+- can't be blank
+- less than 10
+- greater than 0
+*/
+function ratingValidation(rating)
+{
+    var validInput = true;
+
+    if(rating > 10)
+    {
+        validInput = false;
+    }
+    if(rating < 0)
+    {
+        validInput = false;
+    }
+
+    return validInput;
+}
+
+/*
+recommendedValidation
+checks the input relating to if a game is recommended or not. As these
+are radio buttons, this function will only be called when submission
+is being verified.
+- note: the submission validation will make sure that both are not 
+empty. 
+Returns true if input is present or false otherwise
+*/
+function recommendedValidation(userSelection)
+{
+    var validInput = true;
+
+    if(userSelection == "")
+    {
+        validInput = false;
+    }
+
+    return validInput;
+}
+
+/*
+ageValidation
+checks the average age of the users
+- can't be blank
+- greater than 0
+*/
+function ageValidation(age)
+{
+    var validInput = true;
+
+    if(age == "")
+    {
+        validInput = false;
+    }
+    if(age > 19)
+    {
+        validInput = false;
+    }
+
+    return validInput;
+}
+
+/*
+playtimeValidation
+uses input to call TGEplaytimeValidation function (line 295) as 
+parameters and requirements are the same. This is seperate for the 
+sake of organisation and readability
+*/
+function playtimeValidation(playtime)
+{
+    return TGEPlaytimeValidation(playtime);
+}
+
+/*
+playedQuantityValidation
+checks the number of times the reviewer has said they played the
+game.
+- can't be blank
+- greater than 0 
+*/
+function playedQuantityValidation(playedQuantity)
+{
+    var validInput = true;
+
+    if(playedQuantity == "")
+    {
+        validInput = false;
+    }
+    if(playedQuantity <= 0)
+    {
+        validInput = false;
+    }
+
+    return validInput; 
+}
+
+/*
+difficultyValidation
+checks the percived difficulty of the game
+- can't be blank
+as long as some option is selected, should pass validation
+*/
+function difficultyValidation(difficulty)
+{
+    var validInput = true;
+
+    if(difficulty == "")
+    {
+        validInput = false; 
+    }
+
+    return validInput;
+}
