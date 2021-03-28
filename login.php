@@ -79,6 +79,9 @@
                     <tr>
                         <td></td><td><input class="loginButton" type="submit" id="loginButton" value="LOGIN"></td>
                     </tr>
+                    <tr>
+                        <td></td><td><span class="errorMessage" id="invalidLoginMessage"><br></span></td>
+                    </tr>
                 </table>
             </form>
         </div>
