@@ -44,7 +44,7 @@ function emailValidation(email)
     {
         validInput = false;
     }
-    if(!(/^\w+[\w.]*@\w+\.[a-z]{2,3}$/.test(emailInput)))
+    if(!(/^\w+[\w.]*@\w+\.[a-z]{2,3}$/.test(email)))
     {
         validInput = false;
     }

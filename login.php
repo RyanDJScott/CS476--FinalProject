@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
     <link rel="stylesheet" href="stylesheets/login.css">
     <!--==============================Script Files==========================-->
-    <link rel="text/javascript" src="JavaScript/validationFunctions.js"></script>
+    <script type="text/javascript" src="JavaScript/loginValidation.js"></script>
+    <script type="text/javascript" src="JavaScript/validationFunctions.js"></script>
 </head>
 
 <body>
@@ -50,7 +51,7 @@
 
         <!-- contains the login form elements and error spaces -->
         <div class="loginFormContainer">
-            <form class="loginForm" method="POST" action="./PHP/loginScript.php">
+            <form class="loginForm" id="loginForm" method="POST" action="./PHP/loginScript.php">
                 <table class="loginTable">
                     <tr>
                         <td></td><td><span class="errorMessage" id="invalidMessage">
@@ -92,6 +93,6 @@
 
     </div>
 </body>
-<link rel="text/javascript" src="JavaScript/loginEventListeners.js"></script>
+<script type="text/javascript" src="JavaScript/loginEventListeners.js"></script>
 </HTML>
 <?php } ?>
