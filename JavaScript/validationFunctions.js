@@ -454,32 +454,15 @@ function ratingValidation(rating)
 {
     var validInput = true;
 
+    if (rating == "")
+    {
+        validInput = false;
+    }
     if(rating > 10)
     {
         validInput = false;
     }
     if(rating < 0)
-    {
-        validInput = false;
-    }
-
-    return validInput;
-}
-
-/*
-recommendedValidation
-checks the input relating to if a game is recommended or not. As these
-are radio buttons, this function will only be called when submission
-is being verified.
-- note: the submission validation will make sure that both are not 
-empty. 
-Returns true if input is present or false otherwise
-*/
-function recommendedValidation(userSelection)
-{
-    var validInput = true;
-
-    if(userSelection == "")
     {
         validInput = false;
     }
@@ -501,7 +484,7 @@ function ageValidation(age)
     {
         validInput = false;
     }
-    if(age > 19)
+    if(age > 100)
     {
         validInput = false;
     }
