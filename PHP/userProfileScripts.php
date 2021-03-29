@@ -386,7 +386,7 @@ class userEditProfile extends userProfileSubmission {
             if ($this->favGame != $this->user->getFavGame() )
                 $editFavGame = $this->user->setFavGame($this->favGame);
 
-            if ($this->gameType != "N_C" && $this->gameType != $this->user->getGameType() )
+            if ($this->gameType != "N_C" && $this->gameType != $this->user->getGameType())
                 $editGameType = $this->user->setGameType($this->gameType);
             
             if ($this->playTime != "N_C" && $this->playTime != $this->user->getPlayTime())
@@ -402,9 +402,7 @@ class userEditProfile extends userProfileSubmission {
 
                 //Execute query
                 $editPassword = $this->dbConnect->query($updatePassword);
-            } else {
-                $editPassword = FALSE;
-            }
+            } 
 
             $imageUploaded = $this->uploadImage();
 

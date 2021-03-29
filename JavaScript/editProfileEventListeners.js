@@ -1,0 +1,14 @@
+document.getElementById("editFName").addEventListener("blur", firstNameChecker, false);
+document.getElementById("editLName").addEventListener("blur", lastNameChecker, false);
+document.getElementById("editEmail").addEventListener("blur", emailChecker, false);
+document.getElementById("editScreenname").addEventListener("blur", screennameChecker, false);
+document.getElementById("editPassword").addEventListener("blur", passwordChecker, false);
+document.getElementById("editPasswordConfirm").addEventListener("blur", passwordConfirmChecker, false);
+document.getElementById("editBirthday").addEventListener("change", birthdayChecker, false);
+document.getElementById("editFavGame").addEventListener("blur", faveGameChecker, false);
+document.getElementById("editFavGameType").addEventListener("change", faveGameTypeChecker, false);
+document.getElementById("editGameTime").addEventListener("change", gameTimeChecker, false);
+document.getElementById("editBiography").addEventListener("blur", biographyChecker, false);
+document.getElementById("editPic").addEventListener("change", pictureChecker, false);
+document.getElementById("submitForm").addEventListener("submit", submit, false);
+document.getElementById("deleteProfile").addEventListener("click", deleteProfile, false);

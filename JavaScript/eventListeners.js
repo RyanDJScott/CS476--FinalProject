@@ -2,52 +2,7 @@
 // i.e. signup and edit profile
 
 //=======================User Info Listeners====================
-//first name
-document.getElementById("editFName").addEventListener("blur", firstNameChecker, false);
 
-
-//last name
-document.getElementById("editLName").addEventListener("blur", lastNameChecker, false);
-
-
-//email
-document.getElementById("editEmail").addEventListener("blur", emailChecker, false);
-
-
-//screenname
-document.getElementById("editScreenname").addEventListener("blur", screennameChecker, false);
-
-
-//password
-document.getElementById("editPassword").addEventListener("blur", passwordChecker, false);
-
-
-//password confirmation
-document.getElementById("editPasswordConfirm").addEventListener("blur", passwordConfirmChecker, false);
-
-
-//birthday
-document.getElementById("editBirthday").addEventListener("change", birthdayChecker, false);
-
-
-//favourite game
-document.getElementById("editFavGame").addEventListener("blur", faveGameChecker, false);
-
-
-//favourite game type
-document.getElementById("editFavGameType").addEventListener("change", faveGameTypeChecker, false);
-
-
-//time playing games
-document.getElementById("editGameTime").addEventListener("change", gameTimeChecker, false);
-
-
-//biography
-document.getElementById("editBiography").addEventListener("blur", biographyChecker, false);
-
-
-//profile picture
-document.getElementById("editPic").addEventListener("change", pictureChecker, false);
 
 
 //=======================Game Listeners ========================
