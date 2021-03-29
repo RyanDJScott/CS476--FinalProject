@@ -44,7 +44,7 @@ function emailValidation(email)
     {
         validInput = false;
     }
-    if(!(/^\w+[\w.]*@\w+\.[a-z]{2,3}$/.test(emailInput)))
+    if(!(/^\w+[\w.]*@\w+\.[a-z]{2,3}$/.test(email)))
     {
         validInput = false;
     }
@@ -65,11 +65,11 @@ function screennameValidation(screenname)
     {
         validInput = false;
     }
-    if(screenname > 50)
+    if(screenname.length > 50)
     {
         validInput = false;
     }
-    return false;
+    return validInput;
 }
 
 /*
@@ -219,7 +219,7 @@ function pictureValidation(filePath)
     */
     if(filePath != "")
     {
-        var allowedExtensions = (filePathInput.toLowerCase()).search(/((.jpg)|(.jpeg)|(.gif)|(.png))$/);
+        var allowedExtensions = (filePath.toLowerCase()).search(/((.jpg)|(.jpeg)|(.gif)|(.png))$/);
         if(allowedExtensions == -1)
         {
             validInput = false;

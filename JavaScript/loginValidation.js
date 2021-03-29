@@ -12,11 +12,11 @@ function emailChecker(event)
 
     if(validInput == true)
     {
-        errorMsg = "";
+        errorMsg.innerHTML = "";
     }
     if(validInput == false)
     {
-        errorMsg = "This is not a valid email";
+        errorMsg.innerHTML = "This is not a valid email";
     }
 }
 
@@ -30,11 +30,11 @@ function passwordChecker(event)
 
     if(validInput == true)
     {
-        errorMsg = "";
+        errorMsg.innerHTML = "";
     }
     if(validInput == false)
     {
-        errorMsg = "This is not a valid password";
+        errorMsg.innerHTML = "This is not a valid password";
     }
 }
 
@@ -45,20 +45,14 @@ function loginCheck(event)
     var errorMsg = document.getElementById("invalidLoginMessage");
 
     //get page inputs
-    var email = document.getElementById("loginEmail");
-    var password = document.getElementById("loginPassword");
-    
-    //check the inputs
-    var validInput = (emailValidation(email) && passwordValidation(password));
+    var email = document.getElementById("loginEmail").value;
+    var password = document.getElementById("loginPassword").value;
 
-    if(validInput == true)
+    if(emailValidation(email) && passwordValidation(password))
     {
-        errorMsg = "";
-        event.preventDefault();
-    }
-    if(validInput == false)
-    {
-        errorMsg = "This was not a valid login, please check your login and try again";
+        errorMsg.innerHTML = "";
+    } else {
+        errorMsg.innerHTML = "This was not a valid login, please check your login and try again";
         event.preventDefault();
     }
 }

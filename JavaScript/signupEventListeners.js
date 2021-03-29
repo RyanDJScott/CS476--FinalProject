@@ -1,0 +1,13 @@
+document.getElementById("signupFName").addEventListener("blur", firstNameChecker, false);
+document.getElementById("signupLName").addEventListener("blur", lastNameChecker, false);
+document.getElementById("signupEmail").addEventListener("blur", emailChecker, false);
+document.getElementById("signupScreenname").addEventListener("blur", screennameChecker, false);
+document.getElementById("signupPassword").addEventListener("blur", passwordChecker, false);
+document.getElementById("signupPasswordConfirm").addEventListener("blur", passwordConfirmChecker, false);
+document.getElementById("signupBirthday").addEventListener("change", birthdayChecker, false);
+document.getElementById("signupFavGame").addEventListener("blur", faveGameChecker, false);
+document.getElementById("signupFavGameType").addEventListener("change", faveGameTypeChecker, false);
+document.getElementById("signupGameTime").addEventListener("change", gameTimeChecker, false);
+document.getElementById("signupBiography").addEventListener("blur", biographyChecker, false);
+document.getElementById("signupPic").addEventListener("change", pictureChecker, false);
+document.getElementById("signupForm").addEventListener("submit", submit, false);

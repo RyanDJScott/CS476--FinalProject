@@ -78,7 +78,7 @@
 
             <!-- Game Name and Error -->
             <div class="submitTable">
-                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                <form id="submitForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                     <table>
 
                         <!-- Submit TGE Name and Error-->

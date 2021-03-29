@@ -34,7 +34,7 @@
 
             //Insertion error
             if (isset($_GET["error"]) && $_GET["error"] === "db_error")
-                $errorMessage = "There was an issue creating your account. Please contact the site administrators, or try again!";
+                $errorMessage = "There was an issue editing your account. Please contact the site administrators, or try again!";
             
             //Validation error
             if (isset($_GET["error"]) && $_GET["error"] === "val_error")
@@ -50,6 +50,9 @@
     <!--=============================Stylesheets=======================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
     <link rel="stylesheet" href="stylesheets/signup.css">
+    <!--=============================Script Files======================================-->
+    <script type="text/javascript" src="JavaScript/editProfileValidation.js"></script>
+    <script type="text/javascript" src="JavaScript/validationFunctions.js"></script>
 </head>
 
 <body>
@@ -71,7 +74,7 @@
         User can change everything (anything on signup)
     -->
 <!-- Edit Profile Form Container -->
-<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+<form id="submitForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
     <div class="alignmentContainer">
         <div class="signupContainer">
             <p><?php echo htmlspecialchars($successMessage); ?></p>
@@ -228,22 +231,14 @@
                 <input type="submit" id="deleteProfile" name="deleteProfile" class="submitButton" value="DELETE">
             </div>
             
+            <div class="rowContainer">
+                <div class="errorMessage" id="submitError"></div>
+            </div>
         </div>
     </div>
 </form>
 
 </body>
-
+<script type="text/javascript" src="JavaScript/editProfileEventListeners.js"></script>
 </HTML>
 <?php }?>
-<!-- Signup Element Template
-<div class="rowContainer">                  this div contains the row, as to stack the elements
-    <label for=""></label>                      this is the label for the form element
-    <div class="itemContainer">                    this div arranges the input and error to be together
-        <input>                             this holds the input type/info 
-        <div class="errorContainer">                    this div is used for maintaining the error
-            <div class="errorMessage" id=""></div>      this div is just for the error message itself
-        </div>                                      exit error maint. div
-    </div>                                      exit item container
-</div>                                      exit row container
--->

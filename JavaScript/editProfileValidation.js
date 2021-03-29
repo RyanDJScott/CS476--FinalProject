@@ -23,7 +23,6 @@ function firstNameChecker(event)
     {
         firstNameErrorMsg.innerHTML = "This is an invalid name";
     }
-    return validInput;
 }
 
 function lastNameChecker(event)
@@ -42,7 +41,6 @@ function lastNameChecker(event)
     {
         lastNameErrorMsg.innerHTML = "This is an invalid last name";
     }
-    return validInput;
 }
 
 function emailChecker(event)
@@ -59,9 +57,8 @@ function emailChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This email is invalid";
+        errorMsg.innerHTML = "This email is invalid";
     }
-    return validInput;
 }
 
 function screennameChecker(event)
@@ -78,9 +75,8 @@ function screennameChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This screenname is invalid";
+        errorMsg.innerHTML = "This screenname is invalid";
     }
-    return validInput;
 }
 
 function passwordChecker(event)
@@ -97,20 +93,19 @@ function passwordChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This password is invalid";
+        errorMsg.innerHTML = "This password is invalid";
     }
-    return validInput;
 }
 
 function passwordConfirmChecker(event)
 {
     var input = event.currentTarget.value;
 
-    var confirmPassword = document.getElementById("editPasswordConfirm");
+    var password = document.getElementById("editPassword").value;
 
     var errorMsg = document.getElementById("editPasswordConfirmError");
 
-    var validInput = passwordConfirmValidation(input, confirmPassword);
+    var validInput = passwordConfirmValidation(input, password);
 
     if(validInput == true)
     {
@@ -118,9 +113,8 @@ function passwordConfirmChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This password is invalid";
+        errorMsg.innerHTML = "Cannot confirm passwords!";
     }
-    return validInput;
 }
 
 function birthdayChecker(event)
@@ -137,9 +131,8 @@ function birthdayChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This birthday is invalid";
+        errorMsg.innerHTML = "This birthday is invalid";
     }
-    return validInput;
 }
 
 function faveGameChecker(event)
@@ -156,9 +149,8 @@ function faveGameChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This input is invalid";
+        errorMsg.innerHTML = "This input is invalid";
     }
-    return validInput;
 }
 
 function faveGameTypeChecker(event)
@@ -175,9 +167,8 @@ function faveGameTypeChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This input is invalid";
+        errorMsg.innerHTML = "This input is invalid";
     }
-    return validInput;
 }
 
 function gameTimeChecker(event)
@@ -194,9 +185,8 @@ function gameTimeChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This input is invalid";
+        errorMsg.innerHTML = "This input is invalid";
     }
-    return validInput;
 }
 
 function biographyChecker(event)
@@ -213,9 +203,8 @@ function biographyChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This biography is invalid";
+        errorMsg.innerHTML = "This biography is invalid";
     }
-    return validInput;
 }
 
 function pictureChecker(event)
@@ -232,9 +221,16 @@ function pictureChecker(event)
     }
     if(validInput == false)
     {
-        errorMsg = "This picture is invalid";
+        errorMsg.innerHTML = "This picture is invalid";
     }
-    return validInput;
+}
+
+function deleteProfile(event) 
+{
+    if(!confirm("Are you sure you want to permanently delete your account?"))
+    {
+        event.preventDefault();
+    }
 }
 
 /*
@@ -243,75 +239,89 @@ page are valid before the form can be submitted
 */
 function submit(event)
 {
-    var firstName = document.getElementById("editFName");
-    if (firstNameChecker(firstName) == false)
+    var errorMsg = document.getElementById("submitError");
+
+    var firstName = document.getElementById("editFName").value;
+    if (nameValidation(firstName) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var lastName = document.getElementById("editLName");
-    if (lastNameChecker(lastName) == false)
+    var lastName = document.getElementById("editLName").value;
+    if (nameValidation(lastName) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var email = document.getElementById("editEmail");
-    if(emailChecker(email) == false)
+    var email = document.getElementById("editEmail").value;
+    if(emailValidation(email) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var screenname = document.getElementById("editScreenname");
-    if(screennameChecker(screenname) == false)
+    var screenname = document.getElementById("editScreenname").value;
+    if(screennameValidation(screenname) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var password = document.getElementById("editPassword");
-    if(passwordChecker(password) == false)
+    var password = document.getElementById("editPassword").value;
+    if(password != "" && passwordValidation(password) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var passwordConfirm = document.getElementById("editPasswordConfirm");
-    if(passwordConfirmChecker(passwordConfirm) == false)
+    var passwordConfirm = document.getElementById("editPasswordConfirm").value;
+    if(passwordConfirmValidation(password, passwordConfirm) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var birthday = document.getElementById("editBirthday");
-    if(birthdayChecker(birthday) == false)
+    var birthday = document.getElementById("editBirthday").value;
+    if(birthdayValidation(birthday) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var faveGame = document.getElementById("editFavGame");
-    if(faveGameChecker(faveGame) == false)
+    var faveGame = document.getElementById("editFavGame").value;
+    if(faveGameValidation(faveGame) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var faveGameType = document.getElementById("editFavGameType");
-    if(faveGameTypeChecker(faveGameType) == false)
+    var faveGameType = document.getElementById("editFavGameType").value;
+    if(faveGameTypeValidation(faveGameType) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var gameTime = document.getElementById("editGameTime");
-    if(gameTimeChecker(gameTime) == false)
+    var gameTime = document.getElementById("editGameTime").value;
+    if(gameTimeValidation(gameTime) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var biography = document.getElementById("editBiography");
-    if(biographyChecker(biography) == false)
+    var biography = document.getElementById("editBiography").value;
+    if(biographyValidation(biography) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 
-    var picture = document.getElementById("editPic");
-    if(pictureChecker(picture) == false)
+    var picture = document.getElementById("editPic").value;
+    if(pictureValidation(picture) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 }
