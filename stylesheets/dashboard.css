@@ -18,7 +18,7 @@
 .mainContainer {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    min-width: 760px;
     justify-content: center;
     align-items: center;
 }
@@ -26,7 +26,8 @@
 .userInformation {
     display: flex;
     flex-direction: row;
-    width: 75%;
+    min-width: 760px;
+    max-width: 760px;
     margin: 5px; 
     background-color: #F0E5FC;
     border: 1px solid #AAA0B4;
@@ -35,19 +36,36 @@
 .userInformationLeft {
     display: flex;
     flex-direction: column;
-    min-width: 200px;
+    min-width: 380px;
+    width: 25%;
     width: auto;
     justify-content: center;
     align-items: center;
-    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .userProfileImage {
-    width: 200px;
-    height: 200px;
+    display: flex;
+    max-width: 360px;
+    max-height: 360px;
+    width: auto;
+    height: auto;
     background-color: white;
     border: 1px solid #AAA0B4;
     margin-bottom: 5px;
+}
+
+.userProfileImage img {
+    min-width: 356px;
+    min-height: 356px;
+    max-width: 356px;
+    max-height: 358px;
+    width: auto;
+    height: auto;
+    background-color: white;
+    border: 1px solid #AAA0B4;
+    margin: 1px;
 }
 
 .userImg {
@@ -56,6 +74,8 @@
 }
 
 .simpleUserInfo {
+    width: 360px;
+    max-width: 360px;
     min-width: 200px;
     background-color: white;
     border: 1px solid #AAA0B4;
@@ -63,7 +83,7 @@
 
 .userInformationRight {
     margin-top: 5px;
-    margin-right: 5px;
+    margin-right: 10px;
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -77,25 +97,9 @@
 }
 
 .editProfileButton {
+    display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/* buttonButton is the Edit Profile Button on the site */ 
-.buttonButton {
-    background-color: #ccbbcc;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 3px;
-    padding: 5px;
-}
-
-.buttonButton:hover, .buttonButton:focus {
-    border-radius: 10px;
-    transition: all 0.3s ease 0s;
-    background-color: #dac5f1;
-    text-decoration: none;
 }
 
 /* Copied over for delete/promote buttons*/
@@ -109,11 +113,10 @@
 /*Styling for shared dashboard components involving submissions */
 .submitPending {
     background-color: #F0E5FC;
-    min-width: 500px;
-    max-width: 100%;
+    min-width: 760px;
+    max-width: 760px;
     display: flex;
     flex-direction: row;
-    width: 75%;
     border: 1px solid #AAA0B4;
 }
 
@@ -121,8 +124,7 @@
     flex-basis: 33%;
     height: 100px;
     min-width: 100px;
-    margin: 5px;
-    border: 1px solid #AAA0B4;
+    margin: 5px 5px 5px 10px;
 }
 
 .pendingTableContainer {
@@ -130,29 +132,31 @@
     height: auto;
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-right: 5px;
+    margin-right: 10px;
     align-content: center;
-    justify-content: center;
+    justify-content: top;
     flex-basis: 67%;
     background-color: white;
     border: 1px solid #AAA0B4;
 }
 
 .submitDescriptionButton {
-    background-color: #ccbbcc;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 3px;
+    background-color: #ffffff;
+    color: #6B5F77 !important;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 15px;
+    text-transform: uppercase;
+    border-radius: 5px;
     padding: 5px;
     width: 100%;
     height: 100%;
 }
 
 .submitDescriptionButton:hover, .submitDescriptionButton:focus {
-    border-radius: 25px;
+    border-radius: 50px;
     transition: all 0.3s ease 0s;
-    background-color: #dac5f1;
+    background-color: #F0E5FC;
     text-decoration: none;
 }
 
@@ -160,7 +164,8 @@
     background-color: #F0E5FC;
     display: flex;
     flex-direction: row;
-    width: 75%;
+    min-width: 760px;
+    max-width: 760px;
     margin: 5px;
     border: 1px solid #AAA0B4;
 }
@@ -189,9 +194,12 @@
 
 .adminContainer
 {
-    width: 75%;
+    min-width: 760px;
+    max-width: 760px;
     display: flex;
     justify-content: left;
+    align-self: center;
+    justify-self: center;
 }
 
 .adminHeading {
@@ -203,20 +211,23 @@
     font-weight: bold;
 }
 
+.attributeHeader {
+    font-weight: bold;
+    line-height: 1.8;
+}
+
 td, th {
     padding-right: 10px;
-    border: 1px solid black;
+    text-align: center;
 }
 
 th {
     border-bottom: 1px solid black;
-    background-color: #F0E5FC;
 }
 
 table {
-    justify-self: center;
-    align-self: center;
+    width: 100%;
+    justify-self: top;
     text-align: center;
     border-collapse: collapse;
-    margin: 5px;
 }

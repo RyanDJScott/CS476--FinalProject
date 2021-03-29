@@ -26,8 +26,8 @@ p {
 }
 
 .errorMessage {
-    color: red;
-    text-transform: uppercase;
+    color: rgb(241, 106, 111);
+    font-style: italic;
 }
 
 /* Link Styling */

@@ -332,9 +332,10 @@ class Display {
     // Side Effects:
     //   <1> The basic user information is displayed on dashboard.php 
     private function displayDashboardProfile($user) {
-        echo '<h1>' . $user->getScreenName() . '</h1>
+        echo '
         <!-- Main Area Container Which holds all -->
         <div class="mainContainer">
+        <div class="adminContainer"><div class="adminHeading">' . $user->getScreenName() . '</div></div>
     
             <!-- user information container -->
             <div class="userInformation">
@@ -349,9 +350,9 @@ class Display {
     
                     <!-- information container -->
                     <div class="simpleUserInfo">
-                        <p>' . $user->getFirstName() . ' ' . $user->getLastName() . '</p>
-                        <p>' . $user->getBirthday() . '</p>
-                        <p>' . $user->getEmail() . '</p>
+                        <p><span class="attributeHeader">Name: </span>' . $user->getFirstName() . ' ' . $user->getLastName() . '</p>
+                        <p><span class="attributeHeader">Birthday: </span>' . $user->getBirthday() . '</p>
+                        <p><span class="attributeHeader">Email: </span>' . $user->getEmail() . '</p>
                     </div>
                 </div>
     
@@ -360,20 +361,21 @@ class Display {
                     
                     <!-- biography -->
                     <div class="userBiography">
+                        <p><span class="attributeHeader">User Biography: </span></p>
                         <p>' . $user->getBiography() . '</p>
                     </div>
     
                     <!-- right side information-->
                     <div class="favouritesInfo">
-                        <p>Favourite Game: ' . $user->getFavGame() . '</p>
-                        <p>Type: ' . $user->getGameType() . '</p>
-                        <p>Time Playing Game: ' . $user->getPlayTime() . ' years</p>
+                        <p><span class="attributeHeader">Favourite Game: </span>' . $user->getFavGame() . '</p>
+                        <p><span class="attributeHeader">Type: ' . $user->getGameType() . '</p>
+                        <p><span class="attributeHeader">Time Playing Game: </span>' . $user->getPlayTime() . ' years</p>
                     </div>
     
                     <!-- edit profile button-->
                     <div class="editProfileButton">
                         <a href="editProfile.php">
-                            <input class="buttonButton" type="button" value="EDIT PROFILE">
+                            <input class="navButton" type="button" value="EDIT PROFILE">
                         </a>
                     </div>
                 </div>
