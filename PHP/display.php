@@ -256,7 +256,7 @@ class Display {
                 </div>';
 
                 //If the viewing user is an admin, show the promote/delete buttons
-                if (is_a($_SESSION["userObj"], 'adminUser'))
+                if (isset($_SESSION["UID"]) && $_SESSION["UID"] > 0 && is_a($_SESSION["userObj"], 'adminUser'))
                     $this->displayAdminButtons($userID);
         } else {
             echo '<h1>This user does not exist! Please contact the site administrator!</h1>';
