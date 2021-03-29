@@ -7,32 +7,7 @@
 
 //=======================Game Listeners ========================
 
-//game name
-document.getElementById("submitTGEName").addEventListener("blur", TGENameChecker, false);
 
-//company name
-document.getElementById("submitTGECompanyName").addEventListener("blur", TGECompanyNameChecker, false);
-
-//playtime
-document.getElementById("submitTGEPlaytime").addEventListener("blur", TGEPlaytimeChecker, false);
-
-//Age rating
-document.getElementById("submitTGEAge").addEventListener("blur", TGEAgeChecker, false);
-
-//number of players
-document.getElementById("submitTGEPlayers").addEventListener("blur", TGEPlayersChecker, false);
-
-//number of expansions
-document.getElementById("submitTGEExpansions").addEventListener("blur", TGEExpansionsChecker, false);
-
-//text description
-document.getElementById("description").addEventListener("blur", descriptionChecker,false);
-
-//upload
-document.getElementById("submitTGEUpload").addEventListener("change", TGEUploadChecker, false);
-
-//submit button
-document.getElementById("").addEventListener("submit", submitChecker, false);
 
 
 //==============================reviewing a game listeners=========
