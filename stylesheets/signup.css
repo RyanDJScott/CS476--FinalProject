@@ -70,3 +70,8 @@ input, select {
     background-color: #dac5f1;
     text-decoration: none;
 }
+
+textarea {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12pt;
+}
