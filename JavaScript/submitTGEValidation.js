@@ -1,15 +1,3 @@
-/*
-Wrapper functions for submitting a game, these call the validation
-functions made previously and provide errors for the specific page
-and input.
-Each function follows this pattern:
-1. declare a variable based on the value given from the event
-    listener
-2. get the location for the error message for the related input
-3. get the boolean value from the specific input validation function
-4. clear/add an error message based on the result of the validation
-*/
-
 //Checks the name of the game
 function TGENameChecker(event)
 {
@@ -148,7 +136,7 @@ function TGEUploadChecker(event)
 {
     var upload = event.currentTarget.value;
 
-    var errorMsg = document.getElementById("");
+    var errorMsg = document.getElementById("uploadError");
 
     var validInput = TGEUploadValidation(upload);
     
@@ -179,67 +167,61 @@ any other validation function.
 */
 function submitChecker(event)
 {
-    var gameName = document.getElementById("submitTGEName");
+    var errorMsg = document.getElementById("submitError");
+
+    var gameName = document.getElementById("submitTGEName").value;
     if(TGENameValidation(gameName) == false)
     {
-        var errorMsg = document.getElementById("submitTGENameError");
-        errorMsg.innerHTML = "This is an invalid game name";
+        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
         event.preventDefault();
     }
 
-    var companyName = document.getElementById("submitTGECompanyName");
+    var companyName = document.getElementById("submitTGECompanyName").value;
     if(TGECompanyNameValidation(companyName) == false)
     {
-        var errorMsg = document.getElementById("submitTGECompanyNameError");
-        errorMsg.innerHTML = "This is an invalid company name";
+        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
         event.preventDefault();
     }
 
-    var playtime = document.getElementById("submitTGEPlaytime");
+    var playtime = document.getElementById("submitTGEPlaytime").value;
     if(TGEPlaytimeValidation(playtime) == false)
     {
-        var errorMsg = document.getElementById("submitTGEPlaytimeError");
-        errorMsg.innerHTML = "This is an invalid playtime";
+        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
         event.preventDefault();
     }
 
-    var age = document.getElementById("submitTGEAge");
+    var age = document.getElementById("submitTGEAge").value;
     if(TGEAgeValidation(age) == false)
     {
-        var errorMsg = document.getElementById("submitTGEAgeError");
-        errorMsg.innerHTML = "This is an invalid input";
+        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
         event.preventDefault();
     }
 
-    var players = document.getElementById("submitTGEPlayers");
+    var players = document.getElementById("submitTGEPlayers").value;
     if(TGEPlayersValidation(players) == false)
     {
-        var errorMsg = document.getElementById("submitTGEPlayersError");
-        errorMsg.innerHTML = "This is an invalid input";
+        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
         event.preventDefault();
     }
 
-    var expansions = document.getElementById("submitTGEExpansions");
+    var expansions = document.getElementById("submitTGEExpansions").value;
     if(TGEExpansionsValidation(expansions) == false)
     {
-        var errorMsg = document.getElementById("submitTGEExpansionsError");
-        errorMsg.innerHTML = "This is an invalid input";
+        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
         event.preventDefault();
     }
 
-    var description = document.getElementsByName("description");
+    var description = document.getElementById("description").value;
     if(descriptionValidation(description) == false)
     {
-        var errorMsg = document.getElementById("descriptionError");
-        errorMsg.innerHTML = "This is an invalid input";
+        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
         event.preventDefault();
     }
 
-    var upload = document.getElementById("submitTGEUpload");
+    var upload = document.getElementById("submitTGEUpload").value;
     if(TGEUploadValidation(upload) == false)
     {
-        var errorMsg = document.getElementById("");
-        errorMsg.innerHTML = "This is an invalid input";
+        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
         event.preventDefault();
     }
 }
