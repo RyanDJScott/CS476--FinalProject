@@ -7,12 +7,9 @@ function TGENameChecker(event)
 
     var validInput = TGENameValidation(gameName);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This is an invalid game name";
     }
 }
@@ -26,12 +23,9 @@ function TGECompanyNameChecker(event)
 
     var validInput = TGECompanyNameValidation(companyName);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This is an invalid company name";
     }
 }
@@ -45,12 +39,9 @@ function TGEPlaytimeChecker(event)
 
     var validInput = TGEPlaytimeValidation(playtime);
     
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This is an invalid playtime";
     }
 }
@@ -64,12 +55,9 @@ function TGEAgeChecker(event)
 
     var validInput = TGEAgeValidation(age);
     
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This is an invalid input";
     }
 }
@@ -83,12 +71,9 @@ function TGEPlayersChecker(event)
 
     var validInput = TGEPlayersValidation(players);
     
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This is an invalid input";
     }
 }
@@ -102,12 +87,9 @@ function TGEExpansionsChecker(event)
 
     var validInput = TGEExpansionsValidation(expansions);
     
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This is an invalid input";
     }
 }
@@ -121,12 +103,9 @@ function descriptionChecker(event)
 
     var validInput = descriptionValidation(description);
     
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This is an invalid input";
     }
 }
@@ -140,12 +119,9 @@ function TGEUploadChecker(event)
 
     var validInput = TGEUploadValidation(upload);
     
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This is picture cannot be uploaded";
     }
 }
@@ -167,61 +143,22 @@ any other validation function.
 */
 function submitChecker(event)
 {
+    //Get error element
     var errorMsg = document.getElementById("submitError");
 
+    //Get input values
     var gameName = document.getElementById("submitTGEName").value;
-    if(TGENameValidation(gameName) == false)
-    {
-        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
-        event.preventDefault();
-    }
-
     var companyName = document.getElementById("submitTGECompanyName").value;
-    if(TGECompanyNameValidation(companyName) == false)
-    {
-        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
-        event.preventDefault();
-    }
-
     var playtime = document.getElementById("submitTGEPlaytime").value;
-    if(TGEPlaytimeValidation(playtime) == false)
-    {
-        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
-        event.preventDefault();
-    }
-
     var age = document.getElementById("submitTGEAge").value;
-    if(TGEAgeValidation(age) == false)
-    {
-        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
-        event.preventDefault();
-    }
-
     var players = document.getElementById("submitTGEPlayers").value;
-    if(TGEPlayersValidation(players) == false)
-    {
-        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
-        event.preventDefault();
-    }
-
     var expansions = document.getElementById("submitTGEExpansions").value;
-    if(TGEExpansionsValidation(expansions) == false)
-    {
-        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
-        event.preventDefault();
-    }
-
     var description = document.getElementById("description").value;
-    if(descriptionValidation(description) == false)
-    {
-        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
-        event.preventDefault();
-    }
-
     var upload = document.getElementById("submitTGEUpload").value;
-    if(TGEUploadValidation(upload) == false)
-    {
-        errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
-        event.preventDefault();
+
+    if(!(TGENameValidation(gameName) && TGECompanyNameValidation(companyName) && TGEPlaytimeValidation(playtime) && TGEAgeValidation(age)
+        && TGEPlayersValidation(players) && TGEExpansionsValidation(expansions) && descriptionValidation(description) && TGEUploadValidation(upload))) {
+            errorMsg.innerHTML = "Invalid input. Please fill in all fields correctly!";
+            event.preventDefault();
     }
 }

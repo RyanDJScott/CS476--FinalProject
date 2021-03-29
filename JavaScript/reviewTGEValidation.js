@@ -4,8 +4,7 @@ function checkReason(event)
 
     var errorMsg = document.getElementById("reviewTGEDescError");
 
-    if (reviewFlagDescription(reason) == false)
-    {
+    if (!reviewFlagDescription(reason)) {
         errorMsg.innerHTML = "You must provide a reason as to why you are accepting or rejecting this description.";
     } else {
         errorMsg.innerHTML = "";
@@ -34,7 +33,7 @@ function submitForm (event)
 {
     var reason = document.getElementById("gameFeedback").value;
 
-    if (reviewFlagDescription(reason) == false)
+    if (!reviewFlagDescription(reason))
     {
         event.preventDefault();
     }
