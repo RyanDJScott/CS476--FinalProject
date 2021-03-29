@@ -250,7 +250,7 @@ class Display {
                 <div class="favouritesInfo">
                     <p>Favourite Game: ' . $resultRow["favGame"] . '</p>
                     <p>Type: ' . $resultRow["gameType"] . '</p>
-                    <p>Time Playing Game: ' . $resultRow["playTime"] . ' years</p>
+                    <p>Time Playing Game: ' . $resultRow["playTime"] . '</p>
                 </div>
                 </div>
                 </div>';

@@ -28,6 +28,7 @@ the rest of the page
     font-size: x-large;
     font-family: 'Times New Roman', Times, serif;
     padding: 5px;
+    background-color: #F5F0F9;
 }
 
 /* aligns the search options 
@@ -53,7 +54,8 @@ the rest of the page
 */ 
 .rowHeader {
     color: #6B5F77;
-    font-size: larger;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 /* contains the styling for rows to be displayed
@@ -71,17 +73,22 @@ These will contain the search results for their respect section
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    border: 1px solid black;
+    border: 1px solid #AAA0B4;
     padding: 2px;
     margin-right: 20px;
     margin-bottom: 20px;
     margin-top: 20px;
     min-width: fit-content;
+    justify-content: center;
+    align-content: center;
+    font-weight: bold;
+    background-color: #F5F0F9;
+    text-align: center;
 }
 
 /* sets the height/width of images
 */
 .resultImg {
-    width: 150px;
-    height: 100px;
+    width: 300px;
+    height: 300px;
 }
