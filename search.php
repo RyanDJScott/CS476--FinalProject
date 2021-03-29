@@ -60,6 +60,9 @@
                     <label for="game">&nbsp GAME</label>
                     <input type="checkbox" id="game" name="game" value="GAME">
                 </div>
+                <div class = "userGame">
+                    <input type="submit" class="navButton">
+                </div>
             </form>
         </div>
 

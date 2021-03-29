@@ -148,10 +148,14 @@ class Display {
     //   <1> Displays the contents of a tabletop game description as a mini card
     public function displayTGECard(TGE $TGE) {
         echo '<div class="smallGameBox">
-                <p>' . htmlspecialchars($TGE->getGameTitle()) . '</p>
-                <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '/10</p>
-                <p>' . htmlspecialchars($this->limitChars($TGE->getDescription(), 200)) . '</p>
+            <div class="topContainer">
+                <p><span class="attributeHeader">' . htmlspecialchars($TGE->getGameTitle()) . '</span></p>
+                <p><span class="attributeHeader">Rating: </span>' . htmlspecialchars($TGE->getOverallRating()) . '/10</p>
+                <p>' . htmlspecialchars($this->limitChars($TGE->getDescription(), 260)) . '</p>
+            </div>
+            <div class="bottomContainer">
                 <a href="viewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton">View Game Description</a>
+            </div>
             </div>';
     }
 
@@ -173,14 +177,14 @@ class Display {
             echo '<!-- left div for header + information -->
             <div class="featuredItemLeft">
                 <a href="viewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '"><h2>' . htmlspecialchars($TGE->getGameTitle()) . '</h2></a>
-                <p>Submitted by: ' . htmlspecialchars($TGE->getScreenName()) . '</p>
-                <p>Rating: ' . htmlspecialchars($TGE->getOverallRating()) . '</p>
-                <p>Number of Players: ' . htmlspecialchars($TGE->getNumPlayers()) . '</p>
-                <p>Company: ' . htmlspecialchars($TGE->getCompany()) . '</p>
-                <p>Game time: ' . htmlspecialchars($TGE->getPlayTime()) . ' hours </p>
-                <p>Age Rating: ' . htmlspecialchars($TGE->getAgeRating()) . ' yrs</p>
-                <p>Number of Expansions: ' . htmlspecialchars($TGE->getExpansions()) . '</p>
-                <p>Description:</p>
+                <p><span class="attributeHeader">Submitted by: </span>' . htmlspecialchars($TGE->getScreenName()) . '</p>
+                <p><span class="attributeHeader">Rating: </span>' . htmlspecialchars($TGE->getOverallRating()) . '</p>
+                <p><span class="attributeHeader">Number of Players: </span>' . htmlspecialchars($TGE->getNumPlayers()) . '</p>
+                <p><span class="attributeHeader">Company: </span>' . htmlspecialchars($TGE->getCompany()) . '</p>
+                <p><span class="attributeHeader">Game time: </span>' . htmlspecialchars($TGE->getPlayTime()) . ' hours </p>
+                <p><span class="attributeHeader">Age Rating: </span>' . htmlspecialchars($TGE->getAgeRating()) . ' yrs</p>
+                <p><span class="attributeHeader">Number of Expansions: </span>' . htmlspecialchars($TGE->getExpansions()) . '</p>
+                <p><span class="attributeHeader">Description: </span></p>
                 <p>' . htmlspecialchars($TGE->getDescription()) . '</p>
             </div>
 
@@ -246,7 +250,7 @@ class Display {
                 <div class="favouritesInfo">
                     <p>Favourite Game: ' . $resultRow["favGame"] . '</p>
                     <p>Type: ' . $resultRow["gameType"] . '</p>
-                    <p>Time Playing Game: ' . $resultRow["playTime"] . ' years</p>
+                    <p>Time Playing Game: ' . $resultRow["playTime"] . '</p>
                 </div>
                 </div>
                 </div>';

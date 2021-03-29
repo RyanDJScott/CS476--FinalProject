@@ -194,10 +194,12 @@
                 <!-- Biography -->
                 <div class="rowContainer">
                     <label for="signupBiography">Biography:</label>
-                        <input class="bioBoxBig" type="text" id="signupBiography" name="signupBiography" placeholder="tell us a bit about yourself...">
+                    <div class="itemContainer">
+                        <textarea id="signupBiography" name="signupBiography" rows="10" placeholder="tell us a bit about yourself..."></textarea>
                         <div class="errorContainer">
                             <div class="errorMessage" id="signupBiographyError"></div>
                         </div>
+                    </div>
                 </div>
 
                 <!-- Image -->
@@ -212,7 +214,7 @@
                 </div>
 
                 <div class="rowContainer">
-                    <input type="submit" class="submitButton">
+                    <input type="submit" class="navButton">
                 </div>
 
                 <div class="rowContainer">  
