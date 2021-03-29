@@ -219,7 +219,7 @@ function pictureValidation(filePath)
     */
     if(filePath != "")
     {
-        var allowedExtensions = (filePath.toLowerCase()).search(/((.jpg)|(.jpeg)|(.gif)|(.png))$/);
+        var allowedExtensions = (filePath.toString().toLowerCase()).search(/((.jpg)|(.jpeg)|(.gif)|(.png))$/);
         if(allowedExtensions == -1)
         {
             validInput = false;
@@ -422,7 +422,10 @@ function TGEUploadValidation(filePath)
     {
         validInput = false; 
     }
-    pictureValidation(filePath)
+    else 
+    {
+        validInput = pictureValidation(filePath);
+    }
     
     return validInput;
 }

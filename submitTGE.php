@@ -54,6 +54,9 @@
     <!--==========================Stylsheets=================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
     <link rel="stylesheet" href="stylesheets/submitTGE.css">
+    <!--==========================Script Files===============================-->
+    <script type="text/javascript" src="JavaScript/validationFunctions.js"></script>
+    <script type="text/javascript" src="JavaScript/submitTGEValidation.js"></script>
 </head>
 
 <body>
@@ -158,7 +161,7 @@
             <!-- Provides and area to leave the game description -->
             <div class="gameDescription">
                 Describe the game:<br>
-                <textarea rows="4" cols="50" name="description"></textarea>
+                <textarea rows="4" cols="50" name="description" id="description"></textarea>
                 <div class="errorMessage" id="descriptionError"></div>
             </div>
 
@@ -166,18 +169,21 @@
             <div class="uploadImageFile">
                 <label for="submitTGEUpload">Upload a file:</label>
                 <input type="file" id="submitTGEUpload" name="submitTGEUpload[]" multiple>
+                <div class="errorMessage" id="uploadError"></div>
             </div>
 
             <!-- Submit button -->
-            <div submitButton>
+            <div class="submitButton">
                 <input type="submit" class="submitButton" name="formSubmitButton">
             </div>
             </form>
+
+            <div class="errorMessage" id="submitError"></div>
         </div>
     </div>
     </div>
 
 </body>
-
+<script type="text/javascript" src="JavaScript/submitTGEEventListeners.js"></script>
 </html>
 <?php } ?>
