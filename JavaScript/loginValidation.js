@@ -10,12 +10,9 @@ function emailChecker(event)
     
     var validInput = emailValidation(email);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This is not a valid email";
     }
 }
@@ -28,12 +25,9 @@ function passwordChecker(event)
     
     var validInput = passwordValidation(password);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This is not a valid password";
     }
 }
@@ -48,8 +42,7 @@ function loginCheck(event)
     var email = document.getElementById("loginEmail").value;
     var password = document.getElementById("loginPassword").value;
 
-    if(emailValidation(email) && passwordValidation(password))
-    {
+    if(emailValidation(email) && passwordValidation(password)) {
         errorMsg.innerHTML = "";
     } else {
         errorMsg.innerHTML = "This was not a valid login, please check your login and try again";
