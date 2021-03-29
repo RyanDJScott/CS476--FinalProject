@@ -18,5 +18,3 @@
 //===========================Reviewing a Flag=====================
 
 //
-document.getElementById("approveTGE").addEventListener("submit", submissionChecker, false);
-document.getElementById("rejectTGE").addEventListener("submit", submissionChecker, false);

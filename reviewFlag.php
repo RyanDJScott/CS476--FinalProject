@@ -70,6 +70,9 @@ else {
     <link rel="stylesheet" href="stylesheets/viewTg.css">
     <link rel="stylesheet" href="stylesheets/reviewTGE.css">
     <link rel="stylesheet" href="stylesheets/reviewFlag.css">
+    <!--==========================Script Files===============================-->
+    <script type="text/javascript" src="JavaScript/validationFunctions.js"></script>
+    <script type="text/javascript" src="JavaScript/reviewFlagValidation.js"></script>
 </head>
 
 <body>
@@ -114,10 +117,10 @@ else {
         <div class="buttonContainer">
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <!-- Removes the Flag - i.e. the review is fine -->
-                <input class="button" type="submit" name="removeFlag" value="APPROVE"> 
+                <input class="button" type="submit" name="removeFlag" id="removeFlag" value="APPROVE"> 
 
                 <!-- Deletes the review - i.e. the revie violated rules -->
-                <input class="button" type="submit" name="deleteReview" value="DELETE">
+                <input class="button" type="submit" name="deleteReview" id="deleteFlag" value="DELETE">
                 <input type="hidden" name="gameTitle" value="<?=$gameTitle?>">
                 <input type="hidden" name="UID" value="<?=$UID?>">
             </form>
@@ -133,7 +136,7 @@ else {
 
     </div>
 </body>
-
+<script type="text/javascript" src="JavaScript/reviewFlagEventListeners.js"></script>
 </html>
 <?php
 }

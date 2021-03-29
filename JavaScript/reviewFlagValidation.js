@@ -1,28 +1,19 @@
 //makes sure the description box is filled in 
 
-function submissionChecker(event)
+function approveReview(event)
 {
     //popup box
-    if(!confirm("Are you sure?"))
+    if(!confirm("This review was flagged for innapropriate content. Are you sure you approve this review?"))
     {
         event.preventDefault();
     }
+}
 
-    var description = document.getElementById("gameFeedback");
-
-    var errorMsg = document.getElementById("reviewFlagDescError");
-    var submitErrorMsg = document.getElementById("reviewFlagSubmitError");
-
-    if(reviewFlagDescription(description) == false)
+function deleteReview(event)
+{
+    //popup box
+    if(!confirm("This review will be permanently deleted from the website. Are you sure you want to delete it?"))
     {
-        errorMsg.innerHTML = "Description is needed before submission";
-        submitErrorMsg.innerHTML = "Please fix errors";
         event.preventDefault();
     }
-    if(reviewFlagDescription(description) == true)
-    {
-        errorMsg.innerHTML = "";
-        submitErrorMsg.innerHTML = "";
-    }
-
 }
