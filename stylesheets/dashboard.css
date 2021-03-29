@@ -174,7 +174,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    margin: 5px;
+    margin: 5px 5px 5px 10px;
     background-color: white;
     flex-basis: 50%;
     width: auto;
@@ -183,7 +183,7 @@
 
 .descriptionReview {
     display: flex;
-    margin: 5px 5px 5px 0px;
+    margin: 5px 10px 5px 0px;
     background-color: white;
     justify-content: center;
     align-content: center;

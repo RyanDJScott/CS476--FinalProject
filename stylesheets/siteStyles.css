@@ -120,9 +120,15 @@ nav {
     left: 50%;                       
     top: 50%;                         
     transform: translate(-50%, -50%); 
-    color: black;
+    color: #330066;
     width: auto;
     font-size: xx-large;
     font-weight: bolder;
     text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.3);
+    text-align: center;
+    padding: 10px;
+    min-width: 760px;
+    max-width: 760px;
+    border: 1px solid #AAA0B4;
 }
