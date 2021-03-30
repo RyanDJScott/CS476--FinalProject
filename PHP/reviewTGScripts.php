@@ -65,8 +65,6 @@ class submitReview {
 
             $this->submittedBy = $resultRow["screenName"];
         } 
-
-        error_log("Rating: " . $this->rating . ", NumPlays: " . $this->numPlays . ", AvgAge: " . $this->avgAge . ", AvgPlayTime: " . $this->avgPlayTime . ", Difficulty: " . $this->difficulty . ", Review: " . $this->review . ", Recommend: " . $this->recommend . ", screenName: " . $this->submittedBy . "", 0);
     }
 
     // Function Name: valSubmittedBy
