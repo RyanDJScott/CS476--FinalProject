@@ -77,7 +77,7 @@
 
     <?php
         //If the game has been rejected or is pending, show error information
-        if ($gameStatus["status"] == 0 || $gameStatus["status"] == 2) {
+        if (isset($gameStatus) && ($gameStatus["status"] == 0 || $gameStatus["status"] == 2)) {
     ?>
     <p class="errorMessage">This game has not been approved for publication on the site.</p>
     <p class="errorMessage">Please contact the site administrators for more information!</p>
@@ -94,8 +94,10 @@
             $reviews = $thisGame->getReviews();
 
             //Print each review on this page
-            foreach($reviews as $gameReview) {
-                $display->displayReview($gameReview);
+            if (sizeof($reviews) > 0) {
+                foreach($reviews as $gameReview) {
+                    $display->displayReview($gameReview);
+                }
             }
         ?>
     </div>

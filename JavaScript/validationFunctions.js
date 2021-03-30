@@ -71,6 +71,8 @@ function passwordValidation(password)
         return false;
     else if (!(/[A-Z]/.test(password)))
         return false;
+    else
+        return true;
 }
 
 /*
