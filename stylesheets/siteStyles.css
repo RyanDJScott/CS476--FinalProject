@@ -81,6 +81,7 @@ nav {
 .navButton {
     float: right;
     background-color: #ffffff;
+    border: 1px solid black;
     padding: 5px 15px; 
     margin: 10px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
@@ -95,6 +96,7 @@ nav {
     border-radius: 50px;
     transition: all 0.3s ease 0s;
     background-color: #F0E5FC;
+    border: 1px solid black;
     text-decoration: none;
 }
 

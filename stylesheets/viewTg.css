@@ -10,7 +10,9 @@
 */ 
 .name {
     color: #6B5F77;
-    font-size: larger;
+    font-size: xx-large;
+    font-weight: bold;
+    margin-left: 10px;
 }
 
 /* This holds the information on the game for the upper box
@@ -22,11 +24,11 @@ class as well.
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    width: 75%;
+    min-width: 1000px;
+    max-width: 1000px;
     margin: 20px;
     border: 1px solid #AAA0B4;
     background-color: #F5F0F9;
-    padding: 5px;
 }
 
 /* This is the inside containers which hold different information
@@ -36,7 +38,32 @@ together in line
 .innerContainer {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 350px;
+}
+
+.innerContainerRight {
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+}
+
+.leaveReview {
+    display: flex;
+    max-width: fit-content;
+    min-width: fit-content;
+    align-self: center;
+}
+
+.reviewInfo {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.reviewInfoRight {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
 }
 
 /* Contains the images associated with the game which will
@@ -47,7 +74,8 @@ be displayed between the description and the reviews.
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 75%;
+    min-width: 1000px;
+    max-width: 1000px;
     border: 1px solid #AAA0B4;
     background-color: #F5F0F9;
 }
@@ -57,9 +85,10 @@ be four across in a row, centred but should expand to the left
 and right edges of the image container.
 */
 .image {
-    width: 350px;
+    min-width: 200px;
+    max-width: 200px;
     border: 1px solid #AAA0B4;
-    margin: 20px;
+    margin: 25px;
 }
 
 /* solely used for the flag button 
@@ -70,4 +99,9 @@ and right edges of the image container.
     width: 100px;
     padding: 2px;
     font-family: 'Times New Roman', Times, serif;
+}
+
+.attributeHeader {
+    font-weight: bold;
+    line-height: 1.8;
 }

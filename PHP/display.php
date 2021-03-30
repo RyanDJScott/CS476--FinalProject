@@ -548,29 +548,29 @@ class Display {
             <!-- 
                 left side for rating information
             -->
-            <div class="innerContainer">
-                <div class="name">Rating ' . $review->getRating() . '</div>
-                Submitted By: ' . $review->getSubmittedBy() . '<br>
-                Recommended? ' . $this->displayRecommend($review->getRecommend()) . '<br>
-                Number of Players: ' . $review->getNumPlays() . '<br>
-                Age of Players: ' . $review->getAvgAge() . '<br>
-                Time for one Round: ' . $review->getAvgPlayTime() . '<br>
-                Percieved Difficulty: ' . $review->getDifficulty() . '<br>
-                Number of Times Played: ' . $review->getNumPlays() . '<br>
+            <div class="reviewInfo">
+                <div class="name">Rating: ' . $review->getRating() . '/10</div>
+                <p><span class="attributeHeader">Submitted By: </span>' . $review->getSubmittedBy() . '</p>
+                <p><span class="attributeHeader">Recommended? </span>' . $this->displayRecommend($review->getRecommend()) . '</p>
+                <p><span class="attributeHeader">Number of Players: </span>' . $review->getNumPlays() . '</p>
+                <p><span class="attributeHeader">Age of Players: </span>' . $review->getAvgAge() . '</p>
+                <p><span class="attributeHeader">Time for one Round: </span>' . $review->getAvgPlayTime() . '</p>
+                <p><span class="attributeHeader">Percieved Difficulty: </span>' . $review->getDifficulty() . '</p>
+                <p><span class="attributeHeader">Number of Times Played: </span>' . $review->getNumPlays() . '</p>
             </div> 
 
             <!--
                 right side for review itself and flag button
             -->
-            <div class="innerContainer">
+            <div class="reviewInfoRight">
                 <p><br>'
                    . $review->getReview() .  
-                '</p>';
-            
+                '</p>
+                <div class="leaveReview">';
             //Set logic for displaying buttons or not
             if ($review->getFlag() == 0) {
                 echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
-                    <input class="flag" type="submit" name="flag" id="flag" value="FLAG REVIEW">
+                    <input class="navButton" type="submit" name="flag" id="flag" value="FLAG REVIEW">
                     <input type="hidden" name="gameTitle" value="' . $review->getGameTitle() . '">
                     <input type="hidden" name="UID" value="' . $review->getUID() . '">
                 </form>';
@@ -579,9 +579,10 @@ class Display {
             }
 
         echo '</div>
+            </div>
             </div>';
     }
-    
+
     // Function Name: displayReviewTGE
     // Purpose: To display the contents of a tabletop game description on the reviewTGE.php page
     // Parameters: 
@@ -688,25 +689,29 @@ class Display {
             -->
             <div class="innerContainer">
                 <div class="name">' . $TGE->getGameTitle() . '</div>
-                Submitted by ' . $TGE->getScreenName() . ' on ' . $TGE->getDateSubmitted() . '<br>
-                Rating: ' . round($TGE->getOverallRating(), 1) . '<br>
-                Company: ' . $TGE->getCompany() . ' <br>
-                Play Time: ' . $TGE->getPlayTime() . ' hours <br>
-                Age Rating: ' . $TGE->getAgeRating() . '+ <br>
-                Number of Players: ' . $TGE->getNumPlayers() . ' <br>
-                Expansions: ' . $TGE->getExpansions() . ' <br>
+                <p><span class="attributeHeader">Submitted by </span>' . $TGE->getScreenName() . ' on ' . $TGE->getDateSubmitted() . '</p>
+                <p><span class="attributeHeader">Rating: </span>' . round($TGE->getOverallRating(), 1) . '</p>
+                <p><span class="attributeHeader">Company: </span>' . $TGE->getCompany() . ' </p>
+                <p><span class="attributeHeader">Play Time: </span>' . $TGE->getPlayTime() . ' hours </p> 
+                <p><span class="attributeHeader">Age Rating: </span>' . $TGE->getAgeRating() . '+ </p>
+                <p><span class="attributeHeader">Number of Players: </span>' . $TGE->getNumPlayers() . '</p> 
+                <p><span class="attributeHeader">Expansions: </span>' . $TGE->getExpansions() . ' </p>
             </div>
 
             <!-- 
                 The game description itseld on
                 the other (right) side
             -->
-            <div class="innerContainer">
-                <p><br>
-                '. $TGE->getDescription() .'    
-                </p>
+            <div class="innerContainerRight">
+                <div>    
+                    <p><br>
+                    '. $TGE->getDescription() .'    
+                    </p>
+                </div>
+                <div class="leaveReview">
+                    <a href="reviewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton">Leave A Review!</a>
+                </div>
             </div>
-            <a href="reviewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton">Leave A Review!</a>
         </div>
 
         <!-- Container for images of the tabletop game-->
