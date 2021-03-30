@@ -45,7 +45,7 @@
 <HTML>
 
 <head>
-    <title> View Tabletop Game - Queen City's Gambit </title>
+    <title> Edit Profile - Queen City's Gambit </title>
     <meta charset="UTF=8">
     <!--=============================Stylesheets=======================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">

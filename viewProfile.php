@@ -46,7 +46,7 @@
 <HTML lang="en">
 
 <head>
-    <title>Dashboard - Queen City's Gambit</title>
+    <title>View Profile - Queen City's Gambit</title>
     <meta charset="UTF=8">
     <!--==========================Stylsheets=================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">

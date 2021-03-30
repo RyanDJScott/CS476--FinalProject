@@ -50,8 +50,14 @@ page itself and appear in a row.
 */
 .buttonContainer {
     display: flex;
-    width: 75%;
-    margin: 20px; 
+    min-width: 1000px;
+    max-width: 1000px;
+    margin: -20px 20px 20px 20px; 
+    justify-content: center;
+}
+
+.buttonForm {
+    max-width: fit-content;
     justify-content: center;
 }
 
@@ -77,4 +83,11 @@ page itself and appear in a row.
     background-color: #F0E5FC;
     text-decoration: none;
     cursor: pointer;
+}
+
+.name {
+    color: #6B5F77;
+    font-size: xx-large;
+    font-weight: bold;
+    margin-left: 10px;
 }

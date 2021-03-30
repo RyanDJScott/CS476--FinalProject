@@ -65,7 +65,7 @@
 
                     <!-- Login Email -->
                     <tr>
-                        <td><label for="loginEmail">Email: </label></td><td><input type="email" name="loginEmail" id="loginEmail" class="loginInput"></td>
+                        <td><label class="attributeHeader" for="loginEmail">Email: </label></td><td><input type="email" name="loginEmail" id="loginEmail" class="loginInput"></td>
                     </tr>
                     <tr>
                         <td></td><td><span class="errorMessage" id="invalidLoginEmail"><br></span></td>
@@ -73,7 +73,7 @@
 
                     <!-- Login Password -->
                     <tr>
-                        <td><label for="loginPassword">Password:</label></td><td><input type="password" name="loginPassword" id="loginPassword" class="loginInput"></td>
+                        <td><label class="attributeHeader" for="loginPassword">Password:</label></td><td><input type="password" name="loginPassword" id="loginPassword" class="loginInput"></td>
                     </tr>
                     <tr>
                         <td></td><td><span class="errorMessage" id="invalidLoginPassword"><br></span></td>
@@ -81,7 +81,7 @@
 
                     <!-- Login Button -->
                     <tr>
-                        <td></td><td><input class="loginButton" type="submit" id="loginButton" value="LOGIN"></td>
+                        <td></td><td><input class="navButton floatLeft" type="submit" id="loginButton" value="LOGIN"></td>
                     </tr>
                     <tr>
                         <td></td><td><span class="errorMessage" id="invalidLoginMessage"><br></span></td>

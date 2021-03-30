@@ -18,6 +18,7 @@
     flex-basis: 33%;
     max-width: 192px;
     width: auto;
+    border: 1px solid black;
     background-color: white;
     height: 250px;
     margin: 20px;
@@ -29,31 +30,24 @@
     margin: 20px;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: #F5F0F9;
 }
 
 .loginTable {
     font-family: 'Times New Roman', Times, serif;
 }
 
-.loginButton {
-    background-color: #f1d7f1;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 3px;
-    padding: 5px;
-}
-
-.loginButton:hover, .loginButton:focus {
-    border-radius: 10px;
-    transition: all 0.3s ease 0s;
-    background-color: #dac5f1;
-    text-decoration: none;
+.floatLeft {
+    float: left !important;
 }
 
 .loginInput {
-    background-color: #F5F0F9;
+    background-color: #ffffff;
     border: 1px solid #AAA0B4;
     padding: 3px;
+}
+
+.attributeHeader {
+    font-weight: bold;
+    line-height: 1.8;
 }

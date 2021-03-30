@@ -154,7 +154,7 @@ class Display {
                 <p>' . htmlspecialchars($this->limitChars($TGE->getDescription(), 260)) . '</p>
             </div>
             <div class="bottomContainer">
-                <a href="viewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton">View Game Description</a>
+                <a href="viewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton addBorder">View Game Description</a>
             </div>
             </div>';
     }
@@ -217,9 +217,9 @@ class Display {
         if ($userResult->num_rows > 0) {
             $resultRow = $userResult->fetch_assoc();
 
-            echo '<h1>' . $resultRow["screenName"] . '</h1>
+            echo '<div class="mainContainer">
+                <div class="adminContainer"><div class="adminHeading">' . $resultRow["screenName"] . '</div></div>
                 <!-- Main Area Container Which holds all -->
-                <div class="mainContainer">
             
                 <!-- user information container -->
                 <div class="userInformation">
@@ -232,9 +232,9 @@ class Display {
                 </div>
                 <!-- information container -->
                 <div class="simpleUserInfo">
-                    <p>' . $resultRow["firstName"] . ' ' . $resultRow["lastName"] . '</p>
-                    <p>' . $resultRow["birthday"] . '</p>
-                    <p>' . $resultRow["email"] . '</p>
+                    <p><span class="attributeHeader">Name: </span>' . $resultRow["firstName"] . ' ' . $resultRow["lastName"] . '</p>
+                    <p><span class="attributeHeader">Birthday: </span>' . $resultRow["birthday"] . '</p>
+                    <p><span class="attributeHeader">Email: </span>' . $resultRow["email"] . '</p>
                 </div>
                 </div>
 
@@ -243,14 +243,15 @@ class Display {
 
                 <!-- biography -->
                 <div class="userBiography">
+                    <p><span class="attributeHeader">Biography:</span></p>
                     <p>' . $resultRow["biography"] . '</p>
                 </div>
 
                 <!-- right side information-->
                 <div class="favouritesInfo">
-                    <p>Favourite Game: ' . $resultRow["favGame"] . '</p>
-                    <p>Type: ' . $resultRow["gameType"] . '</p>
-                    <p>Time Playing Game: ' . $resultRow["playTime"] . '</p>
+                    <p><span class="attributeHeader">Favourite Game: </span>' . $resultRow["favGame"] . '</p>
+                    <p><span class="attributeHeader">Type: </span>' . $resultRow["gameType"] . '</p>
+                    <p><span class="attributeHeader">Time Playing Game: </span>' . $resultRow["playTime"] . '</p>
                 </div>
                 </div>
                 </div>';
@@ -274,8 +275,8 @@ class Display {
         echo '<!-- This is where the buttons will go -->
         <div class="buttonContainer">
             <form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
-                <input class="buttonButton" type="submit" name="promoteUser" value="PROMOTE"> 
-                <input class="buttonButton" type="submit" name="deleteUser" value="DELETE">
+                <input class="navButton" type="submit" name="promoteUser" value="PROMOTE"> 
+                <input class="navButton" type="submit" name="deleteUser" value="DELETE">
                 <input type="hidden" name="UID" value="' . $userID . '">
             </form>
         </div>';
@@ -649,19 +650,19 @@ class Display {
             -->
             <div class="innerContainer">
                 <div class="name">Rating ' . $review->getRating() . '</div>
-                Submitted By: ' . $review->getSubmittedBy() . '<br>
-                Recommended? ' . $this->displayRecommend($review->getRecommend()) . '<br>
-                Number of Players: ' . $review->getNumPlays() . '<br>
-                Age of Players: ' . $review->getAvgAge() . '<br>
-                Time for one Round: ' . $review->getAvgPlayTime() . '<br>
-                Percieved Difficulty: ' . $review->getDifficulty() . '<br>
-                Number of Times Played: ' . $review->getNumPlays() . '<br>
+                <p><span class="attributeHeader">Submitted By: </span>' . $review->getSubmittedBy() . '</p>
+                <p><span class="attributeHeader">Recommended? </span>' . $this->displayRecommend($review->getRecommend()) . '</p>
+                <p><span class="attributeHeader">Number of Players: </span>' . $review->getNumPlays() . '</p>
+                <p><span class="attributeHeader">Age of Players: </span>' . $review->getAvgAge() . '</p>
+                <p><span class="attributeHeader">Time for one Round: </span>' . $review->getAvgPlayTime() . '</p>
+                <p><span class="attributeHeader">Percieved Difficulty: </span>' . $review->getDifficulty() . '</p>
+                <p><span class="attributeHeader">Number of Times Played: </span>' . $review->getNumPlays() . '</p>
             </div> 
 
             <!--
                 right side for review itself and flag button
             -->
-            <div class="innerContainer">
+            <div class="innerContainerRight">
                 <p><br>'
                    . $review->getReview() .  
                 '</p>
@@ -709,7 +710,7 @@ class Display {
                     </p>
                 </div>
                 <div class="leaveReview">
-                    <a href="reviewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton">Leave A Review!</a>
+                    <a href="reviewTG.php?gameTitle=' . htmlspecialchars($TGE->getGameTitle()) . '" class="navButton addBorder">Leave A Review!</a>
                 </div>
             </div>
         </div>
