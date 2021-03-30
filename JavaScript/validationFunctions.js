@@ -71,6 +71,8 @@ function passwordValidation(password)
         return false;
     else if (!(/[A-Z]/.test(password)))
         return false;
+    else
+        return true;
 }
 
 /*
@@ -158,15 +160,15 @@ checks the URL of the picture given
 */
 function pictureValidation(filePath)
 {
-    if(filePath != "")
-    {
+    if(filePath != "") {
         var allowedExtensions = (filePath.toString().toLowerCase()).search(/((.jpg)|(.jpeg)|(.gif)|(.png))$/);
-        
+
         if (allowedExtensions == -1)
             return false;
-            
-    } else if (filePath.length > 100) {
-        return false;
+        else if (filePath.length > 100) 
+            return false;
+        else 
+            return true;
     } else {
         return true;
     }
@@ -223,7 +225,7 @@ function TGEPlaytimeValidation(playtime)
 {
     if (playtime == "")
         return false;
-    else if (validInput <= 0)
+    else if (playtime <= 0)
         return false;
     else if (isNaN(playtime))
         return false;
@@ -306,7 +308,7 @@ Checks the uploads for the images that the user can provide
 */
 function TGEUploadValidation(filePath)
 {
-    if(filePath == "")
+    if(filePath == "") 
         return false; 
     else if (!(pictureValidation(filePath)))
         return false;

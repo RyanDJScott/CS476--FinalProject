@@ -24,6 +24,15 @@
 
         //Get the status information for this game
         $gameStatus = $thisGame->getStatusInfo();
+    } else if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["gameTitle"]) && strlen($_POST["gameTitle"]) > 0) {
+        //Get the game title
+        $gameTitle = $_POST["gameTitle"];
+
+        //Create a new TGE object 
+        $thisGame = new TGE($gameTitle);
+
+        //Get the status information for this game
+        $gameStatus = $thisGame->getStatusInfo();
     }
 
     //If the user presses the flag button, set the flag
@@ -71,13 +80,16 @@
     <div class="mainPageHeader">
         <img src="dependencies/boardGameHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!"/>
         <div class="headerImageMessage">
-            <?php echo $gameTitle; ?>
+            <?php 
+                if (isset($gameTitle)) 
+                    echo $gameTitle; 
+            ?>
         </div>
     </div> 
 
     <?php
         //If the game has been rejected or is pending, show error information
-        if ($gameStatus["status"] == 0 || $gameStatus["status"] == 2) {
+        if (isset($gameStatus) && ($gameStatus["status"] == 0 || $gameStatus["status"] == 2)) {
     ?>
     <p class="errorMessage">This game has not been approved for publication on the site.</p>
     <p class="errorMessage">Please contact the site administrators for more information!</p>
@@ -94,8 +106,10 @@
             $reviews = $thisGame->getReviews();
 
             //Print each review on this page
-            foreach($reviews as $gameReview) {
-                $display->displayReview($gameReview);
+            if (sizeof($reviews) > 0) {
+                foreach($reviews as $gameReview) {
+                    $display->displayReview($gameReview);
+                }
             }
         ?>
     </div>

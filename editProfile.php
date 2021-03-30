@@ -18,10 +18,10 @@
 
         //If the form was submitted, execute the signup process
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (isset($_POST["editSubmit"]) && $_POST["editSubmit"] === "EDIT") {
+            if (isset($_POST["editSubmit"]) && $_POST["editSubmit"] === "UPDATE PROFILE") {
                 $editProfileObject = new userEditProfile($_SESSION["userObj"]);
                 $editProfileObject->submitForm();
-            } else if (isset($_POST["deleteProfile"]) && $_POST["deleteProfile"] === "DELETE") {
+            } else if (isset($_POST["deleteProfile"]) && $_POST["deleteProfile"] === "DELETE PROFILE") {
                 $_SESSION["userObj"]->deleteAccount();
             }
         }

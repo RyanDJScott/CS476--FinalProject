@@ -68,6 +68,7 @@ together in line
 .gameFeedback {
     max-width: 600px;
     min-width: 600px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .innerContainerRight {

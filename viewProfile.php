@@ -73,7 +73,10 @@
 
     <p class="errorMessage"><?=$errorMessage?></p>
     
-    <?php $display->displayViewProfile($userID); ?>    
+    <?php 
+        if (isset($display))
+            $display->displayViewProfile($userID);
+    ?>    
 
 </body>
 

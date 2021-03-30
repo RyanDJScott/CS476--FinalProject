@@ -90,19 +90,11 @@ else {
         <img src="dependencies/flaggedReview.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
     </div>
 
-    <!-- 
-        Page includes:
-            description of the game for which the review has been flagged
-            images of said game (max of 4)
-            flagged review
-            Buttons, one can remove the flag (review is good) other can delete review
-    -->
-
     <!-- page container -->
     <div class="pageAllignment">
         <?php
             //Check if this review is actually flagged
-            if ($thisReview->getFlag() == 1) {
+            if (isset($thisReview) && $thisReview->getFlag() == 1) {
             
             //This review has been flagged; implement all display functions etc.
         ?>
@@ -127,7 +119,7 @@ else {
         </div>
         <?php
             //This review hasn't been flagged; show error message
-            } else if ($thisReview->getFlag() == 0) {
+            } else if (isset($thisReview) && $thisReview->getFlag() == 0) {
         ?>
         <p class="errorMessage">This review hasn't been flagged!</p>
         <?php
