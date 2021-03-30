@@ -272,14 +272,20 @@ class Display {
     // Side Effects:
     //   <1> Displays the promote and delete buttons for the viewProfile.php page
     private function displayAdminButtons(int $userID) {
-        echo '<!-- This is where the buttons will go -->
+        echo '
+        <!-- Insert scripts for JS validation here -->
+        <script type="text/javascript" src="JavaScript/editUserValidation.js"></script>
+        
+        <!-- This is where the buttons will go -->
         <div class="buttonContainer">
             <form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
-                <input class="navButton" type="submit" name="promoteUser" value="PROMOTE"> 
-                <input class="navButton" type="submit" name="deleteUser" value="DELETE">
+                <input class="navButton" type="submit" name="promoteUser" id="promoteUser" value="PROMOTE"> 
+                <input class="navButton" type="submit" name="deleteUser" id="deleteUser" value="DELETE">
                 <input type="hidden" name="UID" value="' . $userID . '">
             </form>
-        </div>';
+        </div>
+        
+        <script type="text/javascript" src="JavaScript/editUserEventListeners.js"></script>';
     }
   
     //--------------Dashboard Display Functions----------------//

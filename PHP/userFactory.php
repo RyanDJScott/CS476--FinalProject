@@ -728,24 +728,6 @@ class adminUser extends user {
         }
     }
 
-    // Function Name: addTGE
-    // Purpose: To add the tabletop game entry to the DB
-    // Parameters: None
-    // Returns:
-    //   <1> TRUE: If the insert into the DB is successful
-    //   <2> FALSE: If the insert into the DB is unsuccessful
-    // Side Effects: A tabletop game description is inserted into the DB
-    public function addTGE() {}
-
-    // Function Name: leaveReview
-    // Purpose: To add a review to a tabletop game description on the site
-    // Parameters: None
-    // Returns:
-    //   <1> TRUE: If the insert into the DB is successful
-    //   <2> FALSE: If the insert into the DB is unsuccessful
-    // Side Effects: The review is inserted into the DB
-    public function leaveReview() {}
-
     // Function Name: flagReview
     // Purpose: Flag an innappropriate review for moderation
     // Parameters:

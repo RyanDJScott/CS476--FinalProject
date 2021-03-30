@@ -102,7 +102,7 @@ else {
     <div class="pageAllignment">
         <?php
             //Check if this review is actually flagged
-            if ($thisReview->getFlag() == 1) {
+            if (isset($thisReview) && $thisReview->getFlag() == 1) {
             
             //This review has been flagged; implement all display functions etc.
         ?>
@@ -127,7 +127,7 @@ else {
         </div>
         <?php
             //This review hasn't been flagged; show error message
-            } else if ($thisReview->getFlag() == 0) {
+            } else if (isset($thisReview) && $thisReview->getFlag() == 0) {
         ?>
         <p class="errorMessage">This review hasn't been flagged!</p>
         <?php

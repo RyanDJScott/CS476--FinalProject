@@ -24,6 +24,15 @@
 
         //Get the status information for this game
         $gameStatus = $thisGame->getStatusInfo();
+    } else if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["gameTitle"]) && strlen($_POST["gameTitle"]) > 0) {
+        //Get the game title
+        $gameTitle = $_POST["gameTitle"];
+
+        //Create a new TGE object 
+        $thisGame = new TGE($gameTitle);
+
+        //Get the status information for this game
+        $gameStatus = $thisGame->getStatusInfo();
     }
 
     //If the user presses the flag button, set the flag
@@ -71,7 +80,10 @@
     <div class="mainPageHeader">
         <img src="dependencies/boardGameHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!"/>
         <div class="headerImageMessage">
-            <?php echo $gameTitle; ?>
+            <?php 
+                if (isset($gameTitle)) 
+                    echo $gameTitle; 
+            ?>
         </div>
     </div> 
 
