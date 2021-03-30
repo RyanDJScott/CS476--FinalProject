@@ -10,7 +10,7 @@
         // Side Effects: 
         //   <1> The member variables are set to the login credentials for connecting to the database
         public function __construct() {
-            $this->dbConnect = new mysqli("localhost", "geekagog", "5i4C-o5tN)7MhA", "geekagog_QueenCityGambit");
+            $this->dbConnect = new mysqli("", "", "", "");
         
             //Check the connection
             if ($this->dbConnect->connect_error) 
