@@ -67,10 +67,11 @@ else {
     <!-- ================Stylesheets=================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
     <link rel="stylesheet" href="stylesheets/viewTg.css">
-    <link rel="stylesheet" href="stylesheets/reviewTGE.css">
+
     <!-- ================Script Files================-->
     <script type="text/javascript" src="JavaScript/validationFunctions.js"></script>
     <script type="text/javascript" src="JavaScript/reviewTGEValidation.js"></script>
+  
 </head>
 
 <body>
@@ -86,6 +87,9 @@ else {
     <!-- review game header image -->
     <div class="mainPageHeader">
         <img src="dependencies/boardGameHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
+        <div class="headerImageMessage">
+            Add <?php echo $gameTitle; ?> to the Site?
+        </div>
     </div>
 
     <!-- 
@@ -97,23 +101,23 @@ else {
             Space for feedback
             Buttons to accept or reject
     -->
-    <div class="pageAllignment">
+    <div class="overallContainer">
     <p class="errorMessage"><?php echo $errorMessage; ?></p>
         <?php $display->displayReviewTGE($thisGame); ?>
         <form id="submitForm" name="approvalForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <!-- leave feedback -->
-            <div class="textBoxBottom">
-                <div class="nameFeedback">
-                    Leave Feedback
-                </div>
+            <div class="elementContainerBottom">
+                <div class="innerContainerFeedback">
+                <span class="name">Leave Feedback</span>
 
                 <div class="textArea">
                     <!-- input box -->
-                    <textarea name="gameFeedback" id="gameFeedback" rows="10" cols="50"></textarea>
+                    <textarea class="gameFeedback" name="gameFeedback" id="gameFeedback" rows="10"></textarea>
                 </div>
                 <div>
                     <div class="errorMessage" id="reviewTGEDescError"></div>
                 </div>
+            </div>
             </div>
 
             <!-- buttons -->

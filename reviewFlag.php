@@ -115,7 +115,7 @@ else {
 
         <!-- This is where the buttons will go -->
         <div class="buttonContainer">
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <form class="buttonForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <!-- Removes the Flag - i.e. the review is fine -->
                 <input class="button" type="submit" name="removeFlag" id="removeFlag" value="APPROVE"> 
 

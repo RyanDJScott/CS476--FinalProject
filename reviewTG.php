@@ -79,7 +79,7 @@
 
                     <!-- Rating -->
                     <tr>
-                        <td><label for="reviewRating">Rating:</label></td>
+                        <td><label class="attributeHeader" for="reviewRating">Rating:</label></td>
                         <td><input type="input" id="reviewRating" name="reviewRating">&nbsp;/10</td>
                     </tr>
                     <tr>
@@ -91,7 +91,7 @@
 
                     <!-- Recommended? -->
                     <tr>
-                        <td><label for="reviewRecommended">Would you recommend?</label></td>
+                        <td><label class="attributeHeader" for="reviewRecommended">Would you recommend?</label></td>
                         <td><input type="radio" id="yes" name="reviewRecommended" value="YES">Yes &nbsp;
                             <input type="radio" id="no" name="reviewRecommended" value="NO">No
                         </td>
@@ -105,7 +105,7 @@
 
                     <!-- Average Age of Players -->
                     <tr>
-                        <td><label for="reviewAge">Average age of players:</label></td>
+                        <td><label class="attributeHeader" for="reviewAge">Average age of players:</label></td>
                         <td><input type="input" id="reviewAge" name="reviewAge">&nbsp;years</td>
                     </tr>
                     <tr>
@@ -117,7 +117,7 @@
 
                     <!-- Playtime for one round -->
                     <tr>
-                        <td><label for="reviewPlaytime">Time for one round:</label></td>
+                        <td><label class="attributeHeader" for="reviewPlaytime">Time for one round:</label></td>
                         <td><input type="input" id="reviewPlaytime" name="reviewPlaytime">&nbsp;hour(s)</td>
                     </tr>
                     <tr>
@@ -129,7 +129,7 @@
 
                     <!-- Number of Times Player -->
                     <tr>
-                        <td><label for="reviewPlayedQuantity">Number of times played:</label></td>
+                        <td><label class="attributeHeader" for="reviewPlayedQuantity">Number of times played:</label></td>
                         <td><input type="input" id="reviewPlayedQuantity" name="reviewPlayedQuantity"></td>
                     </tr>
                     <tr>
@@ -141,7 +141,7 @@
 
                     <!-- Percieved difficulty -->
                     <tr>
-                        <td><label for="reviewDifficulty">Percieved Difficulty</label></td>
+                        <td><label class="attributeHeader" for="reviewDifficulty">Percieved Difficulty</label></td>
                         <td>
                             <select id="reviewDifficulty" name="reviewDifficulty">
                                 <option value="Easy">Easy</option>
@@ -161,16 +161,21 @@
                 <!-- Review section itself -->
 
                 <div class="reviewSection">
-                    Please tell us about your experience with this game:<br>
-                    <textarea rows="15" cols="75" name="reviewText" id="reviewTGTextArea"></textarea>
+
+                    <div class="attributeHeader">Please tell us about your experience with this game:<br></div>
+                    <textarea rows="15" cols="75" name="reviewText" id="reviewTGTextArea">Leave your review here...</textarea>
+
+
                     <div class="errorMessage" id="reviewTextError"></div>
                 </div>
 
 
                 <!-- submit button-->
-                <input class="reviewSubmitButton" type="submit" id="reviewSubmitButton">
-                <input type="hidden" name="gameTitle" value="<?=$gameTitle?>">
-                <div class="errorMessage" id="reviewSubmitError"></div>
+                <div class="submitAllignment">
+                    <input class="navButton" type="submit" id="reviewSubmitButton">
+                    <input type="hidden" name="gameTitle" value="<?=$gameTitle?>">
+                    <div class="errorMessage" id="reviewSubmitError"></div>
+                </div>
             </form>
         </div>
     </div>

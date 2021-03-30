@@ -45,7 +45,7 @@
 <HTML>
 
 <head>
-    <title> View Tabletop Game - Queen City's Gambit </title>
+    <title> Edit Profile - Queen City's Gambit </title>
     <meta charset="UTF=8">
     <!--=============================Stylesheets=======================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
@@ -67,7 +67,7 @@
 
     <!-- Main header image -->
     <div class="mainPageHeader">
-        <img src="dependencies/boardGameHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
+        <img src="dependencies/editProfileHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
     </div>
 
     <!-- 
@@ -209,10 +209,12 @@
             <!-- Biography -->
             <div class="rowContainer">
                 <label for="editBiography">Biography:</label>
-                    <input class="bioBoxBig" type="text" id="editBiography" name="editBiography" value="<?php echo htmlspecialchars($_SESSION["userObj"]->getBiography()); ?>">
+                <div class="itemContainer">
+                    <textarea class="bioBoxBig" id="editBiography" name="editBiography" rows="10"><?php echo htmlspecialchars($_SESSION["userObj"]->getBiography()); ?></textarea>
                     <div class="errorContainer">
                         <div class="errorMessage" id="editBiographyError"></div>
                     </div>
+                </div>
             </div>
 
             <!-- Image -->
@@ -227,8 +229,10 @@
             </div>
 
             <div class="rowContainer">
-                <input type="submit" id="editSubmit" name="editSubmit" class="submitButton" value="EDIT">
-                <input type="submit" id="deleteProfile" name="deleteProfile" class="submitButton" value="DELETE">
+                <div class="itemContainer">
+                    <input type="submit" id="editSubmit" name="editSubmit" class="navButton" value="UPDATE PROFILE">
+                    <input type="submit" id="deleteProfile" name="deleteProfile" class="navButton" value="DELETE PROFILE">
+                </div>
             </div>
             
             <div class="rowContainer">

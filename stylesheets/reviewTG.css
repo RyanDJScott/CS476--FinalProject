@@ -9,13 +9,18 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    min-width: 760px;
+    max-width: 760px;
+    background-color: #F0E5FC;
     border: 1px solid #AAA0B4;
-    background-color: #F5F0F9;
-    width: fit-content;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
 }
 
 .reviewTableForm {
     margin: 5px 0px 0px 5px;
+    justify-items: center;
 }
 
 .reviewSection {
@@ -28,17 +33,33 @@
 }
 
 input, select, textarea {
-    background-color: #f1d7f1;
+    background-color: #ffffff;
     color: black;
     font-weight: bold;
     border: 1px solid #AAA0B4;
     border-radius: 3px;
     padding: 5px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12pt;
 }
 
-.reviewSubmitButton:hover, .reviewSubmitButton:focus {
-    border-radius: 10px;
-    transition: all 0.3s ease 0s;
-    background-color: #dac5f1;
-    text-decoration: none;
+table {
+    min-width: 570px;
+    max-width: 570px;
+    margin-top: 5px;
+}
+
+td {
+    padding-right: 10px;
+}
+
+.attributeHeader {
+    font-weight: bold;
+    line-height: 1.8;
+}
+
+.submitAllignment {
+    min-width: 370.5px;
+    max-width: 370.5px;
+    height: 1px;
 }
