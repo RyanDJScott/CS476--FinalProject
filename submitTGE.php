@@ -173,6 +173,8 @@
                 <label for="submitTGEUpload" class="attributeHeader">Upload a file:</label>
                 <input type="file" id="submitTGEUpload" class="imageUploader" name="submitTGEUpload[]" multiple><br>
                 Please note that you must select up to four images at the same time<br>
+                
+                <div class="errorMessage" id="uploadError"></div>
             </div>
 
             <!-- Submit button -->
