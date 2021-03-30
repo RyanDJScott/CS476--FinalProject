@@ -15,15 +15,11 @@ function firstNameChecker(event)
 
     var validInput = nameValidation(name);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         firstNameErrorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         firstNameErrorMsg.innerHTML = "This is an invalid name";
     }
-    return validInput;
 }
 
 function lastNameChecker(event)
@@ -34,15 +30,11 @@ function lastNameChecker(event)
 
     var validInput = nameValidation(name);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         lastNameErrorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         lastNameErrorMsg.innerHTML = "This is an invalid last name";
     }
-    return validInput;
 }
 
 function emailChecker(event)
@@ -53,15 +45,11 @@ function emailChecker(event)
 
     var validInput = emailValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This email is invalid";
     }
-    if(validInput == false)
-    {
-        errorMsg = "This email is invalid";
-    }
-    return validInput;
 }
 
 function screennameChecker(event)
@@ -72,15 +60,11 @@ function screennameChecker(event)
 
     var validInput = screennameValidation(screename);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This screenname is invalid";
     }
-    if(validInput == false)
-    {
-        errorMsg = "This screenname is invalid";
-    }
-    return validInput;
 }
 
 function passwordChecker(event)
@@ -91,36 +75,28 @@ function passwordChecker(event)
 
     var validInput = passwordValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This password is invalid";
     }
-    if(validInput == false)
-    {
-        errorMsg = "This password is invalid";
-    }
-    return validInput;
 }
 
 function passwordConfirmChecker(event)
 {
     var input = event.currentTarget.value;
 
-    var confirmPassword = document.getElementById("editPasswordConfirm");
+    var password = document.getElementById("editPassword").value;
 
     var errorMsg = document.getElementById("editPasswordConfirmError");
 
-    var validInput = passwordConfirmValidation(input, confirmPassword);
+    var validInput = passwordConfirmValidation(input, password);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "Cannot confirm passwords!";
     }
-    if(validInput == false)
-    {
-        errorMsg = "This password is invalid";
-    }
-    return validInput;
 }
 
 function birthdayChecker(event)
@@ -131,15 +107,11 @@ function birthdayChecker(event)
 
     var validInput = birthdayValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This birthday is invalid";
     }
-    if(validInput == false)
-    {
-        errorMsg = "This birthday is invalid";
-    }
-    return validInput;
 }
 
 function faveGameChecker(event)
@@ -150,15 +122,11 @@ function faveGameChecker(event)
 
     var validInput = faveGameValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This input is invalid";
     }
-    if(validInput == false)
-    {
-        errorMsg = "This input is invalid";
-    }
-    return validInput;
 }
 
 function faveGameTypeChecker(event)
@@ -169,15 +137,11 @@ function faveGameTypeChecker(event)
 
     var validInput = faveGameTypeValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This input is invalid";
     }
-    if(validInput == false)
-    {
-        errorMsg = "This input is invalid";
-    }
-    return validInput;
 }
 
 function gameTimeChecker(event)
@@ -188,15 +152,11 @@ function gameTimeChecker(event)
 
     var validInput = gameTimeValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This input is invalid";
     }
-    if(validInput == false)
-    {
-        errorMsg = "This input is invalid";
-    }
-    return validInput;
 }
 
 function biographyChecker(event)
@@ -207,15 +167,11 @@ function biographyChecker(event)
 
     var validInput = biographyValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This biography is invalid";
     }
-    if(validInput == false)
-    {
-        errorMsg = "This biography is invalid";
-    }
-    return validInput;
 }
 
 function pictureChecker(event)
@@ -226,15 +182,19 @@ function pictureChecker(event)
 
     var validInput = pictureValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This picture is invalid";
     }
-    if(validInput == false)
+}
+
+function deleteProfile(event) 
+{
+    if(!confirm("Are you sure you want to permanently delete your account?"))
     {
-        errorMsg = "This picture is invalid";
+        event.preventDefault();
     }
-    return validInput;
 }
 
 /*
@@ -243,75 +203,41 @@ page are valid before the form can be submitted
 */
 function submit(event)
 {
-    var firstName = document.getElementById("editFName");
-    if (firstNameChecker(firstName) == false)
-    {
-        event.preventDefault();
+    //Error message on page
+    var errorMsg = document.getElementById("submitError");
+
+    //Input values
+    var firstName = document.getElementById("editFName").value;
+    var lastName = document.getElementById("editLName").value;
+    var email = document.getElementById("editEmail").value;
+    var screenname = document.getElementById("editScreenname").value;
+    var password = document.getElementById("editPassword").value;
+    var passwordConfirm = document.getElementById("editPasswordConfirm").value;
+    var birthday = document.getElementById("editBirthday").value;
+    var faveGame = document.getElementById("editFavGame").value;
+    var faveGameType = document.getElementById("editFavGameType").value;
+    var gameTime = document.getElementById("editGameTime").value;
+    var biography = document.getElementById("editBiography").value;
+    var picture = document.getElementById("editPic").value;
+
+    //If any of the one required fields fails validation, prevent submission
+    if (!(nameValidation(firstName) && nameValidation(lastName) && emailValidation(email) && screennameValidation(screenname) 
+        && birthdayValidation(birthday) && faveGameValidation(faveGame) && faveGameTypeValidation(faveGameType) && gameTimeValidation(gameTime)
+        && biographyValidation(biography) && pictureValidation(picture))) {
+            errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
+            event.preventDefault();
     }
 
-    var lastName = document.getElementById("editLName");
-    if (lastNameChecker(lastName) == false)
+    //Handle passwords separately; depends if it's being changed
+    if(password != "" && passwordValidation(password) == false)
     {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
-
-    var email = document.getElementById("editEmail");
-    if(emailChecker(email) == false)
+    
+    if(passwordConfirmValidation(password, passwordConfirm) == false)
     {
-        event.preventDefault();
-    }
-
-    var screenname = document.getElementById("editScreenname");
-    if(screennameChecker(screenname) == false)
-    {
-        event.preventDefault();
-    }
-
-    var password = document.getElementById("editPassword");
-    if(passwordChecker(password) == false)
-    {
-        event.preventDefault();
-    }
-
-    var passwordConfirm = document.getElementById("editPasswordConfirm");
-    if(passwordConfirmChecker(passwordConfirm) == false)
-    {
-        event.preventDefault();
-    }
-
-    var birthday = document.getElementById("editBirthday");
-    if(birthdayChecker(birthday) == false)
-    {
-        event.preventDefault();
-    }
-
-    var faveGame = document.getElementById("editFavGame");
-    if(faveGameChecker(faveGame) == false)
-    {
-        event.preventDefault();
-    }
-
-    var faveGameType = document.getElementById("editFavGameType");
-    if(faveGameTypeChecker(faveGameType) == false)
-    {
-        event.preventDefault();
-    }
-
-    var gameTime = document.getElementById("editGameTime");
-    if(gameTimeChecker(gameTime) == false)
-    {
-        event.preventDefault();
-    }
-
-    var biography = document.getElementById("editBiography");
-    if(biographyChecker(biography) == false)
-    {
-        event.preventDefault();
-    }
-
-    var picture = document.getElementById("editPic");
-    if(pictureChecker(picture) == false)
-    {
+        errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
         event.preventDefault();
     }
 }

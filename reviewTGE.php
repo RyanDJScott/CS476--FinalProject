@@ -67,7 +67,11 @@ else {
     <!-- ================Stylesheets=================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
     <link rel="stylesheet" href="stylesheets/viewTg.css">
-    <!--<link rel="stylesheet" href="stylesheets/reviewTGE.css">-->
+
+    <!-- ================Script Files================-->
+    <script type="text/javascript" src="JavaScript/validationFunctions.js"></script>
+    <script type="text/javascript" src="JavaScript/reviewTGEValidation.js"></script>
+  
 </head>
 
 <body>
@@ -100,7 +104,7 @@ else {
     <div class="overallContainer">
     <p class="errorMessage"><?php echo $errorMessage; ?></p>
         <?php $display->displayReviewTGE($thisGame); ?>
-        <form name="approvalForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <form id="submitForm" name="approvalForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <!-- leave feedback -->
             <div class="elementContainerBottom">
                 <div class="innerContainerFeedback">
@@ -111,7 +115,7 @@ else {
                     <textarea class="gameFeedback" name="gameFeedback" id="gameFeedback" rows="10"></textarea>
                 </div>
                 <div>
-                    <div class="errorMessage" id="reviewFlagDescError"></div>
+                    <div class="errorMessage" id="reviewTGEDescError"></div>
                 </div>
             </div>
             </div>
@@ -128,13 +132,10 @@ else {
                 <input type="hidden" name="gameTitle" value="<?php echo $gameTitle; ?>">
 
             </div>
-            <div>
-                    <div class="errorMessage" id="reviewFlagSubmitError"></div>
-                </div>
         </form>
     </div>
 </body>
-
+<script type="text/javascript" src="JavaScript/reviewTGEEventListeners.js"></script>
 </html>
 <?php 
 }

@@ -45,6 +45,9 @@
     <!--==========================Stylsheets=================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
     <link rel="stylesheet" href="stylesheets/reviewTG.css">
+    <!--==========================Script Files===============================-->
+    <script type="text/javascript" src="JavaScript/validationFunctions.js"></script>
+    <script type="text/javascript" src="JavaScript/reviewTGValidation.js"></script>
 </head>
 
 <body>
@@ -71,7 +74,7 @@
         <!-- Form container -->
         <div class="formContainer">
         <p class="errorMessage"><?=$errorMessage?></p>
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <form id="submitForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <table class="reviewTableForm">
 
                     <!-- Rating -->
@@ -158,8 +161,11 @@
                 <!-- Review section itself -->
 
                 <div class="reviewSection">
+
                     <div class="attributeHeader">Please tell us about your experience with this game:<br></div>
                     <textarea rows="15" cols="75" name="reviewText" id="reviewTGTextArea">Leave your review here...</textarea>
+
+
                     <div class="errorMessage" id="reviewTextError"></div>
                 </div>
 
@@ -175,6 +181,6 @@
     </div>
 
 </body>
-
+<script type="text/javascript" src="JavaScript/reviewTGEventListeners.js"></script>
 </HTML>
 <?php } ?>

@@ -15,12 +15,9 @@ function firstNameChecker(event)
 
     var validInput = nameValidation(name);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         firstNameErrorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         firstNameErrorMsg.innerHTML = "This is an invalid name";
     }
 }
@@ -33,12 +30,9 @@ function lastNameChecker(event)
 
     var validInput = nameValidation(name);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         lastNameErrorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         lastNameErrorMsg.innerHTML = "This is an invalid last name";
     }
 }
@@ -51,13 +45,10 @@ function emailChecker(event)
 
     var validInput = emailValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
-        errorMsg = "This email is invalid";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This email is invalid";
     }
 }
 
@@ -69,13 +60,10 @@ function screennameChecker(event)
 
     var validInput = screennameValidation(screename);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
-        errorMsg = "This screenname is invalid";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This screenname is invalid";
     }
 }
 
@@ -87,13 +75,10 @@ function passwordChecker(event)
 
     var validInput = passwordValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
-        errorMsg = "This password is invalid";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This password is invalid";
     }
 }
 
@@ -101,19 +86,16 @@ function passwordConfirmChecker(event)
 {
     var input = event.currentTarget.value;
 
-    var confirmPassword = document.getElementById("signupPasswordConfirm");
+    var password = document.getElementById("signupPassword").value;
 
     var errorMsg = document.getElementById("signupPasswordConfirmError");
 
-    var validInput = passwordConfirmValidation(input, confirmPassword);
+    var validInput = passwordConfirmValidation(input, password);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
-        errorMsg = "Cannot confirm passwords";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "Cannot confirm passwords";
     }
 }
 
@@ -125,13 +107,10 @@ function birthdayChecker(event)
 
     var validInput = birthdayValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
-        errorMsg = "This birthday is invalid";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This birthday is invalid";
     }
 }
 
@@ -143,13 +122,10 @@ function faveGameChecker(event)
 
     var validInput = faveGameValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
-        errorMsg = "This input is invalid";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This input is invalid";
     }
 }
 
@@ -161,13 +137,10 @@ function faveGameTypeChecker(event)
 
     var validInput = faveGameTypeValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
-        errorMsg = "This input is invalid";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This input is invalid";
     }
 }
 
@@ -179,13 +152,10 @@ function gameTimeChecker(event)
 
     var validInput = gameTimeValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
-        errorMsg = "This input is invalid";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This input is invalid";
     }
 }
 
@@ -197,13 +167,10 @@ function biographyChecker(event)
 
     var validInput = biographyValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
-        errorMsg = "This biography is invalid";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This biography is invalid";
     }
 }
 
@@ -215,13 +182,10 @@ function pictureChecker(event)
 
     var validInput = pictureValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
-        errorMsg = "This picture is invalid";
+    } else if (!validInput) {
+        errorMsg.innerHTML = "This picture is invalid";
     }
 }
 
@@ -231,75 +195,28 @@ page are valid before the form can be submitted
 */
 function submit(event)
 {
-    var firstName = document.getElementById("signupFName");
-    if (firstNameChecker(firstName) == false)
-    {
-        event.preventDefault();
-    }
+    //Get the error message tag
+    var errorMsg = document.getElementById("submitError");
 
-    var lastName = document.getElementById("signupLName");
-    if (lastNameChecker(lastName) == false)
-    {
-        event.preventDefault();
-    }
+    //Get the input values 
+    var firstName = document.getElementById("signupFName").value;
+    var lastName = document.getElementById("signupLName").value;
+    var email = document.getElementById("signupEmail").value;
+    var screenname = document.getElementById("signupScreenname").value;
+    var password = document.getElementById("signupPassword").value;
+    var passwordConfirm = document.getElementById("signupPasswordConfirm").value;
+    var birthday = document.getElementById("signupBirthday").value;
+    var faveGame = document.getElementById("signupFavGame").value;
+    var faveGameType = document.getElementById("signupFavGameType").value;
+    var gameTime = document.getElementById("signupGameTime").value;
+    var biography = document.getElementById("signupBiography").value;
+    var picture = document.getElementById("signupPic").value;
 
-    var email = document.getElementById("signupEmail");
-    if(emailChecker(email) == false)
-    {
-        event.preventDefault();
-    }
 
-    var screenname = document.getElementById("signupScreenname");
-    if(screennameChecker(screenname) == false)
-    {
-        event.preventDefault();
-    }
-
-    var password = document.getElementById("signupPassword");
-    if(passwordChecker(password) == false)
-    {
-        event.preventDefault();
-    }
-
-    var passwordConfirm = document.getElementById("signupPasswordConfirm");
-    if(passwordConfirmChecker(passwordConfirm) == false)
-    {
-        event.preventDefault();
-    }
-
-    var birthday = document.getElementById("signupBirthday");
-    if(birthdayChecker(birthday) == false)
-    {
-        event.preventDefault();
-    }
-
-    var faveGame = document.getElementById("signupFavGame");
-    if(faveGameChecker(faveGame) == false)
-    {
-        event.preventDefault();
-    }
-
-    var faveGameType = document.getElementById("signupFavGameType");
-    if(faveGameTypeChecker(faveGameType) == false)
-    {
-        event.preventDefault();
-    }
-
-    var gameTime = document.getElementById("signupGameTime");
-    if(gameTimeChecker(gameTime) == false)
-    {
-        event.preventDefault();
-    }
-
-    var biography = document.getElementById("signupBiography");
-    if(biographyChecker(biography) == false)
-    {
-        event.preventDefault();
-    }
-
-    var picture = document.getElementById("signupPic");
-    if(pictureChecker(picture) == false)
-    {
-        event.preventDefault();
+    if (!(nameValidation(firstName) && nameValidation(lastName) && screennameValidation(screenname) && passwordValidation(password)
+        && passwordConfirmValidation(password, passwordConfirm) && birthdayValidation(birthday) && faveGameValidation(faveGame)
+        && faveGameTypeValidation(faveGameType) && gameTimeValidation(gameTime) && biographyValidation(biography) && pictureValidation(picture))) {
+            errorMsg.innerHTML = "There is an issue with one of the fields above! Please fill out all necessary fields!";
+            event.preventDefault();
     }
 }

@@ -12,18 +12,12 @@ Checks the name given (first and last for user)
 */
 function nameValidation(name)
 {
-    var validInput = true;
-
-    if(name == "")
-    {
-        validInput = false;
-    }
-    if (name.length > 25)
-    {
-        validInput = false;
-    }
-
-    return validInput;
+    if (name == "")
+        return false;
+    else if (name.length > 25)
+        return false;
+    else 
+        return true;
 }
 
 /*
@@ -34,22 +28,14 @@ Checks any email passed to website
 */
 function emailValidation(email)
 {
-    var validInput = true;
-
-    if(email == "")
-    {
-        validInput = false; 
-    }
-    if(email.length > 320)
-    {
-        validInput = false;
-    }
-    if(!(/^\w+[\w.]*@\w+\.[a-z]{2,3}$/.test(emailInput)))
-    {
-        validInput = false;
-    }
-
-    return validInput;
+    if (email == "")
+        return false;
+    else if (email.length > 320)
+        return false;
+    else if (!(/^\w+[\w.]*@\w+\.[a-z]{2,3}$/.test(email)))
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -59,17 +45,12 @@ Checks the screenname provided
 */
 function screennameValidation(screenname)
 {
-    var validInput = true;
-
-    if(screenname == "")
-    {
-        validInput = false;
-    }
-    if(screenname > 50)
-    {
-        validInput = false;
-    }
-    return false;
+    if (screenname == "")
+        return false;
+    else if (screenname.length > 50)
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -82,31 +63,14 @@ Checks the password
 */
 function passwordValidation(password)
 {
-    var validInput = true;
-
-    if(password == "")
-    {
-        validInput = false;
-    }
-    if(password.length < 8)
-    {
-        validInput = false;
-    }
-    if(password.length > 25)
-    {
-        validInput = false;
-    }
-    //checks for special character
-    if((/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)) == false)
-    {
-        validInput = false;
-    }
-    //checks for upper-case 
-    if((/[A-Z]/.test(password)) == false)
-    {
-        validInput = false;
-    }
-    return validInput;
+    if (password == "")
+        return false;
+    else if (password.length < 8 || password.length > 25)
+        return false;
+    else if (!(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)))
+        return false;
+    else if (!(/[A-Z]/.test(password)))
+        return false;
 }
 
 /*
@@ -116,13 +80,10 @@ will need to be given botch the original and the confirmation password
 */
 function passwordConfirmValidation(password, confirmPassword)
 {
-    var validInput = true;
-
     if (password != confirmPassword)
-    {
-        validInput = false;
-    }
-    return validInput;
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -131,13 +92,10 @@ checks the birthday
 */
 function birthdayValidation(birthday)
 {
-    var validInput = true;
-
-    if(birthday == "")
-    {
-        validInput = false;
-    }
-    return validInput;
+    if (birthday == "")
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -147,13 +105,10 @@ Checks the favourite game
 */
 function faveGameValidation(faveGame)
 {
-    var validInput = true;
-
-    if(faveGame.length > 60)
-    {
-        validInput = false;
-    }
-    return validInput;
+    if (faveGame.length > 60)
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -163,13 +118,10 @@ This is selected from a drop down menu
 */
 function faveGameTypeValidation(faveGameType)
 {
-    var validInput = true;
-
-    if(faveGameType == "")
-    {
-        validInput = false;
-    }
-    return validInput;
+    if (faveGameType == "")
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -179,13 +131,10 @@ This is selected from a drop down menu
 */
 function gameTimeValidation(gameTime)
 {
-    var validInput = true;
-
-    if(gameTime == "")
-    {
-        validInput = false;
-    }
-    return validInput;
+    if (gameTime == "")
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -195,13 +144,10 @@ checks the user's biography
 */
 function biographyValidation(biography)
 {
-    var validInput = true;
-
-    if(biography.length > 500)
-    {
-        validInput = false;
-    }
-    return validInput;
+    if (biography.length > 500)
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -212,25 +158,18 @@ checks the URL of the picture given
 */
 function pictureValidation(filePath)
 {
-    var validInput = true;
-
-    /*
-    if there is a picture given, search for the type and make sure it is acceptable
-    */
     if(filePath != "")
     {
-        var allowedExtensions = (filePathInput.toLowerCase()).search(/((.jpg)|(.jpeg)|(.gif)|(.png))$/);
-        if(allowedExtensions == -1)
-        {
-            validInput = false;
-        }
+        var allowedExtensions = (filePath.toString().toLowerCase()).search(/((.jpg)|(.jpeg)|(.gif)|(.png))$/);
+        
+        if (allowedExtensions == -1)
+            return false;
+            
+    } else if (filePath.length > 100) {
+        return false;
+    } else {
+        return true;
     }
-    if(filePath.length > 100)
-    {
-        validInput = false;
-    }
-    
-    return validInput;
 }
 
 //*****************************************************************************************
@@ -251,18 +190,12 @@ Name function
 */ 
 function TGENameValidation(gameName)
 {
-    var validInput = true;
-
     if (gameName == "")
-    {
-        validInput = false;
-    }
-    if (gameName.length > 60)
-    {
-        validInput = false;
-    }
-
-    return validInput;
+        return false;
+    else if (gameName.length > 60)
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -272,18 +205,12 @@ Company that produced the game
 */
 function TGECompanyNameValidation(companyName)
 {
-    var validInput = true;
-
     if (companyName == "")
-    {
-        validInput = false;
-    }
-    if (companyName.length > 100)
-    {
-        validInput = false;
-    }
-
-    return validInput;
+        return false;
+    else if (companyName.length > 100)
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -294,23 +221,14 @@ Amount of time required to play the name
 */
 function TGEPlaytimeValidation(playtime)
 {
-    var validInput = true;
-
-    if(playtime == "")
-    {
-        validInput = false;
-    }
-    if(validInput <= 0)
-    {
-        validInput = false;
-    }
-    //check if not a number
-    if(isNaN(playtime))
-    {
-        validInput = false;
-    }
-
-    return validInput;
+    if (playtime == "")
+        return false;
+    else if (validInput <= 0)
+        return false;
+    else if (isNaN(playtime))
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -321,22 +239,14 @@ Age rating provided by the game, will be displayed as ("input+ years" i.e. Recom
 */
 function TGEAgeValidation(age)
 {
-    var validInput = true;
-
-    if(age == "")
-    {
-        validInput = false;
-    }
-    if(isNaN(age))
-    {
-        validInput = false;
-    }
-    if(age > 19 || age < 0)
-    {
-        validInput = false;
-    }
-
-    return validInput;
+    if (age == "")
+        return false;
+    if (isNaN(age))
+        return false;
+    if (age > 19 || age < 0)
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -347,22 +257,14 @@ function TGEAgeValidation(age)
 */
 function TGEPlayersValidation(players)
 {
-    var validInput = true;
-
-    if(players == "")
-    {
-        validInput = false;
-    }
-    if(isNaN(players))
-    {
-        validInput = false;
-    }
-    if(players < 0 || players > 20)
-    {
-        validInput = false; 
-    }
-
-    return validInput;
+    if (players == "")
+        return false;
+    else if (isNaN(players))
+        return false;
+    else if (players < 0 || players > 20)
+        return false; 
+    else
+        return true;
 }
 
 
@@ -373,22 +275,14 @@ Number of expansions available for the game
 */
 function TGEExpansionsValidation(expansions)
 {
-    var validInput = true;
-
-    if(expansions == "")
-    {
-        validInput = false;
-    }
-    if(isNaN(expansions))
-    {
-        validInput = false;
-    }
-    if(expansions < 0 || expansions > 30)
-    {
-        validInput = false; 
-    }
-
-    return validInput;
+    if (expansions == "")
+        return false;
+    if( isNaN(expansions))
+        return false;
+    if (expansions < 0 || expansions > 30)
+        return false; 
+    else
+        return true;
 }
 
 
@@ -399,14 +293,10 @@ Description of the game as provided by the user
 */
 function descriptionValidation(description)
 {
-    var validInput = true;
-
     if(description == "")
-    {
-        validInput = false;
-    }
-
-    return validInput;
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -416,15 +306,12 @@ Checks the uploads for the images that the user can provide
 */
 function TGEUploadValidation(filePath)
 {
-    var validInput = true;
-
     if(filePath == "")
-    {
-        validInput = false; 
-    }
-    pictureValidation(filePath)
-    
-    return validInput;
+        return false; 
+    else if (!(pictureValidation(filePath)))
+        return false;
+    else
+        return true;
 }
 
 //*****************************************************************************************
@@ -449,39 +336,12 @@ checks the rating the user leaves for a game review
 */
 function ratingValidation(rating)
 {
-    var validInput = true;
-
-    if(rating > 10)
-    {
-        validInput = false;
-    }
-    if(rating < 0)
-    {
-        validInput = false;
-    }
-
-    return validInput;
-}
-
-/*
-recommendedValidation
-checks the input relating to if a game is recommended or not. As these
-are radio buttons, this function will only be called when submission
-is being verified.
-- note: the submission validation will make sure that both are not 
-empty. 
-Returns true if input is present or false otherwise
-*/
-function recommendedValidation(userSelection)
-{
-    var validInput = true;
-
-    if(userSelection == "")
-    {
-        validInput = false;
-    }
-
-    return validInput;
+    if (rating == "") 
+        return false;
+    else if (rating < 0 || rating > 10)
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -492,18 +352,12 @@ checks the average age of the users
 */
 function ageValidation(age)
 {
-    var validInput = true;
-
-    if(age == "")
-    {
-        validInput = false;
-    }
-    if(age > 19)
-    {
-        validInput = false;
-    }
-
-    return validInput;
+    if (age == "")
+        return false;
+    if (age > 100)
+        return false;
+    else
+        return true;
 }
 
 /*
@@ -526,18 +380,12 @@ game.
 */
 function playedQuantityValidation(playedQuantity)
 {
-    var validInput = true;
-
-    if(playedQuantity == "")
-    {
-        validInput = false;
-    }
-    if(playedQuantity <= 0)
-    {
-        validInput = false;
-    }
-
-    return validInput; 
+    if (playedQuantity == "")
+        return false;
+    else if (playedQuantity <= 0)
+        return false;
+    else
+        return true; 
 }
 
 /*
@@ -548,14 +396,10 @@ as long as some option is selected, should pass validation
 */
 function difficultyValidation(difficulty)
 {
-    var validInput = true;
-
-    if(difficulty == "")
-    {
-        validInput = false; 
-    }
-
-    return validInput;
+    if (difficulty == "") 
+        return false; 
+    else
+        return true;
 }
 
 //*****************************************************************************************
@@ -569,12 +413,8 @@ to allow page validation
 
 function reviewFlagDescription(description)
 {
-    var validInput = true;
-
-    if(description == "")
-    {
-        validInput = false;
-    }
-
-    return validInput;
+    if (description == "")
+        return false;
+    else
+        return true;
 }

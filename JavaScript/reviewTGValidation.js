@@ -3,7 +3,6 @@ functions for validating the inputs when a user is writing a review
 for a tabletop game
 */
 
-
 //ratingChecker
 function ratingChecker(event)
 {
@@ -13,12 +12,9 @@ function ratingChecker(event)
 
     var validInput = ratingValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This input is invalid";
     }
 }
@@ -32,12 +28,9 @@ function ageChecker(event)
 
     var validInput = ageValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This input is invalid";
     }
 }
@@ -51,12 +44,9 @@ function playtimeChecker(event)
 
     var validInput = playtimeValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This input is invalid";
     }
 }
@@ -70,12 +60,9 @@ function playedQuantityChecker(event)
 
     var validInput = playedQuantityValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if(!validInput) {
         errorMsg.innerHTML = "This input is invalid";
     }
 }
@@ -89,12 +76,9 @@ function difficultyChecker(event)
 
     var validInput = difficultyValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput ) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This input is invalid";
     }
 }
@@ -108,12 +92,9 @@ function reviewDescriptionChecker(event)
 
     var validInput = descriptionValidation(input);
 
-    if(validInput == true)
-    {
+    if (validInput) {
         errorMsg.innerHTML = "";
-    }
-    if(validInput == false)
-    {
+    } else if (!validInput) {
         errorMsg.innerHTML = "This input is invalid";
     }
 }
@@ -122,21 +103,28 @@ function reviewDescriptionChecker(event)
 //note, this is where "reviewRecommended" is validated
 function reviewSubmitChecker(event)
 {
-    //get error message
+    //Get error messages
     var errorMsg = document.getElementById("reviewSubmitError");
+    var recError = document.getElementById("reviewRecommendedError");
 
-    var validInput = true;
+    //Get input values
+    var rating = document.getElementById("reviewRating").value;
+    var age = document.getElementById("reviewAge").value;
+    var playedQuantity = document.getElementById("reviewPlayedQuantity").value;
+    var difficulty = document.getElementById("reviewDifficulty").value;
+    var description = document.getElementById("reviewTGTextArea").value;
 
-    //get inputs
-    var rating = document.getElementById("reviewRating");
-    var recommendedYes = document.getElementById("yes");
-    var recommendedNo = document.getElementById("no");
-    var age = document.getElementById("reviewAge");
-    var playtime = document.getElementById("reviewPlaytime");
-    var playedQuantity = document.getElementById("reviewPlayedQuantity");
-    var difficulty = document.getElementById("reviewDifficulty");
-    var description = document.getElementById("reviewTGTextArea");
+    //If any one of these fields does not validate, prevent submission
+    if (!(ratingValidation(rating) && ageValidation(age) && playtimeValidation(playtime) && playedQuantityValidation(playedQuantity) 
+        && difficultyValidation(difficulty) && descriptionValidation(description))) {
+            errorMsg.innerHTML = "There is an error in one of the input fields. Please fill out all fields!";
+            event.preventDefault();
+    }
 
-    //test each input and prevent submission if needed
-    
+    //Check the radio buttons separately; throw radio button error if not checked
+    if (!(document.getElementById("yes").checked || document.getElementById("no").checked))
+    {
+        recError.innerHTML = "You must select one of these two options!";
+        event.preventDefault();
+    }
 }

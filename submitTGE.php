@@ -54,6 +54,9 @@
     <!--==========================Stylsheets=================================-->
     <link rel="stylesheet" href="stylesheets/siteStyles.css">
     <link rel="stylesheet" href="stylesheets/submitTGE.css">
+    <!--==========================Script Files===============================-->
+    <script type="text/javascript" src="JavaScript/validationFunctions.js"></script>
+    <script type="text/javascript" src="JavaScript/submitTGEValidation.js"></script>
 </head>
 
 <body>
@@ -78,7 +81,7 @@
 
             <!-- Game Name and Error -->
             <div class="submitTable">
-                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                <form id="submitForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                     <table>
 
                         <!-- Submit TGE Name and Error-->
@@ -156,29 +159,35 @@
                     </table>
             </div>
             <!-- Provides and area to leave the game description -->
+
             <div>
                 <div class="attributeHeader">Describe the game:<br></div>
                 <textarea class="gameDescription" rows="10" name="description"></textarea>
+
                 <div class="errorMessage" id="descriptionError"></div>
             </div>
 
             <!-- Upload Button -->
             <div class="uploadImageFile">
+
                 <label for="submitTGEUpload" class="attributeHeader">Upload a file:</label>
                 <input type="file" id="submitTGEUpload" class="imageUploader" name="submitTGEUpload[]" multiple><br>
                 Please note that you must select up to four images at the same time<br>
             </div>
 
             <!-- Submit button -->
-            <div submitButton>
+            <div>
                 <input type="submit" class="navButton" name="formSubmitButton">
+
             </div>
             </form>
+
+            <div class="errorMessage" id="submitError"></div>
         </div>
     </div>
     </div>
 
 </body>
-
+<script type="text/javascript" src="JavaScript/submitTGEEventListeners.js"></script>
 </html>
 <?php } ?>
