@@ -162,7 +162,7 @@
 
             <div>
                 <div class="attributeHeader">Describe the game:<br></div>
-                <textarea class="gameDescription" rows="10" name="description"></textarea>
+                <textarea class="gameDescription" rows="10" name="description" id="description"></textarea>
 
                 <div class="errorMessage" id="descriptionError"></div>
             </div>
