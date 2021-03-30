@@ -92,15 +92,6 @@ else {
         </div>
     </div>
 
-    <!-- 
-        Page includes:
-            Game components
-                -> should be the same as view game
-            Images of the game below
-                -> same as reviewFlag
-            Space for feedback
-            Buttons to accept or reject
-    -->
     <div class="overallContainer">
     <p class="errorMessage"><?php echo $errorMessage; ?></p>
         <?php 

@@ -90,14 +90,6 @@ else {
         <img src="dependencies/flaggedReview.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
     </div>
 
-    <!-- 
-        Page includes:
-            description of the game for which the review has been flagged
-            images of said game (max of 4)
-            flagged review
-            Buttons, one can remove the flag (review is good) other can delete review
-    -->
-
     <!-- page container -->
     <div class="pageAllignment">
         <?php
