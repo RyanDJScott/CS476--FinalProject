@@ -70,6 +70,9 @@
     <!-- Main header image -->
     <div class="mainPageHeader">
         <img src="dependencies/boardGameHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!"/>
+        <div class="headerImageMessage">
+            <?php echo $gameTitle; ?>
+        </div>
     </div> 
 
     <?php

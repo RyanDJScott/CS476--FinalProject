@@ -64,7 +64,7 @@
 
     <!-- Main header image -->
     <div class="mainPageHeader">
-        <img src="dependencies/boardGameHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
+        <img src="dependencies/editProfileHeaderImage.png" class="headerImage" alt="Welcome to Queen City's Gambit!" />
     </div>
 
     <!-- 

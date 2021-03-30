@@ -62,11 +62,11 @@ textarea {
     font-size: larger;
 }
 
-/* This is the inside containers which hold different information
+/* /* This is the inside containers which hold different information
 in each one (determined in associated file). These neeed to line up
 together in line 
 */
-.innerContainer {
+/*.innerContainer {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -75,7 +75,7 @@ together in line
 /* Contains the images associated with the game which will
 be displayed between the description and feedback area.
 */
-.imageContainer {
+/*.imageContainer {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -83,7 +83,7 @@ be displayed between the description and feedback area.
     width: 75%;
     border: 1px solid #AAA0B4;
     background-color: #F5F0F9;
-}
+} */
 
 /* images are only contained in the image container, there should
 be four across in a row, centred but should expand to the left 

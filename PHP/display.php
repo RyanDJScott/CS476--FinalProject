@@ -603,19 +603,19 @@ class Display {
             -->
             <div class="innerContainer">
                 <div class="name">' . $TGE->getGameTitle() . '</div>
-                Submitted by ' . $TGE->getScreenName() . ' on ' . $TGE->getDateSubmitted() . '<br>
-                Company: ' . $TGE->getCompany() . ' <br>
-                Play Time: ' . $TGE->getPlayTime() . ' hours <br>
-                Age Rating: ' . $TGE->getAgeRating() . '+ <br>
-                Number of Players: ' . $TGE->getNumPlayers() . ' <br>
-                Expansions: ' . $TGE->getExpansions() . ' <br>
+                <p><span class="attributeHeader">Submitted by </span>' . $TGE->getScreenName() . ' on ' . $TGE->getDateSubmitted() . '</p>
+                <p><span class="attributeHeader">Company: </span>' . $TGE->getCompany() . '</p>
+                <p><span class="attributeHeader">Play Time: </span>' . $TGE->getPlayTime() . ' hours </p>
+                <p><span class="attributeHeader">Age Rating: </span>' . $TGE->getAgeRating() . '+ </p>
+                <p><span class="attributeHeader">Number of Players: </span>' . $TGE->getNumPlayers() . '</p>
+                <p><span class="attributeHeader">Expansions: </span>' . $TGE->getExpansions() . '</p>
             </div>
 
             <!-- 
                 The game description itseld on
                 the other (right) side
             -->
-            <div class="innerContainer">
+            <div class="innerContainerRight">
                 <p><br>
                 '. $TGE->getDescription() .'    
                 </p>
