@@ -117,7 +117,7 @@ class submitReview {
     //   <2> FALSE: The input value doesn't pass validation
     // Side Effects: N/A
     private function valRecommend () {
-        if (isset($this->recommend) && !empty($this->recommend))
+        if (isset($this->recommend))
             return TRUE;
         else
             return FALSE;

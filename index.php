@@ -54,7 +54,7 @@
         <!-- featured item container-->
         <div class="featuredItem">
             <?php
-                $display->displayTGEFeatureGameBox("Pandemic");
+                $display->displayTGEFeatureGameBox("Tokaido");
             ?>
         </div>
 
