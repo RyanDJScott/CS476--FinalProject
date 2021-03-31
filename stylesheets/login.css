@@ -13,7 +13,7 @@
     align-content: center;
 }
 
-.loginImage {
+.loginFormImage {
     display: flex;
     flex-basis: 33%;
     max-width: 192px;
