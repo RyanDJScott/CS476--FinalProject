@@ -35,7 +35,7 @@
         //   <1> $this->dbConnect is reinitialized with a DB object
         public function __wakeup()
         {
-            $this->dbConnect = new mysqli("localhost", "geekagog", "5i4C-o5tN)7MhA", "geekagog_QueenCityGambit");
+            $this->dbConnect = new mysqli("", "", "", "");
         }
     }
     
